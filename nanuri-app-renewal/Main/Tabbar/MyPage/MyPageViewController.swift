@@ -11,7 +11,7 @@ class MyPageViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = .nanuriPrimary
+        self.view.backgroundColor = .nanuriGreen
         self.title = "마이페이지"
         // Do any additional setup after loading the view.
     }

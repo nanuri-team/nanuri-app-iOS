@@ -12,6 +12,10 @@ class TabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.view.backgroundColor = .white
+        self.tabBar.barTintColor = .white
+        self.tabBar.isTranslucent = false
+        
         let homeNavigationController = UINavigationController(rootViewController: HomeViewController())
         let neighbourhoodNavigationController = UINavigationController(rootViewController: NeighbourhoodViewController())
         let chattingNavigationController = UINavigationController(rootViewController: ChattingViewController())

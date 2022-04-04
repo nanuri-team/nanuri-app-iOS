@@ -20,7 +20,7 @@ class HomeViewController: UIViewController {
     func setUpView() {
         self.view.backgroundColor = .white
         
-        let testTag = DeliveryTagView(type: .direct)
+        let testTag = DDayTagView(dDay: "10")
         self.view.addSubview(testTag)
         testTag.snp.makeConstraints { make in
             make.top.equalToSuperview().inset(50)

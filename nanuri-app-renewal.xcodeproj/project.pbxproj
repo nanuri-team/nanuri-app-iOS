@@ -24,6 +24,8 @@
 		39AD780427FB12280022EAC1 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39AD780327FB12280022EAC1 /* MainViewController.swift */; };
 		39AD780627FB22DD0022EAC1 /* DeliveryTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39AD780527FB22DC0022EAC1 /* DeliveryTagView.swift */; };
 		39AD780827FB26DB0022EAC1 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39AD780727FB26DB0022EAC1 /* Constants.swift */; };
+		39AD780C27FB327F0022EAC1 /* MainProductTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39AD780B27FB327F0022EAC1 /* MainProductTableViewCell.swift */; };
+		39AD780E27FB32C50022EAC1 /* DDayTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39AD780D27FB32C50022EAC1 /* DDayTagView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,6 +47,8 @@
 		39AD780327FB12280022EAC1 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		39AD780527FB22DC0022EAC1 /* DeliveryTagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeliveryTagView.swift; sourceTree = "<group>"; };
 		39AD780727FB26DB0022EAC1 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		39AD780B27FB327F0022EAC1 /* MainProductTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainProductTableViewCell.swift; sourceTree = "<group>"; };
+		39AD780D27FB32C50022EAC1 /* DDayTagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DDayTagView.swift; sourceTree = "<group>"; };
 		670A464DDF73C49130CF9703 /* Pods_nanuri_app_renewal.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_nanuri_app_renewal.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A42E31D890918B132E106A3 /* Pods-nanuri-app-renewal.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-nanuri-app-renewal.debug.xcconfig"; path = "Target Support Files/Pods-nanuri-app-renewal/Pods-nanuri-app-renewal.debug.xcconfig"; sourceTree = "<group>"; };
 		9207345BC3AEC7E7C1B47E1C /* Pods-nanuri-app-renewal.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-nanuri-app-renewal.release.xcconfig"; path = "Target Support Files/Pods-nanuri-app-renewal/Pods-nanuri-app-renewal.release.xcconfig"; sourceTree = "<group>"; };
@@ -107,9 +111,11 @@
 		39AD77E327FB10150022EAC1 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				39AD780A27FB32640022EAC1 /* Cells */,
 				39AD77EF27FB11990022EAC1 /* Extension.swift */,
 				39AD780527FB22DC0022EAC1 /* DeliveryTagView.swift */,
 				39AD780727FB26DB0022EAC1 /* Constants.swift */,
+				39AD780D27FB32C50022EAC1 /* DDayTagView.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -206,6 +212,14 @@
 				39AD77FF27FB120B0022EAC1 /* MyPageViewController.swift */,
 			);
 			path = MyPage;
+			sourceTree = "<group>";
+		};
+		39AD780A27FB32640022EAC1 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				39AD780B27FB327F0022EAC1 /* MainProductTableViewCell.swift */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 		ABDE7EE03F8338F170FC8C7F /* Frameworks */ = {
@@ -340,12 +354,14 @@
 			files = (
 				39AD780227FB12180022EAC1 /* User.swift in Sources */,
 				39AD780427FB12280022EAC1 /* MainViewController.swift in Sources */,
+				39AD780C27FB327F0022EAC1 /* MainProductTableViewCell.swift in Sources */,
 				39AD77FE27FB12030022EAC1 /* BookmarkViewController.swift in Sources */,
 				39AD780627FB22DD0022EAC1 /* DeliveryTagView.swift in Sources */,
 				39AD77CF27FB0F4E0022EAC1 /* AppDelegate.swift in Sources */,
 				39AD77D127FB0F4E0022EAC1 /* SceneDelegate.swift in Sources */,
 				39AD77F827FB11E30022EAC1 /* HomeViewController.swift in Sources */,
 				39AD77FA27FB11EE0022EAC1 /* NeighbourhoodViewController.swift in Sources */,
+				39AD780E27FB32C50022EAC1 /* DDayTagView.swift in Sources */,
 				39AD780827FB26DB0022EAC1 /* Constants.swift in Sources */,
 				39AD77F427FB11BA0022EAC1 /* RegisterViewController.swift in Sources */,
 				39AD780027FB120B0022EAC1 /* MyPageViewController.swift in Sources */,
