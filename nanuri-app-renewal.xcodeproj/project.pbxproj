@@ -7,23 +7,43 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		349EE88BFBCFEC4B071C4AD0 /* Pods_nanuri_app_renewal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 670A464DDF73C49130CF9703 /* Pods_nanuri_app_renewal.framework */; };
 		39AD77CF27FB0F4E0022EAC1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39AD77CE27FB0F4E0022EAC1 /* AppDelegate.swift */; };
 		39AD77D127FB0F4E0022EAC1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39AD77D027FB0F4E0022EAC1 /* SceneDelegate.swift */; };
-		39AD77D327FB0F4E0022EAC1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39AD77D227FB0F4E0022EAC1 /* ViewController.swift */; };
-		39AD77D627FB0F4E0022EAC1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 39AD77D427FB0F4E0022EAC1 /* Main.storyboard */; };
 		39AD77D827FB0F500022EAC1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 39AD77D727FB0F500022EAC1 /* Assets.xcassets */; };
-		39AD77DB27FB0F500022EAC1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 39AD77D927FB0F500022EAC1 /* LaunchScreen.storyboard */; };
+		39AD77F027FB11990022EAC1 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39AD77EF27FB11990022EAC1 /* Extension.swift */; };
+		39AD77F227FB11AF0022EAC1 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39AD77F127FB11AF0022EAC1 /* LoginViewController.swift */; };
+		39AD77F427FB11BA0022EAC1 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39AD77F327FB11BA0022EAC1 /* RegisterViewController.swift */; };
+		39AD77F627FB11CE0022EAC1 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39AD77F527FB11CE0022EAC1 /* TabBarController.swift */; };
+		39AD77F827FB11E30022EAC1 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39AD77F727FB11E30022EAC1 /* HomeViewController.swift */; };
+		39AD77FA27FB11EE0022EAC1 /* NeighbourhoodViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39AD77F927FB11EE0022EAC1 /* NeighbourhoodViewController.swift */; };
+		39AD77FC27FB11F70022EAC1 /* ChattingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39AD77FB27FB11F70022EAC1 /* ChattingViewController.swift */; };
+		39AD77FE27FB12030022EAC1 /* BookmarkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39AD77FD27FB12030022EAC1 /* BookmarkViewController.swift */; };
+		39AD780027FB120B0022EAC1 /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39AD77FF27FB120B0022EAC1 /* MyPageViewController.swift */; };
+		39AD780227FB12180022EAC1 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39AD780127FB12180022EAC1 /* User.swift */; };
+		39AD780427FB12280022EAC1 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39AD780327FB12280022EAC1 /* MainViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		39AD77CB27FB0F4E0022EAC1 /* nanuri-app-renewal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "nanuri-app-renewal.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		39AD77CE27FB0F4E0022EAC1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		39AD77D027FB0F4E0022EAC1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		39AD77D227FB0F4E0022EAC1 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		39AD77D527FB0F4E0022EAC1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		39AD77D727FB0F500022EAC1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		39AD77DA27FB0F500022EAC1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		39AD77DC27FB0F500022EAC1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		39AD77EF27FB11990022EAC1 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
+		39AD77F127FB11AF0022EAC1 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		39AD77F327FB11BA0022EAC1 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
+		39AD77F527FB11CE0022EAC1 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		39AD77F727FB11E30022EAC1 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		39AD77F927FB11EE0022EAC1 /* NeighbourhoodViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeighbourhoodViewController.swift; sourceTree = "<group>"; };
+		39AD77FB27FB11F70022EAC1 /* ChattingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChattingViewController.swift; sourceTree = "<group>"; };
+		39AD77FD27FB12030022EAC1 /* BookmarkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkViewController.swift; sourceTree = "<group>"; };
+		39AD77FF27FB120B0022EAC1 /* MyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewController.swift; sourceTree = "<group>"; };
+		39AD780127FB12180022EAC1 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		39AD780327FB12280022EAC1 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		670A464DDF73C49130CF9703 /* Pods_nanuri_app_renewal.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_nanuri_app_renewal.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8A42E31D890918B132E106A3 /* Pods-nanuri-app-renewal.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-nanuri-app-renewal.debug.xcconfig"; path = "Target Support Files/Pods-nanuri-app-renewal/Pods-nanuri-app-renewal.debug.xcconfig"; sourceTree = "<group>"; };
+		9207345BC3AEC7E7C1B47E1C /* Pods-nanuri-app-renewal.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-nanuri-app-renewal.release.xcconfig"; path = "Target Support Files/Pods-nanuri-app-renewal/Pods-nanuri-app-renewal.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,6 +51,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				349EE88BFBCFEC4B071C4AD0 /* Pods_nanuri_app_renewal.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -42,6 +63,8 @@
 			children = (
 				39AD77CD27FB0F4E0022EAC1 /* nanuri-app-renewal */,
 				39AD77CC27FB0F4E0022EAC1 /* Products */,
+				EA8FAB15FF5747EA66FE8AEE /* Pods */,
+				ABDE7EE03F8338F170FC8C7F /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -56,15 +79,145 @@
 		39AD77CD27FB0F4E0022EAC1 /* nanuri-app-renewal */ = {
 			isa = PBXGroup;
 			children = (
-				39AD77CE27FB0F4E0022EAC1 /* AppDelegate.swift */,
-				39AD77D027FB0F4E0022EAC1 /* SceneDelegate.swift */,
-				39AD77D227FB0F4E0022EAC1 /* ViewController.swift */,
-				39AD77D427FB0F4E0022EAC1 /* Main.storyboard */,
-				39AD77D727FB0F500022EAC1 /* Assets.xcassets */,
-				39AD77D927FB0F500022EAC1 /* LaunchScreen.storyboard */,
+				39AD77E227FB10100022EAC1 /* Main */,
+				39AD77E327FB10150022EAC1 /* Common */,
+				39AD77E727FB10430022EAC1 /* Delegate */,
+				39AD77E527FB102E0022EAC1 /* Utils */,
+				39AD77E427FB10240022EAC1 /* Model */,
 				39AD77DC27FB0F500022EAC1 /* Info.plist */,
 			);
 			path = "nanuri-app-renewal";
+			sourceTree = "<group>";
+		};
+		39AD77E227FB10100022EAC1 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				39AD780327FB12280022EAC1 /* MainViewController.swift */,
+				39AD77E627FB103D0022EAC1 /* Login */,
+				39AD77E827FB10500022EAC1 /* Register */,
+				39AD77E927FB10590022EAC1 /* Tabbar */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		39AD77E327FB10150022EAC1 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				39AD77EF27FB11990022EAC1 /* Extension.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		39AD77E427FB10240022EAC1 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				39AD780127FB12180022EAC1 /* User.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		39AD77E527FB102E0022EAC1 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				39AD77D727FB0F500022EAC1 /* Assets.xcassets */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		39AD77E627FB103D0022EAC1 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				39AD77F127FB11AF0022EAC1 /* LoginViewController.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		39AD77E727FB10430022EAC1 /* Delegate */ = {
+			isa = PBXGroup;
+			children = (
+				39AD77CE27FB0F4E0022EAC1 /* AppDelegate.swift */,
+				39AD77D027FB0F4E0022EAC1 /* SceneDelegate.swift */,
+			);
+			path = Delegate;
+			sourceTree = "<group>";
+		};
+		39AD77E827FB10500022EAC1 /* Register */ = {
+			isa = PBXGroup;
+			children = (
+				39AD77F327FB11BA0022EAC1 /* RegisterViewController.swift */,
+			);
+			path = Register;
+			sourceTree = "<group>";
+		};
+		39AD77E927FB10590022EAC1 /* Tabbar */ = {
+			isa = PBXGroup;
+			children = (
+				39AD77F527FB11CE0022EAC1 /* TabBarController.swift */,
+				39AD77EA27FB10600022EAC1 /* Home */,
+				39AD77EB27FB10660022EAC1 /* Neighbourhood */,
+				39AD77EC27FB11360022EAC1 /* Chatting */,
+				39AD77ED27FB11470022EAC1 /* Bookmark */,
+				39AD77EE27FB11550022EAC1 /* MyPage */,
+			);
+			path = Tabbar;
+			sourceTree = "<group>";
+		};
+		39AD77EA27FB10600022EAC1 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				39AD77F727FB11E30022EAC1 /* HomeViewController.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		39AD77EB27FB10660022EAC1 /* Neighbourhood */ = {
+			isa = PBXGroup;
+			children = (
+				39AD77F927FB11EE0022EAC1 /* NeighbourhoodViewController.swift */,
+			);
+			path = Neighbourhood;
+			sourceTree = "<group>";
+		};
+		39AD77EC27FB11360022EAC1 /* Chatting */ = {
+			isa = PBXGroup;
+			children = (
+				39AD77FB27FB11F70022EAC1 /* ChattingViewController.swift */,
+			);
+			path = Chatting;
+			sourceTree = "<group>";
+		};
+		39AD77ED27FB11470022EAC1 /* Bookmark */ = {
+			isa = PBXGroup;
+			children = (
+				39AD77FD27FB12030022EAC1 /* BookmarkViewController.swift */,
+			);
+			path = Bookmark;
+			sourceTree = "<group>";
+		};
+		39AD77EE27FB11550022EAC1 /* MyPage */ = {
+			isa = PBXGroup;
+			children = (
+				39AD77FF27FB120B0022EAC1 /* MyPageViewController.swift */,
+			);
+			path = MyPage;
+			sourceTree = "<group>";
+		};
+		ABDE7EE03F8338F170FC8C7F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				670A464DDF73C49130CF9703 /* Pods_nanuri_app_renewal.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		EA8FAB15FF5747EA66FE8AEE /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				8A42E31D890918B132E106A3 /* Pods-nanuri-app-renewal.debug.xcconfig */,
+				9207345BC3AEC7E7C1B47E1C /* Pods-nanuri-app-renewal.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -74,9 +227,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 39AD77DF27FB0F500022EAC1 /* Build configuration list for PBXNativeTarget "nanuri-app-renewal" */;
 			buildPhases = (
+				1AE06B7418902FA77A8D5537 /* [CP] Check Pods Manifest.lock */,
 				39AD77C727FB0F4E0022EAC1 /* Sources */,
 				39AD77C827FB0F4E0022EAC1 /* Frameworks */,
 				39AD77C927FB0F4E0022EAC1 /* Resources */,
+				4F900C4F7933AFB8A60BD887 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -125,45 +280,76 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				39AD77DB27FB0F500022EAC1 /* LaunchScreen.storyboard in Resources */,
 				39AD77D827FB0F500022EAC1 /* Assets.xcassets in Resources */,
-				39AD77D627FB0F4E0022EAC1 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		1AE06B7418902FA77A8D5537 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-nanuri-app-renewal-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		4F900C4F7933AFB8A60BD887 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-nanuri-app-renewal/Pods-nanuri-app-renewal-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-nanuri-app-renewal/Pods-nanuri-app-renewal-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-nanuri-app-renewal/Pods-nanuri-app-renewal-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		39AD77C727FB0F4E0022EAC1 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				39AD77D327FB0F4E0022EAC1 /* ViewController.swift in Sources */,
+				39AD780227FB12180022EAC1 /* User.swift in Sources */,
+				39AD780427FB12280022EAC1 /* MainViewController.swift in Sources */,
+				39AD77FE27FB12030022EAC1 /* BookmarkViewController.swift in Sources */,
 				39AD77CF27FB0F4E0022EAC1 /* AppDelegate.swift in Sources */,
 				39AD77D127FB0F4E0022EAC1 /* SceneDelegate.swift in Sources */,
+				39AD77F827FB11E30022EAC1 /* HomeViewController.swift in Sources */,
+				39AD77FA27FB11EE0022EAC1 /* NeighbourhoodViewController.swift in Sources */,
+				39AD77F427FB11BA0022EAC1 /* RegisterViewController.swift in Sources */,
+				39AD780027FB120B0022EAC1 /* MyPageViewController.swift in Sources */,
+				39AD77FC27FB11F70022EAC1 /* ChattingViewController.swift in Sources */,
+				39AD77F627FB11CE0022EAC1 /* TabBarController.swift in Sources */,
+				39AD77F227FB11AF0022EAC1 /* LoginViewController.swift in Sources */,
+				39AD77F027FB11990022EAC1 /* Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXVariantGroup section */
-		39AD77D427FB0F4E0022EAC1 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				39AD77D527FB0F4E0022EAC1 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		39AD77D927FB0F500022EAC1 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				39AD77DA27FB0F500022EAC1 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		39AD77DD27FB0F500022EAC1 /* Debug */ = {
@@ -284,6 +470,7 @@
 		};
 		39AD77E027FB0F500022EAC1 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8A42E31D890918B132E106A3 /* Pods-nanuri-app-renewal.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -311,6 +498,7 @@
 		};
 		39AD77E127FB0F500022EAC1 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9207345BC3AEC7E7C1B47E1C /* Pods-nanuri-app-renewal.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
