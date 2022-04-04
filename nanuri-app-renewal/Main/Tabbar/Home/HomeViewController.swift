@@ -11,19 +11,21 @@ class HomeViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        self.title = "홈"
+        
+        setUpView()
     }
     
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    func setUpView() {
+        self.view.backgroundColor = .white
+        
+        let testTag = DeliveryTagView(type: .direct)
+        self.view.addSubview(testTag)
+        testTag.snp.makeConstraints { make in
+            make.top.equalToSuperview().inset(50)
+            make.leading.equalToSuperview().inset(50)
+        }
     }
-    */
 
 }

@@ -7,7 +7,9 @@
 
 import UIKit
 
+import Alamofire
 import IQKeyboardManagerSwift
+import SnapKit
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {

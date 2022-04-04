@@ -11,7 +11,8 @@ class ChattingViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.view.backgroundColor = .nanuriBlue
+        self.title = "채팅"
         // Do any additional setup after loading the view.
     }
     
