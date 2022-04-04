@@ -11,7 +11,8 @@ class BookmarkViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.view.backgroundColor = .nanuriBrown
+        self.title = "즐겨찾기"
         // Do any additional setup after loading the view.
     }
     
