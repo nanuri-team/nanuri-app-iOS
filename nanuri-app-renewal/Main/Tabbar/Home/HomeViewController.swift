@@ -28,7 +28,9 @@ class HomeViewController: UIViewController {
     //MARK: - Selector
     
     @objc func selectMoreButton() {
-        print("more")
+        let allRegionProductTableViewController = AllRegionProductTableViewController()
+        allRegionProductTableViewController.hidesBottomBarWhenPushed = true
+        self.navigationController?.pushViewController(allRegionProductTableViewController, animated: true)
     }
     
     func setUpEventScrollView() {
@@ -171,7 +173,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
                 allRegionTitleLabel.attributedText = NSAttributedString(string: "전체 지역의 상품")
                 cell.contentView.addSubview(allRegionTitleLabel)
                 allRegionTitleLabel.snp.makeConstraints { make in
-                    make.left.equalToSuperview()
+                    make.left.equalToSuperview().inset(16)
                     make.top.equalToSuperview()
                 }
                 
@@ -179,13 +181,13 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
                 moreButton.setAttributedTitle(NSAttributedString(string: "더보기"), for: .normal)
                 cell.contentView.addSubview(moreButton)
                 moreButton.snp.makeConstraints { make in
-                    make.right.equalToSuperview()
+                    make.right.equalToSuperview().inset(16)
                     make.top.equalToSuperview()
                 }
                 moreButton.addTarget(self, action: #selector(selectMoreButton), for: .touchUpInside)
                 
                 cell.contentView.snp.makeConstraints { make in
-                    make.left.right.equalToSuperview().inset(16)
+                    make.left.right.equalToSuperview()
                 }
                 return cell
             }
