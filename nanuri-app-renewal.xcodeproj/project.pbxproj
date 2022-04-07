@@ -28,6 +28,8 @@
 		39AD780E27FB32C50022EAC1 /* DDayTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39AD780D27FB32C50022EAC1 /* DDayTagView.swift */; };
 		87D17BA027FB5BF100E171A2 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87D17B9F27FB5BF100E171A2 /* SearchViewController.swift */; };
 		87D17BA227FB5C0B00E171A2 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87D17BA127FB5C0B00E171A2 /* SettingViewController.swift */; };
+		39AD781227FB47730022EAC1 /* VerticalProductCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39AD781127FB47730022EAC1 /* VerticalProductCollectionViewCell.swift */; };
+		39AD781427FDF28E0022EAC1 /* AllRegionProductTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39AD781327FDF28E0022EAC1 /* AllRegionProductTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -51,6 +53,8 @@
 		39AD780727FB26DB0022EAC1 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		39AD780B27FB327F0022EAC1 /* MainProductTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainProductTableViewCell.swift; sourceTree = "<group>"; };
 		39AD780D27FB32C50022EAC1 /* DDayTagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DDayTagView.swift; sourceTree = "<group>"; };
+		39AD781127FB47730022EAC1 /* VerticalProductCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerticalProductCollectionViewCell.swift; sourceTree = "<group>"; };
+		39AD781327FDF28E0022EAC1 /* AllRegionProductTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllRegionProductTableViewController.swift; sourceTree = "<group>"; };
 		670A464DDF73C49130CF9703 /* Pods_nanuri_app_renewal.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_nanuri_app_renewal.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		87D17B9F27FB5BF100E171A2 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		87D17BA127FB5C0B00E171A2 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
@@ -184,6 +188,7 @@
 			isa = PBXGroup;
 			children = (
 				39AD77F727FB11E30022EAC1 /* HomeViewController.swift */,
+				39AD781327FDF28E0022EAC1 /* AllRegionProductTableViewController.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -224,6 +229,7 @@
 			isa = PBXGroup;
 			children = (
 				39AD780B27FB327F0022EAC1 /* MainProductTableViewCell.swift */,
+				39AD781127FB47730022EAC1 /* VerticalProductCollectionViewCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -382,6 +388,7 @@
 				39AD77CF27FB0F4E0022EAC1 /* AppDelegate.swift in Sources */,
 				39AD77D127FB0F4E0022EAC1 /* SceneDelegate.swift in Sources */,
 				39AD77F827FB11E30022EAC1 /* HomeViewController.swift in Sources */,
+				39AD781227FB47730022EAC1 /* VerticalProductCollectionViewCell.swift in Sources */,
 				39AD77FA27FB11EE0022EAC1 /* NeighbourhoodViewController.swift in Sources */,
 				39AD780E27FB32C50022EAC1 /* DDayTagView.swift in Sources */,
 				39AD780827FB26DB0022EAC1 /* Constants.swift in Sources */,
@@ -392,6 +399,7 @@
 				39AD77F627FB11CE0022EAC1 /* TabBarController.swift in Sources */,
 				87D17BA227FB5C0B00E171A2 /* SettingViewController.swift in Sources */,
 				39AD77F227FB11AF0022EAC1 /* LoginViewController.swift in Sources */,
+				39AD781427FDF28E0022EAC1 /* AllRegionProductTableViewController.swift in Sources */,
 				39AD77F027FB11990022EAC1 /* Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
