@@ -43,7 +43,7 @@ class VerticalProductCollectionViewCell: UICollectionViewCell {
             make.height.width.equalTo(120)
         }
         
-        let dDayTagView = DDayTagView(dDay: "120")
+        let dDayTagView = DDayTagView(dDay: "3")
         cellView.addSubview(dDayTagView)
         dDayTagView.snp.makeConstraints { make in
             make.top.equalToSuperview().inset(6)
