@@ -142,3 +142,7 @@ Pods/Target Support Files/SnapKit/SnapKit-umbrella.h
 Pods/Target Support Files/SnapKit/SnapKit.debug.xcconfig
 Pods/Target Support Files/SnapKit/SnapKit.modulemap
 Pods/Target Support Files/SnapKit/SnapKit.release.xcconfig
+Pods/Pods.xcodeproj/xcuserdata/a0000.xcuserdatad/xcschemes/Pods-nanuri-app-renewal.xcscheme
+Pods/Pods.xcodeproj/xcuserdata/a0000.xcuserdatad/xcschemes/Alamofire.xcscheme
+Pods/Pods.xcodeproj/xcuserdata/a0000.xcuserdatad/xcschemes/IQKeyboardManagerSwift.xcscheme
+Pods/Pods.xcodeproj/xcuserdata/a0000.xcuserdatad/xcschemes/SnapKit.xcscheme

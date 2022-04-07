@@ -1,21 +1,26 @@
 //
-//  MyPageViewController.swift
+//  SettingViewController.swift
 //  nanuri-app-renewal
 //
-//  Created by minimani on 2022/04/04.
+//  Created by a0000 on 2022/04/05.
 //
 
 import UIKit
 
-class MyPageViewController: UIViewController {
+class SettingViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = .white
-        self.title = "마이페이지"
+
         // Do any additional setup after loading the view.
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        let tabbarController = TabBarController()
+        tabbarController.modalTransitionStyle = .crossDissolve
+        tabbarController.modalPresentationStyle = .fullScreen
+        self.present(tabbarController, animated: false, completion: nil)
+    }
 
     /*
     // MARK: - Navigation
