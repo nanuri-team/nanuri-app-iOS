@@ -34,18 +34,50 @@ extension UIColor {
         return UIColor(red: 155.0 / 255.0, green: 179.0 / 255.0, blue: 226.0 / 255.0, alpha: 1)
     }
     
-    class var nanuriGray: UIColor {
+    class var nanuriGray4: UIColor {
         // rgba(162, 162, 167, 1)
         return UIColor(red: 162.0 / 255.0, green: 162.0 / 255.0, blue: 167.0 / 255.0, alpha: 1)
     }
     
-    class var nanuriLightGray: UIColor {
+    class var nanuriGray3: UIColor {
+        // rgba(204, 205, 209, 1)
+        return UIColor(red: 204.0 / 255.0, green: 205.0 / 255.0, blue: 209.0 / 255.0, alpha: 1)
+    }
+    
+    class var nanuriGray2: UIColor {
         // rgba(232, 233, 235, 1)
         return UIColor(red: 232.0 / 255.0, green: 233.0 / 255.0, blue: 235.0 / 255.0, alpha: 1)
+    }
+    
+    class var nanuriGray1: UIColor {
+        // rgba(250, 250, 252, 1)
+        return UIColor(red: 250.0 / 255.0, green: 250.0 / 255.0, blue: 252.0 / 255.0, alpha: 1)
     }
     
     class var nanuriOrange: UIColor {
         // rgba(255, 158, 86, 1)
         return UIColor(red: 255.0 / 255.0, green: 158.0 / 255.0, blue: 86.0 / 255.0, alpha: 1)
+    }
+}
+
+extension UIView {
+    func statusbarView(rootView: UIView) {
+        if #available(iOS 13.0, *) {
+            let statusBarHeight: CGFloat = UIApplication.shared.statusBarFrame.size.height
+            
+            let statusbarView = UIView()
+            statusbarView.backgroundColor = .white
+            rootView.addSubview(statusbarView)
+            rootView.bringSubviewToFront(statusbarView)
+            
+            statusbarView.snp.makeConstraints { make in
+                make.top.leading.trailing.equalToSuperview()
+                make.height.equalTo(statusBarHeight)
+            }
+          
+        } else {
+            let statusBar = UIApplication.shared.value(forKeyPath: "statusBarWindow.statusBar") as? UIView
+            statusBar?.backgroundColor = .white
+        }
     }
 }

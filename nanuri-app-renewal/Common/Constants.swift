@@ -12,7 +12,7 @@ struct DeliveryTypeName {
     static let direct = "직거래"
 }
 
-struct LevelType {
+struct LevelTypeName {
     static let been = "콩"
     static let leaf = "새싹"
     static let flower = "꽃"

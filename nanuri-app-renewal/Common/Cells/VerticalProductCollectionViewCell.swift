@@ -36,7 +36,7 @@ class VerticalProductCollectionViewCell: UICollectionViewCell {
         
         let productImageView = UIImageView()
         productImageView.layer.cornerRadius = 12
-        productImageView.backgroundColor = .nanuriLightGray
+        productImageView.backgroundColor = .nanuriGray2
         cellView.addSubview(productImageView)
         productImageView.snp.makeConstraints { make in
             make.top.equalToSuperview()
@@ -79,7 +79,7 @@ class VerticalProductCollectionViewCell: UICollectionViewCell {
         let totalRecruit = UILabel()
         totalRecruit.attributedText = NSAttributedString(string: "/5")
         totalRecruit.font = UIFont.systemFont(ofSize: 12)
-        totalRecruit.textColor = .nanuriGray
+        totalRecruit.textColor = .nanuriGray4
         cellView.addSubview(totalRecruit)
         totalRecruit.snp.makeConstraints { make in
             make.top.equalTo(productName.snp.bottom).inset(-4)
