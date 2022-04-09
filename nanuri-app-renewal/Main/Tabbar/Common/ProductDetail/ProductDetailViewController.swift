@@ -18,7 +18,9 @@ class ProductDetailViewController: UIViewController {
         self.view.backgroundColor = .white
         self.title = "상품 정보"
         let backButton = UIBarButtonItem(image: UIImage(named: "back_ic"), style: .plain, target: self, action: #selector(selectBackButton))
+        let optionButton = UIBarButtonItem(image: UIImage(named: "more_ic"), style: .plain, target: self, action: #selector(selectOptionButton))
         self.navigationItem.setLeftBarButton(backButton, animated: true)
+        self.navigationItem.setRightBarButton(optionButton, animated: true)
         
         setUpView()
         setUpBottomView()
@@ -26,6 +28,24 @@ class ProductDetailViewController: UIViewController {
 
     @objc func selectBackButton() {
         self.navigationController?.popViewController(animated: true)
+    }
+    
+    @objc func selectOptionButton() {
+        print("Click")
+        presentOptionAlert()
+    }
+    
+    func presentOptionAlert() {
+        let optionAlert = UIAlertController(title: "상품을 수정하거나 삭제할 수 있습니다.", message: nil, preferredStyle: .actionSheet)
+        let editAction = UIAlertAction(title: "수정하기", style: .default, handler: nil)
+        let deleteAction = UIAlertAction(title: "삭제하기", style: .destructive, handler: nil)
+        let cancelAction = UIAlertAction(title: "취소", style: .cancel, handler: nil)
+        
+        optionAlert.addAction(editAction)
+        optionAlert.addAction(deleteAction)
+        optionAlert.addAction(cancelAction)
+        
+        self.present(optionAlert, animated: true, completion: nil)
     }
     
     func setUpBottomView() {
@@ -62,7 +82,7 @@ class ProductDetailViewController: UIViewController {
         bottomView.addSubview(commentView)
         commentView.snp.makeConstraints { make in
             make.top.equalToSuperview().inset(13)
-            make.left.equalTo(purchaseButton.snp.right)
+            make.left.equalTo(purchaseButton.snp.right).inset(-5)
             make.width.equalToSuperview().multipliedBy(0.1)
             make.bottom.equalToSuperview().inset(9)
         }
@@ -122,6 +142,9 @@ class ProductDetailViewController: UIViewController {
         productDetailScrollView.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height - CGFloat(edgeHeight))
         productDetailScrollView.contentSize = CGSize(width: productDetailScrollView.frame.width, height: productDetailScrollView.frame.height)
         self.view.addSubview(productDetailScrollView)
+        
+        print(self.view.frame.width)
+        print(productDetailScrollView.frame.width)
         
         let productImageView = UIView()
         productDetailScrollView.addSubview(productImageView)
@@ -293,7 +316,7 @@ class ProductDetailViewController: UIViewController {
         userLevelView.addSubview(user)
         user.snp.makeConstraints { make in
             make.top.equalToSuperview()
-            make.right.equalTo(level.snp.left).inset(-4)
+            make.right.equalTo(level.snp.left).inset(4)
             make.centerY.equalToSuperview()
         }
         
