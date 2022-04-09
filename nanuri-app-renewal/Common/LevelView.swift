@@ -45,9 +45,11 @@ class LevelView: UIView {
             levelImageView.image = UIImage(named: "leaf_ic")
         case .flower:
             levelNameLabel.attributedText = NSAttributedString(string: "꽃")
+            levelNameLabel.textColor = .nanuriLevelOrange
             levelImageView.image = UIImage(named: "flower_ic")
         case .tree:
             levelNameLabel.attributedText = NSAttributedString(string: "나무")
+            levelNameLabel.textColor = .nanuriLevelMint
             levelImageView.image = UIImage(named: "tree_ic")
         }
         

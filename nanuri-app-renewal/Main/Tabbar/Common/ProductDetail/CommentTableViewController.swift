@@ -12,34 +12,54 @@ class CommentTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        self.view.backgroundColor = .white
+        self.title = "댓글"
+        let backButton = UIBarButtonItem(image: UIImage(named: "back_ic"), style: .plain, target: self, action: #selector(selectBackButton))
+        self.navigationItem.setLeftBarButton(backButton, animated: true)
+        
+        self.tableView.separatorInset = .zero
+        self.tableView.separatorColor = .nanuriGray2
+//        self.tableView.separatorStyle = .none
+    }
+    
+    @objc func selectBackButton() {
+        self.navigationController?.popViewController(animated: true)
     }
 
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0
+        return 10
     }
 
-    /*
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
-
-        return cell
+        let identifier = "\(indexPath.row)"
+        
+        if let reuseCell = tableView.dequeueReusableCell(withIdentifier: identifier) {
+            return reuseCell
+        } else {
+            
+            if indexPath.row % 2 == 0 {
+                let cell = CommentTableViewCell.init(style: .default, reuseIdentifier: identifier)
+                cell.selectionStyle = .none
+                
+                return cell
+            } else {
+                let cell = ReCommentTableViewCell.init(style: .default, reuseIdentifier: identifier)
+                cell.selectionStyle = .none
+                
+                return cell
+            }
+        }
     }
-    */
+    
 
     /*
     // Override to support conditional editing of the table view.

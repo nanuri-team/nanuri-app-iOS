@@ -35,6 +35,10 @@ class ProductDetailViewController: UIViewController {
         presentOptionAlert()
     }
     
+    @objc func selectCommentButton() {
+        presentCommentViewController()
+    }
+    
     func presentOptionAlert() {
         let optionAlert = UIAlertController(title: "상품을 수정하거나 삭제할 수 있습니다.", message: nil, preferredStyle: .actionSheet)
         let editAction = UIAlertAction(title: "수정하기", style: .default, handler: nil)
@@ -46,6 +50,12 @@ class ProductDetailViewController: UIViewController {
         optionAlert.addAction(cancelAction)
         
         self.present(optionAlert, animated: true, completion: nil)
+    }
+    
+    func presentCommentViewController() {
+        let commentTableViewController = CommentTableViewController()
+        commentTableViewController.hidesBottomBarWhenPushed = true
+        self.navigationController?.pushViewController(commentTableViewController, animated: true)
     }
     
     func setUpBottomView() {
@@ -95,6 +105,7 @@ class ProductDetailViewController: UIViewController {
             make.centerX.equalToSuperview()
             make.width.height.equalTo(24)
         }
+        commentButton.addTarget(self, action: #selector(selectCommentButton), for: .touchUpInside)
         
         let commentCount = UILabel()
         commentCount.attributedText = NSAttributedString(string: "0")
