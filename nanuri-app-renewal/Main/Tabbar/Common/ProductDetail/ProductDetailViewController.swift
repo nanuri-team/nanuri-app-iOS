@@ -53,9 +53,9 @@ class ProductDetailViewController: UIViewController {
     }
     
     func presentCommentViewController() {
-        let commentTableViewController = CommentTableViewController()
-        commentTableViewController.hidesBottomBarWhenPushed = true
-        self.navigationController?.pushViewController(commentTableViewController, animated: true)
+        let commentViewController = CommentViewController()
+        commentViewController.hidesBottomBarWhenPushed = true
+        self.navigationController?.pushViewController(commentViewController, animated: true)
     }
     
     func setUpBottomView() {
