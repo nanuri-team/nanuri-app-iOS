@@ -205,9 +205,13 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let productDetailViewController = ProductDetailViewController()
-        productDetailViewController.hidesBottomBarWhenPushed = true
-        self.navigationController?.pushViewController(productDetailViewController, animated: true)
+        if indexPath.section == 0 {
+            
+        } else {
+            let productDetailViewController = ProductDetailViewController()
+            productDetailViewController.hidesBottomBarWhenPushed = true
+            self.navigationController?.pushViewController(productDetailViewController, animated: true)
+        }
     }
 }
 
