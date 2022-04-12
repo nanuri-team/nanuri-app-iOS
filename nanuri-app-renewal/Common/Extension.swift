@@ -44,6 +44,11 @@ extension UIColor {
         return UIColor(red: 155.0 / 255.0, green: 179.0 / 255.0, blue: 226.0 / 255.0, alpha: 1)
     }
     
+    class var nanuriGray5: UIColor {
+        // rgba(137, 137, 142, 1)
+        return UIColor(red: 137.0 / 255.0, green: 137.0 / 255.0, blue: 142.0 / 255.0, alpha: 1)
+    }
+    
     class var nanuriGray4: UIColor {
         // rgba(162, 162, 167, 1)
         return UIColor(red: 162.0 / 255.0, green: 162.0 / 255.0, blue: 167.0 / 255.0, alpha: 1)

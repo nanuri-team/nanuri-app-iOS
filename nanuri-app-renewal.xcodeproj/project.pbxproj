@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		349EE88BFBCFEC4B071C4AD0 /* Pods_nanuri_app_renewal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 670A464DDF73C49130CF9703 /* Pods_nanuri_app_renewal.framework */; };
+		397ACBA42805F5B500E83FA0 /* LocationPermissionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397ACBA32805F5B500E83FA0 /* LocationPermissionViewController.swift */; };
+		397ACBA62805F93D00E83FA0 /* CheckMyLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397ACBA52805F93D00E83FA0 /* CheckMyLocationViewController.swift */; };
 		39AD77CF27FB0F4E0022EAC1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39AD77CE27FB0F4E0022EAC1 /* AppDelegate.swift */; };
 		39AD77D127FB0F4E0022EAC1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39AD77D027FB0F4E0022EAC1 /* SceneDelegate.swift */; };
 		39AD77D827FB0F500022EAC1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 39AD77D727FB0F500022EAC1 /* Assets.xcassets */; };
@@ -40,6 +42,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		397ACBA32805F5B500E83FA0 /* LocationPermissionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationPermissionViewController.swift; sourceTree = "<group>"; };
+		397ACBA52805F93D00E83FA0 /* CheckMyLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckMyLocationViewController.swift; sourceTree = "<group>"; };
 		39AD77CB27FB0F4E0022EAC1 /* nanuri-app-renewal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "nanuri-app-renewal.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		39AD77CE27FB0F4E0022EAC1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		39AD77D027FB0F4E0022EAC1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -88,6 +92,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		397ACBA22805F59400E83FA0 /* SettingLocation */ = {
+			isa = PBXGroup;
+			children = (
+				397ACBA32805F5B500E83FA0 /* LocationPermissionViewController.swift */,
+				397ACBA52805F93D00E83FA0 /* CheckMyLocationViewController.swift */,
+			);
+			path = SettingLocation;
+			sourceTree = "<group>";
+		};
 		39AD77C227FB0F4E0022EAC1 = {
 			isa = PBXGroup;
 			children = (
@@ -257,6 +270,7 @@
 		39AD781727FF2EA00022EAC1 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				397ACBA22805F59400E83FA0 /* SettingLocation */,
 				39AD781E280157170022EAC1 /* ProductDetail */,
 			);
 			path = Common;
@@ -425,6 +439,7 @@
 				39AD780627FB22DD0022EAC1 /* DeliveryTagView.swift in Sources */,
 				39AD77CF27FB0F4E0022EAC1 /* AppDelegate.swift in Sources */,
 				39AD77D127FB0F4E0022EAC1 /* SceneDelegate.swift in Sources */,
+				397ACBA42805F5B500E83FA0 /* LocationPermissionViewController.swift in Sources */,
 				39AD77F827FB11E30022EAC1 /* HomeViewController.swift in Sources */,
 				39AD781B27FF3E9C0022EAC1 /* LoactionTagView.swift in Sources */,
 				39AD781227FB47730022EAC1 /* VerticalProductCollectionViewCell.swift in Sources */,
@@ -438,6 +453,7 @@
 				39AD77FC27FB11F70022EAC1 /* ChattingViewController.swift in Sources */,
 				39AD78242801624B0022EAC1 /* ReCommentTableViewCell.swift in Sources */,
 				39AD77F627FB11CE0022EAC1 /* TabBarController.swift in Sources */,
+				397ACBA62805F93D00E83FA0 /* CheckMyLocationViewController.swift in Sources */,
 				87D17BA227FB5C0B00E171A2 /* SettingViewController.swift in Sources */,
 				39AD782628016DDF0022EAC1 /* CommentViewController.swift in Sources */,
 				39AD782228015C5D0022EAC1 /* CommentTableViewCell.swift in Sources */,

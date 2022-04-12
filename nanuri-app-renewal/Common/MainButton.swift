@@ -33,7 +33,8 @@ class MainButton: UIButton {
         case .main:
             self.backgroundColor = .nanuriGreen
         case .disable:
-            self.backgroundColor = .nanuriGray3
+            self.titleLabel?.textColor = .nanuriGray5
+            self.backgroundColor = .nanuriGray2
         }
     }
 }

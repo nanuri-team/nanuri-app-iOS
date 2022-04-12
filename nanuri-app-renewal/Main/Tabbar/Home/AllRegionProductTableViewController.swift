@@ -14,6 +14,7 @@ class AllRegionProductTableViewController: UITableViewController {
 
         self.view.backgroundColor = .white
         self.title = "전체 지역 상품"
+
         let backButton = UIBarButtonItem(image: UIImage(named: "back_ic"), style: .plain, target: self, action: #selector(selectBackButton))
         self.navigationItem.setLeftBarButton(backButton, animated: true)
         

@@ -88,6 +88,9 @@ class CommentViewController: UIViewController {
     }
 }
 
+
+//MARK: - UITableViewDelegate, UITableViewDataSource
+
 extension CommentViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 10
