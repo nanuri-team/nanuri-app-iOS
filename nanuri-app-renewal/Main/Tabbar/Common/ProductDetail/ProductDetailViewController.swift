@@ -57,7 +57,7 @@ class ProductDetailViewController: UIViewController {
         commentViewController.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(commentViewController, animated: true)
     }
-    
+
     func setUpBottomView() {
         let bottomView = UIView()
         bottomView.backgroundColor = .white
@@ -106,6 +106,7 @@ class ProductDetailViewController: UIViewController {
             make.width.height.equalTo(24)
         }
         commentButton.addTarget(self, action: #selector(selectCommentButton), for: .touchUpInside)
+
         
         let commentCount = UILabel()
         commentCount.attributedText = NSAttributedString(string: "0")
