@@ -11,7 +11,6 @@ class HomeViewController: UIViewController {
     
 
     let headerScrollView = UIScrollView()
-    
     var sampleImageViewArray: [UIImageView] = []
     var collectionCellWidth = 120
     var collectionCellHeight = 163
@@ -120,7 +119,7 @@ class HomeViewController: UIViewController {
             make.height.equalTo(collectionCellHeight)
         }
 
-        
+
         let allRegionTableView = UITableView()
         allRegionTableView.delegate = self
         allRegionTableView.dataSource = self
