@@ -47,9 +47,16 @@ class AllRegionProductTableViewController: UITableViewController {
             return reuseCell
         } else {
             let cell = MainProductTableViewCell.init(style: .default, reuseIdentifier: identifier)
+            cell.selectionStyle = .none
             
             return cell
         }
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let productDetailViewController = ProductDetailViewController()
+        productDetailViewController.hidesBottomBarWhenPushed = true
+        self.navigationController?.pushViewController(productDetailViewController, animated: true)
     }
     
 

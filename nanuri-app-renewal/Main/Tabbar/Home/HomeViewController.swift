@@ -207,12 +207,12 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.section == 0 {
-            
-        } else {
-            let productDetailViewController = ProductDetailViewController()
-            productDetailViewController.hidesBottomBarWhenPushed = true
-            self.navigationController?.pushViewController(productDetailViewController, animated: true)
+        if indexPath.section == 1 {
+            if indexPath.row == 0 {
+                let productDetailViewController = ProductDetailViewController()
+                productDetailViewController.hidesBottomBarWhenPushed = true
+                self.navigationController?.pushViewController(productDetailViewController, animated: true)
+            }
         }
     }
 }
