@@ -11,8 +11,6 @@ class HomeViewController: UIViewController {
     
 
     let headerScrollView = UIScrollView()
-    
-  
     var sampleImageViewArray: [UIImageView] = []
     var collectionCellWidth = 120
     var collectionCellHeight = 163
@@ -198,9 +196,20 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
                 return reuseCell
             } else {
                 let cell = MainProductTableViewCell.init(style: .default, reuseIdentifier: identifier)
+                cell.selectionStyle = .none
                 
                 return cell
             }
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.section == 0 {
+            
+        } else {
+            let productDetailViewController = ProductDetailViewController()
+            productDetailViewController.hidesBottomBarWhenPushed = true
+            self.navigationController?.pushViewController(productDetailViewController, animated: true)
         }
     }
 }
@@ -227,6 +236,12 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             return UICollectionViewCell()
         }
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let productDetailViewController = ProductDetailViewController()
+        productDetailViewController.hidesBottomBarWhenPushed = true
+        self.navigationController?.pushViewController(productDetailViewController, animated: true)
     }
 }
 

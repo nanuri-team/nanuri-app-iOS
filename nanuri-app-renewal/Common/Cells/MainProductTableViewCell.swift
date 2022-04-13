@@ -36,7 +36,7 @@ class MainProductTableViewCell: UITableViewCell {
         cellView.layer.cornerRadius = 12
         cellView.backgroundColor = .white
         cellView.layer.borderWidth = 1
-        cellView.layer.borderColor = UIColor.nanuriLightGray.cgColor
+        cellView.layer.borderColor = UIColor.nanuriGray2.cgColor
         cellView.clipsToBounds = true
         contentView.addSubview(cellView)
         cellView.snp.makeConstraints { make in
@@ -64,7 +64,7 @@ class MainProductTableViewCell: UITableViewCell {
         }
         
         let productImage = UIImageView()
-        productImage.backgroundColor = .nanuriLightGray
+        productImage.backgroundColor = .nanuriGray2
         productImage.contentMode = .scaleToFill
         cellView.addSubview(productImage)
         productImage.snp.makeConstraints { make in
@@ -111,7 +111,7 @@ class MainProductTableViewCell: UITableViewCell {
         let totalRecruit = UILabel()
         totalRecruit.attributedText = NSAttributedString(string: "/5")
         totalRecruit.font = UIFont.systemFont(ofSize: 12)
-        totalRecruit.textColor = .nanuriGray
+        totalRecruit.textColor = .nanuriGray4
         cellView.addSubview(totalRecruit)
         totalRecruit.snp.makeConstraints { make in
             make.right.equalTo(productImage.snp.left).inset(-10)
