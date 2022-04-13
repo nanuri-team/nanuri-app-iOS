@@ -12,10 +12,7 @@ class HomeViewController: UIViewController {
 
     let headerScrollView = UIScrollView()
     
-    var collectionCellWidth = 120
-    var collectionCellHeight = 163
-    let ratioWidth = UIScreen.main.bounds.width
-    
+  
     var sampleImageViewArray: [UIImageView] = []
     var collectionCellWidth = 120
     var collectionCellHeight = 163
@@ -125,18 +122,6 @@ class HomeViewController: UIViewController {
         }
 
 
-        
-        let layout = UICollectionViewFlowLayout()
-        let eventProductCollectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        eventProductCollectionView.frame = CGRect(x: 0, y: 0, width: Int(ratioWidth), height: collectionCellHeight)
-        eventProductCollectionView.delegate = self
-        eventProductCollectionView.dataSource = self
-        layout.scrollDirection = .horizontal
-        layout.minimumLineSpacing = 16
-        eventProductCollectionView.register(VerticalProductCollectionViewCell.self, forCellWithReuseIdentifier: VerticalProductCollectionViewCell.cellId)
-
-
-        
         let allRegionTableView = UITableView()
         allRegionTableView.delegate = self
         allRegionTableView.dataSource = self

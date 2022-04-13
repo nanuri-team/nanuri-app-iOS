@@ -16,7 +16,7 @@ class TabBarController: UITabBarController {
         self.tabBar.barTintColor = .white
         self.tabBar.isTranslucent = false
         
-        let homeNavigationController = UINavigationController(rootViewController: SearchViewController())
+        let homeNavigationController = UINavigationController(rootViewController: HomeViewController())
         let neighbourhoodNavigationController = UINavigationController(rootViewController: NeighbourhoodViewController())
         let chattingNavigationController = UINavigationController(rootViewController: ChattingViewController())
         let bookmarkNavigationController = UINavigationController(rootViewController: BookmarkViewController())
