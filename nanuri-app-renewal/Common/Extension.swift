@@ -13,7 +13,12 @@ extension UIColor {
         // rgba(99, 178, 97, 1)
         return UIColor(red: 99.0 / 255.0, green: 178.0 / 255.0, blue: 97.0 / 255.0, alpha: 1)
     }
-    
+
+    class var nanuriLevelMint: UIColor {
+        // rgba(133, 228, 205, 1)
+        return UIColor(red: 133.0 / 255.0, green: 228.0 / 255.0, blue: 205.0 / 255.0, alpha: 1)
+    }
+
     class var nanuriLevelGreen: UIColor {
         // rgba(173, 233, 112, 1)
         return UIColor(red: 173.0 / 255.0, green: 233.0 / 255.0, blue: 112.0 / 255.0, alpha: 1)
@@ -63,7 +68,12 @@ extension UIColor {
         // rgba(255, 158, 86, 1)
         return UIColor(red: 255.0 / 255.0, green: 158.0 / 255.0, blue: 86.0 / 255.0, alpha: 1)
     }
-    
+
+    class var nanuriLevelOrange: UIColor {
+        // rgba(243, 198, 110, 1)
+        return UIColor(red: 243.0 / 255.0, green: 198.0 / 255.0, blue: 110.0 / 255.0, alpha: 1)
+    }
+
     class var nanuriYellow: UIColor {
         // rgba(241, 235, 96, 1)
         return UIColor(red: 241.0 / 255.0, green: 235.0 / 255.0, blue: 96.0 / 255.0, alpha: 1)
@@ -90,4 +100,14 @@ extension UIView {
             statusBar?.backgroundColor = .white
         }
     }
+}
+
+extension UITextField {
+  func addPadding() {
+      let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: 20, height: self.frame.height))
+      self.leftView = paddingView
+      self.leftViewMode = ViewMode.always
+      self.rightView = paddingView
+      self.rightViewMode = ViewMode.always
+  }
 }
