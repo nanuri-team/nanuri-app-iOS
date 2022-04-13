@@ -58,8 +58,7 @@ class VerticalProductCollectionViewCell: UICollectionViewCell {
         }
         
         let productName = UILabel()
-        productName.attributedText = NSAttributedString(string: "로스팅 원두")
-        productName.font = UIFont.systemFont(ofSize: 14)
+        productName.attributedText = .attributeFont(font: .PRegular, size: 14, text: "로스팅 원두", lineHeight: 17)
         cellView.addSubview(productName)
         productName.snp.makeConstraints { make in
             make.left.right.equalToSuperview()
@@ -67,8 +66,7 @@ class VerticalProductCollectionViewCell: UICollectionViewCell {
         }
         
         let productPrice = UILabel()
-        productPrice.attributedText = NSAttributedString(string: "3,500원")
-        productPrice.font = UIFont.systemFont(ofSize: 11)
+        productPrice.attributedText = .attributeFont(font: .PBold, size: 11, text: "3,500원", lineHeight: 13)
         cellView.addSubview(productPrice)
         productPrice.snp.makeConstraints { make in
             make.top.equalTo(productName.snp.bottom).inset(-4)
@@ -77,8 +75,7 @@ class VerticalProductCollectionViewCell: UICollectionViewCell {
         }
         
         let totalRecruit = UILabel()
-        totalRecruit.attributedText = NSAttributedString(string: "/5")
-        totalRecruit.font = UIFont.systemFont(ofSize: 12)
+        totalRecruit.attributedText = .attributeFont(font: .NSRExtrabold, size: 12, text: "/5", lineHeight: 14)
         totalRecruit.textColor = .nanuriGray4
         cellView.addSubview(totalRecruit)
         totalRecruit.snp.makeConstraints { make in
@@ -88,8 +85,7 @@ class VerticalProductCollectionViewCell: UICollectionViewCell {
         }
         
         let productParticipant = UILabel()
-        productParticipant.attributedText = NSAttributedString(string: "2")
-        productParticipant.font = UIFont.systemFont(ofSize: 12)
+        productParticipant.attributedText = .attributeFont(font: .NSRExtrabold, size: 12, text: "2", lineHeight: 14)
         productParticipant.textColor = .nanuriOrange
         cellView.addSubview(productParticipant)
         productParticipant.snp.makeConstraints { make in

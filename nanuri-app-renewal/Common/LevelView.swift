@@ -28,7 +28,6 @@ class LevelView: UIView {
         self.init(frame: .zero)
         
         let levelNameLabel = UILabel()
-        levelNameLabel.font = UIFont.systemFont(ofSize: 11)
         self.addSubview(levelNameLabel)
         
         let levelImageView = UIImageView()
@@ -36,19 +35,19 @@ class LevelView: UIView {
         
         switch level {
         case .bean:
-            levelNameLabel.attributedText = NSAttributedString(string: "콩")
+            levelNameLabel.attributedText = .attributeFont(font: .NSRExtrabold, size: 11, text: "콩", lineHeight: 11)
             levelNameLabel.textColor = .nanuriYellow
             levelImageView.image = UIImage(named: "bean_ic")
         case .leaf:
-            levelNameLabel.attributedText = NSAttributedString(string: "새싹")
+            levelNameLabel.attributedText = .attributeFont(font: .NSRExtrabold, size: 11, text: "새싹", lineHeight: 11)
             levelNameLabel.textColor = .nanuriLevelGreen
             levelImageView.image = UIImage(named: "leaf_ic")
         case .flower:
-            levelNameLabel.attributedText = NSAttributedString(string: "꽃")
+            levelNameLabel.attributedText = .attributeFont(font: .NSRExtrabold, size: 11, text: "꽃", lineHeight: 11)
             levelNameLabel.textColor = .nanuriLevelOrange
             levelImageView.image = UIImage(named: "flower_ic")
         case .tree:
-            levelNameLabel.attributedText = NSAttributedString(string: "나무")
+            levelNameLabel.attributedText = .attributeFont(font: .NSRExtrabold, size: 11, text: "나무", lineHeight: 11)
             levelNameLabel.textColor = .nanuriLevelMint
             levelImageView.image = UIImage(named: "tree_ic")
         }

@@ -29,7 +29,7 @@ class CheckMyLocationViewController: UIViewController {
 
     func setUpView() {
         let locationTitleLabel = UILabel()
-        locationTitleLabel.attributedText = NSAttributedString(string: "여기가 현재\n회원님의 위치가 맞나요?")
+        locationTitleLabel.attributedText = .attributeFont(font: .PRegular, size: 16, text: "여기가 현재\n회원님의 위치가 맞나요?", lineHeight: 24)
         locationTitleLabel.numberOfLines = 2
         locationTitleLabel.textAlignment = .center
         locationTitleLabel.textColor = .nanuriGray5
@@ -48,8 +48,7 @@ class CheckMyLocationViewController: UIViewController {
         }
         
         let myLocationLabel = UILabel()
-        myLocationLabel.attributedText = NSAttributedString(string: "\"서울시 강북구 미아동\"")
-        myLocationLabel.font = UIFont.systemFont(ofSize: 24, weight: .bold)
+        myLocationLabel.attributedText = .attributeFont(font: .NSRExtrabold, size: 24, text: "\"서울시 강북구 미아동\"", lineHeight: 27.24)
         myLocationLabel.textColor = .nanuriGreen
         self.view.addSubview(myLocationLabel)
         myLocationLabel.snp.makeConstraints { make in
@@ -61,7 +60,7 @@ class CheckMyLocationViewController: UIViewController {
         self.view.addSubview(buttonView)
         
         let cancelButton = MainButton(style: .disable)
-        cancelButton.setAttributedTitle(NSAttributedString(string: "아니오, 다릅니다"), for: .normal)
+        cancelButton.setAttributedTitle(.attributeFont(font: .PBold, size: 15, text: "아니오, 다릅니다", lineHeight: 18), for: .normal)
         buttonView.addSubview(cancelButton)
         cancelButton.snp.makeConstraints { make in
             make.width.equalToSuperview().multipliedBy(0.45)
@@ -70,7 +69,7 @@ class CheckMyLocationViewController: UIViewController {
         }
         
         let okButton = MainButton(style: .main)
-        okButton.setAttributedTitle(NSAttributedString(string: "네, 맞습니다"), for: .normal)
+        okButton.setAttributedTitle(.attributeFont(font: .PBold, size: 15, text: "네, 맞습니다", lineHeight: 18), for: .normal)
         buttonView.addSubview(okButton)
         okButton.snp.makeConstraints { make in
             make.width.equalToSuperview().multipliedBy(0.45)

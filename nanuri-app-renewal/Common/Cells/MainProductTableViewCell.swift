@@ -55,8 +55,8 @@ class MainProductTableViewCell: UITableViewCell {
         }
         
         let productLocationLabel = UILabel()
-        productLocationLabel.attributedText = NSAttributedString(string: "서울시 강남구")
-        productLocationLabel.font = UIFont.systemFont(ofSize: 12)
+        productLocationLabel.attributedText = .attributeFont(font: .NSRBold, size: 12, text: "서울시 강남구", lineHeight: 14)
+        productLocationLabel.textColor = .nanuriGray4
         cellView.addSubview(productLocationLabel)
         productLocationLabel.snp.makeConstraints { make in
             make.left.equalTo(locationImageView.snp.right).inset(-2)
@@ -74,8 +74,7 @@ class MainProductTableViewCell: UITableViewCell {
         }
         
         let productName = UILabel()
-        productName.attributedText = NSAttributedString(string: "로스팅 원두")
-        productName.font = UIFont.systemFont(ofSize: 17)
+        productName.attributedText = .attributeFont(font: .PRegular, size: 17, text: "로스팅 원두", lineHeight: 20)
         cellView.addSubview(productName)
         productName.snp.makeConstraints { make in
             make.left.equalToSuperview().inset(14)
@@ -84,9 +83,8 @@ class MainProductTableViewCell: UITableViewCell {
         }
         
         let productPrice = UILabel()
-        productPrice.attributedText = NSAttributedString(string: "3,500원")
+        productPrice.attributedText = .attributeFont(font: .PBold, size: 16, text: "3,500원", lineHeight: 19)
         productPrice.textAlignment = .right
-        productPrice.font = UIFont.systemFont(ofSize: 16)
         cellView.addSubview(productPrice)
         productPrice.snp.makeConstraints { make in
             make.top.equalTo(productName.snp.bottom).inset(-5)
@@ -109,8 +107,7 @@ class MainProductTableViewCell: UITableViewCell {
         }
         
         let totalRecruit = UILabel()
-        totalRecruit.attributedText = NSAttributedString(string: "/5")
-        totalRecruit.font = UIFont.systemFont(ofSize: 12)
+        totalRecruit.attributedText = .attributeFont(font: .NSRExtrabold, size: 12, text: "/5", lineHeight: 14)
         totalRecruit.textColor = .nanuriGray4
         cellView.addSubview(totalRecruit)
         totalRecruit.snp.makeConstraints { make in
@@ -119,8 +116,7 @@ class MainProductTableViewCell: UITableViewCell {
         }
         
         let productParticipant = UILabel()
-        productParticipant.attributedText = NSAttributedString(string: "2")
-        productParticipant.font = UIFont.systemFont(ofSize: 12)
+        productParticipant.attributedText = .attributeFont(font: .NSRExtrabold, size: 12, text: "2", lineHeight: 14)
         productParticipant.textColor = .nanuriOrange
         cellView.addSubview(productParticipant)
         productParticipant.snp.makeConstraints { make in

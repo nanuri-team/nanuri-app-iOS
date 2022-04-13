@@ -35,9 +35,8 @@ class LocationPermissionViewController: UIViewController {
     
     func setUpView() {
         let permissionTitleLabel = UILabel()
-        permissionTitleLabel.attributedText = NSAttributedString(string: "나누리에서\n내 주변 이웃과의 거래를 위해")
+        permissionTitleLabel.attributedText = .attributeFont(font: .PRegular, size: 24, text: "나누리에서\n내 주변 이웃과의 거래를 위해", lineHeight: 29)
         permissionTitleLabel.numberOfLines = 2
-        permissionTitleLabel.font = UIFont.systemFont(ofSize: 24)
         self.view.addSubview(permissionTitleLabel)
         permissionTitleLabel.snp.makeConstraints { make in
             make.top.equalTo(self.view.safeAreaLayoutGuide).inset(40)
@@ -45,9 +44,8 @@ class LocationPermissionViewController: UIViewController {
         }
         
         let permissionColorTitleLabel = UILabel()
-        permissionColorTitleLabel.attributedText = NSAttributedString(string: "내 위치 권한을 허용해주세요.")
+        permissionColorTitleLabel.attributedText = .attributeFont(font: .PRegular, size: 24, text: "내 위치 권한을 허용해주세요.", lineHeight: 29)
         permissionColorTitleLabel.textColor = .nanuriGreen
-        permissionColorTitleLabel.font = UIFont.systemFont(ofSize: 24)
         self.view.addSubview(permissionColorTitleLabel)
         permissionColorTitleLabel.snp.makeConstraints { make in
             make.top.equalTo(permissionTitleLabel.snp.bottom)
@@ -74,7 +72,7 @@ class LocationPermissionViewController: UIViewController {
         }
         
         let settingLocationButton = MainButton(style: .main)
-        settingLocationButton.setAttributedTitle(NSAttributedString(string: "현 위치 설정하기"), for: .normal)
+        settingLocationButton.setAttributedTitle(.attributeFont(font: .PBold, size: 15, text: "현 위치 설정하기", lineHeight: 18), for: .normal)
         bottomView.addSubview(settingLocationButton)
         settingLocationButton.snp.makeConstraints { make in
             make.left.right.top.bottom.equalToSuperview().inset(8)

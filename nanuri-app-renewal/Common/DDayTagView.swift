@@ -21,10 +21,9 @@ class DDayTagView: UIView {
         self.init(frame: .zero)
         
         let typeLabel = UILabel()
-        typeLabel.font = UIFont.systemFont(ofSize: 11, weight: .bold)
         self.addSubview(typeLabel)
         
-        typeLabel.attributedText = NSAttributedString(string: "D-\(dDay)")
+        typeLabel.attributedText = .attributeFont(font: .NSRExtrabold, size: 11, text: "D-\(dDay)", lineHeight: 11)
         typeLabel.textColor = .nanuriDarkGreen
         self.backgroundColor = .nanuriLightGreen.withAlphaComponent(0.2)
         

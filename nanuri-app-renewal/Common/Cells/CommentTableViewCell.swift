@@ -37,8 +37,7 @@ class CommentTableViewCell: UITableViewCell {
         self.contentView.addSubview(cellView)
         
         let user = UILabel()
-        user.attributedText = NSAttributedString(string: "닉네임뭐하지")
-        user.font = UIFont.systemFont(ofSize: 13, weight: .bold)
+        user.attributedText = .attributeFont(font: .PBold, size: 13, text: "닉네임뭐하지", lineHeight: 16)
         cellView.addSubview(user)
         user.snp.makeConstraints { make in
             make.top.equalToSuperview().inset(12)
@@ -63,8 +62,7 @@ class CommentTableViewCell: UITableViewCell {
         
         let comment = UILabel()
         comment.numberOfLines = 3
-        comment.attributedText = NSAttributedString(string: "혹시 인원 못 모여도 공구 진행해주실 수 있나요 ㅜㅜ 제발 해주세여")
-        comment.font = UIFont.systemFont(ofSize: 13)
+        comment.attributedText = .attributeFont(font: .PRegular, size: 13, text: "혹시 인원 못 모여도 공구 진행해주실 수 있나요 ㅜㅜ 제발 해주세여", lineHeight: 19)
         cellView.addSubview(comment)
         comment.snp.makeConstraints { make in
             make.top.equalTo(user.snp.bottom).inset(-8)
@@ -72,8 +70,7 @@ class CommentTableViewCell: UITableViewCell {
         }
         
         let commentTime = UILabel()
-        commentTime.attributedText = NSAttributedString(string: "2022.03.22(화) 13:48")
-        commentTime.font = UIFont.systemFont(ofSize: 12)
+        commentTime.attributedText = .attributeFont(font: .PRegular, size: 12, text: "2022.03.22(화) 13:48", lineHeight: 18)
         commentTime.textColor = .nanuriGray3
         cellView.addSubview(commentTime)
         commentTime.snp.makeConstraints { make in
@@ -82,10 +79,9 @@ class CommentTableViewCell: UITableViewCell {
         }
         
         let reCommentButton = UIButton()
-        reCommentButton.setAttributedTitle(NSAttributedString(string: "답글"), for: .normal)
+        reCommentButton.setAttributedTitle(.attributeFont(font: .PRegular, size: 12, text: "답글", lineHeight: 14), for: .normal)
         reCommentButton.layer.borderColor = UIColor.nanuriGray3.cgColor
         reCommentButton.layer.borderWidth = 1
-        reCommentButton.titleLabel?.font = UIFont.systemFont(ofSize: 12)
         reCommentButton.setTitleColor(.nanuriGray3, for: .normal)
         cellView.addSubview(reCommentButton)
         reCommentButton.snp.makeConstraints { make in
