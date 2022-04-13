@@ -2,7 +2,7 @@
 //  CommentTableViewCell.swift
 //  nanuri-app-renewal
 //
-//  Created by minimani on 2022/04/09.
+//  Created by minimani on 2022/04/13.
 //
 
 import UIKit
@@ -104,3 +104,4 @@ class CommentTableViewCell: UITableViewCell {
     }
 
 }
+
