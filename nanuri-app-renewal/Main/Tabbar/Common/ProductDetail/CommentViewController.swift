@@ -68,7 +68,7 @@ class CommentViewController: UIViewController {
         commentTextField.clipsToBounds = true
         commentTextField.layer.borderWidth = 1
         commentTextField.layer.borderColor = UIColor.nanuriGray2.cgColor
-        commentTextField.font = UIFont.systemFont(ofSize: 15)
+        commentTextField.attributedText = .attributeFont(font: .PRegular, size: 15, text: "", lineHeight: 18)
         commentTextField.addPadding()
         bottomView.addSubview(commentTextField)
         commentTextField.layer.cornerRadius = 25

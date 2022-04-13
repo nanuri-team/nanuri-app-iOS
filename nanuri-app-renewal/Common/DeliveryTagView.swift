@@ -26,16 +26,15 @@ class DeliveryTagView: UIView {
         self.init(frame: .zero)
         
         let typeLabel = UILabel()
-        typeLabel.font = UIFont.systemFont(ofSize: 11, weight: .bold)
         self.addSubview(typeLabel)
         
         switch type {
         case .delivery:
-            typeLabel.attributedText = NSAttributedString(string: DeliveryTypeName.delivery)
+            typeLabel.attributedText = .attributeFont(font: .NSRExtrabold, size: 11, text: DeliveryTypeName.delivery, lineHeight: 11)
             typeLabel.textColor = .nanuriBrown
             self.backgroundColor = .nanuriBrown.withAlphaComponent(0.2)
         case .direct:
-            typeLabel.attributedText = NSAttributedString(string: DeliveryTypeName.direct)
+            typeLabel.attributedText = .attributeFont(font: .NSRExtrabold, size: 11, text: DeliveryTypeName.direct, lineHeight: 11)
             typeLabel.textColor = .nanuriBlue
             self.backgroundColor = .nanuriBlue.withAlphaComponent(0.2)
         }

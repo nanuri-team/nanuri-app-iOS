@@ -48,8 +48,7 @@ class ReCommentTableViewCell: UITableViewCell {
         cellView.addSubview(commentView)
         
         let user = UILabel()
-        user.attributedText = NSAttributedString(string: "프로자취러")
-        user.font = UIFont.systemFont(ofSize: 13, weight: .bold)
+        user.attributedText = .attributeFont(font: .PBold, size: 13, text: "프로자취러", lineHeight: 16)
         commentView.addSubview(user)
         user.snp.makeConstraints { make in
             make.top.equalToSuperview().inset(12)
@@ -74,8 +73,7 @@ class ReCommentTableViewCell: UITableViewCell {
         
         let comment = UILabel()
         comment.numberOfLines = 3
-        comment.attributedText = NSAttributedString(string: "ㅠㅠ 2명뿐이면 어려울 거 같아용..")
-        comment.font = UIFont.systemFont(ofSize: 13)
+        comment.attributedText = .attributeFont(font: .PRegular, size: 13, text: "ㅠㅠ 2명뿐이면 어려울 거 같아용..", lineHeight: 19)
         commentView.addSubview(comment)
         comment.snp.makeConstraints { make in
             make.top.equalTo(user.snp.bottom).inset(-8)
@@ -84,8 +82,7 @@ class ReCommentTableViewCell: UITableViewCell {
         }
         
         let commentTime = UILabel()
-        commentTime.attributedText = NSAttributedString(string: "2022.03.22(화) 13:48")
-        commentTime.font = UIFont.systemFont(ofSize: 12)
+        commentTime.attributedText = .attributeFont(font: .PRegular, size: 12, text: "2022.03.22(화) 13:48", lineHeight: 18)
         commentTime.textColor = .nanuriGray3
         commentView.addSubview(commentTime)
         commentTime.snp.makeConstraints { make in

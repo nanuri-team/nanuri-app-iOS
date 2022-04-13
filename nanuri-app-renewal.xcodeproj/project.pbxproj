@@ -9,6 +9,12 @@
 /* Begin PBXBuildFile section */
 		349EE88BFBCFEC4B071C4AD0 /* Pods_nanuri_app_renewal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 670A464DDF73C49130CF9703 /* Pods_nanuri_app_renewal.framework */; };
 		39308CC12806FFFB00C41F9F /* CommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39308CC02806FFFB00C41F9F /* CommentTableViewCell.swift */; };
+		39308CCF28073ACE00C41F9F /* NanumSquareRoundB.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 39308CC9280737A600C41F9F /* NanumSquareRoundB.ttf */; };
+		39308CD328073AD200C41F9F /* NanumSquareRoundEB.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 39308CCB280737A600C41F9F /* NanumSquareRoundEB.ttf */; };
+		39308CE92807461C00C41F9F /* Pretendard-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 39308CE52807461C00C41F9F /* Pretendard-Medium.otf */; };
+		39308CEA2807461C00C41F9F /* Pretendard-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 39308CE62807461C00C41F9F /* Pretendard-SemiBold.otf */; };
+		39308CEB2807461C00C41F9F /* Pretendard-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 39308CE72807461C00C41F9F /* Pretendard-Bold.otf */; };
+		39308CEC2807461C00C41F9F /* Pretendard-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 39308CE82807461C00C41F9F /* Pretendard-Regular.otf */; };
 		397ACBA42805F5B500E83FA0 /* LocationPermissionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397ACBA32805F5B500E83FA0 /* LocationPermissionViewController.swift */; };
 		397ACBA62805F93D00E83FA0 /* CheckMyLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397ACBA52805F93D00E83FA0 /* CheckMyLocationViewController.swift */; };
 		39AD77CF27FB0F4E0022EAC1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39AD77CE27FB0F4E0022EAC1 /* AppDelegate.swift */; };
@@ -44,6 +50,12 @@
 
 /* Begin PBXFileReference section */
 		39308CC02806FFFB00C41F9F /* CommentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentTableViewCell.swift; sourceTree = "<group>"; };
+		39308CC9280737A600C41F9F /* NanumSquareRoundB.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = NanumSquareRoundB.ttf; sourceTree = "<group>"; };
+		39308CCB280737A600C41F9F /* NanumSquareRoundEB.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = NanumSquareRoundEB.ttf; sourceTree = "<group>"; };
+		39308CE52807461C00C41F9F /* Pretendard-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Medium.otf"; sourceTree = "<group>"; };
+		39308CE62807461C00C41F9F /* Pretendard-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-SemiBold.otf"; sourceTree = "<group>"; };
+		39308CE72807461C00C41F9F /* Pretendard-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Bold.otf"; sourceTree = "<group>"; };
+		39308CE82807461C00C41F9F /* Pretendard-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Regular.otf"; sourceTree = "<group>"; };
 		397ACBA32805F5B500E83FA0 /* LocationPermissionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationPermissionViewController.swift; sourceTree = "<group>"; };
 		397ACBA52805F93D00E83FA0 /* CheckMyLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckMyLocationViewController.swift; sourceTree = "<group>"; };
 		39AD77CB27FB0F4E0022EAC1 /* nanuri-app-renewal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "nanuri-app-renewal.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -94,6 +106,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		39308CC22807370B00C41F9F /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				39308CE72807461C00C41F9F /* Pretendard-Bold.otf */,
+				39308CE52807461C00C41F9F /* Pretendard-Medium.otf */,
+				39308CE82807461C00C41F9F /* Pretendard-Regular.otf */,
+				39308CE62807461C00C41F9F /* Pretendard-SemiBold.otf */,
+				39308CC9280737A600C41F9F /* NanumSquareRoundB.ttf */,
+				39308CCB280737A600C41F9F /* NanumSquareRoundEB.ttf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
 		397ACBA22805F59400E83FA0 /* SettingLocation */ = {
 			isa = PBXGroup;
 			children = (
@@ -171,6 +196,7 @@
 		39AD77E527FB102E0022EAC1 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				39308CC22807370B00C41F9F /* Fonts */,
 				39AD77D727FB0F500022EAC1 /* Assets.xcassets */,
 			);
 			path = Utils;
@@ -381,7 +407,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				39308CD328073AD200C41F9F /* NanumSquareRoundEB.ttf in Resources */,
+				39308CEB2807461C00C41F9F /* Pretendard-Bold.otf in Resources */,
 				39AD77D827FB0F500022EAC1 /* Assets.xcassets in Resources */,
+				39308CEA2807461C00C41F9F /* Pretendard-SemiBold.otf in Resources */,
+				39308CEC2807461C00C41F9F /* Pretendard-Regular.otf in Resources */,
+				39308CCF28073ACE00C41F9F /* NanumSquareRoundB.ttf in Resources */,
+				39308CE92807461C00C41F9F /* Pretendard-Medium.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

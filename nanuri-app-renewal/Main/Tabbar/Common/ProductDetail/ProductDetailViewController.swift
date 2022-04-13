@@ -80,7 +80,7 @@ class ProductDetailViewController: UIViewController {
         
         
         let purchaseButton = MainButton(style: .main)
-        purchaseButton.setAttributedTitle(NSAttributedString(string: "공동 구매 참여하기"), for: .normal)
+        purchaseButton.setAttributedTitle(.attributeFont(font: .PBold, size: 15, text: "공동 구매 참여하기", lineHeight: 18), for: .normal)
         bottomView.addSubview(purchaseButton)
         purchaseButton.snp.makeConstraints { make in
             make.left.equalToSuperview().inset(8)
@@ -109,9 +109,8 @@ class ProductDetailViewController: UIViewController {
 
         
         let commentCount = UILabel()
-        commentCount.attributedText = NSAttributedString(string: "0")
+        commentCount.attributedText = .attributeFont(font: .PRegular, size: 12, text: "0", lineHeight: 18)
         commentCount.textColor = .nanuriGray3
-        commentCount.font = UIFont.systemFont(ofSize: 12)
         commentView.addSubview(commentCount)
         commentCount.snp.makeConstraints { make in
             make.top.equalTo(commentButton.snp.bottom).inset(-4)
@@ -137,9 +136,8 @@ class ProductDetailViewController: UIViewController {
         }
         
         let favoriteCount = UILabel()
-        favoriteCount.attributedText = NSAttributedString(string: "12")
+        favoriteCount.attributedText = .attributeFont(font: .PRegular, size: 12, text: "12", lineHeight: 18)
         favoriteCount.textColor = .nanuriGray3
-        favoriteCount.font = UIFont.systemFont(ofSize: 12)
         favoriteView.addSubview(favoriteCount)
         favoriteCount.snp.makeConstraints { make in
             make.top.equalTo(favoriteButton.snp.bottom).inset(-4)
@@ -176,13 +174,12 @@ class ProductDetailViewController: UIViewController {
         }
         
         let productLinkButton = UIButton()
-        productLinkButton.setAttributedTitle(NSAttributedString(string: "상품 링크 바로가기"), for: .normal)
+        productLinkButton.setAttributedTitle(.attributeFont(font: .PRegular, size: 15, text: "상품 링크 바로가기", lineHeight: 18), for: .normal)
         productLinkButton.setImage(UIImage(named: "link_ic"), for: .normal)
         productLinkButton.layer.borderWidth = 1
         productLinkButton.backgroundColor = .white
         productLinkButton.layer.borderColor = UIColor.nanuriGreen.cgColor
         productLinkButton.layer.cornerRadius = 36 / 2
-        productLinkButton.titleLabel?.font = UIFont.systemFont(ofSize: 15, weight: .regular)
         productLinkButton.setTitleColor(.nanuriGreen, for: .normal)
         productImageView.addSubview(productLinkButton)
         productLinkButton.snp.makeConstraints { make in
@@ -193,8 +190,7 @@ class ProductDetailViewController: UIViewController {
         }
         
         let categoryLabel = UILabel()
-        categoryLabel.attributedText = NSAttributedString(string: "#생활용품")
-        categoryLabel.font = UIFont.systemFont(ofSize: 13)
+        categoryLabel.attributedText = .attributeFont(font: .NSRExtrabold, size: 13, text: "#생활용품", lineHeight: 14.76)
         categoryLabel.textColor = .nanuriGreen
         productDetailScrollView.addSubview(categoryLabel)
         categoryLabel.snp.makeConstraints { make in
@@ -217,8 +213,7 @@ class ProductDetailViewController: UIViewController {
         }
         
         let productName = UILabel()
-        productName.attributedText = NSAttributedString(string: "로스팅 원두")
-        productName.font = UIFont.systemFont(ofSize: 22, weight: .semibold)
+        productName.attributedText = .attributeFont(font: .PSemibold, size: 22, text: "로스팅 원두", lineHeight: 26)
         productDetailScrollView.addSubview(productName)
         productName.snp.makeConstraints { make in
             make.top.equalTo(categoryLabel.snp.bottom).inset(-8)
@@ -226,8 +221,7 @@ class ProductDetailViewController: UIViewController {
         }
         
         let purchaseDate = UILabel()
-        purchaseDate.attributedText = NSAttributedString(string: "2022.03.02 - 2022.03.25")
-        purchaseDate.font = UIFont.systemFont(ofSize: 13, weight: .regular)
+        purchaseDate.attributedText = .attributeFont(font: .PRegular, size: 13, text: "2022.03.02 - 2022.03.25", lineHeight: 15)
         purchaseDate.textColor = .nanuriGray4
         productDetailScrollView.addSubview(purchaseDate)
         purchaseDate.snp.makeConstraints { make in
@@ -236,8 +230,7 @@ class ProductDetailViewController: UIViewController {
         }
         
         let productPrice = UILabel()
-        productPrice.attributedText = NSAttributedString(string: "3,500원")
-        productPrice.font = UIFont.systemFont(ofSize: 18, weight: .bold)
+        productPrice.attributedText = .attributeFont(font: .PBold, size: 18, text: "3,500원", lineHeight: 21.6)
         productDetailScrollView.addSubview(productPrice)
         productPrice.snp.makeConstraints { make in
             make.top.equalTo(productName.snp.bottom)
@@ -253,8 +246,7 @@ class ProductDetailViewController: UIViewController {
         }
         
         let productParticipant = UILabel()
-        productParticipant.attributedText = NSAttributedString(string: "2")
-        productParticipant.font = UIFont.systemFont(ofSize: 12)
+        productParticipant.attributedText = .attributeFont(font: .NSRExtrabold, size: 12, text: "2", lineHeight: 13.62)
         productParticipant.textColor = .nanuriOrange
         productDetailScrollView.addSubview(productParticipant)
         productParticipant.snp.makeConstraints { make in
@@ -263,8 +255,7 @@ class ProductDetailViewController: UIViewController {
         }
         
         let totalRecruit = UILabel()
-        totalRecruit.attributedText = NSAttributedString(string: "/ 5")
-        totalRecruit.font = UIFont.systemFont(ofSize: 12)
+        totalRecruit.attributedText = .attributeFont(font: .NSRExtrabold, size: 12, text: "/ 5", lineHeight: 13.62)
         totalRecruit.textColor = .nanuriGray4
         productDetailScrollView.addSubview(totalRecruit)
         totalRecruit.snp.makeConstraints { make in
@@ -285,9 +276,8 @@ class ProductDetailViewController: UIViewController {
         }
         
         let progress = UILabel()
-        progress.attributedText = NSAttributedString(string: "\(Int(participantProgress.progress * 100))%")
+        progress.attributedText = .attributeFont(font: .NSRExtrabold, size: 12, text: "\(Int(participantProgress.progress * 100))%", lineHeight: 13.62)
         progress.textColor = .nanuriGray4
-        progress.font = UIFont.systemFont(ofSize: 12, weight: .bold)
         productDetailScrollView.addSubview(progress)
         progress.snp.makeConstraints { make in
             make.top.equalTo(productPrice.snp.bottom).inset(-16)
@@ -323,8 +313,7 @@ class ProductDetailViewController: UIViewController {
         }
         
         let user = UILabel()
-        user.attributedText = NSAttributedString(string: "프로자취러")
-        user.font = UIFont.systemFont(ofSize: 15, weight: .bold)
+        user.attributedText = .attributeFont(font: .NSRExtrabold, size: 15, text: "프로자취러", lineHeight: 17.03)
         userLevelView.addSubview(user)
         user.snp.makeConstraints { make in
             make.top.equalToSuperview()
@@ -339,34 +328,28 @@ class ProductDetailViewController: UIViewController {
         }
         
         let contents = UITextView()
-        contents.attributedText = NSAttributedString(string: """
-    로스팅 원두 배송합니다!\n
-    코스트코에서 사올 예정이고 1인당 1개씩만 주문 가능합니다!\n
-    \n
-    가격은 배송비 포함해서 + 1000원이구요\n
-    주문주실 때 주소 적어주세요!\n
-    로스팅 원두 배송합니다!\n
-    코스트코에서 사올 예정이고 1인당 1개씩만 주문 가능합니다!\n
-    \n
-    가격은 배송비 포함해서 + 1000원이구요\n
-    주문주실 때 주소 적어주세요!\n
-    로스팅 원두 배송합니다!\n
-    코스트코에서 사올 예정이고 1인당 1개씩만 주문 가능합니다!\n
-    \n
-    가격은 배송비 포함해서 + 1000원이구요\n
-    주문주실 때 주소 적어주세요!\n
-""")
+        contents.attributedText = .attributeFont(font: .PRegular, size: 15, text: """
+로스팅 원두 배송합니다!
+코스트코에서 사올 예정이고 1인당 1개씩만 주문 가능합니다!
+
+가격은 배송비 포함해서 + 1000원이구요
+주문주실 때 주소 적어주세요!
+로스팅 원두 배송합니다!
+코스트코에서 사올 예정이고 1인당 1개씩만 주문 가능합니다!
+
+가격은 배송비 포함해서 + 1000원이구요
+주문주실 때 주소 적어주세요!
+""", lineHeight: 22)
         productDetailScrollView.addSubview(contents)
         contents.isEditable = false
         contents.isScrollEnabled = false
-        contents.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-        contents.font = UIFont.systemFont(ofSize: 12)
+//        contents.contentInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
         
         let contensViewHeight = bottomViewHeight + 20
         
         contents.snp.makeConstraints { make in
             make.top.equalTo(locationTagView.snp.bottom).inset(-24)
-            make.left.right.equalToSuperview()
+            make.left.right.equalToSuperview().inset(16)
             make.bottom.equalToSuperview().inset(contensViewHeight)
         }
         

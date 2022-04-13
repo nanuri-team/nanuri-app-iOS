@@ -98,7 +98,7 @@ class HomeViewController: UIViewController {
         }
         
         let eventTitleLabel = UILabel()
-        eventTitleLabel.attributedText = NSAttributedString(string: "마감 임박 공구!")
+        eventTitleLabel.attributedText = .attributeFont(font: .PBold, size: 17, text: "마감 임박 공구!", lineHeight: 20)
         headerView.addSubview(eventTitleLabel)
         eventTitleLabel.snp.makeConstraints { make in
             make.top.equalTo(headerScrollView.snp.bottom).inset(-32)
@@ -168,7 +168,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
                 cell.selectionStyle = .none
                 
                 let allRegionTitleLabel = UILabel()
-                allRegionTitleLabel.attributedText = NSAttributedString(string: "전체 지역의 상품")
+                allRegionTitleLabel.attributedText = .attributeFont(font: .PBold, size: 17, text: "전체 지역의 상품", lineHeight: 20)
                 cell.contentView.addSubview(allRegionTitleLabel)
                 allRegionTitleLabel.snp.makeConstraints { make in
                     make.left.equalToSuperview().inset(16)
@@ -176,7 +176,10 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
                 }
                 
                 let moreButton = UIButton()
-                moreButton.setAttributedTitle(NSAttributedString(string: "더보기"), for: .normal)
+                moreButton.setAttributedTitle(.attributeFont(font: .PRegular, size: 13, text: "더보기", lineHeight: 13), for: .normal)
+                moreButton.setImage(UIImage(named: "back_gray_ic"), for: .normal)
+                moreButton.setTitleColor(.nanuriGray4, for: .normal)
+                moreButton.semanticContentAttribute = .forceRightToLeft
                 cell.contentView.addSubview(moreButton)
                 moreButton.snp.makeConstraints { make in
                     make.right.equalToSuperview().inset(16)

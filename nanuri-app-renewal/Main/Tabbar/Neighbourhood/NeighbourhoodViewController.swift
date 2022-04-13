@@ -16,8 +16,7 @@ class NeighbourhoodViewController: UIViewController {
         let locationButton = UIButton()
         locationButton.setImage(UIImage(named: "place_black_ic"), for: .normal)
         locationButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: -4, bottom: 0, right: 0)
-        locationButton.setAttributedTitle(NSAttributedString(string: "현 위치"), for: .normal)
-        locationButton.titleLabel?.font = UIFont.systemFont(ofSize: 15)
+        locationButton.setAttributedTitle(.attributeFont(font: .PBold, size: 15, text: "현 위치", lineHeight: 18), for: .normal)
         locationButton.addTarget(self, action: #selector(selectLocationButton), for: .touchUpInside)
         
         let location = UIBarButtonItem(customView: locationButton)
@@ -53,8 +52,7 @@ class NeighbourhoodViewController: UIViewController {
         }
         
         let titleLabel = UILabel()
-        titleLabel.attributedText = NSAttributedString(string: "현 위치를 설정해주세요")
-        titleLabel.font = UIFont.systemFont(ofSize: 24, weight: .bold)
+        titleLabel.attributedText = .attributeFont(font: .PBold, size: 24, text: "현 위치를 설정해주세요", lineHeight: 24)
         titleLabel.textColor = .nanuriGray3
         noSettingLocationView.addSubview(titleLabel)
         titleLabel.snp.makeConstraints { make in
@@ -63,10 +61,9 @@ class NeighbourhoodViewController: UIViewController {
         }
         
         let descriptionLabel = UILabel()
-        descriptionLabel.attributedText = NSAttributedString(string: "내 주변의 거래 상품을 보려면\n좌측 상단의 현 위치 버튼을 눌러 설정해야 합니다.")
+        descriptionLabel.attributedText = .attributeFont(font: .PRegular, size: 15, text: "내 주변의 거래 상품을 보려면\n좌측 상단의 현 위치 버튼을 눌러 설정해야 합니다.", lineHeight: 22)
         descriptionLabel.numberOfLines = 2
         descriptionLabel.textAlignment = .center
-        descriptionLabel.font = UIFont.systemFont(ofSize: 15)
         descriptionLabel.textColor = .nanuriGray3
         noSettingLocationView.addSubview(descriptionLabel)
         descriptionLabel.snp.makeConstraints { make in

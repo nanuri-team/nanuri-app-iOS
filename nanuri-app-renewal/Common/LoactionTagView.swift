@@ -32,8 +32,7 @@ class LocationTagView: UIView {
         }
         
         let productLocationLabel = UILabel()
-        productLocationLabel.attributedText = NSAttributedString(string: location)
-        productLocationLabel.font = UIFont.systemFont(ofSize: 12)
+        productLocationLabel.attributedText = .attributeFont(font: .NSRExtrabold, size: 12, text: location, lineHeight: 14)
         productLocationLabel.textColor = .nanuriGray4
         self.addSubview(productLocationLabel)
         productLocationLabel.snp.makeConstraints { make in

@@ -27,7 +27,6 @@ class MainButton: UIButton {
         
         self.layer.cornerRadius = 4
         self.setTitleColor(.white, for: .normal)
-        self.titleLabel?.font = UIFont.systemFont(ofSize: 15, weight: .bold)
         
         switch style {
         case .main:
