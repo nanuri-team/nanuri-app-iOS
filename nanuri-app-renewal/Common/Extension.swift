@@ -83,6 +83,11 @@ extension UIColor {
         // rgba(241, 235, 96, 1)
         return UIColor(red: 241.0 / 255.0, green: 235.0 / 255.0, blue: 96.0 / 255.0, alpha: 1)
     }
+    
+    class var nanuriRed: UIColor {
+        // rgba(255, 59, 48, 1)
+        return UIColor(red: 255.0 / 255.0, green: 59.0 / 255.0, blue: 48.0 / 255.0, alpha: 1)
+    }
 }
 
 extension UIView {
@@ -108,8 +113,8 @@ extension UIView {
 }
 
 extension UITextField {
-  func addPadding() {
-      let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: 20, height: self.frame.height))
+    func addPadding(width: CGFloat) {
+      let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: width, height: self.frame.height))
       self.leftView = paddingView
       self.leftViewMode = ViewMode.always
       self.rightView = paddingView
