@@ -42,7 +42,9 @@ class ProductDetailViewController: UIViewController {
     func presentOptionAlert() {
         let optionAlert = UIAlertController(title: "상품을 수정하거나 삭제할 수 있습니다.", message: nil, preferredStyle: .actionSheet)
         let editAction = UIAlertAction(title: "수정하기", style: .default, handler: nil)
-        let deleteAction = UIAlertAction(title: "삭제하기", style: .destructive, handler: nil)
+        let deleteAction = UIAlertAction(title: "삭제하기", style: .destructive) { _ in
+            self.presentAlertViewController()
+        }
         let cancelAction = UIAlertAction(title: "취소", style: .cancel, handler: nil)
         
         optionAlert.addAction(editAction)
@@ -50,6 +52,55 @@ class ProductDetailViewController: UIViewController {
         optionAlert.addAction(cancelAction)
         
         self.present(optionAlert, animated: true, completion: nil)
+    }
+    
+    func presentAlertViewController() {
+        let contentView = UIView()
+        
+        let titleLabel = UILabel()
+        titleLabel.attributedText = .attributeFont(font: .PBold, size: 20, text: "등록한 상품을\n정말 삭제하시겠습니까?", lineHeight: 24)
+        titleLabel.numberOfLines = 2
+        titleLabel.textAlignment = .center
+        contentView.addSubview(titleLabel)
+        titleLabel.snp.makeConstraints { make in
+            make.top.equalToSuperview().inset(44)
+            make.centerX.equalToSuperview()
+        }
+        
+        let reasonTextView = TextView()
+        reasonTextView.layer.borderWidth = 1
+        reasonTextView.layer.borderColor = UIColor.nanuriGray2.cgColor
+        reasonTextView.layer.cornerRadius = 8
+        reasonTextView.placeholder(text: "취소 사유를 작성해주세요.\n작성하신 사유는 참여자에게만 공개됩니다.\n(예: 상품 가격 변동, 상품 품절, 단순 변심)")
+        contentView.addSubview(reasonTextView)
+        reasonTextView.snp.makeConstraints { make in
+            make.top.equalTo(titleLabel.snp.bottom).inset(-24)
+            make.left.right.equalToSuperview().inset(16)
+            make.height.equalTo(165)
+        }
+        
+        let alert = AlertViewController.init(contents: contentView, cancelString: "취소", okString: "삭제", okHandler: {
+            self.presentDeleteCompleteAlertViewController()
+        }, cancelHandler: nil)
+        alert.present(self, alertView: alert, animated: false)
+    }
+    
+    func presentDeleteCompleteAlertViewController() {
+    
+        let contentView = UIView()
+        
+        let titleLabel = UILabel()
+        titleLabel.attributedText = .attributeFont(font: .PBold, size: 20, text: "등록한 상품이\n정상적으로 삭제되었습니다.", lineHeight: 24)
+        titleLabel.numberOfLines = 2
+        titleLabel.textAlignment = .center
+        contentView.addSubview(titleLabel)
+        titleLabel.snp.makeConstraints { make in
+            make.top.equalToSuperview().inset(44)
+            make.centerX.equalToSuperview()
+        }
+        
+        let alert = AlertViewController.init(contents: contentView, contentsViewHeight: 120, okString: "확인", okHandler: nil)
+        alert.present(self, alertView: alert, animated: false)
     }
     
     func presentCommentViewController() {

@@ -17,6 +17,8 @@
 		39308CEC2807461C00C41F9F /* Pretendard-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 39308CE82807461C00C41F9F /* Pretendard-Regular.otf */; };
 		39308CF02807518400C41F9F /* FilterButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39308CEF2807518400C41F9F /* FilterButton.swift */; };
 		39308CF2280880DB00C41F9F /* CheckboxButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39308CF1280880DB00C41F9F /* CheckboxButton.swift */; };
+		39308CF62808860900C41F9F /* AlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39308CF52808860900C41F9F /* AlertViewController.swift */; };
+		39308CF82808923300C41F9F /* TextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39308CF72808923300C41F9F /* TextView.swift */; };
 		397ACBA42805F5B500E83FA0 /* LocationPermissionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397ACBA32805F5B500E83FA0 /* LocationPermissionViewController.swift */; };
 		397ACBA62805F93D00E83FA0 /* CheckMyLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397ACBA52805F93D00E83FA0 /* CheckMyLocationViewController.swift */; };
 		39AD77CF27FB0F4E0022EAC1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39AD77CE27FB0F4E0022EAC1 /* AppDelegate.swift */; };
@@ -60,6 +62,8 @@
 		39308CE82807461C00C41F9F /* Pretendard-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Regular.otf"; sourceTree = "<group>"; };
 		39308CEF2807518400C41F9F /* FilterButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterButton.swift; sourceTree = "<group>"; };
 		39308CF1280880DB00C41F9F /* CheckboxButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckboxButton.swift; sourceTree = "<group>"; };
+		39308CF52808860900C41F9F /* AlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewController.swift; sourceTree = "<group>"; };
+		39308CF72808923300C41F9F /* TextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextView.swift; sourceTree = "<group>"; };
 		397ACBA32805F5B500E83FA0 /* LocationPermissionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationPermissionViewController.swift; sourceTree = "<group>"; };
 		397ACBA52805F93D00E83FA0 /* CheckMyLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckMyLocationViewController.swift; sourceTree = "<group>"; };
 		39AD77CB27FB0F4E0022EAC1 /* nanuri-app-renewal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "nanuri-app-renewal.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -187,6 +191,8 @@
 				39AD781C27FF424F0022EAC1 /* LevelView.swift */,
 				39308CEF2807518400C41F9F /* FilterButton.swift */,
 				39308CF1280880DB00C41F9F /* CheckboxButton.swift */,
+				39308CF52808860900C41F9F /* AlertViewController.swift */,
+				39308CF72808923300C41F9F /* TextView.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -496,7 +502,9 @@
 				39AD781927FF2EC20022EAC1 /* ProductDetailViewController.swift in Sources */,
 				39AD77FC27FB11F70022EAC1 /* ChattingViewController.swift in Sources */,
 				39308CC12806FFFB00C41F9F /* CommentTableViewCell.swift in Sources */,
+				39308CF82808923300C41F9F /* TextView.swift in Sources */,
 				39AD78242801624B0022EAC1 /* ReCommentTableViewCell.swift in Sources */,
+				39308CF62808860900C41F9F /* AlertViewController.swift in Sources */,
 				39AD77F627FB11CE0022EAC1 /* TabBarController.swift in Sources */,
 				397ACBA62805F93D00E83FA0 /* CheckMyLocationViewController.swift in Sources */,
 				87D17BA227FB5C0B00E171A2 /* SettingViewController.swift in Sources */,
