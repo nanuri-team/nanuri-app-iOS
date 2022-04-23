@@ -19,6 +19,7 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "홈"
+        self.navigationController?.navigationBar.isHidden = false
         
         setUpView()
     }
@@ -30,6 +31,12 @@ class HomeViewController: UIViewController {
         let allRegionProductTableViewController = AllRegionProductTableViewController()
         allRegionProductTableViewController.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(allRegionProductTableViewController, animated: true)
+    }
+    
+    @objc func selectAddProductButton() {
+        let addProductStepOneViewController = AddProductStepOneViewController()
+        addProductStepOneViewController.hidesBottomBarWhenPushed = true
+        self.navigationController?.pushViewController(addProductStepOneViewController, animated: true)
     }
     
     func setUpEventScrollView() {
@@ -70,7 +77,7 @@ class HomeViewController: UIViewController {
 
     func setUpView() {
         self.view.backgroundColor = .white
-        
+    
         let headerView = UIView()
         let headerViewHeight = collectionCellHeight + 30 + 40 + 187 + 32
         headerView.frame = CGRect(x: 0, y: 0, width: Int(ratioWidth), height: headerViewHeight)
@@ -134,7 +141,18 @@ class HomeViewController: UIViewController {
             make.bottom.equalToSuperview()
         }
         
-
+        let addProductButton = UIButton()
+        addProductButton.setImage(UIImage(named: "plus_ic"), for: .normal)
+        addProductButton.backgroundColor = .nanuriGreen
+        addProductButton.layer.cornerRadius = 52 / 2
+        self.view.addSubview(addProductButton)
+        self.view.bringSubviewToFront(addProductButton)
+        addProductButton.snp.makeConstraints { make in
+            make.width.height.equalTo(52)
+            make.bottom.equalToSuperview().inset(32)
+            make.right.equalToSuperview().inset(24)
+        }
+        addProductButton.addTarget(self, action: #selector(selectAddProductButton), for: .touchUpInside)
     }
 
 }
