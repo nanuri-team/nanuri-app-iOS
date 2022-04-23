@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "close_ic.png",
+      "filename" : "category_etc_ic.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "close_ic@2x.png",
+      "filename" : "category_etc_ic@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "close_ic@3x.png",
+      "filename" : "category_etc_ic@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
@@ -19,8 +19,5 @@
   "info" : {
     "author" : "xcode",
     "version" : 1
-  },
-  "properties" : {
-    "template-rendering-intent" : "original"
   }
 }
