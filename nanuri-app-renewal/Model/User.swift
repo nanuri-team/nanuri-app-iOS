@@ -6,3 +6,18 @@
 //
 
 import Foundation
+
+struct User: Decodable {
+    var user: UserData
+}
+
+struct UserInfo: Decodable {
+    var user: [UserData]
+}
+
+struct UserData: Decodable {
+    var socialID: Int
+    
+}
+
+

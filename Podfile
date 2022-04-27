@@ -9,5 +9,5 @@ target 'nanuri-app-renewal' do
   pod 'Alamofire', '~> 5.5'
   pod 'SnapKit', '~> 5.0.0'
   pod 'IQKeyboardManagerSwift', '6.3.0'
-
+  pod 'KakaoSDK'
 end
