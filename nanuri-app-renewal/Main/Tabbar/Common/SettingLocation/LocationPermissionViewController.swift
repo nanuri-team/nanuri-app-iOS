@@ -6,8 +6,11 @@
 //
 
 import UIKit
+import CoreLocation
 
 class LocationPermissionViewController: UIViewController {
+    
+    var locationManager: CLLocationManager = CLLocationManager()
     
     var bottomViewHeight = 64
     var edgeHeight = 34
@@ -23,11 +26,17 @@ class LocationPermissionViewController: UIViewController {
         setUpView()
     }
     
+    
     @objc func selectBackButton() {
         self.navigationController?.popViewController(animated: true)
     }
     
     @objc func selectSettingLocationButton() {
+        // 위치 정보 허용 팝업
+        self.locationManager.requestWhenInUseAuthorization()
+        self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.delegate = self
+
         let checkMyLocationViewController = CheckMyLocationViewController()
         checkMyLocationViewController.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(checkMyLocationViewController, animated: true)
@@ -89,4 +98,10 @@ class LocationPermissionViewController: UIViewController {
         
     }
 
+}
+
+extension LocationPermissionViewController: CLLocationManagerDelegate {
+    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
+        
+    }
 }

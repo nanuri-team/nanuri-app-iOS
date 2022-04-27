@@ -9,6 +9,9 @@ import UIKit
 
 class NeighbourhoodViewController: UIViewController {
     
+    let neighbourhoodTableView = UITableView()
+    let noSettingLocationView = UIView()
+    
     var collectionCellWidth = 120
     var collectionCellHeight = 163
     let ratioWidth = UIScreen.main.bounds.width
@@ -33,8 +36,6 @@ class NeighbourhoodViewController: UIViewController {
         
 //        setUpNoSettingView()
         
-        
-        
         // filter button
         for i in 0..<filterCount {
             let filterButton = FilterButton(filterType: i)
@@ -44,8 +45,12 @@ class NeighbourhoodViewController: UIViewController {
             filterButtonArray.append(filterButton)
         }
         
-        
+//        setUpNoSettingView()
         setUpView()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        
     }
     
     @objc func selectLocationButton() {
@@ -69,8 +74,13 @@ class NeighbourhoodViewController: UIViewController {
     }
     
     func setUpNoSettingView() {
-        let noSettingLocationView = UIView()
-        self.view.addSubview(noSettingLocationView)
+        let wrapView = UIView()
+        self.view.addSubview(wrapView)
+        wrapView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+        
+        wrapView.addSubview(noSettingLocationView)
         
         let locationImageView = UIImageView()
         locationImageView.image = UIImage(named: "location_large_ic")
@@ -145,7 +155,6 @@ class NeighbourhoodViewController: UIViewController {
             make.height.equalTo(16)
         }
         
-        let neighbourhoodTableView = UITableView()
         neighbourhoodTableView.delegate = self
         neighbourhoodTableView.dataSource = self
         neighbourhoodTableView.separatorInset = .zero
