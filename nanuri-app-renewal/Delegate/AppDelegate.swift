@@ -10,6 +10,9 @@ import UIKit
 import Alamofire
 import IQKeyboardManagerSwift
 import SnapKit
+import KakaoSDKCommon
+import KakaoSDKAuth
+import KakaoSDKUser
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -19,9 +22,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         // 13이상인 경우에는 SceneDelegate에서 이미 초기화 되었으니까 바로 return
+        KakaoSDK.initSDK(appKey: "ca58fb6fe4a03e54e743b7b25bf5ae4b")
+        return true
+        
         if #available(iOS 13.0, *) {
             return true
         }
+        
+//        KakaoSDK.initSDK(appKey: "ca58fb6fe4a03e54e743b7b25bf5ae4b")
         
         // 13이전의 경우에는 SceneDelegate에서 해주었던 작업을 그대로 진행해주면 된다.
         window = UIWindow()

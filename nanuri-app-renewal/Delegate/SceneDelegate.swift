@@ -19,9 +19,22 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         guard let windowScene = (scene as? UIWindowScene) else { return }
         let window = UIWindow(windowScene: windowScene)
-        window.rootViewController = TabBarController()
+        window.rootViewController = LoginViewController()
+        // 로그인 화면 전환 로직
+        /*
+        if UserDefaults.standard.integer(forKey: "userID") == 0 {
+            let loginVC = LoginViewController()
+//            self.present(loginVC, animated: true)
+            
+            window.rootViewController = loginVC
+        } else {
+            
+            window.rootViewController = TabBarController()
+        }
+        */
         self.window = window
         window.makeKeyAndVisible()
+//        window.rootViewController = TabBarController()
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
