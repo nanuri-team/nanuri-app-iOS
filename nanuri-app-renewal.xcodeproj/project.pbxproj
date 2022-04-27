@@ -24,6 +24,14 @@
 		3954BB952813C9F300C8815E /* AddProductStepTwoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3954BB942813C9F300C8815E /* AddProductStepTwoViewController.swift */; };
 		3954BB972813E61D00C8815E /* AddProductStepThreeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3954BB962813E61C00C8815E /* AddProductStepThreeViewController.swift */; };
 		3954BB992813FCD100C8815E /* AddProductStepFourViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3954BB982813FCD100C8815E /* AddProductStepFourViewController.swift */; };
+		3954BB9C281425E800C8815E /* ChattingListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3954BB9B281425E800C8815E /* ChattingListTableViewCell.swift */; };
+		3954BBA028142FA000C8815E /* ChattingListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3954BB9F28142FA000C8815E /* ChattingListTableViewController.swift */; };
+		3954BBA528142FE900C8815E /* MyChatMessageViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3954BBA428142FE900C8815E /* MyChatMessageViewCell.swift */; };
+		3954BBA7281433FC00C8815E /* YourChatMessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3954BBA6281433FB00C8815E /* YourChatMessageTableViewCell.swift */; };
+		3954BBA92814363F00C8815E /* ChattingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3954BBA82814363F00C8815E /* ChattingViewController.swift */; };
+		3954BBAB2816FCED00C8815E /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3954BBAA2816FCED00C8815E /* Networking.swift */; };
+		39788AF328188A3B00ABD918 /* Singleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39788AF228188A3B00ABD918 /* Singleton.swift */; };
+		39788AF528188B5700ABD918 /* Posts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39788AF428188B5700ABD918 /* Posts.swift */; };
 		397ACBA42805F5B500E83FA0 /* LocationPermissionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397ACBA32805F5B500E83FA0 /* LocationPermissionViewController.swift */; };
 		397ACBA62805F93D00E83FA0 /* CheckMyLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397ACBA52805F93D00E83FA0 /* CheckMyLocationViewController.swift */; };
 		39AD77CF27FB0F4E0022EAC1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39AD77CE27FB0F4E0022EAC1 /* AppDelegate.swift */; };
@@ -35,7 +43,6 @@
 		39AD77F627FB11CE0022EAC1 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39AD77F527FB11CE0022EAC1 /* TabBarController.swift */; };
 		39AD77F827FB11E30022EAC1 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39AD77F727FB11E30022EAC1 /* HomeViewController.swift */; };
 		39AD77FA27FB11EE0022EAC1 /* NeighbourhoodViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39AD77F927FB11EE0022EAC1 /* NeighbourhoodViewController.swift */; };
-		39AD77FC27FB11F70022EAC1 /* ChattingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39AD77FB27FB11F70022EAC1 /* ChattingViewController.swift */; };
 		39AD77FE27FB12030022EAC1 /* BookmarkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39AD77FD27FB12030022EAC1 /* BookmarkViewController.swift */; };
 		39AD780027FB120B0022EAC1 /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39AD77FF27FB120B0022EAC1 /* MyPageViewController.swift */; };
 		39AD780227FB12180022EAC1 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39AD780127FB12180022EAC1 /* User.swift */; };
@@ -74,6 +81,14 @@
 		3954BB942813C9F300C8815E /* AddProductStepTwoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProductStepTwoViewController.swift; sourceTree = "<group>"; };
 		3954BB962813E61C00C8815E /* AddProductStepThreeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProductStepThreeViewController.swift; sourceTree = "<group>"; };
 		3954BB982813FCD100C8815E /* AddProductStepFourViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProductStepFourViewController.swift; sourceTree = "<group>"; };
+		3954BB9B281425E800C8815E /* ChattingListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChattingListTableViewCell.swift; sourceTree = "<group>"; };
+		3954BB9F28142FA000C8815E /* ChattingListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChattingListTableViewController.swift; sourceTree = "<group>"; };
+		3954BBA428142FE900C8815E /* MyChatMessageViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyChatMessageViewCell.swift; sourceTree = "<group>"; };
+		3954BBA6281433FB00C8815E /* YourChatMessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YourChatMessageTableViewCell.swift; sourceTree = "<group>"; };
+		3954BBA82814363F00C8815E /* ChattingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChattingViewController.swift; sourceTree = "<group>"; };
+		3954BBAA2816FCED00C8815E /* Networking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networking.swift; sourceTree = "<group>"; };
+		39788AF228188A3B00ABD918 /* Singleton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Singleton.swift; sourceTree = "<group>"; };
+		39788AF428188B5700ABD918 /* Posts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Posts.swift; sourceTree = "<group>"; };
 		397ACBA32805F5B500E83FA0 /* LocationPermissionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationPermissionViewController.swift; sourceTree = "<group>"; };
 		397ACBA52805F93D00E83FA0 /* CheckMyLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckMyLocationViewController.swift; sourceTree = "<group>"; };
 		39AD77CB27FB0F4E0022EAC1 /* nanuri-app-renewal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "nanuri-app-renewal.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -87,7 +102,6 @@
 		39AD77F527FB11CE0022EAC1 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		39AD77F727FB11E30022EAC1 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		39AD77F927FB11EE0022EAC1 /* NeighbourhoodViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeighbourhoodViewController.swift; sourceTree = "<group>"; };
-		39AD77FB27FB11F70022EAC1 /* ChattingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChattingViewController.swift; sourceTree = "<group>"; };
 		39AD77FD27FB12030022EAC1 /* BookmarkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkViewController.swift; sourceTree = "<group>"; };
 		39AD77FF27FB120B0022EAC1 /* MyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewController.swift; sourceTree = "<group>"; };
 		39AD780127FB12180022EAC1 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -146,6 +160,16 @@
 				3954BB982813FCD100C8815E /* AddProductStepFourViewController.swift */,
 			);
 			path = AddProduct;
+			sourceTree = "<group>";
+		};
+		3954BBA328142FB900C8815E /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				3954BB9B281425E800C8815E /* ChattingListTableViewCell.swift */,
+				3954BBA428142FE900C8815E /* MyChatMessageViewCell.swift */,
+				3954BBA6281433FB00C8815E /* YourChatMessageTableViewCell.swift */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 		397ACBA22805F59400E83FA0 /* SettingLocation */ = {
@@ -215,6 +239,8 @@
 				39308CF52808860900C41F9F /* AlertViewController.swift */,
 				39308CF72808923300C41F9F /* TextView.swift */,
 				394D4D7B28105C6D00A4D669 /* StepItemView.swift */,
+				3954BBAA2816FCED00C8815E /* Networking.swift */,
+				39788AF228188A3B00ABD918 /* Singleton.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -223,6 +249,7 @@
 			isa = PBXGroup;
 			children = (
 				39AD780127FB12180022EAC1 /* User.swift */,
+				39788AF428188B5700ABD918 /* Posts.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -298,7 +325,9 @@
 		39AD77EC27FB11360022EAC1 /* Chatting */ = {
 			isa = PBXGroup;
 			children = (
-				39AD77FB27FB11F70022EAC1 /* ChattingViewController.swift */,
+				3954BBA328142FB900C8815E /* Cells */,
+				3954BB9F28142FA000C8815E /* ChattingListTableViewController.swift */,
+				3954BBA82814363F00C8815E /* ChattingViewController.swift */,
 			);
 			path = Chatting;
 			sourceTree = "<group>";
@@ -503,7 +532,11 @@
 			files = (
 				39AD780227FB12180022EAC1 /* User.swift in Sources */,
 				875B688C2806098700D083C9 /* MyRegisterProductViewController.swift in Sources */,
+				3954BBA528142FE900C8815E /* MyChatMessageViewCell.swift in Sources */,
+				3954BBA028142FA000C8815E /* ChattingListTableViewController.swift in Sources */,
 				39AD780427FB12280022EAC1 /* MainViewController.swift in Sources */,
+				3954BB9C281425E800C8815E /* ChattingListTableViewCell.swift in Sources */,
+				3954BBA92814363F00C8815E /* ChattingViewController.swift in Sources */,
 				394D4D7C28105C6D00A4D669 /* StepItemView.swift in Sources */,
 				39AD780C27FB327F0022EAC1 /* MainProductTableViewCell.swift in Sources */,
 				39AD77FE27FB12030022EAC1 /* BookmarkViewController.swift in Sources */,
@@ -518,14 +551,16 @@
 				39AD781B27FF3E9C0022EAC1 /* LoactionTagView.swift in Sources */,
 				39AD781227FB47730022EAC1 /* VerticalProductCollectionViewCell.swift in Sources */,
 				39AD77FA27FB11EE0022EAC1 /* NeighbourhoodViewController.swift in Sources */,
+				3954BBAB2816FCED00C8815E /* Networking.swift in Sources */,
 				39AD780E27FB32C50022EAC1 /* DDayTagView.swift in Sources */,
 				39308CF02807518400C41F9F /* FilterButton.swift in Sources */,
 				39AD780827FB26DB0022EAC1 /* Constants.swift in Sources */,
 				39AD77F427FB11BA0022EAC1 /* RegisterViewController.swift in Sources */,
+				3954BBA7281433FC00C8815E /* YourChatMessageTableViewCell.swift in Sources */,
+				39788AF528188B5700ABD918 /* Posts.swift in Sources */,
 				87D17BA027FB5BF100E171A2 /* SearchViewController.swift in Sources */,
 				39AD780027FB120B0022EAC1 /* MyPageViewController.swift in Sources */,
 				39AD781927FF2EC20022EAC1 /* ProductDetailViewController.swift in Sources */,
-				39AD77FC27FB11F70022EAC1 /* ChattingViewController.swift in Sources */,
 				39308CC12806FFFB00C41F9F /* CommentTableViewCell.swift in Sources */,
 				39308CF82808923300C41F9F /* TextView.swift in Sources */,
 				39AD78242801624B0022EAC1 /* ReCommentTableViewCell.swift in Sources */,
@@ -533,6 +568,7 @@
 				39AD77F627FB11CE0022EAC1 /* TabBarController.swift in Sources */,
 				397ACBA62805F93D00E83FA0 /* CheckMyLocationViewController.swift in Sources */,
 				87D17BA227FB5C0B00E171A2 /* SettingViewController.swift in Sources */,
+				39788AF328188A3B00ABD918 /* Singleton.swift in Sources */,
 				39AD782628016DDF0022EAC1 /* CommentViewController.swift in Sources */,
 				39AD781627FF2A7A0022EAC1 /* MainButton.swift in Sources */,
 				3954BB992813FCD100C8815E /* AddProductStepFourViewController.swift in Sources */,
