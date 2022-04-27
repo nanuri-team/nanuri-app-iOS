@@ -183,3 +183,61 @@ extension NSAttributedString {
         return attrString
     }
 }
+
+extension Int {
+    func toCategoryName() -> String {
+        switch self {
+        case 0:
+            return "SUPPLIES"
+        case 1:
+            return "FOOD"
+        case 2:
+            return "KITCHEN"
+        case 3:
+            return "BATH"
+        case 4:
+            return "STATIONERY"
+        case 5:
+            return "ETC"
+        default:
+            return "ETC"
+        }
+    }
+    
+    func toTradeTypeName() -> String {
+        switch self {
+        case 0:
+            return "PARCEL"
+        case 1:
+            return "DIRECT"
+        default:
+            return ""
+        }
+    }
+}
+
+enum FormatType: String {
+    case dotAndDay = "yyyy.MM.dd (E)"
+    case dahsed = "yyyy-MM-dd"
+}
+
+// 날짜 형식
+extension DateFormatter {
+
+    func changeDateFormat(_ date: Date, format: FormatType) -> String {
+        self.locale = Locale(identifier: "ko")
+        self.timeZone = TimeZone(abbreviation: "KST")
+        self.dateFormat = format.rawValue
+        
+        return self.string(from: date)
+    }
+    
+    func changeStringToDate(_ string: String, format: FormatType) -> Date {
+        self.locale = Locale(identifier: "ko")
+        self.timeZone = TimeZone(abbreviation: "KST")
+        self.dateFormat = format.rawValue
+        guard let date = self.date(from: string) else { return Date() }
+        
+        return date
+    }
+}

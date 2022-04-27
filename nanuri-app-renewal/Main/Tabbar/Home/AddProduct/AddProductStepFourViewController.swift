@@ -17,10 +17,14 @@ class AddProductStepFourViewController: UIViewController {
     let deliveryDescription = ["공동구매 참여자들에게 택배로 배송할 예정이에요.", "공동구매 참여자와 직접 만나서 물건을 전달할 예정이에요."]
     var selectIndex = 0
     var radioButtonArray: [UIButton] = []
+    var postProductInfo: [String: Any] = [:]
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "상품 등록하기"
+        
+        print(postProductInfo)
         
         let backButton = UIBarButtonItem(image: UIImage(named: "back_ic"), style: .plain, target: self, action: #selector(selectBackButton))
         self.navigationItem.setLeftBarButton(backButton, animated: true)
@@ -36,8 +40,27 @@ class AddProductStepFourViewController: UIViewController {
         self.navigationController?.popViewController(animated: true)
     }
     
-    @objc func selectNextButton() {
-        //
+    @objc func selectAddProductButton() {
+        guard validation() else {
+            print("return")
+            return
+        }
+        
+        postPosts()
+    }
+    
+    func validation() -> Bool {
+        postProductInfo["quantity"] = 1
+        postProductInfo["trade_type"] = selectIndex.toTradeTypeName()
+        return true
+    }
+    
+    func postPosts() {
+        Networking.sharedObject.postPosts(parameter: postProductInfo) { response in
+            print(response)
+        }
+        
+        navigationController?.popToRootViewController(animated: true)
     }
     
     func setUpStepView() {
@@ -135,13 +158,13 @@ class AddProductStepFourViewController: UIViewController {
             make.top.equalToSuperview()
         }
         
-        let nextButton = MainButton(style: .main)
-        nextButton.setAttributedTitle(.attributeFont(font: .PBold, size: 15, text: "상품 등록", lineHeight: 18), for: .normal)
-        bottomView.addSubview(nextButton)
-        nextButton.snp.makeConstraints { make in
+        let addProductButton = MainButton(style: .main)
+        addProductButton.setAttributedTitle(.attributeFont(font: .PBold, size: 15, text: "상품 등록", lineHeight: 18), for: .normal)
+        bottomView.addSubview(addProductButton)
+        addProductButton.snp.makeConstraints { make in
             make.left.right.top.bottom.equalToSuperview().inset(8)
         }
-        nextButton.addTarget(self, action: #selector(selectNextButton), for: .touchUpInside)
+        addProductButton.addTarget(self, action: #selector(selectAddProductButton), for: .touchUpInside)
     }
 
 }
@@ -186,6 +209,12 @@ extension AddProductStepFourViewController: UITableViewDelegate, UITableViewData
                 make.centerY.equalToSuperview()
                 make.right.equalToSuperview().inset(16)
             }
+            
+            if indexPath.row == 0 {
+                radioButton.setImage(UIImage(named: "radio_select_ic"), for: .normal)
+                selectIndex = indexPath.row
+            }
+            
             radioButtonArray.append(radioButton)
             
             return cell

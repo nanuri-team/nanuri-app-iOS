@@ -11,8 +11,14 @@ class AddProductStepOneViewController: UIViewController {
 
     let stepView = UIView()
     
+    let productNameTextField = UITextField()
+    let productLinkTextField = UITextField()
+    let productPriceTextField = UITextField()
+
+    
     var bottomViewHeight = 64
     var edgeHeight = 34
+    var postProductInfo: [String: Any] = [:]
 
     
     override func viewDidLoad() {
@@ -34,9 +40,39 @@ class AddProductStepOneViewController: UIViewController {
     }
     
     @objc func selectNextButton() {
+        
+        guard validation() else {
+            print("return")
+            return
+        }
+        
         let addProductStepTwoViewController = AddProductStepTwoViewController()
+        addProductStepTwoViewController.postProductInfo = postProductInfo
         addProductStepTwoViewController.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(addProductStepTwoViewController, animated: true)
+    }
+    
+    func validation() -> Bool {
+        guard let productNameText = productNameTextField.text,
+              let productLinkText = productLinkTextField.text,
+              let productPriceText = productPriceTextField.text
+        else { return false }
+        
+        if productNameText.isEmpty ||
+            productLinkText.isEmpty ||
+            productPriceText.isEmpty {
+            return false
+        } else {
+            postProductInfo["title"] = productNameText
+            postProductInfo["product_url"] = productLinkText
+            
+            if let integerToProductPrice = Int(productPriceText) {
+                postProductInfo["unit_price"] = integerToProductPrice
+            } else {
+                postProductInfo["unit_price"] = 0
+            }
+            return true
+        }
     }
     
     func setUpStepView() {
@@ -116,7 +152,7 @@ class AddProductStepOneViewController: UIViewController {
             make.left.right.equalToSuperview().inset(16)
         }
         
-        let productNameTextField = UITextField()
+        productNameTextField.autocapitalizationType = .none
         productNameTextField.attributedText = .attributeFont(font: .PRegular, size: 15, text: "", lineHeight: 18)
         productNameTextField.attributedPlaceholder = .attributeFont(font: .PRegular, size: 15, text: "공구할 상품의 이름이 무엇인가요?", lineHeight: 18)
         productNameTextField.borderStyle = .line
@@ -140,7 +176,7 @@ class AddProductStepOneViewController: UIViewController {
             make.left.right.equalToSuperview().inset(16)
         }
         
-        let productLinkTextField = UITextField()
+        productLinkTextField.autocapitalizationType = .none
         productLinkTextField.attributedText = .attributeFont(font: .PRegular, size: 15, text: "", lineHeight: 18)
         productLinkTextField.attributedPlaceholder = .attributeFont(font: .PRegular, size: 15, text: "이 상품을 구매할 링크가 어디인가요?", lineHeight: 18)
         productLinkTextField.borderStyle = .line
@@ -164,7 +200,6 @@ class AddProductStepOneViewController: UIViewController {
             make.left.right.equalToSuperview().inset(16)
         }
         
-        let productPriceTextField = UITextField()
         productPriceTextField.attributedText = .attributeFont(font: .PRegular, size: 15, text: "", lineHeight: 18)
         productPriceTextField.attributedPlaceholder = .attributeFont(font: .PRegular, size: 15, text: "공구할 사람들이 이 상품을 얼마에 살 수 있나요?", lineHeight: 18)
         productPriceTextField.borderStyle = .line
