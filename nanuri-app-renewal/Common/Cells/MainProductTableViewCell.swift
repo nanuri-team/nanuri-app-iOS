@@ -9,6 +9,9 @@ import UIKit
 
 class MainProductTableViewCell: UITableViewCell {
     
+    let productName = UILabel()
+
+    
     static let cellId = "mainProductCell"
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -73,7 +76,6 @@ class MainProductTableViewCell: UITableViewCell {
             make.height.width.equalTo(cellView.snp.height)
         }
         
-        let productName = UILabel()
         productName.attributedText = .attributeFont(font: .PRegular, size: 17, text: "로스팅 원두", lineHeight: 20)
         cellView.addSubview(productName)
         productName.snp.makeConstraints { make in

@@ -1,41 +1,22 @@
 //
-//  AllRegionProductTableViewController.swift
+//  ChattingTableViewController.swift
 //  nanuri-app-renewal
 //
-//  Created by minimani on 2022/04/07.
+//  Created by minimani on 2022/04/23.
 //
 
 import UIKit
 
-class AllRegionProductTableViewController: UITableViewController {
-    
-    var postsListArray: [ResultInfo] = []
+class ChattingListTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         self.view.backgroundColor = .white
-        self.title = "전체 지역 상품"
-        self.tableView.dataSource = self
+        self.title = "채팅"
 
-        let backButton = UIBarButtonItem(image: UIImage(named: "back_ic"), style: .plain, target: self, action: #selector(selectBackButton))
-        self.navigationItem.setLeftBarButton(backButton, animated: true)
-        
         self.tableView.separatorInset = .zero
         self.tableView.separatorStyle = .none
-        
-        self.getPostsList()
-    }
-    
-    @objc func selectBackButton() {
-        self.navigationController?.popViewController(animated: true)
-    }
-    
-    func getPostsList() {
-        Networking.sharedObject.getPostsList { response in
-            self.postsListArray = response.results
-            self.tableView.reloadData()
-        } 
     }
 
     // MARK: - Table view data source
@@ -47,32 +28,27 @@ class AllRegionProductTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return postsListArray.count
+        return 10
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        let post = postsListArray[indexPath.row]
-        
-        let identifier = "\(indexPath.row) \(post.uuid)"
+        let identifier = "\(indexPath.row)"
         
         if let reuseCell = tableView.dequeueReusableCell(withIdentifier: identifier) {
             return reuseCell
         } else {
-            let cell = MainProductTableViewCell.init(style: .default, reuseIdentifier: identifier)
+            let cell = ChattingListTableViewCell.init(style: .default, reuseIdentifier: identifier)
             cell.selectionStyle = .none
-            
-            cell.productName.attributedText = .attributeFont(font: .PRegular, size: 17, text: post.title, lineHeight: 20)
             
             return cell
         }
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let productDetailViewController = ProductDetailViewController()
-        productDetailViewController.hidesBottomBarWhenPushed = true
-        self.navigationController?.pushViewController(productDetailViewController, animated: true)
+        let chattingViewController = ChattingViewController()
+        chattingViewController.hidesBottomBarWhenPushed = true
+        self.navigationController?.pushViewController(chattingViewController, animated: true)
     }
     
 
