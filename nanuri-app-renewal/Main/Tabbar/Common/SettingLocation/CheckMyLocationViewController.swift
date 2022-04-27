@@ -6,8 +6,12 @@
 //
 
 import UIKit
+import CoreLocation
 
 class CheckMyLocationViewController: UIViewController {
+    
+    var locationManager: CLLocationManager = CLLocationManager()
+    let myLocationLabel = UILabel()
     
     var edgeHeight = 34
 
@@ -16,6 +20,9 @@ class CheckMyLocationViewController: UIViewController {
 
         self.title = "내 위치 설정"
         self.view.backgroundColor = .white
+        locationManager.delegate = self
+        //위치업데이트
+        locationManager.startUpdatingLocation()
 
         let backButton = UIBarButtonItem(image: UIImage(named: "back_ic"), style: .plain, target: self, action: #selector(selectBackButton))
         self.navigationItem.setLeftBarButton(backButton, animated: true)
@@ -25,6 +32,35 @@ class CheckMyLocationViewController: UIViewController {
     
     @objc func selectBackButton() {
         self.navigationController?.popViewController(animated: true)
+    }
+    
+    @objc func selectCancelButton() {
+        locationManager.startUpdatingLocation()
+    }
+    
+    @objc func selectOkButton() {
+        Singleton.shared.isSettingLocation = true
+        self.navigationController?.popToRootViewController(animated: true)
+    }
+    
+    func getCurrentAddress(location: CLLocation) {
+        let geocoder = CLGeocoder()
+        let locale = Locale(identifier: "Ko-kr")
+        
+        geocoder.reverseGeocodeLocation(location, preferredLocale: locale) { placemarks, error in
+            if error != nil {
+                print("\(error)")
+                return
+            }
+            
+            guard let placemark = placemarks?.first,
+                  let administrativeArea = placemark.administrativeArea,
+                    let locality = placemark.locality
+           else { return }
+           
+            self.myLocationLabel.attributedText = .attributeFont(font: .NSRExtrabold, size: 24, text: "\"\(administrativeArea) \(locality)\"", lineHeight: 27.24)
+           print(locality)
+        }
     }
 
     func setUpView() {
@@ -47,8 +83,7 @@ class CheckMyLocationViewController: UIViewController {
             make.centerX.equalToSuperview()
         }
         
-        let myLocationLabel = UILabel()
-        myLocationLabel.attributedText = .attributeFont(font: .NSRExtrabold, size: 24, text: "\"서울시 강북구 미아동\"", lineHeight: 27.24)
+        myLocationLabel.attributedText = .attributeFont(font: .NSRExtrabold, size: 24, text: "\"\"", lineHeight: 27.24)
         myLocationLabel.textColor = .nanuriGreen
         self.view.addSubview(myLocationLabel)
         myLocationLabel.snp.makeConstraints { make in
@@ -67,6 +102,7 @@ class CheckMyLocationViewController: UIViewController {
             make.top.bottom.equalToSuperview()
             make.left.equalToSuperview().inset(16)
         }
+        cancelButton.addTarget(self, action: #selector(selectCancelButton), for: .touchUpInside)
         
         let okButton = MainButton(style: .main)
         okButton.setAttributedTitle(.attributeFont(font: .PBold, size: 15, text: "네, 맞습니다", lineHeight: 18), for: .normal)
@@ -77,6 +113,7 @@ class CheckMyLocationViewController: UIViewController {
             make.left.equalTo(cancelButton.snp.right).inset(-7)
             make.right.equalToSuperview().inset(16)
         }
+        okButton.addTarget(self, action: #selector(selectOkButton), for: .touchUpInside)
         
         buttonView.snp.makeConstraints { make in
             make.bottom.equalTo(self.view.safeAreaLayoutGuide).inset(14)
@@ -85,4 +122,12 @@ class CheckMyLocationViewController: UIViewController {
         }
     }
 
+}
+
+extension CheckMyLocationViewController: CLLocationManagerDelegate {
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        if let location = locations.first {
+            getCurrentAddress(location: location)
+        }
+    }
 }

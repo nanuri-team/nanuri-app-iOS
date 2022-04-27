@@ -13,4 +13,5 @@ class Singleton {
     let tokenName: String = "Token"
     var userToken: String = "c698d104a7d8a9b5564ac9a141010d56c36ac02a"
 
+    var isSettingLocation = false
 }
