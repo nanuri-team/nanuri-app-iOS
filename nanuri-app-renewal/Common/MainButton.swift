@@ -35,5 +35,9 @@ class MainButton: UIButton {
             self.titleLabel?.textColor = .nanuriGray5
             self.backgroundColor = .nanuriGray2
         }
+        
+        self.snp.makeConstraints { make in
+            make.height.equalTo(48)
+        }
     }
 }
