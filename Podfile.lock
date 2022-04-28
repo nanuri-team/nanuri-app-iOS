@@ -34,12 +34,14 @@ PODS:
   - KakaoSDKUser (2.8.4):
     - KakaoSDKAuth (= 2.8.4)
   - SnapKit (5.0.1)
+  - Starscream (4.0.4)
 
 DEPENDENCIES:
   - Alamofire (~> 5.5)
   - IQKeyboardManagerSwift (= 6.3.0)
   - KakaoSDK
   - SnapKit (~> 5.0.0)
+  - Starscream (~> 4.0.0)
 
 SPEC REPOS:
   trunk:
@@ -55,6 +57,7 @@ SPEC REPOS:
     - KakaoSDKTemplate
     - KakaoSDKUser
     - SnapKit
+    - Starscream
 
 SPEC CHECKSUMS:
   Alamofire: 1c4fb5369c3fe93d2857c780d8bbe09f06f97e7c
@@ -69,7 +72,8 @@ SPEC CHECKSUMS:
   KakaoSDKTemplate: 23ff3023d189f0962d28e34627a19c0eb8c1c7a6
   KakaoSDKUser: d878977e0ba6b365cfeac3b6319cdf4231713bea
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
+  Starscream: 5178aed56b316f13fa3bc55694e583d35dd414d9
 
-PODFILE CHECKSUM: 4ae1948d615d54bdc59c2cc8c0405f52392e8c93
+PODFILE CHECKSUM: 4f6c7af2d9e5aa40df26e789c0ef6a0225b67052
 
 COCOAPODS: 1.11.3

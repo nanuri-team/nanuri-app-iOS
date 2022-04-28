@@ -98,6 +98,11 @@ extension UIColor {
         // rgba(255, 59, 48, 1)
         return UIColor(red: 255.0 / 255.0, green: 59.0 / 255.0, blue: 48.0 / 255.0, alpha: 1)
     }
+    
+    class var nanuriBlack1: UIColor {
+        // rgba(54, 55, 59, 1)
+        return UIColor(red: 54.0 / 255.0, green: 55.0 / 255.0, blue: 59.0 / 255.0, alpha: 1)
+    }
 }
 
 extension UIView {

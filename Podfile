@@ -10,4 +10,5 @@ target 'nanuri-app-renewal' do
   pod 'SnapKit', '~> 5.0.0'
   pod 'IQKeyboardManagerSwift', '6.3.0'
   pod 'KakaoSDK'
+  pod 'Starscream', '~> 4.0.0'
 end
