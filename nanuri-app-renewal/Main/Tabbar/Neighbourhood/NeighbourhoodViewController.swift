@@ -11,12 +11,15 @@ class NeighbourhoodViewController: UIViewController {
     
     let neighbourhoodTableView = UITableView()
     let noSettingLocationView = UIView()
+    var neighbourhoodCollectionView: UICollectionView!
     
     var collectionCellWidth = 120
     var collectionCellHeight = 163
     let ratioWidth = UIScreen.main.bounds.width
     var filterButtonArray: [FilterButton] = []
     var filterCount = 6 + 1
+    var postsListArray: [ResultInfo] = []
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,6 +50,7 @@ class NeighbourhoodViewController: UIViewController {
         
 //        setUpNoSettingView()
         setUpView()
+        getPostsList()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -71,6 +75,14 @@ class NeighbourhoodViewController: UIViewController {
         }
         
         filterButtonArray[sender.tag].isSelected = true
+    }
+    
+    func getPostsList() {
+        Networking.sharedObject.getPostsList { response in
+            self.postsListArray = response.results
+            self.neighbourhoodTableView.reloadData()
+            self.neighbourhoodCollectionView.reloadData()
+        }
     }
     
     func setUpNoSettingView() {
@@ -133,7 +145,7 @@ class NeighbourhoodViewController: UIViewController {
         }
         
         let layout = UICollectionViewFlowLayout()
-        let neighbourhoodCollectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        neighbourhoodCollectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         neighbourhoodCollectionView.delegate = self
         neighbourhoodCollectionView.dataSource = self
         neighbourhoodCollectionView.register(VerticalProductCollectionViewCell.self, forCellWithReuseIdentifier: VerticalProductCollectionViewCell.cellId)
@@ -179,7 +191,7 @@ extension NeighbourhoodViewController: UITableViewDelegate, UITableViewDataSourc
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return postsListArray.count
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -231,12 +243,24 @@ extension NeighbourhoodViewController: UITableViewDelegate, UITableViewDataSourc
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let identifier = "\(indexPath.row)"
+        let post = postsListArray[indexPath.row]
+        let identifier = "\(indexPath.row) \(post.uuid)"
         if let reuseCell = tableView.dequeueReusableCell(withIdentifier: identifier) {
             return reuseCell
         } else {
             let cell = MainProductTableViewCell.init(style: .default, reuseIdentifier: identifier)
             cell.selectionStyle = .none
+            
+            cell.productImage.imageUpload(url: post.image?.replaceImageUrl() ?? "")
+            cell.productName.attributedText = .attributeFont(font: .PRegular, size: 17, text: post.title, lineHeight: 20)
+            cell.productLocationLabel.attributedText = .attributeFont(font: .NSRBold, size: 12, text: post.writerAddress ?? "", lineHeight: 14)
+            cell.productPrice.attributedText = .attributeFont(font: .PBold, size: 16, text: "\(post.unitPrice.toPriceNumberFormmat())원", lineHeight: 19)
+            cell.productPrice.textAlignment = .right
+            cell.deliveryTagView.setDeliveryType(type: post.tradeType)
+            
+            cell.dDayTagView.setDday(dDay: post.waitedUntil?.dDaycalculator() ?? "")
+            cell.totalRecruit.attributedText = .attributeFont(font: .NSRExtrabold, size: 12, text: "/\(post.maxParticipants)", lineHeight: 14)
+            cell.productParticipant.attributedText = .attributeFont(font: .NSRExtrabold, size: 12, text: "\(post.numParticipants)", lineHeight: 14)
             
             return cell
         }
@@ -244,6 +268,7 @@ extension NeighbourhoodViewController: UITableViewDelegate, UITableViewDataSourc
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let productDetailViewController = ProductDetailViewController()
+        productDetailViewController.postInfo = postsListArray[indexPath.row]
         productDetailViewController.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(productDetailViewController, animated: true)
     }
@@ -251,7 +276,7 @@ extension NeighbourhoodViewController: UITableViewDelegate, UITableViewDataSourc
 
 extension NeighbourhoodViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return postsListArray.count
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -267,11 +292,24 @@ extension NeighbourhoodViewController: UICollectionViewDelegate, UICollectionVie
             return UICollectionViewCell()
         }
         
+        let post = postsListArray[indexPath.row]
+        
+        cell.productImageView.imageUpload(url: post.image?.replaceImageUrl() ?? "")
+        cell.productName.attributedText = .attributeFont(font: .PRegular, size: 14, text: post.title, lineHeight: 17)
+        cell.productPrice.attributedText = .attributeFont(font: .PBold, size: 11, text: "\(post.unitPrice.toPriceNumberFormmat())원", lineHeight: 13)
+        cell.productPrice.textAlignment = .right
+        cell.deliveryTagView.setDeliveryType(type: post.tradeType)
+        
+        cell.dDayTagView.setDday(dDay: post.waitedUntil?.dDaycalculator() ?? "")
+        cell.totalRecruit.attributedText = .attributeFont(font: .NSRExtrabold, size: 12, text: "/\(post.maxParticipants)", lineHeight: 14)
+        cell.productParticipant.attributedText = .attributeFont(font: .NSRExtrabold, size: 12, text: "\(post.numParticipants)", lineHeight: 14)
+        
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let productDetailViewController = ProductDetailViewController()
+        productDetailViewController.postInfo = postsListArray[indexPath.row]
         productDetailViewController.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(productDetailViewController, animated: true)
     }

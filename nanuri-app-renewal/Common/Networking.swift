@@ -57,7 +57,6 @@ extension Networking {
             case .success(_):
                 guard let response = response.value else { return }
                 completion(response)
-                print(response)
             case .failure(let error):
                 print(error)
             }
