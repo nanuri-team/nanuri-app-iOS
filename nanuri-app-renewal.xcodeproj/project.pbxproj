@@ -728,6 +728,7 @@
 				INFOPLIST_FILE = "nanuri-app-renewal/Info.plist";
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "위치 정보 권한 허용";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "위치 정보 권한 허용";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "갤러리 권한을 허용해주세요";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
@@ -760,6 +761,7 @@
 				INFOPLIST_FILE = "nanuri-app-renewal/Info.plist";
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "위치 정보 권한 허용";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "위치 정보 권한 허용";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "갤러리 권한을 허용해주세요";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";

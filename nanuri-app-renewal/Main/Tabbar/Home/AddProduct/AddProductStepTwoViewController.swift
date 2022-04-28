@@ -22,6 +22,8 @@ class AddProductStepTwoViewController: UIViewController {
     var edgeHeight = 34
     var postProductInfo: [String: Any] = [:]
     var selectDate = Date()
+    var postImageData: UIImage!
+
 
     
     override func viewDidLoad() {
@@ -53,6 +55,7 @@ class AddProductStepTwoViewController: UIViewController {
         
         let addProductStepThreeViewController = AddProductStepThreeViewController()
         addProductStepThreeViewController.postProductInfo = postProductInfo
+        addProductStepThreeViewController.postImageData = postImageData
         addProductStepThreeViewController.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(addProductStepThreeViewController, animated: true)
     }

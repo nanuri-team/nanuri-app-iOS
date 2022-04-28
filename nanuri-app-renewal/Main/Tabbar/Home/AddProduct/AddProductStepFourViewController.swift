@@ -18,6 +18,8 @@ class AddProductStepFourViewController: UIViewController {
     var selectIndex = 0
     var radioButtonArray: [UIButton] = []
     var postProductInfo: [String: Any] = [:]
+    var postImageData: UIImage!
+
 
     
     override func viewDidLoad() {
@@ -56,7 +58,7 @@ class AddProductStepFourViewController: UIViewController {
     }
     
     func postPosts() {
-        Networking.sharedObject.postPosts(parameter: postProductInfo) { response in
+        Networking.sharedObject.postPosts(image: postImageData, parameter: postProductInfo) { response in
             print(response)
         }
         
