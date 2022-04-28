@@ -36,6 +36,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.rootViewController = TabBarController() // 초기 ViewController
         window?.makeKeyAndVisible()
         
+        let _ = UIImagePickerController()
         IQKeyboardManager.shared.enable = true
                 
         return true

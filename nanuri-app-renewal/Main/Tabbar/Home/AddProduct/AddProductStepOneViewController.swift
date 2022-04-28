@@ -14,11 +14,13 @@ class AddProductStepOneViewController: UIViewController {
     let productNameTextField = UITextField()
     let productLinkTextField = UITextField()
     let productPriceTextField = UITextField()
+    let addImageView = UIImageView()
 
     
     var bottomViewHeight = 64
     var edgeHeight = 34
     var postProductInfo: [String: Any] = [:]
+    var postImageData: UIImage!
 
     
     override func viewDidLoad() {
@@ -48,14 +50,24 @@ class AddProductStepOneViewController: UIViewController {
         
         let addProductStepTwoViewController = AddProductStepTwoViewController()
         addProductStepTwoViewController.postProductInfo = postProductInfo
+        addProductStepTwoViewController.postImageData = addImageView.image
         addProductStepTwoViewController.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(addProductStepTwoViewController, animated: true)
+    }
+    
+    @objc func selectAddImageButton() {
+        let imagePickerController = UIImagePickerController()
+        imagePickerController.sourceType = .photoLibrary
+        imagePickerController.delegate = self
+        imagePickerController.allowsEditing = true
+        self.present(imagePickerController, animated: true)
     }
     
     func validation() -> Bool {
         guard let productNameText = productNameTextField.text,
               let productLinkText = productLinkTextField.text,
-              let productPriceText = productPriceTextField.text
+              let productPriceText = productPriceTextField.text,
+              let _ = addImageView.image
         else { return false }
         
         if productNameText.isEmpty ||
@@ -254,6 +266,18 @@ class AddProductStepOneViewController: UIViewController {
             make.left.equalToSuperview().inset(16)
             make.bottom.equalToSuperview().inset(100)
         }
+        addImageButton.addTarget(self, action: #selector(selectAddImageButton), for: .touchUpInside)
+        
+        addImageView.layer.backgroundColor = UIColor.nanuriGray2.cgColor
+        addImageView.layer.cornerRadius = 4
+        addImageView.clipsToBounds = true
+        contentsScrollView.addSubview(addImageView)
+        addImageView.snp.makeConstraints { make in
+            make.height.width.equalTo(64)
+            make.top.equalTo(imageLabel.snp.bottom).inset(-10)
+            make.left.equalTo(addImageButton.snp.right).inset(-10)
+            make.bottom.equalToSuperview().inset(100)
+        }
         
     }
     
@@ -286,4 +310,19 @@ class AddProductStepOneViewController: UIViewController {
         nextButton.addTarget(self, action: #selector(selectNextButton), for: .touchUpInside)
     }
 
+}
+
+extension AddProductStepOneViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        if let image = info[UIImagePickerController.InfoKey(rawValue: "UIImagePickerControllerEditedImage")] as? UIImage {
+            addImageView.image = image
+        }
+        
+        picker.dismiss(animated: true, completion: nil)
+    }
+    
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true, completion: nil)
+    }
 }
