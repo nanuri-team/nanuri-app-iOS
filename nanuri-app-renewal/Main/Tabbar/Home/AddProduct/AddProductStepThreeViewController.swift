@@ -18,6 +18,7 @@ class AddProductStepThreeViewController: UIViewController {
     var selectIndex = 0
     var radioButtonArray: [UIButton] = []
     var postProductInfo: [String: Any] = [:]
+    var postImageData: UIImage!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,6 +49,7 @@ class AddProductStepThreeViewController: UIViewController {
         
         let addProductStepFourViewController = AddProductStepFourViewController()
         addProductStepFourViewController.postProductInfo = postProductInfo
+        addProductStepFourViewController.postImageData = postImageData
         addProductStepFourViewController.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(addProductStepFourViewController, animated: true)
     }
