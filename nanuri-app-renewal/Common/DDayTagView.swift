@@ -17,9 +17,7 @@ class DDayTagView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    convenience init(dDay: String) {
-        self.init(frame: .zero)
-        
+    func setDday(dDay: String) {
         let typeLabel = UILabel()
         self.addSubview(typeLabel)
         

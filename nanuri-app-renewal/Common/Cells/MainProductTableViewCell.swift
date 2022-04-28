@@ -9,8 +9,14 @@ import UIKit
 
 class MainProductTableViewCell: UITableViewCell {
     
+    let productImage = UIImageView()
     let productName = UILabel()
-
+    let productLocationLabel = UILabel()
+    let productPrice = UILabel()
+    let deliveryTagView = DeliveryTagView()
+    let totalRecruit = UILabel()
+    let productParticipant = UILabel()
+    let dDayTagView = DDayTagView()
     
     static let cellId = "mainProductCell"
     
@@ -57,7 +63,6 @@ class MainProductTableViewCell: UITableViewCell {
             make.height.width.equalTo(16)
         }
         
-        let productLocationLabel = UILabel()
         productLocationLabel.attributedText = .attributeFont(font: .NSRBold, size: 12, text: "서울시 강남구", lineHeight: 14)
         productLocationLabel.textColor = .nanuriGray4
         cellView.addSubview(productLocationLabel)
@@ -66,7 +71,6 @@ class MainProductTableViewCell: UITableViewCell {
             make.top.equalToSuperview().inset(14)
         }
         
-        let productImage = UIImageView()
         productImage.backgroundColor = .nanuriGray2
         productImage.contentMode = .scaleToFill
         cellView.addSubview(productImage)
@@ -84,7 +88,6 @@ class MainProductTableViewCell: UITableViewCell {
             make.right.equalTo(productImage.snp.left).inset(10)
         }
         
-        let productPrice = UILabel()
         productPrice.attributedText = .attributeFont(font: .PBold, size: 16, text: "3,500원", lineHeight: 19)
         productPrice.textAlignment = .right
         cellView.addSubview(productPrice)
@@ -94,21 +97,18 @@ class MainProductTableViewCell: UITableViewCell {
             make.right.equalTo(productImage.snp.left).inset(-10)
         }
         
-        let deliveryTagView = DeliveryTagView(type: .direct)
         cellView.addSubview(deliveryTagView)
         deliveryTagView.snp.makeConstraints { make in
             make.left.equalToSuperview().inset(14)
             make.bottom.equalToSuperview().inset(14)
         }
         
-        let dDayTagView = DDayTagView(dDay: "5")
         cellView.addSubview(dDayTagView)
         dDayTagView.snp.makeConstraints { make in
             make.bottom.equalToSuperview().inset(14)
             make.left.equalTo(deliveryTagView.snp.right).inset(-4)
         }
         
-        let totalRecruit = UILabel()
         totalRecruit.attributedText = .attributeFont(font: .NSRExtrabold, size: 12, text: "/5", lineHeight: 14)
         totalRecruit.textColor = .nanuriGray4
         cellView.addSubview(totalRecruit)
@@ -117,7 +117,6 @@ class MainProductTableViewCell: UITableViewCell {
             make.bottom.equalToSuperview().inset(14)
         }
         
-        let productParticipant = UILabel()
         productParticipant.attributedText = .attributeFont(font: .NSRExtrabold, size: 12, text: "2", lineHeight: 14)
         productParticipant.textColor = .nanuriOrange
         cellView.addSubview(productParticipant)

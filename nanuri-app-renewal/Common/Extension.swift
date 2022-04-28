@@ -8,6 +8,8 @@
 import Foundation
 import UIKit
 
+import SDWebImage
+
 extension UIColor {
     class var nanuriGreen: UIColor {
         // rgba(99, 178, 97, 1)
@@ -219,11 +221,20 @@ extension Int {
             return ""
         }
     }
+    
+    func toPriceNumberFormmat() -> String {
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .decimal
+        let result = numberFormatter.string(for: self)!
+        
+        return result
+    }
 }
 
 enum FormatType: String {
     case dotAndDay = "yyyy.MM.dd (E)"
     case dahsed = "yyyy-MM-dd"
+    case dot = "yyyy.MM.dd"
 }
 
 // 날짜 형식
@@ -244,5 +255,25 @@ extension DateFormatter {
         guard let date = self.date(from: string) else { return Date() }
         
         return date
+    }
+}
+
+extension String {
+    func replaceImageUrl() -> String {
+        let index = self.firstIndex(of: "?") ?? self.endIndex
+        let url = self[..<index]
+        return String(url)
+    }
+    
+    func dDaycalculator() -> String {
+        let date = DateFormatter().changeStringToDate(self, format: .dahsed)
+        guard let dDay = Calendar.current.dateComponents([.day], from: Date(), to: date).day else { return "" }
+        return "\(dDay + 1)"
+    }
+}
+
+extension UIImageView {
+    func imageUpload(url: String) {
+        self.sd_setImage(with: URL(string: url), placeholderImage: UIImage(named: "placeholder.png"))
     }
 }

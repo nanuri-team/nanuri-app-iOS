@@ -9,11 +9,14 @@ import Foundation
 import UIKit
 
 enum DeliveryType {
-    case delivery
-    case direct
+    static let parcel = "PARCEL"
+    static let direct = "DIRECT"
 }
 
 class DeliveryTagView: UIView {
+    
+    let typeLabel = UILabel()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
     }
@@ -22,21 +25,20 @@ class DeliveryTagView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    convenience init(type: DeliveryType) {
-        self.init(frame: .zero)
-        
-        let typeLabel = UILabel()
+    func setDeliveryType(type: String) {
         self.addSubview(typeLabel)
         
         switch type {
-        case .delivery:
+        case DeliveryType.parcel:
             typeLabel.attributedText = .attributeFont(font: .NSRExtrabold, size: 11, text: DeliveryTypeName.delivery, lineHeight: 11)
             typeLabel.textColor = .nanuriBrown
             self.backgroundColor = .nanuriBrown.withAlphaComponent(0.2)
-        case .direct:
+        case DeliveryType.direct:
             typeLabel.attributedText = .attributeFont(font: .NSRExtrabold, size: 11, text: DeliveryTypeName.direct, lineHeight: 11)
             typeLabel.textColor = .nanuriBlue
             self.backgroundColor = .nanuriBlue.withAlphaComponent(0.2)
+        default:
+            return
         }
         
         // view
@@ -54,5 +56,4 @@ class DeliveryTagView: UIView {
            make.center.equalToSuperview()
        }
     }
-    
 }

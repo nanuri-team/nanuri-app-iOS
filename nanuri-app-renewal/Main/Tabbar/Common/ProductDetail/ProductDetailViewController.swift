@@ -12,6 +12,7 @@ class ProductDetailViewController: UIViewController {
     var bottomViewHeight = 64
     var edgeHeight = 34
     let ratioWidth = UIScreen.main.bounds.width / 375
+    var postInfo: ResultInfo?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,6 +38,16 @@ class ProductDetailViewController: UIViewController {
     
     @objc func selectCommentButton() {
         presentCommentViewController()
+    }
+    
+    @objc func selectProductLinkButton() {
+        guard let postInfo = postInfo else {
+            return
+        }
+
+        if let url = URL(string: postInfo.productUrl) {
+            UIApplication.shared.open(url, options: [:])
+        }
     }
     
     func presentOptionAlert() {
@@ -199,6 +210,10 @@ class ProductDetailViewController: UIViewController {
     
     func setUpView() {
         
+        guard let postInfo = postInfo else {
+            return
+        }
+        
         let productDetailScrollView = UIScrollView()
         productDetailScrollView.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height - CGFloat(edgeHeight))
         productDetailScrollView.contentSize = CGSize(width: productDetailScrollView.frame.width, height: productDetailScrollView.frame.height)
@@ -216,6 +231,8 @@ class ProductDetailViewController: UIViewController {
         }
         
         let productImage = UIImageView()
+        productImage.imageUpload(url: postInfo.image?.replaceImageUrl() ?? "")
+        productImage.contentMode = .scaleToFill
         productImage.backgroundColor = .nanuriGray2
         productImageView.addSubview(productImage)
         productImage.snp.makeConstraints { make in
@@ -239,9 +256,10 @@ class ProductDetailViewController: UIViewController {
             make.height.equalTo(36)
             make.width.equalTo(158)
         }
+        productLinkButton.addTarget(self, action: #selector(selectProductLinkButton), for: .touchUpInside)
         
         let categoryLabel = UILabel()
-        categoryLabel.attributedText = .attributeFont(font: .NSRExtrabold, size: 13, text: "#생활용품", lineHeight: 14.76)
+        categoryLabel.attributedText = .attributeFont(font: .NSRExtrabold, size: 13, text: "#\(postInfo.category ?? "")", lineHeight: 14.76)
         categoryLabel.textColor = .nanuriGreen
         productDetailScrollView.addSubview(categoryLabel)
         categoryLabel.snp.makeConstraints { make in
@@ -249,14 +267,16 @@ class ProductDetailViewController: UIViewController {
             make.left.equalToSuperview().inset(16)
         }
         
-        let dDayTagView = DDayTagView(dDay: "365")
+        let dDayTagView = DDayTagView()
+        dDayTagView.setDday(dDay: postInfo.waitedUntil?.dDaycalculator() ?? "")
         productDetailScrollView.addSubview(dDayTagView)
         dDayTagView.snp.makeConstraints { make in
             make.top.equalTo(productImageView.snp.bottom).inset(-24)
             make.right.equalToSuperview().inset(16)
         }
         
-        let deliveryTagView = DeliveryTagView(type: .delivery)
+        let deliveryTagView = DeliveryTagView()
+        deliveryTagView.setDeliveryType(type: postInfo.tradeType)
         productDetailScrollView.addSubview(deliveryTagView)
         deliveryTagView.snp.makeConstraints { make in
             make.top.equalTo(productImageView.snp.bottom).inset(-24)
@@ -264,7 +284,7 @@ class ProductDetailViewController: UIViewController {
         }
         
         let productName = UILabel()
-        productName.attributedText = .attributeFont(font: .PSemibold, size: 22, text: "로스팅 원두", lineHeight: 26)
+        productName.attributedText = .attributeFont(font: .PSemibold, size: 22, text: postInfo.title, lineHeight: 26)
         productDetailScrollView.addSubview(productName)
         productName.snp.makeConstraints { make in
             make.top.equalTo(categoryLabel.snp.bottom).inset(-8)
@@ -272,7 +292,9 @@ class ProductDetailViewController: UIViewController {
         }
         
         let purchaseDate = UILabel()
-        purchaseDate.attributedText = .attributeFont(font: .PRegular, size: 13, text: "2022.03.02 - 2022.03.25", lineHeight: 15)
+        let waitedFromDate = DateFormatter().changeDateFormat(DateFormatter().changeStringToDate(postInfo.waitedFrom ?? "", format: .dahsed), format: .dot)
+        let waitedUntilDate = DateFormatter().changeDateFormat(DateFormatter().changeStringToDate(postInfo.waitedUntil ?? "", format: .dahsed), format: .dot)
+        purchaseDate.attributedText = .attributeFont(font: .PRegular, size: 13, text: "\(waitedFromDate) - \(waitedUntilDate)", lineHeight: 15)
         purchaseDate.textColor = .nanuriGray4
         productDetailScrollView.addSubview(purchaseDate)
         purchaseDate.snp.makeConstraints { make in
@@ -281,7 +303,7 @@ class ProductDetailViewController: UIViewController {
         }
         
         let productPrice = UILabel()
-        productPrice.attributedText = .attributeFont(font: .PBold, size: 18, text: "3,500원", lineHeight: 21.6)
+        productPrice.attributedText = .attributeFont(font: .PBold, size: 18, text: "\(postInfo.unitPrice.toPriceNumberFormmat())원", lineHeight: 21.6)
         productDetailScrollView.addSubview(productPrice)
         productPrice.snp.makeConstraints { make in
             make.top.equalTo(productName.snp.bottom)
@@ -297,7 +319,7 @@ class ProductDetailViewController: UIViewController {
         }
         
         let productParticipant = UILabel()
-        productParticipant.attributedText = .attributeFont(font: .NSRExtrabold, size: 12, text: "2", lineHeight: 13.62)
+        productParticipant.attributedText = .attributeFont(font: .NSRExtrabold, size: 12, text: "\(postInfo.numParticipants)", lineHeight: 13.62)
         productParticipant.textColor = .nanuriOrange
         productDetailScrollView.addSubview(productParticipant)
         productParticipant.snp.makeConstraints { make in
@@ -306,7 +328,7 @@ class ProductDetailViewController: UIViewController {
         }
         
         let totalRecruit = UILabel()
-        totalRecruit.attributedText = .attributeFont(font: .NSRExtrabold, size: 12, text: "/ 5", lineHeight: 13.62)
+        totalRecruit.attributedText = .attributeFont(font: .NSRExtrabold, size: 12, text: "/ \(postInfo.maxParticipants)", lineHeight: 13.62)
         totalRecruit.textColor = .nanuriGray4
         productDetailScrollView.addSubview(totalRecruit)
         totalRecruit.snp.makeConstraints { make in
@@ -314,11 +336,13 @@ class ProductDetailViewController: UIViewController {
             make.left.equalTo(productParticipant.snp.right).inset(-2)
         }
         
+        let percentage = Float(postInfo.numParticipants) / Float(postInfo.maxParticipants)
+        
         let participantProgress = UIProgressView()
         participantProgress.progressViewStyle = .default
         participantProgress.progressTintColor = .nanuriGray3
         participantProgress.trackTintColor = .nanuriGray1
-        participantProgress.progress = 0.5
+        participantProgress.progress = percentage
         productDetailScrollView.addSubview(participantProgress)
         participantProgress.snp.makeConstraints { make in
             make.top.equalTo(participantImageView.snp.bottom).inset(-4)
@@ -327,7 +351,7 @@ class ProductDetailViewController: UIViewController {
         }
         
         let progress = UILabel()
-        progress.attributedText = .attributeFont(font: .NSRExtrabold, size: 12, text: "\(Int(participantProgress.progress * 100))%", lineHeight: 13.62)
+        progress.attributedText = .attributeFont(font: .NSRExtrabold, size: 12, text: "\(Int(percentage * 100))%", lineHeight: 13.62)
         progress.textColor = .nanuriGray4
         productDetailScrollView.addSubview(progress)
         progress.snp.makeConstraints { make in
@@ -345,7 +369,7 @@ class ProductDetailViewController: UIViewController {
             make.height.equalTo(1)
         }
         
-        let locationTagView = LocationTagView(location: "서울시 강남구")
+        let locationTagView = LocationTagView(location: postInfo.writerAddress ?? "")
         productDetailScrollView.addSubview(locationTagView)
         locationTagView.snp.makeConstraints { make in
             make.top.equalTo(separateView.snp.bottom).inset(-24)
@@ -364,7 +388,7 @@ class ProductDetailViewController: UIViewController {
         }
         
         let user = UILabel()
-        user.attributedText = .attributeFont(font: .NSRExtrabold, size: 15, text: "프로자취러", lineHeight: 17.03)
+        user.attributedText = .attributeFont(font: .NSRExtrabold, size: 15, text: postInfo.writer, lineHeight: 17.03)
         userLevelView.addSubview(user)
         user.snp.makeConstraints { make in
             make.top.equalToSuperview()
@@ -379,18 +403,7 @@ class ProductDetailViewController: UIViewController {
         }
         
         let contents = UITextView()
-        contents.attributedText = .attributeFont(font: .PRegular, size: 15, text: """
-로스팅 원두 배송합니다!
-코스트코에서 사올 예정이고 1인당 1개씩만 주문 가능합니다!
-
-가격은 배송비 포함해서 + 1000원이구요
-주문주실 때 주소 적어주세요!
-로스팅 원두 배송합니다!
-코스트코에서 사올 예정이고 1인당 1개씩만 주문 가능합니다!
-
-가격은 배송비 포함해서 + 1000원이구요
-주문주실 때 주소 적어주세요!
-""", lineHeight: 22)
+        contents.attributedText = .attributeFont(font: .PRegular, size: 15, text: postInfo.description, lineHeight: 22)
         productDetailScrollView.addSubview(contents)
         contents.isEditable = false
         contents.isScrollEnabled = false
