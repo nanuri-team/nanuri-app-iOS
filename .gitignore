@@ -155,3 +155,33 @@ Pods/Pods.xcodeproj/xcuserdata/min.xcuserdatad/xcschemes/KakaoSDKStory.xcscheme
 Pods/Pods.xcodeproj/xcuserdata/min.xcuserdatad/xcschemes/KakaoSDKTalk.xcscheme
 Pods/Pods.xcodeproj/xcuserdata/min.xcuserdatad/xcschemes/KakaoSDKTemplate.xcscheme
 Pods/Pods.xcodeproj/xcuserdata/min.xcuserdatad/xcschemes/KakaoSDKUser.xcscheme
+Pods/Pods.xcodeproj/xcuserdata/min.xcuserdatad/xcschemes/Starscream.xcscheme
+Pods/Starscream/LICENSE
+Pods/Starscream/README.md
+Pods/Starscream/Sources/Compression/Compression.swift
+Pods/Starscream/Sources/Compression/WSCompression.swift
+Pods/Starscream/Sources/DataBytes/Data+Extensions.swift
+Pods/Starscream/Sources/Engine/Engine.swift
+Pods/Starscream/Sources/Engine/NativeEngine.swift
+Pods/Starscream/Sources/Engine/WSEngine.swift
+Pods/Starscream/Sources/Framer/FoundationHTTPHandler.swift
+Pods/Starscream/Sources/Framer/FoundationHTTPServerHandler.swift
+Pods/Starscream/Sources/Framer/FrameCollector.swift
+Pods/Starscream/Sources/Framer/Framer.swift
+Pods/Starscream/Sources/Framer/HTTPHandler.swift
+Pods/Starscream/Sources/Framer/StringHTTPHandler.swift
+Pods/Starscream/Sources/Security/FoundationSecurity.swift
+Pods/Starscream/Sources/Security/Security.swift
+Pods/Starscream/Sources/Server/Server.swift
+Pods/Starscream/Sources/Server/WebSocketServer.swift
+Pods/Starscream/Sources/Starscream/WebSocket.swift
+Pods/Starscream/Sources/Transport/FoundationTransport.swift
+Pods/Starscream/Sources/Transport/TCPTransport.swift
+Pods/Starscream/Sources/Transport/Transport.swift
+Pods/Target Support Files/Starscream/Starscream-dummy.m
+Pods/Target Support Files/Starscream/Starscream-Info.plist
+Pods/Target Support Files/Starscream/Starscream-prefix.pch
+Pods/Target Support Files/Starscream/Starscream-umbrella.h
+Pods/Target Support Files/Starscream/Starscream.debug.xcconfig
+Pods/Target Support Files/Starscream/Starscream.modulemap
+Pods/Target Support Files/Starscream/Starscream.release.xcconfig

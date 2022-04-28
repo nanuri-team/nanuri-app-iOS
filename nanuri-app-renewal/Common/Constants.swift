@@ -31,6 +31,11 @@ enum LevelTypeName {
     static let tree = "나무"
 }
 
+enum ChatType {
+    static let loadMessage = "load_messages"
+    static let sendMessage = "send_message"
+}
+
 //enum TradeType {
 //    case direct = "DIRECT"
 //    case parcel = "PARCEL"

@@ -11,6 +11,9 @@ class YourChatMessageViewCell: UITableViewCell {
     
     static let cellId = "yourChatMessage"
     
+    let userName = UILabel()
+    let chatLabel = UILabel()
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setUpView()
@@ -37,21 +40,11 @@ class YourChatMessageViewCell: UITableViewCell {
         cellView.backgroundColor = .white
         cellView.clipsToBounds = true
         contentView.addSubview(cellView)
-        cellView.snp.makeConstraints { make in
-            make.top.bottom.equalToSuperview().inset(8)
-            make.left.right.equalToSuperview().inset(16)
-            make.height.equalTo(60)
-        }
+      
         
-        let userName = UILabel()
-        userName.attributedText = .attributeFont(font: .PBold, size: 13, text: "프로 공구러", lineHeight: 15)
-        userName.textColor = .nanuriGray7
-        cellView.addSubview(userName)
-        userName.snp.makeConstraints { make in
-            make.top.equalToSuperview()
-            make.left.equalToSuperview()
-            make.width.equalToSuperview().multipliedBy(0.8)
-        }
+//        userName.attributedText = .attributeFont(font: .PBold, size: 13, text: "프로 공구러", lineHeight: 15)
+//        userName.textColor = .nanuriGray7
+//        cellView.addSubview(userName)
     
         
         let yourMessageView = UIView()
@@ -62,11 +55,33 @@ class YourChatMessageViewCell: UITableViewCell {
         yourMessageView.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMaxXMaxYCorner, .layerMinXMaxYCorner]
         yourMessageView.layer.masksToBounds = true
         cellView.addSubview(yourMessageView)
+        
+        chatLabel.attributedText = .attributeFont(font: .PRegular, size: 13, text: "", lineHeight: 19)
+        chatLabel.numberOfLines = 0
+        chatLabel.textColor = .nanuriBlack1
+        chatLabel.lineBreakMode = .byWordWrapping
+        yourMessageView.addSubview(chatLabel)
+        chatLabel.snp.makeConstraints { make in
+            make.top.bottom.equalToSuperview().inset(10)
+            make.bottom.equalToSuperview().inset(-10)
+            make.left.right.equalToSuperview().inset(14)
+        }
+        
         yourMessageView.snp.makeConstraints { make in
-            make.top.equalTo(userName.snp.bottom).inset(-6)
-            make.bottom.equalToSuperview()
-            make.width.equalToSuperview().multipliedBy(0.8)
+            make.top.equalTo(chatLabel.snp.top)
+            make.right.equalTo(chatLabel.snp.right).inset(-14)
             make.left.equalToSuperview()
+        }
+        
+//        userName.snp.makeConstraints { make in
+//            make.bottom.equalTo(yourMessageView.snp.top).inset(-10)
+//            make.left.equalToSuperview()
+//        }
+        
+        cellView.snp.makeConstraints { make in
+            make.top.equalTo(yourMessageView.snp.top)
+            make.bottom.equalTo(yourMessageView.snp.bottom)
+            make.left.right.equalToSuperview().inset(16)
         }
     }
 
