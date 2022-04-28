@@ -19,7 +19,7 @@ class TabBarController: UITabBarController {
         
         let homeNavigationController = UINavigationController(rootViewController: HomeViewController())
         let neighbourhoodNavigationController = UINavigationController(rootViewController: NeighbourhoodViewController())
-        let chattingNavigationController = UINavigationController(rootViewController: ChattingViewController())
+        let chattingNavigationController = UINavigationController(rootViewController: ChattingListTableViewController())
         let bookmarkNavigationController = UINavigationController(rootViewController: BookmarkTableViewController())
         let myPageNavigationController = UINavigationController(rootViewController: MyPageViewController())
         

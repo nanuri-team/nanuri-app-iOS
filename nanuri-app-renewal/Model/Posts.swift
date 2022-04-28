@@ -16,6 +16,7 @@ struct PostList: Decodable {
 
 struct ResultInfo: Decodable {
     var writer: String
+    var writerAddress: String?
     var participants: [String]
     var category: String?
     var favoredBy: [String]
@@ -41,6 +42,7 @@ struct ResultInfo: Decodable {
     
     enum CodingKeys: String, CodingKey {
         case writer
+        case writerAddress = "writer_address"
         case participants
         case category
         case favoredBy = "favored_by"
@@ -66,3 +68,19 @@ struct ResultInfo: Decodable {
     }
 }
 
+struct postProductInfo {
+    var quantity: String = ""
+    var description: String = ""
+    var minParticipants: Int = 0
+    var maxParticipants: Int = 0
+    var numParticipants: Int = 0
+    var productUrl: String = ""
+    var tradeType: String = ""
+    var orderStatus: String = ""
+    var waitedFrom: String = ""
+    var waitedUntil: String = ""
+    var title: String = ""
+    var image: String = ""
+    var unitPrice: Int = 0
+    var category: String = ""
+}

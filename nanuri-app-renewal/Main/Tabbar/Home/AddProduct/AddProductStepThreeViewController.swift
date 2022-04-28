@@ -17,10 +17,13 @@ class AddProductStepThreeViewController: UIViewController {
     let categoryName = ["생활용품", "음식", "주방", "욕실", "문구", "기타"]
     var selectIndex = 0
     var radioButtonArray: [UIButton] = []
+    var postProductInfo: [String: Any] = [:]
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "상품 등록하기"
+        
+        print(postProductInfo)
         
         let backButton = UIBarButtonItem(image: UIImage(named: "back_ic"), style: .plain, target: self, action: #selector(selectBackButton))
         self.navigationItem.setLeftBarButton(backButton, animated: true)
@@ -37,9 +40,21 @@ class AddProductStepThreeViewController: UIViewController {
     }
     
     @objc func selectNextButton() {
+        
+        guard validation() else {
+            print("return")
+            return
+        }
+        
         let addProductStepFourViewController = AddProductStepFourViewController()
+        addProductStepFourViewController.postProductInfo = postProductInfo
         addProductStepFourViewController.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(addProductStepFourViewController, animated: true)
+    }
+    
+    func validation() -> Bool {
+        postProductInfo["category"] = selectIndex.toCategoryName()
+        return true
     }
     
     func setUpStepView() {
@@ -189,6 +204,12 @@ extension AddProductStepThreeViewController: UITableViewDelegate, UITableViewDat
                 make.centerY.equalToSuperview()
                 make.right.equalToSuperview().inset(16)
             }
+            
+            if indexPath.row == 0 {
+                radioButton.setImage(UIImage(named: "radio_select_ic"), for: .normal)
+                selectIndex = indexPath.row
+            }
+            
             radioButtonArray.append(radioButton)
             
             return cell
