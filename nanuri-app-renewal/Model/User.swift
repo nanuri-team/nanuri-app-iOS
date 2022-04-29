@@ -7,6 +7,7 @@
 
 import Foundation
 
+
 //struct UserList: Decodable {
 //    var count: Int
 //    var next: String?
@@ -14,8 +15,24 @@ import Foundation
 //    var results: [UserInfo]
 //}
 
+struct UserList: Decodable {
+    var count: Int
+    var next: String?
+    var pervious: String?
+    var results: [UserInfo]
+}
+
+
+//struct UserInfo: Decodable {
+//    var user: [UserData]
+//}
 struct UserInfo: Decodable {
+
     var password: String?
+    var posts: [String]
+    var favoritePosts: [String]
+    var lastLogin: String
+    var uuid: String
     var email: String
     var nickname: String?
     var isActive: Bool
@@ -35,8 +52,10 @@ struct UserInfo: Decodable {
         case latitude
         case longitude
         case address
-        case profileUrl = "profile_url"
+        case profile
         case authProvider = "auth_provider"
+        case createdAt = "created_at"
+        case updatedAt = "updated_at"
     }
 }
 
@@ -44,5 +63,4 @@ struct UserInfo: Decodable {
 struct UserPostResponse: Decodable {
     var results: UserInfo
 }
-
 

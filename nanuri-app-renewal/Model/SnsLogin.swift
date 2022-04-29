@@ -7,24 +7,35 @@
 
 import Foundation
 
-struct SocialLogins: Decodable {
-    var count: Int
-    var data: [SnsId]
-  
+//struct SocialLogins: Decodable {
+//    var data: [SnsId]
+//
+//}
+struct SNSPostResponse: Decodable {
+    var data: SnsId
 }
 
 struct SnsId: Decodable {
-    var id: Int
-    var socialId: String
+    var user: String
+    var kakaoID: Int
+    var createdAt: String
+    var updatedAt: String
     
     enum CodingKeys:String, CodingKey {
-        case id
-        case socialId = "social_id"
+        case user
+        case kakaoID = "kakao_id"
+        case createdAt = "created_at"
+        case updatedAt = "updated_at"
+    }
+    // nil 생성자 재정의
+    init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        user = (try? values.decodeIfPresent(String.self, forKey: .user)) ?? ""
+        kakaoID = (try? values.decodeIfPresent(Int.self, forKey: .kakaoID)) ?? 0
+        createdAt = try values.decode(String.self, forKey: .createdAt)
+        updatedAt = try values.decode(String.self, forKey: .updatedAt)
     }
 }
 
 
-struct SNSPostResponse: Decodable {
-    var create: String
-    var data: SnsId
-}
+

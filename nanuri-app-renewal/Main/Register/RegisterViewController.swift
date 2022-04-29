@@ -14,6 +14,9 @@ class RegisterViewController: UIViewController {
     // 사용자정보
     let nickNameTextField = UITextField()
     
+    // 사용자정보
+    var nickname = UITextField()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -36,6 +39,11 @@ class RegisterViewController: UIViewController {
         } else {
             sender.isSelected = true
         }
+    }
+    @objc func actSignUp(){
+        print("actSignup")
+        saveUserInfo()
+        
     }
     
     @objc func selectSignUpBtn(_ sender: Any) {
@@ -203,6 +211,7 @@ class RegisterViewController: UIViewController {
         registerButton.setAttributedTitle(.attributeFont(font: .PBold, size: 15, text: "회원가입", lineHeight: 18), for: .normal)
         registerButton.addTarget(self, action: #selector(selectSignUpBtn), for: .touchUpInside)
         self.view.addSubview(registerButton)
+        registerButton.addTarget(self, action: #selector(actSignUp), for: .touchUpInside)
         registerButton.snp.makeConstraints { make in
             make.bottom.equalTo(self.view.safeAreaLayoutGuide).inset(32)
             make.left.right.equalToSuperview().inset(16)

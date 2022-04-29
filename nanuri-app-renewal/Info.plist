@@ -10,6 +10,13 @@
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
+	<key>CFBundleIdentifier</key>
+	<string>nanuri.team.project.nanuri-app</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>kakao 7927f2d495e76c08506214280d3e3557</string>

@@ -10,6 +10,14 @@ import UIKit
 class VerticalProductCollectionViewCell: UICollectionViewCell {
     
     static let cellId = "verticalProductCell"
+    let dDayTagView = DDayTagView()
+    let deliveryTagView = DeliveryTagView()
+    let productName = UILabel()
+    let productPrice = UILabel()
+    let totalRecruit = UILabel()
+    let productParticipant = UILabel()
+    let productImageView = UIImageView()
+
     
     override init(frame: CGRect) {
         super.init(frame: .zero)
@@ -34,8 +42,9 @@ class VerticalProductCollectionViewCell: UICollectionViewCell {
             make.width.equalTo(120)
         }
         
-        let productImageView = UIImageView()
         productImageView.layer.cornerRadius = 12
+        productImageView.clipsToBounds = true
+        productImageView.contentMode = .scaleToFill
         productImageView.backgroundColor = .nanuriGray2
         cellView.addSubview(productImageView)
         productImageView.snp.makeConstraints { make in
@@ -43,21 +52,18 @@ class VerticalProductCollectionViewCell: UICollectionViewCell {
             make.height.width.equalTo(120)
         }
         
-        let dDayTagView = DDayTagView(dDay: "3")
         cellView.addSubview(dDayTagView)
         dDayTagView.snp.makeConstraints { make in
             make.top.equalToSuperview().inset(6)
             make.right.equalToSuperview().inset(6)
         }
         
-        let deliveryTagView = DeliveryTagView(type: .delivery)
         cellView.addSubview(deliveryTagView)
         deliveryTagView.snp.makeConstraints { make in
             make.top.equalToSuperview().inset(6)
             make.right.equalTo(dDayTagView.snp.left).inset(-2)
         }
         
-        let productName = UILabel()
         productName.attributedText = .attributeFont(font: .PRegular, size: 14, text: "로스팅 원두", lineHeight: 17)
         cellView.addSubview(productName)
         productName.snp.makeConstraints { make in
@@ -65,7 +71,6 @@ class VerticalProductCollectionViewCell: UICollectionViewCell {
             make.top.equalTo(productImageView.snp.bottom).inset(-6)
         }
         
-        let productPrice = UILabel()
         productPrice.attributedText = .attributeFont(font: .PBold, size: 11, text: "3,500원", lineHeight: 13)
         cellView.addSubview(productPrice)
         productPrice.snp.makeConstraints { make in
@@ -74,7 +79,6 @@ class VerticalProductCollectionViewCell: UICollectionViewCell {
             make.bottom.equalToSuperview()
         }
         
-        let totalRecruit = UILabel()
         totalRecruit.attributedText = .attributeFont(font: .NSRExtrabold, size: 12, text: "/5", lineHeight: 14)
         totalRecruit.textColor = .nanuriGray4
         cellView.addSubview(totalRecruit)
@@ -84,7 +88,6 @@ class VerticalProductCollectionViewCell: UICollectionViewCell {
             make.bottom.equalToSuperview()
         }
         
-        let productParticipant = UILabel()
         productParticipant.attributedText = .attributeFont(font: .NSRExtrabold, size: 12, text: "2", lineHeight: 14)
         productParticipant.textColor = .nanuriOrange
         cellView.addSubview(productParticipant)

@@ -6,13 +6,16 @@
 //
 
 import UIKit
+
 import KakaoSDKAuth
 import KakaoSDKCommon
 import KakaoSDKUser
+
 import Alamofire
 
 class LoginViewController: UIViewController {
-
+//    var kakaoID: SnsId?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .white
@@ -40,13 +43,11 @@ class LoginViewController: UIViewController {
     @objc func selectApplelogin(_ sender: UIButton) {
         print("apple")
     }
-    
     //####
     func userInfo(){
 //        let strURL = "http://localhost:8080/api/auth/kakao/accounts/"
         
         let strURL = "https://nanuri.app/api/auth/kakao/accounts/"
-        
         //shared 라는 건 singleton 객체라는 것
         UserApi.shared.me { user, error in
             if let error = error { /*error 가 !nil*/
@@ -58,12 +59,10 @@ class LoginViewController: UIViewController {
                 //내부적으로 쓰는 구분..?
                 if let kId =  user?.id {
                     
-
                     
                     let params: Parameters = ["kakao_id":kId]
                     let alamo = AF.request(strURL, method: .post, parameters: params)
                     alamo.responseJSON { response in
-
                         switch response.result {
                         case .success(let value):
                             print("Success with key: \(value)")
@@ -87,20 +86,13 @@ class LoginViewController: UIViewController {
                                     }
                                 }
                             }
-                            
-                            
 
-                            let registerVC = RegisterViewController()
-                            registerVC.modalPresentationStyle = .fullScreen
-                            self.present(registerVC,animated: true)
-                            
                         case .failure(let error):
                             if let error = error.errorDescription {
                                 print(error)
                             }
                         }
                     }
-                 
                 }
                 
             }
