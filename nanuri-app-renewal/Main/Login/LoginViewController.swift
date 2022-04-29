@@ -43,11 +43,13 @@ class LoginViewController: UIViewController {
     @objc func selectApplelogin(_ sender: UIButton) {
         print("apple")
     }
-    //####
+    
+    
     func userInfo(){
-//        let strURL = "http://localhost:8080/api/auth/kakao/accounts/"
-        
         let strURL = "https://nanuri.app/api/auth/kakao/accounts/"
+        
+        
+        
         //shared 라는 건 singleton 객체라는 것
         UserApi.shared.me { user, error in
             if let error = error { /*error 가 !nil*/
@@ -59,45 +61,62 @@ class LoginViewController: UIViewController {
                 //내부적으로 쓰는 구분..?
                 if let kId =  user?.id {
                     
+//                    SnsUserInfoSingleton.shared.kakaoUserId = Int(kId)
                     
                     let params: Parameters = ["kakao_id":kId]
                     let alamo = AF.request(strURL, method: .post, parameters: params)
                     alamo.responseJSON { response in
+//                        print("###\(response)")
                         switch response.result {
                         case .success(let value):
-                            print("Success with key: \(value)")
+                            print(value)
+//                           print("%%%%\(value)")
+                            let registerVC = RegisterViewController()
+                            registerVC.modalPresentationStyle = .fullScreen
+                            self.present(registerVC,animated: true)
                             
-                            if let token = value as? [String: String] {
-                                if let backToken = token["token"] {
-
-                                    UserDefaults.standard.set(backToken, forKey: "token")
-                                    if let tokenNum = UserDefaults.standard.string(forKey: "token") as? String {
-                                        print(tokenNum)
-                                    }
-
-                                }
-                            }
-                            
-                            if let uuid = value as? [String: String] {
-                                if let userUUID = uuid["uuid"] {
-                                    UserDefaults.standard.set(userUUID, forKey: "uuid")
-                                    if let userUuid = UserDefaults.standard.string(forKey: "uuid") as? String {
-                                        print(userUuid)
-                                    }
-                                }
-                            }
-
                         case .failure(let error):
                             if let error = error.errorDescription {
                                 print(error)
                             }
                         }
                     }
+                    
+                    // test
+                    /*
+                    let header: HTTPHeaders = ["Content-Type" : "multipart/form-data"]
+                    let parameters = ["kakao_id":SnsUserInfoSingleton.shared.kakaoUserId!]
+                  
+                    AF.upload(multipartFormData: { multiFormData in
+                        for (key, value) in parameters {
+                            multiFormData.append(Data("\(value)".utf8), withName: key)
+                            print("@@@@@@\(key),\(value)")
+                        }
+                    }, to: strURL, headers: header).responseDecodable(of: SNSPostResponse.self) { response in
+                        print("@@@\(SNSPostResponse.self)")
+                        switch response.result {
+                        case .success(_):
+                            print("sucess reponse is :\(response)")
+                            guard let value = response.value else { return }
+                            SnsUserInfoSingleton.shared.user = value.data.user
+//                            if let registerVC = UIStoryboard(name: "Login", bundle: nil).instantiateViewController(withIdentifier: "registerStoryboard") as? RegisterViewController {
+                            let registerVC = RegisterViewController()
+                                registerVC.modalPresentationStyle = .fullScreen
+                                self.present(registerVC,animated: true)
+                                
+//                            }
+                        case .failure(let error):
+                            
+                            print(error.localizedDescription)
+                        }
+                    }
+                    
+                    */
                 }
                 
             }
         }
-    } // ####
+    }
     
     
     func snsloginSetUpView(){
