@@ -8,6 +8,8 @@
 import Foundation
 import UIKit
 
+import SDWebImage
+
 extension UIColor {
     class var nanuriGreen: UIColor {
         // rgba(99, 178, 97, 1)
@@ -98,6 +100,11 @@ extension UIColor {
         // rgba(255, 59, 48, 1)
         return UIColor(red: 255.0 / 255.0, green: 59.0 / 255.0, blue: 48.0 / 255.0, alpha: 1)
     }
+    
+    class var nanuriBlack1: UIColor {
+        // rgba(54, 55, 59, 1)
+        return UIColor(red: 54.0 / 255.0, green: 55.0 / 255.0, blue: 59.0 / 255.0, alpha: 1)
+    }
 }
 
 extension UIView {
@@ -181,5 +188,92 @@ extension NSAttributedString {
                 ], range: NSMakeRange(0, attrString.length))
         
         return attrString
+    }
+}
+
+extension Int {
+    func toCategoryName() -> String {
+        switch self {
+        case 0:
+            return "SUPPLIES"
+        case 1:
+            return "FOOD"
+        case 2:
+            return "KITCHEN"
+        case 3:
+            return "BATH"
+        case 4:
+            return "STATIONERY"
+        case 5:
+            return "ETC"
+        default:
+            return "ETC"
+        }
+    }
+    
+    func toTradeTypeName() -> String {
+        switch self {
+        case 0:
+            return "PARCEL"
+        case 1:
+            return "DIRECT"
+        default:
+            return ""
+        }
+    }
+    
+    func toPriceNumberFormmat() -> String {
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .decimal
+        let result = numberFormatter.string(for: self)!
+        
+        return result
+    }
+}
+
+enum FormatType: String {
+    case dotAndDay = "yyyy.MM.dd (E)"
+    case dahsed = "yyyy-MM-dd"
+    case dot = "yyyy.MM.dd"
+}
+
+// 날짜 형식
+extension DateFormatter {
+
+    func changeDateFormat(_ date: Date, format: FormatType) -> String {
+        self.locale = Locale(identifier: "ko")
+        self.timeZone = TimeZone(abbreviation: "KST")
+        self.dateFormat = format.rawValue
+        
+        return self.string(from: date)
+    }
+    
+    func changeStringToDate(_ string: String, format: FormatType) -> Date {
+        self.locale = Locale(identifier: "ko")
+        self.timeZone = TimeZone(abbreviation: "KST")
+        self.dateFormat = format.rawValue
+        guard let date = self.date(from: string) else { return Date() }
+        
+        return date
+    }
+}
+
+extension String {
+    func replaceImageUrl() -> String {
+        let index = self.firstIndex(of: "?") ?? self.endIndex
+        let url = self[..<index]
+        return String(url)
+    }
+    
+    func dDaycalculator() -> String {
+        let date = DateFormatter().changeStringToDate(self, format: .dahsed)
+        guard let dDay = Calendar.current.dateComponents([.day], from: Date(), to: date).day else { return "" }
+        return "\(dDay + 1)"
+    }
+}
+
+extension UIImageView {
+    func imageUpload(url: String) {
+        self.sd_setImage(with: URL(string: url), placeholderImage: UIImage(named: "placeholder.png"))
     }
 }

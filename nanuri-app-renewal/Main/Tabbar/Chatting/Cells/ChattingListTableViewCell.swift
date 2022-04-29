@@ -72,7 +72,8 @@ class ChattingListTableViewCell: UITableViewCell {
             make.right.equalToSuperview().inset(19)
         }
         
-        let deliveryTag = DeliveryTagView(type: .delivery)
+        let deliveryTag = DeliveryTagView()
+        deliveryTag.setDeliveryType(type: DeliveryType.parcel)
         cellView.addSubview(deliveryTag)
         deliveryTag.snp.makeConstraints { make in
             make.left.equalTo(productImageView.snp.right).inset(-11)

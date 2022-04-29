@@ -81,13 +81,14 @@ extension Networking {
         getPostsListRequest(url: url, completion: result)
     }
     
-    func postPosts(parameter: [String:String], result: @escaping (_ response: ResultInfo) -> ()) {
+    func postPosts(image: UIImage, parameter: [String: Any], result: @escaping (_ response: ResultInfo) -> ()) {
         let url = "\(APIInfo.hostURL)\(APIInfo.api)\(APIInfo.version)\(APIList.posts)"
     
         let params = parameter
+        let imageData = image.jpegData(compressionQuality: 0.7)!
         print("\(#file.split(separator: "/").last!)-\(#function)[\(#line)] \(url) 👉 \(params)")
         
-        postPostsListRequest(url: url, params: params, completion: result)
+        postPostsRequest(image: imageData, url: url, params: params, completion: result)
     }
 }
 
@@ -103,26 +104,32 @@ extension Networking {
             case .success(_):
                 guard let response = response.value else { return }
                 completion(response)
-                print(response)
             case .failure(let error):
                 print(error)
             }
         }
     }
     
-    private func postPostsListRequest(url: String, params: [String : String], completion: @escaping (_ response: ResultInfo) -> ()) {
+    private func postPostsRequest(image: Data, url: String, params: [String : Any], completion: @escaping (_ response: ResultInfo) -> ()) {
         let header: HTTPHeaders = [
-            "Authorization": "Token \(Singleton.shared.userToken)"
+            "Authorization": "Token \(Singleton.shared.userToken)",
+            "Content-Type" : "multipart/form-data"
         ]
-        let request = setPostRequest(url: url, params: params, headers: header)
-        request.responseDecodable(of: ResultInfo.self) { response in
+        AF.upload(multipartFormData: { multiFormData in
+            for (key, value) in params {
+                multiFormData.append(Data("\(value)".utf8), withName: key)
+            }
+            multiFormData.append(image, withName: "image", fileName: "image.jpeg", mimeType: "image/jpeg")
+        }, to: url, headers: header)
+            .uploadProgress(queue: .main) { progress in
+               print("Upload Progress: \(progress.fractionCompleted)")
+            }
+            .responseString { response in
             switch response.result {
             case .success(_):
-                guard let response = response.value else { return }
-                completion(response)
-                print(response)
-            case .failure(let error):
-                print(error)
+                print("sucess reponse is :\(response)")
+            case .failure(_):
+                print("fail")
             }
         }
     }

@@ -11,6 +11,8 @@ class MyChatMessageViewCell: UITableViewCell {
     
     static let cellId = "myChatMessage"
     
+    let chatLabel = UILabel()
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setUpView()
@@ -37,11 +39,7 @@ class MyChatMessageViewCell: UITableViewCell {
         cellView.backgroundColor = .white
         cellView.clipsToBounds = true
         contentView.addSubview(cellView)
-        cellView.snp.makeConstraints { make in
-            make.top.bottom.equalToSuperview().inset(8)
-            make.left.right.equalToSuperview().inset(16)
-            make.height.equalTo(58)
-        }
+        
         
         let myMessageView = UIView()
         myMessageView.backgroundColor = .nanuriGreen
@@ -49,10 +47,31 @@ class MyChatMessageViewCell: UITableViewCell {
         myMessageView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMaxYCorner, .layerMinXMaxYCorner]
         myMessageView.layer.masksToBounds = true
         cellView.addSubview(myMessageView)
+        
+        
+        chatLabel.attributedText = .attributeFont(font: .PRegular, size: 13, text: "", lineHeight: 19)
+        chatLabel.numberOfLines = 0
+        chatLabel.textColor = .white
+        chatLabel.lineBreakMode = .byWordWrapping
+        myMessageView.addSubview(chatLabel)
+        chatLabel.snp.makeConstraints { make in
+            make.top.bottom.equalToSuperview().inset(10)
+            make.bottom.equalToSuperview().inset(-10)
+            make.left.right.equalToSuperview().inset(14)
+        }
+        
+        
         myMessageView.snp.makeConstraints { make in
-            make.top.bottom.equalToSuperview()
-            make.width.equalToSuperview().multipliedBy(0.8)
+            make.top.equalTo(chatLabel.snp.top)
+            make.left.equalTo(chatLabel.snp.left)
             make.right.equalToSuperview()
+        }
+        
+        cellView.snp.makeConstraints { make in
+            make.top.equalTo(myMessageView.snp.top)
+            make.bottom.equalTo(myMessageView.snp.bottom)
+            make.left.right.equalToSuperview().inset(16)
+            make.centerY.equalToSuperview()
         }
     }
 

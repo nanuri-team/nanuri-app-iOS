@@ -11,8 +11,16 @@ class AddProductStepOneViewController: UIViewController {
 
     let stepView = UIView()
     
+    let productNameTextField = UITextField()
+    let productLinkTextField = UITextField()
+    let productPriceTextField = UITextField()
+    let addImageView = UIImageView()
+
+    
     var bottomViewHeight = 64
     var edgeHeight = 34
+    var postProductInfo: [String: Any] = [:]
+    var postImageData: UIImage!
 
     
     override func viewDidLoad() {
@@ -34,9 +42,49 @@ class AddProductStepOneViewController: UIViewController {
     }
     
     @objc func selectNextButton() {
+        
+        guard validation() else {
+            print("return")
+            return
+        }
+        
         let addProductStepTwoViewController = AddProductStepTwoViewController()
+        addProductStepTwoViewController.postProductInfo = postProductInfo
+        addProductStepTwoViewController.postImageData = addImageView.image
         addProductStepTwoViewController.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(addProductStepTwoViewController, animated: true)
+    }
+    
+    @objc func selectAddImageButton() {
+        let imagePickerController = UIImagePickerController()
+        imagePickerController.sourceType = .photoLibrary
+        imagePickerController.delegate = self
+        imagePickerController.allowsEditing = true
+        self.present(imagePickerController, animated: true)
+    }
+    
+    func validation() -> Bool {
+        guard let productNameText = productNameTextField.text,
+              let productLinkText = productLinkTextField.text,
+              let productPriceText = productPriceTextField.text,
+              let _ = addImageView.image
+        else { return false }
+        
+        if productNameText.isEmpty ||
+            productLinkText.isEmpty ||
+            productPriceText.isEmpty {
+            return false
+        } else {
+            postProductInfo["title"] = productNameText
+            postProductInfo["product_url"] = productLinkText
+            
+            if let integerToProductPrice = Int(productPriceText) {
+                postProductInfo["unit_price"] = integerToProductPrice
+            } else {
+                postProductInfo["unit_price"] = 0
+            }
+            return true
+        }
     }
     
     func setUpStepView() {
@@ -116,7 +164,7 @@ class AddProductStepOneViewController: UIViewController {
             make.left.right.equalToSuperview().inset(16)
         }
         
-        let productNameTextField = UITextField()
+        productNameTextField.autocapitalizationType = .none
         productNameTextField.attributedText = .attributeFont(font: .PRegular, size: 15, text: "", lineHeight: 18)
         productNameTextField.attributedPlaceholder = .attributeFont(font: .PRegular, size: 15, text: "공구할 상품의 이름이 무엇인가요?", lineHeight: 18)
         productNameTextField.borderStyle = .line
@@ -140,7 +188,7 @@ class AddProductStepOneViewController: UIViewController {
             make.left.right.equalToSuperview().inset(16)
         }
         
-        let productLinkTextField = UITextField()
+        productLinkTextField.autocapitalizationType = .none
         productLinkTextField.attributedText = .attributeFont(font: .PRegular, size: 15, text: "", lineHeight: 18)
         productLinkTextField.attributedPlaceholder = .attributeFont(font: .PRegular, size: 15, text: "이 상품을 구매할 링크가 어디인가요?", lineHeight: 18)
         productLinkTextField.borderStyle = .line
@@ -164,7 +212,6 @@ class AddProductStepOneViewController: UIViewController {
             make.left.right.equalToSuperview().inset(16)
         }
         
-        let productPriceTextField = UITextField()
         productPriceTextField.attributedText = .attributeFont(font: .PRegular, size: 15, text: "", lineHeight: 18)
         productPriceTextField.attributedPlaceholder = .attributeFont(font: .PRegular, size: 15, text: "공구할 사람들이 이 상품을 얼마에 살 수 있나요?", lineHeight: 18)
         productPriceTextField.borderStyle = .line
@@ -219,6 +266,18 @@ class AddProductStepOneViewController: UIViewController {
             make.left.equalToSuperview().inset(16)
             make.bottom.equalToSuperview().inset(100)
         }
+        addImageButton.addTarget(self, action: #selector(selectAddImageButton), for: .touchUpInside)
+        
+        addImageView.layer.backgroundColor = UIColor.nanuriGray2.cgColor
+        addImageView.layer.cornerRadius = 4
+        addImageView.clipsToBounds = true
+        contentsScrollView.addSubview(addImageView)
+        addImageView.snp.makeConstraints { make in
+            make.height.width.equalTo(64)
+            make.top.equalTo(imageLabel.snp.bottom).inset(-10)
+            make.left.equalTo(addImageButton.snp.right).inset(-10)
+            make.bottom.equalToSuperview().inset(100)
+        }
         
     }
     
@@ -251,4 +310,19 @@ class AddProductStepOneViewController: UIViewController {
         nextButton.addTarget(self, action: #selector(selectNextButton), for: .touchUpInside)
     }
 
+}
+
+extension AddProductStepOneViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        if let image = info[UIImagePickerController.InfoKey(rawValue: "UIImagePickerControllerEditedImage")] as? UIImage {
+            addImageView.image = image
+        }
+        
+        picker.dismiss(animated: true, completion: nil)
+    }
+    
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true, completion: nil)
+    }
 }

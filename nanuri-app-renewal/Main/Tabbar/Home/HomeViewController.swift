@@ -11,10 +11,15 @@ class HomeViewController: UIViewController {
     
 
     let headerScrollView = UIScrollView()
+    let allRegionTableView = UITableView()
+    var eventProductCollectionView: UICollectionView!
+    
     var sampleImageViewArray: [UIImageView] = []
     var collectionCellWidth = 120
     var collectionCellHeight = 163
     let ratioWidth = UIScreen.main.bounds.width
+    var postsListArray: [ResultInfo] = []
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,6 +27,7 @@ class HomeViewController: UIViewController {
         self.navigationController?.navigationBar.isHidden = false
         
         setUpView()
+        getPostsList()
     }
     
     
@@ -37,6 +43,22 @@ class HomeViewController: UIViewController {
         let addProductStepOneViewController = AddProductStepOneViewController()
         addProductStepOneViewController.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(addProductStepOneViewController, animated: true)
+    }
+    
+    func getPostsList() {
+        Networking.sharedObject.getPostsList { response in
+            let result = response.results
+            self.postsListArray = []
+            if result.count > 10 {
+                for i in 0..<10 {
+                    self.postsListArray.append(result[i])
+                }
+            } else {
+                self.postsListArray = result
+            }
+            self.allRegionTableView.reloadData()
+            self.eventProductCollectionView.reloadData()
+        }
     }
     
     func setUpEventScrollView() {
@@ -113,7 +135,7 @@ class HomeViewController: UIViewController {
         }
         
         let layout = UICollectionViewFlowLayout()
-        let eventProductCollectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        eventProductCollectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         eventProductCollectionView.delegate = self
         eventProductCollectionView.dataSource = self
         layout.scrollDirection = .horizontal
@@ -127,7 +149,6 @@ class HomeViewController: UIViewController {
         }
 
 
-        let allRegionTableView = UITableView()
         allRegionTableView.delegate = self
         allRegionTableView.dataSource = self
         allRegionTableView.separatorInset = .zero
@@ -169,7 +190,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         if section == 0 {
             return 1
         } else {
-            return 10
+            return postsListArray.count
         }
     }
     
@@ -202,6 +223,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
                 moreButton.snp.makeConstraints { make in
                     make.right.equalToSuperview().inset(16)
                     make.top.equalToSuperview()
+                    make.height.equalTo(30)
                 }
                 moreButton.addTarget(self, action: #selector(selectMoreButton), for: .touchUpInside)
                 
@@ -211,13 +233,25 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
                 return cell
             }
         } else {
-            let identifier = "\(indexPath.row)"
+            let post = postsListArray[indexPath.row]
+            let identifier = "\(indexPath.row) \(post.uuid)"
             
             if let reuseCell = tableView.dequeueReusableCell(withIdentifier: identifier) {
                 return reuseCell
             } else {
                 let cell = MainProductTableViewCell.init(style: .default, reuseIdentifier: identifier)
                 cell.selectionStyle = .none
+                
+                cell.productImage.imageUpload(url: post.image?.replaceImageUrl() ?? "")
+                cell.productName.attributedText = .attributeFont(font: .PRegular, size: 17, text: post.title, lineHeight: 20)
+                cell.productLocationLabel.attributedText = .attributeFont(font: .NSRBold, size: 12, text: post.writerAddress ?? "", lineHeight: 14)
+                cell.productPrice.attributedText = .attributeFont(font: .PBold, size: 16, text: "\(post.unitPrice.toPriceNumberFormmat())원", lineHeight: 19)
+                cell.productPrice.textAlignment = .right
+                cell.deliveryTagView.setDeliveryType(type: post.tradeType)
+                
+                cell.dDayTagView.setDday(dDay: post.waitedUntil?.dDaycalculator() ?? "")
+                cell.totalRecruit.attributedText = .attributeFont(font: .NSRExtrabold, size: 12, text: "/\(post.maxParticipants)", lineHeight: 14)
+                cell.productParticipant.attributedText = .attributeFont(font: .NSRExtrabold, size: 12, text: "\(post.numParticipants)", lineHeight: 14)
                 
                 return cell
             }
@@ -226,11 +260,11 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section == 1 {
-            if indexPath.row == 0 {
-                let productDetailViewController = ProductDetailViewController()
-                productDetailViewController.hidesBottomBarWhenPushed = true
-                self.navigationController?.pushViewController(productDetailViewController, animated: true)
-            }
+            let productDetailViewController = ProductDetailViewController()
+            productDetailViewController.postInfo = postsListArray[indexPath.row]
+            productDetailViewController.hidesBottomBarWhenPushed = true
+            self.navigationController?.pushViewController(productDetailViewController, animated: true)
+            
         }
     }
 }
@@ -240,7 +274,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
 
 extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return postsListArray.count
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -253,15 +287,30 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
     
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: VerticalProductCollectionViewCell.cellId, for: indexPath) as? VerticalProductCollectionViewCell else {
             return UICollectionViewCell()
         }
+        
+        let post = postsListArray[indexPath.row]
+        
+        cell.productImageView.imageUpload(url: post.image?.replaceImageUrl() ?? "")
+        cell.productName.attributedText = .attributeFont(font: .PRegular, size: 14, text: post.title, lineHeight: 17)
+        cell.productPrice.attributedText = .attributeFont(font: .PBold, size: 11, text: "\(post.unitPrice.toPriceNumberFormmat())원", lineHeight: 13)
+        cell.productPrice.textAlignment = .right
+        cell.deliveryTagView.setDeliveryType(type: post.tradeType)
+        
+        cell.dDayTagView.setDday(dDay: post.waitedUntil?.dDaycalculator() ?? "")
+        cell.totalRecruit.attributedText = .attributeFont(font: .NSRExtrabold, size: 12, text: "/\(post.maxParticipants)", lineHeight: 14)
+        cell.productParticipant.attributedText = .attributeFont(font: .NSRExtrabold, size: 12, text: "\(post.numParticipants)", lineHeight: 14)
+        
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let productDetailViewController = ProductDetailViewController()
         productDetailViewController.hidesBottomBarWhenPushed = true
+        productDetailViewController.postInfo = postsListArray[indexPath.row]
         self.navigationController?.pushViewController(productDetailViewController, animated: true)
     }
 }
