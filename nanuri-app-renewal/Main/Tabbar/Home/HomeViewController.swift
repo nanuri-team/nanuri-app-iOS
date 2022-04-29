@@ -22,13 +22,13 @@ class HomeViewController: UIViewController {
     var deadlineImminentPostsArray: [ResultInfo] = []
 
 
-
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "홈"
         self.navigationController?.navigationBar.isHidden = false
         
         setUpView()
+        getPostsList()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -66,7 +66,7 @@ class HomeViewController: UIViewController {
             self.eventProductCollectionView.reloadData()
         }
     }
-    
+
     func getDeadlineImminent(responsePost: [ResultInfo]) {
         deadlineImminentPostsArray = []
         for i in 0..<responsePost.count {

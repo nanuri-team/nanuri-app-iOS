@@ -53,14 +53,12 @@ class ProductDetailViewController: UIViewController {
             UIApplication.shared.open(url, options: [:])
         }
     }
-    
     @objc func selectPurchaseButton() {
         purchaseButton.setStyle(style: .disable)
         purchaseButton.isEnabled = false
         purchaseButton.setAttributedTitle(.attributeFont(font: .PBold, size: 15, text: "이미 참여한 공동 구매 입니다!", lineHeight: 18), for: .normal)
         
     }
-    
     func presentOptionAlert() {
         let optionAlert = UIAlertController(title: "상품을 수정하거나 삭제할 수 있습니다.", message: nil, preferredStyle: .actionSheet)
         let editAction = UIAlertAction(title: "수정하기", style: .default, handler: nil)

@@ -21,7 +21,6 @@ class Networking: NSObject {
     }()
 }
 
-
 extension Networking {
   
     /// 상품 리스트 불러오기
@@ -98,5 +97,9 @@ extension Networking {
     
     func setGetRequest(url: String, params: Parameters?, headers: HTTPHeaders) -> DataRequest {
         return sessionManager.request(url, method: .get, parameters: params, headers: headers)
+    }
+    
+    func setPatchRequest(url: String, params: Parameters?, headers: HTTPHeaders) -> DataRequest {
+        return sessionManager.request(url, method: .patch, parameters: params,  headers: headers)
     }
 }

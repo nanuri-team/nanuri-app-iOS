@@ -6,10 +6,25 @@
 //
 
 import UIKit
+import KakaoSDKCommon
+import KakaoSDKAuth
+import KakaoSDKUser
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
+    
+    func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
+        
+        if let url = URLContexts.first?.url {
+            if (AuthApi.isKakaoTalkLoginUrl(url)) {
+                _ = AuthController.handleOpenUrl(url: url)
+            }
+        }
+        
+      
+    }
+    
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
@@ -19,19 +34,19 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         guard let windowScene = (scene as? UIWindowScene) else { return }
         let window = UIWindow(windowScene: windowScene)
-        window.rootViewController = TabBarController()
+//        window.rootViewController = TabBarController()
         // 로그인 화면 전환 로직
-        /*
-        if UserDefaults.standard.integer(forKey: "userID") == 0 {
-            let loginVC = LoginViewController()
+        
+        if UserDefaults.standard.integer(forKey: "kakaoID") == 0 {
+//            let loginVC = LoginViewController()
 //            self.present(loginVC, animated: true)
             
-            window.rootViewController = loginVC
+            window.rootViewController = LoginViewController()
         } else {
             
             window.rootViewController = TabBarController()
         }
-        */
+        
         self.window = window
         window.makeKeyAndVisible()
 //        window.rootViewController = TabBarController()

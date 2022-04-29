@@ -15,7 +15,6 @@ class NeighbourhoodViewController: UIViewController {
     let locationButton = UIButton()
     var wrapView = UIView()
     var noSettingWrapView = UIView()
-
     
     var collectionCellWidth = 120
     var collectionCellHeight = 163
@@ -48,6 +47,7 @@ class NeighbourhoodViewController: UIViewController {
             filterButton.addTarget(self, action: #selector(selectFilterButton), for: .touchUpInside)
             filterButtonArray.append(filterButton)
         }
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
