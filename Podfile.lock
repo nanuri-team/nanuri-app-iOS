@@ -45,7 +45,7 @@ DEPENDENCIES:
   - KakaoSDK
   - SDWebImage
   - SnapKit (~> 5.0.0)
-  - Starscream (~> 4.0.0)
+  - Starscream
 
 SPEC REPOS:
   trunk:
@@ -81,5 +81,6 @@ SPEC CHECKSUMS:
   Starscream: 5178aed56b316f13fa3bc55694e583d35dd414d9
 
 PODFILE CHECKSUM: 7f9a6ac6646138c09071aa6dabb297e50e8dfd12
+
 
 COCOAPODS: 1.11.3

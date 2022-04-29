@@ -29,7 +29,7 @@ class AddProductStepTwoViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "상품 등록하기"
-        
+        extendedLayoutIncludesOpaqueBars = true
         print(postProductInfo)
         
         let backButton = UIBarButtonItem(image: UIImage(named: "back_ic"), style: .plain, target: self, action: #selector(selectBackButton))
@@ -191,7 +191,7 @@ class AddProductStepTwoViewController: UIViewController {
             make.left.right.equalToSuperview().inset(16)
         }
         
-        productLocationTextField.attributedText = .attributeFont(font: .PRegular, size: 15, text: "서울시 강남구 논현동", lineHeight: 18)
+        productLocationTextField.attributedText = .attributeFont(font: .PRegular, size: 15, text: Singleton.shared.testLocation, lineHeight: 18)
         productLocationTextField.textColor = .nanuriGray4
         productLocationTextField.borderStyle = .line
         productLocationTextField.clipsToBounds = true
@@ -218,6 +218,7 @@ class AddProductStepTwoViewController: UIViewController {
         
         minimumRecruitmentTextField.attributedText = .attributeFont(font: .PRegular, size: 15, text: "", lineHeight: 18)
         minimumRecruitmentTextField.attributedPlaceholder = .attributeFont(font: .PRegular, size: 15, text: "최소 인원", lineHeight: 18)
+        minimumRecruitmentTextField.keyboardType = .numberPad
         minimumRecruitmentTextField.borderStyle = .line
         minimumRecruitmentTextField.clipsToBounds = true
         minimumRecruitmentTextField.layer.borderWidth = 1
@@ -262,6 +263,7 @@ class AddProductStepTwoViewController: UIViewController {
         
         maximumRecruitmentTextField.attributedText = .attributeFont(font: .PRegular, size: 15, text: "", lineHeight: 18)
         maximumRecruitmentTextField.attributedPlaceholder = .attributeFont(font: .PRegular, size: 15, text: "최대 인원", lineHeight: 18)
+        maximumRecruitmentTextField.keyboardType = .numberPad
         maximumRecruitmentTextField.borderStyle = .line
         maximumRecruitmentTextField.clipsToBounds = true
         maximumRecruitmentTextField.layer.borderWidth = 1
@@ -355,6 +357,7 @@ class AddProductStepTwoViewController: UIViewController {
             make.left.right.equalToSuperview().inset(16)
         }
         
+        detailContentsTextView.delegate = self
         detailContentsTextView.attributedText = .attributeFont(font: .PRegular, size: 15, text: "", lineHeight: 18)
         detailContentsTextView.placeholder(text: "상세 내용 또는 진행 방법을\n구매자가 알 수 있도록 자세히 입력해주세요.\n(예: 가격 책정 기준, 배송비, 주문 기간 등)")
         detailContentsTextView.textContainerInset = UIEdgeInsets(top: 14, left: 16, bottom: 14, right: 16)
@@ -399,4 +402,16 @@ class AddProductStepTwoViewController: UIViewController {
         nextButton.addTarget(self, action: #selector(selectNextButton), for: .touchUpInside)
     }
 
+}
+
+extension AddProductStepTwoViewController: UITextViewDelegate {
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        detailContentsTextView.hidePlaceholder()
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        if detailContentsTextView.text.isEmpty {
+            detailContentsTextView.showPlaceholder()
+        }
+    }
 }

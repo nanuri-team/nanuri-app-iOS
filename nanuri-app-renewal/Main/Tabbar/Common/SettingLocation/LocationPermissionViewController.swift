@@ -19,6 +19,7 @@ class LocationPermissionViewController: UIViewController {
         super.viewDidLoad()
         self.title = "위치 권한 허용"
         self.view.backgroundColor = .white
+        extendedLayoutIncludesOpaqueBars = true
 
         let backButton = UIBarButtonItem(image: UIImage(named: "back_ic"), style: .plain, target: self, action: #selector(selectBackButton))
         self.navigationItem.setLeftBarButton(backButton, animated: true)

@@ -265,6 +265,12 @@ extension String {
         return String(url)
     }
     
+    func slicePostUuid() -> String {
+        let index = self.firstIndex(of: "-") ?? self.endIndex
+        let uuid = self[..<index]
+        return String(uuid)
+    }
+    
     func dDaycalculator() -> String {
         let date = DateFormatter().changeStringToDate(self, format: .dahsed)
         guard let dDay = Calendar.current.dateComponents([.day], from: Date(), to: date).day else { return "" }

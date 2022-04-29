@@ -19,6 +19,7 @@ class HomeViewController: UIViewController {
     var collectionCellHeight = 163
     let ratioWidth = UIScreen.main.bounds.width
     var postsListArray: [ResultInfo] = []
+    var deadlineImminentPostsArray: [ResultInfo] = []
 
 
     override func viewDidLoad() {
@@ -27,6 +28,10 @@ class HomeViewController: UIViewController {
         self.navigationController?.navigationBar.isHidden = false
         
         setUpView()
+        getPostsList()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
         getPostsList()
     }
     
@@ -56,8 +61,21 @@ class HomeViewController: UIViewController {
             } else {
                 self.postsListArray = result
             }
+            self.getDeadlineImminent(responsePost: response.results)
             self.allRegionTableView.reloadData()
             self.eventProductCollectionView.reloadData()
+        }
+    }
+
+    func getDeadlineImminent(responsePost: [ResultInfo]) {
+        deadlineImminentPostsArray = []
+        for i in 0..<responsePost.count {
+            // post.waitedUntil?.dDaycalculator() ?? ""
+            guard let integerWaitUnitl = Int(responsePost[i].waitedUntil?.dDaycalculator() ?? "0") else { return }
+            print(integerWaitUnitl)
+            if integerWaitUnitl <= 10 {
+                deadlineImminentPostsArray.append(responsePost[i])
+            }
         }
     }
     
@@ -115,17 +133,17 @@ class HomeViewController: UIViewController {
         }
         setUpEventScrollView()
         
-        let pagerView = UIView()
-        pagerView.backgroundColor = .black.withAlphaComponent(0.4)
-        pagerView.layer.cornerRadius = 18 / 2
-        headerView.addSubview(pagerView)
-        pagerView.snp.makeConstraints { make in
-            make.bottom.equalTo(headerScrollView.snp.bottom).inset(10)
-            make.right.equalToSuperview().inset(10)
-            make.width.equalTo(42)
-            make.height.equalTo(18)
-        }
-        
+//        let pagerView = UIView()
+//        pagerView.backgroundColor = .black.withAlphaComponent(0.4)
+//        pagerView.layer.cornerRadius = 18 / 2
+//        headerView.addSubview(pagerView)
+//        pagerView.snp.makeConstraints { make in
+//            make.bottom.equalTo(headerScrollView.snp.bottom).inset(10)
+//            make.right.equalToSuperview().inset(10)
+//            make.width.equalTo(42)
+//            make.height.equalTo(18)
+//        }
+//
         let eventTitleLabel = UILabel()
         eventTitleLabel.attributedText = .attributeFont(font: .PBold, size: 17, text: "마감 임박 공구!", lineHeight: 20)
         headerView.addSubview(eventTitleLabel)
@@ -138,6 +156,7 @@ class HomeViewController: UIViewController {
         eventProductCollectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         eventProductCollectionView.delegate = self
         eventProductCollectionView.dataSource = self
+        eventProductCollectionView.showsHorizontalScrollIndicator = false
         layout.scrollDirection = .horizontal
         layout.minimumLineSpacing = 16
         eventProductCollectionView.register(VerticalProductCollectionViewCell.self, forCellWithReuseIdentifier: VerticalProductCollectionViewCell.cellId)
@@ -274,7 +293,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
 
 extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return postsListArray.count
+        return deadlineImminentPostsArray.count
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -292,7 +311,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             return UICollectionViewCell()
         }
         
-        let post = postsListArray[indexPath.row]
+        let post = deadlineImminentPostsArray[indexPath.row]
         
         cell.productImageView.imageUpload(url: post.image?.replaceImageUrl() ?? "")
         cell.productName.attributedText = .attributeFont(font: .PRegular, size: 14, text: post.title, lineHeight: 17)

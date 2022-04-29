@@ -9,14 +9,18 @@ import UIKit
 
 class ProductDetailViewController: UIViewController {
     
+    let purchaseButton = MainButton(style: .main)
+    
     var bottomViewHeight = 64
     var edgeHeight = 34
     let ratioWidth = UIScreen.main.bounds.width / 375
     var postInfo: ResultInfo?
+    var purcahsePosts: [ResultInfo] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .white
+        extendedLayoutIncludesOpaqueBars = true
         self.title = "상품 정보"
         let backButton = UIBarButtonItem(image: UIImage(named: "back_ic"), style: .plain, target: self, action: #selector(selectBackButton))
         let optionButton = UIBarButtonItem(image: UIImage(named: "more_ic"), style: .plain, target: self, action: #selector(selectOptionButton))
@@ -49,7 +53,12 @@ class ProductDetailViewController: UIViewController {
             UIApplication.shared.open(url, options: [:])
         }
     }
-    
+    @objc func selectPurchaseButton() {
+        purchaseButton.setStyle(style: .disable)
+        purchaseButton.isEnabled = false
+        purchaseButton.setAttributedTitle(.attributeFont(font: .PBold, size: 15, text: "이미 참여한 공동 구매 입니다!", lineHeight: 18), for: .normal)
+        
+    }
     func presentOptionAlert() {
         let optionAlert = UIAlertController(title: "상품을 수정하거나 삭제할 수 있습니다.", message: nil, preferredStyle: .actionSheet)
         let editAction = UIAlertAction(title: "수정하기", style: .default, handler: nil)
@@ -140,15 +149,25 @@ class ProductDetailViewController: UIViewController {
             make.top.equalToSuperview()
         }
         
+        guard let postInfo = postInfo else {
+            return
+        }
         
-        let purchaseButton = MainButton(style: .main)
-        purchaseButton.setAttributedTitle(.attributeFont(font: .PBold, size: 15, text: "공동 구매 참여하기", lineHeight: 18), for: .normal)
+       
+        
+        if postInfo.writer == "nanuriaws@gmail.com" {
+            purchaseButton.setAttributedTitle(.attributeFont(font: .PBold, size: 15, text: "공동 구매 진행하기", lineHeight: 18), for: .normal)
+        } else {
+            purchaseButton.setAttributedTitle(.attributeFont(font: .PBold, size: 15, text: "공동 구매 참여하기", lineHeight: 18), for: .normal)
+        }
+        
         bottomView.addSubview(purchaseButton)
         purchaseButton.snp.makeConstraints { make in
             make.left.equalToSuperview().inset(8)
             make.width.equalToSuperview().multipliedBy(0.75)
             make.top.bottom.equalToSuperview().inset(8)
         }
+        purchaseButton.addTarget(self, action: #selector(selectPurchaseButton), for: .touchUpInside)
         
         let commentView = UIView()
         bottomView.addSubview(commentView)
@@ -388,7 +407,7 @@ class ProductDetailViewController: UIViewController {
         }
         
         let user = UILabel()
-        user.attributedText = .attributeFont(font: .NSRExtrabold, size: 15, text: postInfo.writer, lineHeight: 17.03)
+        user.attributedText = .attributeFont(font: .NSRExtrabold, size: 15, text: postInfo.writerNickname ?? "", lineHeight: 17.03)
         userLevelView.addSubview(user)
         user.snp.makeConstraints { make in
             make.top.equalToSuperview()

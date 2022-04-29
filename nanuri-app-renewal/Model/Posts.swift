@@ -17,6 +17,7 @@ struct PostList: Decodable {
 struct ResultInfo: Decodable {
     var writer: String
     var writerAddress: String?
+    var writerNickname: String?
     var participants: [String]
     var category: String?
     var favoredBy: [String]
@@ -43,6 +44,7 @@ struct ResultInfo: Decodable {
     enum CodingKeys: String, CodingKey {
         case writer
         case writerAddress = "writer_address"
+        case writerNickname = "writer_nickname"
         case participants
         case category
         case favoredBy = "favored_by"

@@ -727,9 +727,10 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = P5A4NBG7AB;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "nanuri-app-renewal/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "나누리";
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "위치 정보 권한 허용";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "위치 정보 권한 허용";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "갤러리 권한을 허용해주세요";
@@ -760,9 +761,10 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = P5A4NBG7AB;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "nanuri-app-renewal/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "나누리";
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "위치 정보 권한 허용";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "위치 정보 권한 허용";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "갤러리 권한을 허용해주세요";

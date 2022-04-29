@@ -17,7 +17,7 @@ class ChattingViewController: UIViewController {
     
     var bottomViewHeight = 64
     var edgeHeight = 34
-    var roomName = "uuid"
+    var roomName: String?
     var messageData: [ChatResponse] = []
     var loadMessageData: [LoadChatResponse] = []
     var messageType = "load_message"
@@ -26,7 +26,7 @@ class ChattingViewController: UIViewController {
         super.viewDidLoad()
     
         self.title = "채팅"
-        
+        extendedLayoutIncludesOpaqueBars = true
         let backButton = UIBarButtonItem(image: UIImage(named: "back_ic"), style: .plain, target: self, action: #selector(selectBackButton))
         self.navigationItem.setLeftBarButton(backButton, animated: true)
         
@@ -63,7 +63,11 @@ class ChattingViewController: UIViewController {
     
     private func setUpWebSocket() {
         print("setUpSocket")
-        let url = URL(string: "wss://nanuri.app/ws/chat/\(roomName)/?token=\(Singleton.shared.userToken)")!
+        guard let roomName = roomName else {
+            return
+        }
+        
+        let url = URL(string: "wss://nanuri.app/ws/chat/\(roomName.slicePostUuid())/?token=\(Singleton.shared.userToken)")!
         let request = URLRequest(url: url)
         socket = WebSocket(request: request)
         socket.delegate = self
@@ -84,8 +88,10 @@ class ChattingViewController: UIViewController {
     }
     
     func tableScrollUpdate() {
-        let indexPath = IndexPath( row: messageData.count - 1, section: 0 )
-        self.chatTableView.scrollToRow(at: indexPath, at: .bottom, animated: false)
+        if messageData.count > 0 {
+            let indexPath = IndexPath( row: messageData.count - 1, section: 0 )
+            self.chatTableView.scrollToRow(at: indexPath, at: .bottom, animated: false)
+        }
     }
 
     func setUpView() {

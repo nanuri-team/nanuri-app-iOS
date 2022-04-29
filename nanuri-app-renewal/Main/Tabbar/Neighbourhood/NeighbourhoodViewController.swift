@@ -9,9 +9,12 @@ import UIKit
 
 class NeighbourhoodViewController: UIViewController {
     
-    let neighbourhoodTableView = UITableView()
+    var neighbourhoodTableView = UITableView()
     let noSettingLocationView = UIView()
     var neighbourhoodCollectionView: UICollectionView!
+    let locationButton = UIButton()
+    var wrapView = UIView()
+    var noSettingWrapView = UIView()
     
     var collectionCellWidth = 120
     var collectionCellHeight = 163
@@ -25,10 +28,9 @@ class NeighbourhoodViewController: UIViewController {
         super.viewDidLoad()
         self.view.backgroundColor = .white
         
-        let locationButton = UIButton()
+        locationButton.setAttributedTitle(.attributeFont(font: .PBold, size: 15, text: "현 위치", lineHeight: 18), for: .normal)
         locationButton.setImage(UIImage(named: "place_black_ic"), for: .normal)
         locationButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: -4, bottom: 0, right: 0)
-        locationButton.setAttributedTitle(.attributeFont(font: .PBold, size: 15, text: "현 위치", lineHeight: 18), for: .normal)
         locationButton.addTarget(self, action: #selector(selectLocationButton), for: .touchUpInside)
         
         let location = UIBarButtonItem(customView: locationButton)
@@ -36,8 +38,6 @@ class NeighbourhoodViewController: UIViewController {
         
         self.navigationItem.setLeftBarButton(location, animated: true)
         self.navigationItem.setRightBarButton(notificationButton, animated: true)
-        
-//        setUpNoSettingView()
         
         // filter button
         for i in 0..<filterCount {
@@ -47,14 +47,20 @@ class NeighbourhoodViewController: UIViewController {
             filterButton.addTarget(self, action: #selector(selectFilterButton), for: .touchUpInside)
             filterButtonArray.append(filterButton)
         }
-        
-//        setUpNoSettingView()
-        setUpView()
-        getPostsList()
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        
+        if Singleton.shared.testLocation == "" {
+            noSettingWrapView.removeFromSuperview()
+            locationButton.setAttributedTitle(.attributeFont(font: .PBold, size: 15, text: "현 위치", lineHeight: 18), for: .normal)
+            setUpNoSettingView()
+        } else {
+            wrapView.removeFromSuperview()
+            locationButton.setAttributedTitle(.attributeFont(font: .PBold, size: 15, text: Singleton.shared.testLocation, lineHeight: 18), for: .normal)
+            setUpView()
+            getPostsList()
+        }
     }
     
     @objc func selectLocationButton() {
@@ -86,13 +92,13 @@ class NeighbourhoodViewController: UIViewController {
     }
     
     func setUpNoSettingView() {
-        let wrapView = UIView()
-        self.view.addSubview(wrapView)
-        wrapView.snp.makeConstraints { make in
+        noSettingWrapView = UIView()
+        self.view.addSubview(noSettingWrapView)
+        noSettingWrapView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
         
-        wrapView.addSubview(noSettingLocationView)
+        noSettingWrapView.addSubview(noSettingLocationView)
         
         let locationImageView = UIImageView()
         locationImageView.image = UIImage(named: "location_large_ic")
@@ -131,6 +137,12 @@ class NeighbourhoodViewController: UIViewController {
     }
     
     func setUpView() {
+    
+        wrapView = UIView()
+        self.view.addSubview(wrapView)
+        wrapView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
         
         let headerView = UIView()
         let headerViewHeight = collectionCellHeight + 30 + 40 + 30
@@ -149,6 +161,7 @@ class NeighbourhoodViewController: UIViewController {
         neighbourhoodCollectionView.delegate = self
         neighbourhoodCollectionView.dataSource = self
         neighbourhoodCollectionView.register(VerticalProductCollectionViewCell.self, forCellWithReuseIdentifier: VerticalProductCollectionViewCell.cellId)
+        neighbourhoodCollectionView.showsHorizontalScrollIndicator = false
         layout.scrollDirection = .horizontal
         layout.minimumLineSpacing = 16
         headerView.addSubview(neighbourhoodCollectionView)
@@ -167,13 +180,14 @@ class NeighbourhoodViewController: UIViewController {
             make.height.equalTo(16)
         }
         
+        neighbourhoodTableView = UITableView()
         neighbourhoodTableView.delegate = self
         neighbourhoodTableView.dataSource = self
         neighbourhoodTableView.separatorInset = .zero
         neighbourhoodTableView.separatorStyle = .none
         neighbourhoodTableView.tableHeaderView = headerView
         neighbourhoodTableView.register(MainProductTableViewCell.self, forCellReuseIdentifier: MainProductTableViewCell.cellId)
-        self.view.addSubview(neighbourhoodTableView)
+        wrapView.addSubview(neighbourhoodTableView)
         neighbourhoodTableView.snp.makeConstraints { make in
             make.top.left.right.bottom.equalToSuperview()
         }
@@ -223,7 +237,7 @@ extension NeighbourhoodViewController: UITableViewDelegate, UITableViewDataSourc
                 if i == filterButtonArray.count - 1 {
                     filterButtonArray[i].snp.makeConstraints { make in
                         make.left.equalTo(filterButtonArray[i - 1].snp.right).inset(-6)
-                        make.right.equalToSuperview()
+                        make.right.equalToSuperview().inset(16)
                     }
                 } else { // 나머지 버튼
                     filterButtonArray[i].snp.makeConstraints { make in

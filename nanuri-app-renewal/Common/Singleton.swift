@@ -14,6 +14,10 @@ class Singleton {
     var userToken: String = "c698d104a7d8a9b5564ac9a141010d56c36ac02a"
     var uuid: String = "c4efed4c79d3bdd3155cba4fecd29eeb14ef5bf1"
     var isSettingLocation = false
+    
+    var testLocation: String = ""
+    
+    private init() { }
 }
 
 //class UserSingleton {

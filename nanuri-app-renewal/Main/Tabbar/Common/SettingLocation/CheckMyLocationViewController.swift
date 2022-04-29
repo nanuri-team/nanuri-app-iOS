@@ -23,6 +23,7 @@ class CheckMyLocationViewController: UIViewController {
         locationManager.delegate = self
         //위치업데이트
         locationManager.startUpdatingLocation()
+        extendedLayoutIncludesOpaqueBars = true
 
         let backButton = UIBarButtonItem(image: UIImage(named: "back_ic"), style: .plain, target: self, action: #selector(selectBackButton))
         self.navigationItem.setLeftBarButton(backButton, animated: true)
@@ -35,7 +36,8 @@ class CheckMyLocationViewController: UIViewController {
     }
     
     @objc func selectCancelButton() {
-        locationManager.startUpdatingLocation()
+        Singleton.shared.testLocation = ""
+        self.navigationController?.popViewController(animated: true)
     }
     
     @objc func selectOkButton() {
@@ -59,7 +61,7 @@ class CheckMyLocationViewController: UIViewController {
            else { return }
            
             self.myLocationLabel.attributedText = .attributeFont(font: .NSRExtrabold, size: 24, text: "\"\(administrativeArea) \(locality)\"", lineHeight: 27.24)
-           print(locality)
+            Singleton.shared.testLocation = "\(administrativeArea) \(locality)"
         }
     }
 
@@ -127,6 +129,7 @@ class CheckMyLocationViewController: UIViewController {
 extension CheckMyLocationViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let location = locations.first {
+            print(location)
             getCurrentAddress(location: location)
         }
     }

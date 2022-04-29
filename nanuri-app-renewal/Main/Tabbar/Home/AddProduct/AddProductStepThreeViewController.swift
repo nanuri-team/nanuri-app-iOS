@@ -23,7 +23,7 @@ class AddProductStepThreeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "상품 등록하기"
-        
+        extendedLayoutIncludesOpaqueBars = true
         print(postProductInfo)
         
         let backButton = UIBarButtonItem(image: UIImage(named: "back_ic"), style: .plain, target: self, action: #selector(selectBackButton))
