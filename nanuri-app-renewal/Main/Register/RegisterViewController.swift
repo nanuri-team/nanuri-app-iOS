@@ -6,13 +6,20 @@
 //
 
 import UIKit
+import Alamofire
 
 class RegisterViewController: UIViewController {
-
+    var user: UserInfo?
+    var userParams: [String : Any] = [:]
+    // 사용자정보
+    let nickNameTextField = UITextField()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         setUpView()
+        
+       
     }
     
     @objc func selectTermsCheckButton(sender: UIButton) {
@@ -30,6 +37,114 @@ class RegisterViewController: UIViewController {
             sender.isSelected = true
         }
     }
+    
+    @objc func selectSignUpBtn(_ sender: Any) {
+        
+        saveUserInfo()
+    }
+    /*
+    func saveUserInfo() {
+            guard let userUUID = UserDefaults.standard.string(forKey: "uuid") else { return }
+            let strURL = "https://nanuri.app/api/v1/users/\(userUUID)"
+    //        let strURL = "http://localhost:8080/api/v1/users/"
+            guard let userToken = UserDefaults.standard.string(forKey: "token") else { return }
+            
+            guard let userEmail = UserDefaults.standard.string(forKey: "email") else { return }
+            
+            guard let registerNickname = nickNameTextField.text else { return }
+           print("nickname: \(registerNickname)")
+            let header: HTTPHeaders = [
+                "Content-Type" : "multipart/form-data",
+                "Content-Disposition": "form-data",
+                "Authorization": "Token \(userToken)"
+            ]
+            
+            AF.upload(multipartFormData: { multipartFormData in
+                multipartFormData.append(Data(registerNickname.utf8), withName: "nickname")
+            }, to: strURL, method: .patch, headers: header).responseJSON { response in
+                print("[response result] \(response)")
+                switch response.result {
+                case .success(_):
+                    print("success: \(response)")
+                case .failure(let error):
+                    print(error.localizedDescription)
+                }
+            }
+            
+    //        let userParams:Parameters = ["nickname": registerNickname]
+            
+
+    //        print("@@@\(registerNickname)")
+    //        AF.upload(multipartFormData: { multiFormData in
+    //            for (key, value) in userParams {
+    //                multiFormData.append(Data("\(value)".utf8), withName: key)
+    //            }
+    //        }, to: strURL, headers: header).responseString { response in
+    //            switch response.result {
+    //            case .success(_):
+    //                print("success:\(response)")
+    //                guard let value = response.value else { return }
+    //                Networking.sharedObject.patchUserListRequest(url: strURL, params: userParams) { response in
+    //                    print(response)
+    //                    print("유저정보:\(userParams)")
+    //                }
+    //                let homeVC = HomeViewController()
+    //
+    //                homeVC.modalPresentationStyle = .fullScreen
+    //                self.present(homeVC, animated: true, completion: nil)
+    //
+    //            case .failure(let error):
+    //                print(error.localizedDescription)
+    //
+    //            }
+    //        }
+            
+            
+        }
+    */
+    //@@@@@@@@
+    
+    func saveUserInfo() {
+        guard let userUUID = UserDefaults.standard.string(forKey: "uuid") else { return }
+        let strURL = "https://nanuri.app/api/v1/users/\(userUUID)"
+//        let strURL = "http://localhost:8080/api/v1/users/"
+        guard let userToken = UserDefaults.standard.string(forKey: "token") else { return }
+        
+        guard let userEmail = UserDefaults.standard.string(forKey: "email") else { return }
+        
+        guard let registerNickname = nickNameTextField.text else { return }
+       
+        let header: HTTPHeaders = [
+            "Content-Type" : "multipart/form-data",
+            "Authorization": "Token \(userToken)"
+        ]
+        let userParams:Parameters = ["nickname": registerNickname]
+        
+        AF.upload( multipartFormData: { multiFormData in
+            for (key, value) in userParams {
+                multiFormData.append(Data("\(value)".utf8), withName: key)
+            }
+        }, to: strURL,method:.patch , headers: header).responseString { response in
+            switch response.result {
+            case .success(_):
+                print("success:\(response)")
+                guard let value = response.value else { return }
+                print("value: \(value)")
+                let tabVC = TabBarController()
+                
+                tabVC.modalPresentationStyle = .fullScreen
+                self.present(tabVC, animated: true, completion: nil)
+
+            case .failure(let error):
+                print(error.localizedDescription)
+
+            }
+        }
+        
+        
+    }
+     
+    //@@@@@@@@
     
     func setUpView() {
         self.view.backgroundColor = .white
@@ -68,7 +183,7 @@ class RegisterViewController: UIViewController {
             make.left.equalTo(requiredLabel.snp.right).inset(-4)
         }
         
-        let nickNameTextField = UITextField()
+        
         nickNameTextField.placeholder = "닉네임(영문, 한글 20자 이내)"
         nickNameTextField.attributedText = .attributeFont(font: .PRegular, size: 15, text: "", lineHeight: 18)
         nickNameTextField.borderStyle = .line
@@ -86,6 +201,7 @@ class RegisterViewController: UIViewController {
         
         let registerButton = MainButton(style: .main)
         registerButton.setAttributedTitle(.attributeFont(font: .PBold, size: 15, text: "회원가입", lineHeight: 18), for: .normal)
+        registerButton.addTarget(self, action: #selector(selectSignUpBtn), for: .touchUpInside)
         self.view.addSubview(registerButton)
         registerButton.snp.makeConstraints { make in
             make.bottom.equalTo(self.view.safeAreaLayoutGuide).inset(32)

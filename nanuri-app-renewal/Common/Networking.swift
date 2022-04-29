@@ -20,7 +20,70 @@ class Networking: NSObject {
         return Session(configuration: configuration, interceptor: interceptor)
     }()
 }
-
+// 사용자 정보
+extension Networking {
+  
+    func getUserInfo(url: String, completion: @escaping (_ response: UserInfo) -> ()) {
+        guard let userToken = UserDefaults.standard.string(forKey: "token") else { return }
+        let header: HTTPHeaders = [
+            "Content-Type" : "multipart/form-data",
+            "Authorization": "Token \(userToken)"
+        ]
+//        String(describing: UserDefaults.standard.string(forKey: "token"))
+        let url = "https://nanuri.app/api/v1/users/"
+//        let url = "http://localhost:8080/api/v1/users/"
+        
+        let request = setGetRequest(url: url, params: nil, headers: header)
+        request.responseDecodable(of: UserInfo.self) { response in
+            switch response.result {
+            case .success(_):
+                guard let response = response.value else { return }
+                completion(response)
+                print(response)
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
+    func postUserListRequest(url: String,params:[String: Any], completion: @escaping (_ response: UserInfo) -> ()) {
+        guard let userToken = UserDefaults.standard.string(forKey: "token") else { return }
+        let header: HTTPHeaders = [
+            "Authorization": "Token \(userToken)"
+        ]
+        let request = setPostRequest(url: url, params: params, headers: header)
+        request.responseDecodable(of: UserInfo.self) { response in
+            switch response.result {
+            case .success(_):
+                guard let response = response.value else { return }
+                completion(response)
+                print(response)
+                print("유저정보:\(UserInfo.self)")
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    // patch
+    func patchUserDetail(url: String,params:[String: Any], completion: @escaping (_ response: UserInfo) -> ()) {
+        guard let userToken = UserDefaults.standard.string(forKey: "token") else { return }
+        let header: HTTPHeaders = [
+            "Authorization": "Token \(userToken)"
+        ]
+        let request = setPatchRequest(url: url, params: params, headers: header)
+        request.responseDecodable(of: UserInfo.self) { response in
+            switch response.result {
+            case .success(_):
+                guard let response = response.value else { return }
+                completion(response)
+                print(response)
+                print("유저정보:\(UserInfo.self)")
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+}
 
 extension Networking {
   
@@ -96,5 +159,8 @@ extension Networking {
     
     func setGetRequest(url: String, params: Parameters?, headers: HTTPHeaders) -> DataRequest {
         return sessionManager.request(url, method: .get, parameters: params, headers: headers)
+    }
+    func setPatchRequest(url: String, params: Parameters?, headers: HTTPHeaders) -> DataRequest {
+        return sessionManager.request(url, method: .patch, parameters: params,  headers: headers)
     }
 }
