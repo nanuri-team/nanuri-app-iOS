@@ -7,6 +7,14 @@
 
 import Foundation
 
+
+//struct UserList: Decodable {
+//    var count: Int
+//    var next: String?
+//    var pervious: String?
+//    var results: [UserInfo]
+//}
+
 struct UserList: Decodable {
     var count: Int
     var next: String?
@@ -14,10 +22,13 @@ struct UserList: Decodable {
     var results: [UserInfo]
 }
 
+
 //struct UserInfo: Decodable {
 //    var user: [UserData]
 //}
 struct UserInfo: Decodable {
+
+    var password: String?
     var posts: [String]
     var favoritePosts: [String]
     var lastLogin: String
@@ -29,16 +40,11 @@ struct UserInfo: Decodable {
     var latitude: Double?
     var longitude: Double?
     var address: String?
-    var profile: String?
+    var profileUrl: String?
     var authProvider: String?
-    var createdAt: String
-    var updatedAt: String
     
     enum CodingKeys: String, CodingKey {
-        case posts
-        case favoritePosts = "favorite_posts"
-        case lastLogin = "last_login"
-        case uuid
+        case password
         case email
         case nickname
         case isActive = "is_active"
