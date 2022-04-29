@@ -11,6 +11,14 @@ class ChattingListTableViewCell: UITableViewCell {
     
     static let cellId = "chattingListCell"
     
+    let productName = UILabel()
+    let deliveryTag = DeliveryTagView()
+    let chatPeopleLabel = UILabel()
+    let productLocationLabel = UILabel()
+    let productImageView = UIImageView()
+
+
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setUpView()
@@ -42,7 +50,6 @@ class ChattingListTableViewCell: UITableViewCell {
             make.height.equalTo(84)
         }
         
-        let productImageView = UIImageView()
         productImageView.backgroundColor = .nanuriGray2
         productImageView.contentMode = .scaleToFill
         productImageView.layer.cornerRadius = 12
@@ -53,7 +60,6 @@ class ChattingListTableViewCell: UITableViewCell {
             make.centerY.equalToSuperview()
         }
         
-        let productName = UILabel()
         productName.attributedText = .attributeFont(font: .PBold, size: 13, text: "레트로 노트북", lineHeight: 15)
         cellView.addSubview(productName)
         productName.snp.makeConstraints { make in
@@ -72,7 +78,6 @@ class ChattingListTableViewCell: UITableViewCell {
             make.right.equalToSuperview().inset(19)
         }
         
-        let deliveryTag = DeliveryTagView()
         deliveryTag.setDeliveryType(type: DeliveryType.parcel)
         cellView.addSubview(deliveryTag)
         deliveryTag.snp.makeConstraints { make in
@@ -80,7 +85,6 @@ class ChattingListTableViewCell: UITableViewCell {
             make.bottom.equalToSuperview().inset(10)
         }
         
-        let chatPeopleLabel = UILabel()
         chatPeopleLabel.attributedText = .attributeFont(font: .NSRExtrabold, size: 12, text: "2", lineHeight: 14)
         chatPeopleLabel.textColor = .nanuriGray4
         cellView.addSubview(chatPeopleLabel)
@@ -107,7 +111,6 @@ class ChattingListTableViewCell: UITableViewCell {
             make.bottom.equalToSuperview().inset(10)
         }
         
-        let productLocationLabel = UILabel()
         productLocationLabel.attributedText = .attributeFont(font: .NSRBold, size: 12, text: "서울시 강남구", lineHeight: 14)
         productLocationLabel.textColor = .nanuriGray4
         cellView.addSubview(productLocationLabel)

@@ -40,4 +40,14 @@ class MainButton: UIButton {
             make.height.equalTo(48)
         }
     }
+    
+    func setStyle(style: MainButtonStyle) {
+        switch style {
+        case .main:
+            self.backgroundColor = .nanuriGreen
+        case .disable:
+            self.titleLabel?.textColor = .nanuriGray5
+            self.backgroundColor = .nanuriGray2
+        }
+    }
 }

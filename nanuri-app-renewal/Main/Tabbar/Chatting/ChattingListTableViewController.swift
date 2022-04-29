@@ -8,6 +8,9 @@
 import UIKit
 
 class ChattingListTableViewController: UITableViewController {
+    
+    var chatDummyPostList: [ResultInfo] = []
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -17,7 +20,20 @@ class ChattingListTableViewController: UITableViewController {
 
         self.tableView.separatorInset = .zero
         self.tableView.separatorStyle = .none
+        
+        getDummyPost()
     }
+    
+    func getDummyPost() {
+        Networking.sharedObject.getPostsList { response in
+            self.chatDummyPostList = []
+            for i in 0..<3 {
+                self.chatDummyPostList.append(response.results[i])
+            }
+            self.tableView.reloadData()
+        }
+    }
+    
 
     // MARK: - Table view data source
 
@@ -28,12 +44,13 @@ class ChattingListTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 3
+        return chatDummyPostList.count
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let identifier = "\(indexPath.row)"
+        let chatDummyPost = chatDummyPostList[indexPath.row]
+        let identifier = "\(indexPath.row) \(chatDummyPost.uuid)"
         
         if let reuseCell = tableView.dequeueReusableCell(withIdentifier: identifier) {
             return reuseCell
@@ -41,12 +58,20 @@ class ChattingListTableViewController: UITableViewController {
             let cell = ChattingListTableViewCell.init(style: .default, reuseIdentifier: identifier)
             cell.selectionStyle = .none
             
+            cell.productImageView.imageUpload(url: chatDummyPost.image ?? "")
+            cell.productName.attributedText = .attributeFont(font: .PBold, size: 13, text: chatDummyPost.title, lineHeight: 15)
+            cell.deliveryTag.setDeliveryType(type: DeliveryType.parcel)
+            cell.chatPeopleLabel.attributedText = .attributeFont(font: .NSRExtrabold, size: 12, text: "\(chatDummyPost.numParticipants)", lineHeight: 14)
+            cell.productLocationLabel.attributedText = .attributeFont(font: .NSRBold, size: 12, text: chatDummyPost.writerAddress ?? "", lineHeight: 14)
+
+
             return cell
         }
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let chattingViewController = ChattingViewController()
+        chattingViewController.roomName = chatDummyPostList[indexPath.row].uuid
         chattingViewController.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(chattingViewController, animated: true)
     }

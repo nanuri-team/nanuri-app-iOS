@@ -11,7 +11,7 @@ class Singleton {
     static let shared = Singleton()
     
     let tokenName: String = "Token"
-    var userToken: String = "a37f227eac7ea2e61e41ab32876d58409cf40a53"
+    var userToken: String = "c698d104a7d8a9b5564ac9a141010d56c36ac02a"
 
     var isSettingLocation = false
     
