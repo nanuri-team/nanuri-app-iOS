@@ -19,7 +19,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         guard let windowScene = (scene as? UIWindowScene) else { return }
         let window = UIWindow(windowScene: windowScene)
-        window.rootViewController = LoginViewController()
+        window.rootViewController = TabBarController()
         // 로그인 화면 전환 로직
         /*
         if UserDefaults.standard.integer(forKey: "userID") == 0 {

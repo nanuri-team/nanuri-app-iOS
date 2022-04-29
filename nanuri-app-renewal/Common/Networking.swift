@@ -21,6 +21,53 @@ class Networking: NSObject {
     }()
 }
 
+extension Networking {
+    // 사용자정보
+   private func getUserInfo(url: String, completion: @escaping (_ response: UserList) -> ()) {
+        let header: HTTPHeaders = [
+            "Authorization": "Token \(Singleton.shared.userToken)"
+        ]
+        let url = "https://nanuri.app/api/v1/users/"
+       let request = setGetRequest(url: url, params: nil, headers: header)
+       request.responseDecodable(of: UserList.self) { response in
+           switch response.result {
+           case .success(_):
+               guard let response = response.value else { return }
+               completion(response)
+               print(response)
+           case .failure(let error):
+               print(error)
+           }
+       }
+    }
+    
+    private func postUserListRequest(url: String,params:[String: String], completion: @escaping (_ response: UserInfo) -> ()) {
+        let header: HTTPHeaders = [
+            "Authorization": "Token \(Singleton.shared.userToken)"
+        ]
+        let request = setPostRequest(url: url, params: params, headers: header)
+            request.responseDecodable(of: UserInfo.self) { response in
+                switch response.result {
+                case .success(_):
+                    guard let response = response.value else { return }
+                    completion(response)
+                    print(response)
+                case .failure(let error):
+                    print(error)
+                }
+            }
+//        let root = AF.request(url, method: .get)
+//        root.responseDecodable(of: UserPostResponse.self) { response in
+//            switch response.result {
+//            case .success(_):
+//                guard let result = response.value else { return }
+//                completion(result)
+//            case .failure(let error):
+//                print(error.localizedDescription)
+//            }
+//        }
+    }
+}
 
 extension Networking {
   

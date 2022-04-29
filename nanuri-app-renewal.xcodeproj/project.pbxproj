@@ -170,7 +170,6 @@
 			path = AddProduct;
 			sourceTree = "<group>";
 		};
-
 		3954BBA328142FB900C8815E /* Cells */ = {
 			isa = PBXGroup;
 			children = (
