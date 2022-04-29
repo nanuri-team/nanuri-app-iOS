@@ -23,11 +23,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         // 13이상인 경우에는 SceneDelegate에서 이미 초기화 되었으니까 바로 return
         KakaoSDK.initSDK(appKey: "ca58fb6fe4a03e54e743b7b25bf5ae4b")
-        return true
         
-        if #available(iOS 13.0, *) {
-            return true
-        }
+        let _ = UIImagePickerController()
+        IQKeyboardManager.shared.enable = true
+        UINavigationBar.appearance().isTranslucent = false
+        UINavigationBar.appearance().barTintColor = .white
         
 //        KakaoSDK.initSDK(appKey: "ca58fb6fe4a03e54e743b7b25bf5ae4b")
         
@@ -36,9 +36,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.rootViewController = TabBarController() // 초기 ViewController
         window?.makeKeyAndVisible()
         
-        let _ = UIImagePickerController()
-        IQKeyboardManager.shared.enable = true
-                
         return true
     }
 

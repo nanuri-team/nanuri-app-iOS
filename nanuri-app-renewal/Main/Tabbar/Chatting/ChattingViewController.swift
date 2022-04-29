@@ -26,7 +26,7 @@ class ChattingViewController: UIViewController {
         super.viewDidLoad()
     
         self.title = "채팅"
-        
+        extendedLayoutIncludesOpaqueBars = true
         let backButton = UIBarButtonItem(image: UIImage(named: "back_ic"), style: .plain, target: self, action: #selector(selectBackButton))
         self.navigationItem.setLeftBarButton(backButton, animated: true)
         

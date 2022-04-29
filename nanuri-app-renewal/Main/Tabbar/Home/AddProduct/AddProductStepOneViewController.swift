@@ -26,6 +26,7 @@ class AddProductStepOneViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "상품 등록하기"
+        extendedLayoutIncludesOpaqueBars = true
         
         let closeButton = UIBarButtonItem(image: UIImage(named: "close_ic"), style: .plain, target: self, action: #selector(selectCloseButton))
         self.navigationItem.setLeftBarButton(closeButton, animated: true)

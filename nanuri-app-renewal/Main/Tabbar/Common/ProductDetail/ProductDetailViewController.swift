@@ -17,6 +17,7 @@ class ProductDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .white
+        extendedLayoutIncludesOpaqueBars = true
         self.title = "상품 정보"
         let backButton = UIBarButtonItem(image: UIImage(named: "back_ic"), style: .plain, target: self, action: #selector(selectBackButton))
         let optionButton = UIBarButtonItem(image: UIImage(named: "more_ic"), style: .plain, target: self, action: #selector(selectOptionButton))
@@ -388,7 +389,7 @@ class ProductDetailViewController: UIViewController {
         }
         
         let user = UILabel()
-        user.attributedText = .attributeFont(font: .NSRExtrabold, size: 15, text: postInfo.writer, lineHeight: 17.03)
+        user.attributedText = .attributeFont(font: .NSRExtrabold, size: 15, text: postInfo.writerNickname ?? "", lineHeight: 17.03)
         userLevelView.addSubview(user)
         user.snp.makeConstraints { make in
             make.top.equalToSuperview()

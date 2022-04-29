@@ -27,7 +27,7 @@ class AddProductStepFourViewController: UIViewController {
         self.title = "상품 등록하기"
         
         print(postProductInfo)
-        
+        extendedLayoutIncludesOpaqueBars = true
         let backButton = UIBarButtonItem(image: UIImage(named: "back_ic"), style: .plain, target: self, action: #selector(selectBackButton))
         self.navigationItem.setLeftBarButton(backButton, animated: true)
         
@@ -47,7 +47,6 @@ class AddProductStepFourViewController: UIViewController {
             print("return")
             return
         }
-        
         postPosts()
     }
     

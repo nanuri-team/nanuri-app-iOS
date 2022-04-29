@@ -14,7 +14,7 @@ class CommentViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        extendedLayoutIncludesOpaqueBars = true
         self.view.backgroundColor = .white
         self.title = "댓글"
         let backButton = UIBarButtonItem(image: UIImage(named: "back_ic"), style: .plain, target: self, action: #selector(selectBackButton))
