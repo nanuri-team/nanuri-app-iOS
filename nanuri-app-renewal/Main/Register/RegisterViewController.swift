@@ -9,7 +9,7 @@ import UIKit
 import Alamofire
 
 class RegisterViewController: UIViewController {
-    var user: UserInfo?
+//    var user: UserInfo?
     var userParams: [String : Any] = [:]
     // 사용자정보
     let nickNameTextField = UITextField()
@@ -41,8 +41,22 @@ class RegisterViewController: UIViewController {
         }
     }
     @objc func actSignUp(){
-        print("actSignup")
-        saveUserInfo()
+       
+//        saveUserInfo()
+        
+        guard let nickNameText = nickNameTextField.text else { return }
+        if nickNameText.isEmpty {
+            return
+        } else {
+            UserDefaults.standard.set(nickNameText, forKey: "nickName")
+            if UserDefaults.standard.string(forKey: "nickName") != nil {
+                let tabbarViewController = TabBarController()
+                tabbarViewController.modalTransitionStyle = .crossDissolve
+                tabbarViewController.modalPresentationStyle = .overFullScreen
+                self.present(tabbarViewController, animated: true, completion: nil)
+            }
+//            self.dismiss(animated: true, completion: nil)
+        }
         
     }
     

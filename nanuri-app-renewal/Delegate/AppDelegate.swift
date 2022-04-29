@@ -23,7 +23,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         // 13이상인 경우에는 SceneDelegate에서 이미 초기화 되었으니까 바로 return
         KakaoSDK.initSDK(appKey: "7927f2d495e76c08506214280d3e3557")
-        return true
         
         if #available(iOS 13.0, *) {
             return true

@@ -11,5 +11,5 @@ target 'nanuri-app-renewal' do
   pod 'IQKeyboardManagerSwift', '6.3.0'
   pod 'KakaoSDK'
   pod 'Starscream', '~> 4.0.0'
-  pod 'SDWebImage', '~> 5.0'
+  pod 'SDWebImage'
 end
