@@ -10,8 +10,8 @@ import Foundation
 class SnsUserInfoSingleton{
     static let shared = SnsUserInfoSingleton()
     
-    var id: Int?
-    var kakaoUserId:String?
+    var user: String?
+    var kakaoUserId:Int?
     
     private init(){ }
 }

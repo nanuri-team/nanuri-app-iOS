@@ -6,9 +6,14 @@
 //
 
 import UIKit
+import Alamofire
 
 class RegisterViewController: UIViewController {
-
+    var user: UserInfo?
+    
+    // 사용자정보
+    var nickname = UITextField()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -30,6 +35,50 @@ class RegisterViewController: UIViewController {
             sender.isSelected = true
         }
     }
+    @objc func actSignUp(){
+        print("actSignup")
+        saveUserInfo()
+        
+    }
+    
+    func saveUserInfo() {
+        let strURL = "https://nanuri.app/api/v1/users/"
+        guard let registerNickname = nickname.text else { return }
+        print("@@@\(registerNickname)")
+        let header: HTTPHeaders = ["Content-Type" : "multipart/form-data"]
+        let params:Parameters = ["nickname":registerNickname]
+        /*
+        AF.upload(multipartFormData: { multiFormData in
+            for (key, value) in params {
+                multiFormData.append(Data("\(value)".utf8), withName: key)
+            }
+        }, to: strURL, headers: header).responseDecodable(of: UserPostResponse.self ){ response in
+            print("@@@\(response)")
+            switch response.result {
+            case .success(_):
+               
+                print("sucess reponse is :\(response)")
+                guard let value = response.value else { return }
+                Networking.sharedObject.getUserInfo(url: strURL, completion: { UserList in
+                    <#code#>
+                }) { result in
+                    
+                    //Singleton.shared.userToken = result
+                    UserDefaults.standard.set(result.user.uuid, forKey: "uuid")
+
+                    let homeVC = HomeViewController()
+                    
+                    homeVC.modalPresentationStyle = .fullScreen
+                    self.present(homeVC, animated: true, completion: nil)
+                }
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+            
+        }
+        */
+    }
+    
     
     func setUpView() {
         self.view.backgroundColor = .white
@@ -87,6 +136,7 @@ class RegisterViewController: UIViewController {
         let registerButton = MainButton(style: .main)
         registerButton.setAttributedTitle(.attributeFont(font: .PBold, size: 15, text: "회원가입", lineHeight: 18), for: .normal)
         self.view.addSubview(registerButton)
+        registerButton.addTarget(self, action: #selector(actSignUp), for: .touchUpInside)
         registerButton.snp.makeConstraints { make in
             make.bottom.equalTo(self.view.safeAreaLayoutGuide).inset(32)
             make.left.right.equalToSuperview().inset(16)

@@ -6,11 +6,16 @@
 //
 
 import UIKit
+
+import KakaoSDKAuth
+import KakaoSDKCommon
 import KakaoSDKUser
+
 import Alamofire
 
 class LoginViewController: UIViewController {
-    let clientId = "ba607c1bb1fabf7060c476d4a65e30cd"
+//    var kakaoID: SnsId?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .white
@@ -19,6 +24,7 @@ class LoginViewController: UIViewController {
         
         snsloginSetUpView()
     }
+    
     @objc func selectKakaologin(_ sender: UIButton) {
         UserApi.shared.loginWithKakaoAccount(prompts: [.Login]) { (oauthToken, error) in
             if let error = error {
@@ -28,7 +34,7 @@ class LoginViewController: UIViewController {
                 
                 // do something
                 _ = oauthToken
-               // self.saveUserInfo()
+                self.userInfo()
             }
         }
     }
@@ -37,85 +43,81 @@ class LoginViewController: UIViewController {
     @objc func selectApplelogin(_ sender: UIButton) {
         print("apple")
     }
-    /*
     
-    func saveUserInfo(){
-        let strURL = "https://kauth.kakao.com/oauth/authorize?client_id=\(clientId)&redirect_uri=http://localhost:8080/api/auth/kakao/accounts/&response_type=code"
-        guard let socialIdx = SnsUserInfoSingleton.shared.id else { return }
-        let header: HTTPHeaders = ["Content-Type" : "multipart/form-data"]
-        let params:Parameters = ["social_id":socialIdx]
-        
-        AF.upload(multipartFormData: { multiFormData in
-            for (key, value) in params {
-                multiFormData.append(Data("\(value)".utf8), withName: key)
-            }
-        }, to: strURL, headers: header).responseDecodable(of: SnsId.self) { response in
-            switch response.result {
-            case .success(_):
-               
-                print("sucess reponse is :\(response)")
-                guard let value = response.value else { return }
-                Networking.sharedObject.getUserInfo(userID: value.data.userID) { result in
-                    
-                    UserSingleton.shared.userData = result
-                    UserDefaults.standard.set(result.user.userID, forKey: "userID")
-
-                    let addView = UIStoryboard(name: "Main" , bundle: nil)
-                    guard let addVC = addView.instantiateViewController(withIdentifier: "tabBarView") as? TabBarController else { return }
-                addVC.modalPresentationStyle = .fullScreen
-                    self.present(addVC, animated: true, completion: nil)
-                }
-            case .failure(let error):
-                print(error.localizedDescription)
-            }
-        }
-    }
-    */
-    /*
+    
     func userInfo(){
-        let strURL = "https://kauth.kakao.com/oauth/authorize?client_id=\(clientId)&redirect_uri=http://localhost:8080/api/auth/kakao/token/callback/&response_type=code"
+        let strURL = "https://nanuri.app/api/auth/kakao/accounts/"
+        
+        
+        
         //shared 라는 건 singleton 객체라는 것
         UserApi.shared.me { user, error in
             if let error = error { /*error 가 !nil*/
                 print(error.localizedDescription)
                 return
+                
             } else {
+                
                 //내부적으로 쓰는 구분..?
                 if let kId =  user?.id {
                     
-                    SnsUserInfoSingleton.shared.kakaoUserId = "\(kId)"
+//                    SnsUserInfoSingleton.shared.kakaoUserId = Int(kId)
+                    
+                    let params: Parameters = ["kakao_id":kId]
+                    let alamo = AF.request(strURL, method: .post, parameters: params)
+                    alamo.responseJSON { response in
+//                        print("###\(response)")
+                        switch response.result {
+                        case .success(let value):
+                            print(value)
+//                           print("%%%%\(value)")
+                            let registerVC = RegisterViewController()
+                            registerVC.modalPresentationStyle = .fullScreen
+                            self.present(registerVC,animated: true)
+                            
+                        case .failure(let error):
+                            if let error = error.errorDescription {
+                                print(error)
+                            }
+                        }
+                    }
                     
                     // test
+                    /*
                     let header: HTTPHeaders = ["Content-Type" : "multipart/form-data"]
-                    let parameters = ["social_id":"\(SnsUserInfoSingleton.shared.kakaoUserId!)"]
-                    
+                    let parameters = ["kakao_id":SnsUserInfoSingleton.shared.kakaoUserId!]
+                  
                     AF.upload(multipartFormData: { multiFormData in
                         for (key, value) in parameters {
                             multiFormData.append(Data("\(value)".utf8), withName: key)
+                            print("@@@@@@\(key),\(value)")
                         }
                     }, to: strURL, headers: header).responseDecodable(of: SNSPostResponse.self) { response in
+                        print("@@@\(SNSPostResponse.self)")
                         switch response.result {
                         case .success(_):
                             print("sucess reponse is :\(response)")
                             guard let value = response.value else { return }
-                            SnsUserInfoSingleton.shared.id = value.data.id
-                            if let registerVC = UIStoryboard(name: "Login", bundle: nil).instantiateViewController(withIdentifier: "registerStoryboard") as? RegisterViewController {
+                            SnsUserInfoSingleton.shared.user = value.data.user
+//                            if let registerVC = UIStoryboard(name: "Login", bundle: nil).instantiateViewController(withIdentifier: "registerStoryboard") as? RegisterViewController {
+                            let registerVC = RegisterViewController()
                                 registerVC.modalPresentationStyle = .fullScreen
                                 self.present(registerVC,animated: true)
                                 
-                            }
+//                            }
                         case .failure(let error):
                             
                             print(error.localizedDescription)
                         }
                     }
                     
+                    */
                 }
                 
             }
         }
     }
-    */
+    
     
     func snsloginSetUpView(){
         let logoImageView = UIImageView()
