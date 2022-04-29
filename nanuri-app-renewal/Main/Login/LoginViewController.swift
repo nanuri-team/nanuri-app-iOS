@@ -59,6 +59,12 @@ class LoginViewController: UIViewController {
                 //내부적으로 쓰는 구분..?
                 if let kId =  user?.id {
                     
+                    guard let user = user,
+                          let kakaoAccount = user.kakaoAccount,
+                          let email = kakaoAccount.email
+                    else { return }
+
+                    UserDefaults.standard.set(email, forKey: "userEmail")
                     
                     let params: Parameters = ["kakao_id":kId]
                     let alamo = AF.request(strURL, method: .post, parameters: params)
@@ -86,6 +92,11 @@ class LoginViewController: UIViewController {
                                     }
                                 }
                             }
+                            
+                            let registerViewController = RegisterViewController()
+                            registerViewController.modalTransitionStyle = .crossDissolve
+                            registerViewController.modalPresentationStyle = .overFullScreen
+                            self.present(registerViewController, animated: true, completion: nil)
 
                         case .failure(let error):
                             if let error = error.errorDescription {
