@@ -9,14 +9,10 @@ import UIKit
 
 class MyPageViewController: UIViewController, UIScrollViewDelegate {
     
-    let scrollView = UIScrollView()
-    let contentView = UIView()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setUpView()
-//        mypageSetUpView()
     }
     
     private func setUpView() {
@@ -24,27 +20,26 @@ class MyPageViewController: UIViewController, UIScrollViewDelegate {
         let settingButton = UIBarButtonItem(image: UIImage(named: "setting_ic"), style: .plain, target: self, action: #selector(selectSettingButton))
         self.navigationItem.setRightBarButton(settingButton, animated: true)
         
-        self.view.addSubview(scrollView)
-        scrollView.snp.makeConstraints {
+        let productListTableView = UITableView()
+        productListTableView.delegate = self
+        productListTableView.dataSource = self
+        productListTableView.separatorInset = .zero
+        productListTableView.separatorStyle = .none
+        productListTableView.sectionHeaderTopPadding = 0
+        productListTableView.register(MainProductTableViewCell.self, forCellReuseIdentifier: MainProductTableViewCell.cellId)
+        self.view.addSubview(productListTableView)
+        productListTableView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
         
-        contentView.backgroundColor = .purple
-        self.scrollView.addSubview(contentView)
-        contentView.snp.makeConstraints {
-            $0.edges.equalToSuperview()
-            $0.width.equalToSuperview()
-            $0.height.equalTo(1000)
-        }
+        let headerView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: 95))
+        productListTableView.tableHeaderView = headerView
         
         let profileView = UIView()
-        contentView.addSubview(profileView)
+        headerView.addSubview(profileView)
         profileView.backgroundColor = .white
         profileView.snp.makeConstraints {
-            $0.top.equalToSuperview()
-            $0.left.equalToSuperview()
-            $0.right.equalToSuperview()
-            $0.height.equalTo(95)
+            $0.edges.equalToSuperview()
         }
         
         let profileImageView = UIImageView()
@@ -55,7 +50,7 @@ class MyPageViewController: UIViewController, UIScrollViewDelegate {
             $0.centerY.equalToSuperview()
             $0.width.height.equalTo(56)
         }
-        
+
         let profileNameLabel = UILabel()
         profileNameLabel.attributedText = .attributeFont(font: .PBold, size: 18, text: "프로자취러", lineHeight: 20)
         profileView.addSubview(profileNameLabel)
@@ -63,21 +58,22 @@ class MyPageViewController: UIViewController, UIScrollViewDelegate {
             $0.top.equalTo(20)
             $0.left.equalTo(profileImageView.snp.right).inset(-16)
         }
-        
+        // profileNameLabel 10글자 이상이면 나머지는 ... 로 표시되도록
+
         let levelView = LevelView(.flower, isLevelName: true)
         profileView.addSubview(levelView)
         levelView.snp.makeConstraints {
             $0.centerY.equalTo(profileNameLabel)
             $0.left.equalTo(profileNameLabel.snp.right).inset(-6)
         }
-        
+
         let locationTagView = LocationTagView(location: "서울시 강남구")
         profileView.addSubview(locationTagView)
         locationTagView.snp.makeConstraints {
             $0.top.equalTo(profileNameLabel.snp.bottom).inset(-8)
             $0.left.equalTo(profileImageView.snp.right).inset(-16)
         }
-        
+
         let profileModifyButton = UIButton()
         profileModifyButton.setAttributedTitle(.attributeFont(font: .PRegular, size: 13, text: "수정", lineHeight: 13), for: .normal)
         profileModifyButton.setTitleColor(.nanuriGray5, for: .normal)
@@ -87,9 +83,8 @@ class MyPageViewController: UIViewController, UIScrollViewDelegate {
         profileModifyButton.snp.makeConstraints {
             $0.top.equalTo(20)
             $0.right.equalTo(-16)
+            $0.width.equalTo(23)
         }
-        
-        
     }
     
     
@@ -109,20 +104,13 @@ class MyPageViewController: UIViewController, UIScrollViewDelegate {
         self.navigationController?.pushViewController(myProfileModifiedView, animated:true)
     }
     
+    @objc func registeredProductsListButtonTapped(_ sender: UIButton) {
+        print("registeredProductsListButtonTapped")
+    }
     
-    // 마이페이지 탭 메뉴 ( 스크롤) 세팅
-    /*
-     func setScrollView() {
-     //        scrollView.delegate = self
-     scrollView.contentSize.width = self.view.frame.width * 2
-     
-     //        self.addChild(MyRegisterProductViewController)
-     //        guard let myRegisterProduct = MyRegisterProductViewController.view else { return }
-     }
-     */
-    
-    
-    
+    @objc func participatedProductsListButtonTapped(_ sender: UIButton) {
+        print("participatedProductsListButtonTapped")
+    }
     
     /*
      // MARK: - Navigation
@@ -133,7 +121,119 @@ class MyPageViewController: UIViewController, UIScrollViewDelegate {
      // Pass the selected object to the new view controller
      }
      */
+}
+
+extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 14
+    }
     
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 95
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let header = UIView()
+        header.backgroundColor = .white
+
+        let productView = UIView()
+        productView.backgroundColor = .nanuriGray2
+        header.addSubview(productView)
+        productView.snp.makeConstraints {
+            $0.top.equalToSuperview()
+            $0.left.right.equalToSuperview()
+            $0.height.equalTo(45)
+        }
+
+        let registeredProductsListButton = UIButton()
+        registeredProductsListButton.backgroundColor = .white
+        registeredProductsListButton.setAttributedTitle(.attributeFont(font: .PRegular, size: 13, text: "내가 등록한 상품", lineHeight: 15), for: .normal)
+        registeredProductsListButton.setTitleColor(.nanuriGreen, for: .normal)
+        productView.addSubview(registeredProductsListButton)
+        registeredProductsListButton.snp.makeConstraints {
+            $0.top.equalToSuperview()
+            $0.left.equalToSuperview()
+            $0.width.equalTo(productView.snp.width).dividedBy(2)
+            $0.height.equalTo(42)
+        }
+        registeredProductsListButton.addTarget(self, action: #selector(registeredProductsListButtonTapped), for: .touchUpInside)
+
+        let clickedView = UIView()
+        clickedView.backgroundColor = .nanuriGreen
+        productView.addSubview(clickedView)
+        clickedView.snp.makeConstraints {
+            $0.top.equalTo(registeredProductsListButton.snp.bottom)
+            $0.left.equalToSuperview()
+            $0.width.equalTo(registeredProductsListButton.snp.width)
+            $0.height.equalTo(3)
+        }
+
+        let participatedProductsListButton = UIButton()
+        participatedProductsListButton.backgroundColor = .white
+        participatedProductsListButton.setAttributedTitle(.attributeFont(font: .PRegular, size: 13, text: "내가 참여한 상품", lineHeight: 15), for: .normal)
+        participatedProductsListButton.setTitleColor(.nanuriGray5, for: .normal)
+        productView.addSubview(participatedProductsListButton)
+        participatedProductsListButton.snp.makeConstraints {
+            $0.top.equalToSuperview()
+            $0.right.equalToSuperview()
+            $0.width.equalTo(productView.snp.width).dividedBy(2)
+            $0.height.equalTo(42)
+        }
+        participatedProductsListButton.addTarget(self, action: #selector(participatedProductsListButtonTapped), for: .touchUpInside)
+
+        let clickedView2 = UIView()
+        clickedView2.backgroundColor = .nanuriGray2
+        productView.addSubview(clickedView2)
+        clickedView2.snp.makeConstraints {
+            $0.top.equalTo(participatedProductsListButton.snp.bottom)
+            $0.right.equalToSuperview()
+            $0.width.equalTo(participatedProductsListButton.snp.width)
+            $0.height.equalTo(3)
+        }
+
+        let numberOfListLabel = UILabel()
+        numberOfListLabel.attributedText = .attributeFont(font: .PBold, size: 13, text: "전체 14개", lineHeight: 15)
+        header.addSubview(numberOfListLabel)
+        numberOfListLabel.snp.makeConstraints {
+            $0.top.equalTo(productView.snp.bottom).inset(-25)
+            $0.left.equalTo(16)
+        }
+
+        let moreButton = UIButton()
+        moreButton.setAttributedTitle(.attributeFont(font: .PRegular, size: 13, text: "진행 중인 상품", lineHeight: 13), for: .normal)
+        moreButton.setImage(UIImage(named: "down_arrow_ic"), for: .normal)
+        moreButton.setTitleColor(.nanuriGray4, for: .normal)
+        moreButton.semanticContentAttribute = .forceLeftToRight
+        header.addSubview(moreButton)
+        moreButton.snp.makeConstraints {
+            $0.top.equalTo(productView.snp.bottom).inset(-25)
+            $0.right.equalTo(-16)
+        }
+        moreButton.addTarget(self, action: #selector(selectMoreButton), for: .touchUpInside)
+
+        return header
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let identifier = "\(indexPath.row)"
+        
+        if let reuseCell = tableView.dequeueReusableCell(withIdentifier: identifier) {
+            return reuseCell
+        } else {
+            let cell = MainProductTableViewCell.init(style: .default, reuseIdentifier: identifier)
+            cell.selectionStyle = .none
+            
+            return cell
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.row == 0 {
+            let productDetailViewController = ProductDetailViewController()
+            productDetailViewController.hidesBottomBarWhenPushed = true
+            self.navigationController?.pushViewController(productDetailViewController, animated: true)
+        }
+    }
 }
 
 //extension UIViewController {
