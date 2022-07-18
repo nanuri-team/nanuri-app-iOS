@@ -7,26 +7,96 @@
 
 import UIKit
 
-class MyPageViewController: UIViewController {
+class MyPageViewController: UIViewController, UIScrollViewDelegate {
+    
     let scrollView = UIScrollView()
-    //let profileView = UIView()
+    let contentView = UIView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = .white
+        
+        setUpView()
+//        mypageSetUpView()
+    }
+    
+    private func setUpView() {
         self.title = "마이페이지"
-        // Do any additional setup after loading the view.
-        let settingButton = UIBarButtonItem(image: UIImage(named:"setting_ic"), style: .plain, target: self, action: #selector(selectSettingButton))
+        let settingButton = UIBarButtonItem(image: UIImage(named: "setting_ic"), style: .plain, target: self, action: #selector(selectSettingButton))
         self.navigationItem.setRightBarButton(settingButton, animated: true)
-        mypageSetUpView()
         
+        self.view.addSubview(scrollView)
+        scrollView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
         
+        contentView.backgroundColor = .purple
+        self.scrollView.addSubview(contentView)
+        contentView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+            $0.width.equalToSuperview()
+            $0.height.equalTo(1000)
+        }
+        
+        let profileView = UIView()
+        contentView.addSubview(profileView)
+        profileView.backgroundColor = .white
+        profileView.snp.makeConstraints {
+            $0.top.equalToSuperview()
+            $0.left.equalToSuperview()
+            $0.right.equalToSuperview()
+            $0.height.equalTo(95)
+        }
+        
+        let profileImageView = UIImageView()
+        profileImageView.image = UIImage(named: "myprofile_photo_ic")
+        profileView.addSubview(profileImageView)
+        profileImageView.snp.makeConstraints {
+            $0.left.equalTo(16)
+            $0.centerY.equalToSuperview()
+            $0.width.height.equalTo(56)
+        }
+        
+        let profileNameLabel = UILabel()
+        profileNameLabel.attributedText = .attributeFont(font: .PBold, size: 18, text: "프로자취러", lineHeight: 20)
+        profileView.addSubview(profileNameLabel)
+        profileNameLabel.snp.makeConstraints {
+            $0.top.equalTo(20)
+            $0.left.equalTo(profileImageView.snp.right).inset(-16)
+        }
+        
+        let levelView = LevelView(.flower, isLevelName: true)
+        profileView.addSubview(levelView)
+        levelView.snp.makeConstraints {
+            $0.centerY.equalTo(profileNameLabel)
+            $0.left.equalTo(profileNameLabel.snp.right).inset(-6)
+        }
+        
+        let locationTagView = LocationTagView(location: "서울시 강남구")
+        profileView.addSubview(locationTagView)
+        locationTagView.snp.makeConstraints {
+            $0.top.equalTo(profileNameLabel.snp.bottom).inset(-8)
+            $0.left.equalTo(profileImageView.snp.right).inset(-16)
+        }
+        
+        let profileModifyButton = UIButton()
+        profileModifyButton.setAttributedTitle(.attributeFont(font: .PRegular, size: 13, text: "수정", lineHeight: 13), for: .normal)
+        profileModifyButton.setTitleColor(.nanuriGray5, for: .normal)
+        profileModifyButton.semanticContentAttribute = .forceLeftToRight
+        profileModifyButton.addTarget(self, action: #selector(clickModifyButton), for: .touchUpInside)
+        profileView.addSubview(profileModifyButton)
+        profileModifyButton.snp.makeConstraints {
+            $0.top.equalTo(20)
+            $0.right.equalTo(-16)
+        }
         
         
     }
+    
+    
+    
     // objc - Actions
     @objc func selectSettingButton() {
-        print("setting")
+        print("settingButton Tapped")
     }
     
     @objc func selectMoreButton() {
@@ -51,137 +121,6 @@ class MyPageViewController: UIViewController {
      }
      */
     
-    func mypageSetUpView() {
-        
-        let profileView = UIView()
-        self.view.addSubview(profileView)
-
-        
-        profileView.snp.makeConstraints {
-            $0.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
-            $0.left.right.equalToSuperview()
-            $0.width.equalTo(375)
-            $0.height.equalTo(92)
-        }
-        // Profile
-        let profileImage = UIImageView()
-        profileImage.image = UIImage(named: "myprofile_photo_ic")
-//        profileImage.backgroundColor = .nanuriGray1
-        profileView.addSubview(profileImage)
-        
-        profileImage.layer.cornerRadius = 30
-        //        profileImage.clipsToBounds = true
-        profileImage.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(24)
-            $0.left.equalTo(16)
-            $0.width.height.equalTo(56)
-        }
-        //Profile name
-        let profileName = UILabel()
-        profileName.attributedText = .attributeFont(font: .PBold, size: 18, text: "프로자취러", lineHeight: 20)
-        profileView.addSubview(profileName)
-        profileName.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(28)
-            $0.left.equalToSuperview().inset(88)
-        }
-        let separateView = UIView()
-        separateView.backgroundColor = .nanuriGray2
-        self.view.addSubview(separateView)
-        separateView.snp.makeConstraints { make in
-            make.top.equalToSuperview().inset(92)
-            make.left.right.equalToSuperview()
-            make.height.equalTo(1)
-        }
-        //        let userLevelView = UIView()
-        //        profileView.addSubview(userLevelView)
-        let level = LevelView(.flower, isLevelName: true)
-        profileView.addSubview(level)
-        level.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(38)
-            $0.left.equalTo(profileName.snp.right).inset(-6)
-            //            $0.right.equalToSuperview()
-            //            $0.centerY.equalToSuperview()
-        }
-//        let moreButton = UIButton()
-//        moreButton.setAttributedTitle(.attributeFont(font: .PRegular, size: 13, text: "진행 중인 상품", lineHeight: 13), for: .normal)
-//        moreButton.setImage(UIImage(named: "down_arrow_ic"), for: .normal)
-//        moreButton.setTitleColor(.nanuriGray4, for: .normal)
-//        moreButton.semanticContentAttribute = .forceLeftToRight
-        
-        let profileModifyButton = UIButton()
-        profileModifyButton.setAttributedTitle(.attributeFont(font: .PRegular, size: 13, text: "수정", lineHeight: 13), for: .normal)
-        profileModifyButton.setTitleColor(.nanuriOrange, for: .normal)
-        profileModifyButton.semanticContentAttribute = .forceLeftToRight
-        profileModifyButton.addTarget(self, action: #selector(clickModifyButton), for: .touchUpInside)
-        
-        let locationTagView = LocationTagView(location: "서울시 강남구")
-        profileView.addSubview(locationTagView)
-        locationTagView.snp.makeConstraints {
-            $0.top.equalTo(profileName.snp.bottom).inset(-10)
-            $0.left.equalToSuperview().inset(88)
-        }
-        
-        // 상품리스트 뷰 버튼
-        let myProductsBtn = UIView()
-        self.view.addSubview(myProductsBtn)
-//        myProductsBtn.backgroundColor = .nanuriGray1
-        
-        myProductsBtn.snp.makeConstraints {
-            $0.top.equalTo(profileView.snp.bottom)
-            $0.width.equalTo(375)
-            $0.height.equalTo(50)
-        }
-//        myProductsBtn.layer.borderColor = UIColor.nanuriLightGreen.cgColor
-//        myProductsBtn.layer.borderWidth = 2
-        
-        let myRegisteredProductsList = UIButton()
-        myProductsBtn.addSubview(myRegisteredProductsList)
-        myRegisteredProductsList.backgroundColor = .white
-        myRegisteredProductsList.setAttributedTitle(.attributeFont(font:.PRegular, size: 13, text: "내가 등록한 상품", lineHeight: 15), for: .normal)
-        myRegisteredProductsList.snp.makeConstraints {
-            $0.top.equalTo(profileView.snp.bottom)
-            $0.width.equalTo(187)
-            $0.height.equalTo(44)
-            $0.left.equalToSuperview()
-            
-        }
-        
-         let myBoughtProductsList = UIButton()
-         myProductsBtn.addSubview(myBoughtProductsList)
-        myBoughtProductsList.setImage(UIImage(named:"mypage_boughtBtn_ic"), for: .normal)
-        
-//         myBoughtProductsList.setAttributedTitle(.attributeFont(font: .PRegular, size: 13, text: "내가 구매한 상품", lineHeight: 15), for: .normal)
-         myBoughtProductsList.snp.makeConstraints {
-         $0.top.equalTo(profileView.snp.bottom)
-         $0.width.equalTo(187)
-         $0.height.equalTo(44)
-         $0.right.equalToSuperview()
-         //            $0.left.equalTo(myRegisteredProductsList.snp.right)
-         }
-        let separateView2 = UIView()
-        separateView2.backgroundColor = .nanuriGray2
-        self.view.addSubview(separateView2)
-        separateView2.snp.makeConstraints { make in
-            make.top.equalTo(myProductsBtn.snp.bottom).inset(5)
-            make.left.right.equalToSuperview()
-            make.height.equalTo(1)
-        }
-        let mypageProductLists = UITableView()
-//        mypageProductLists.backgroundColor = .nanuriBlue
-        mypageProductLists.delegate = self
-        mypageProductLists.dataSource = self
-        mypageProductLists.separatorInset = .zero
-        mypageProductLists.separatorStyle = .none
-        mypageProductLists.register(MainProductTableViewCell.self, forCellReuseIdentifier: MainProductTableViewCell.cellId)
-        self.view.addSubview(mypageProductLists)
-        mypageProductLists.snp.makeConstraints {
-//            $0.top.equalTo(myProductsBtn.snp.bottom).offset(20)
-            $0.top.equalTo(myProductsBtn.snp.bottom).inset(-24)
-            $0.left.right.equalToSuperview()
-            $0.bottom.equalToSuperview()
-        }
-        
-    }
     
     
     
@@ -196,84 +135,6 @@ class MyPageViewController: UIViewController {
      */
     
 }
-//
-
-extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 0 {
-            return 1
-        } else {
-            return 2
-        }
-    }
-    
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 100
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.section == 0 {
-            if let reuseCell = tableView.dequeueReusableCell(withIdentifier: "cell") {
-                return reuseCell
-            } else {
-                let cell = UITableViewCell.init(style: .default, reuseIdentifier: "cell")
-                cell.selectionStyle = .none
-    
-                let mypageList = UILabel()
-                mypageList.attributedText = .attributeFont(font: .PBold, size: 13, text: "전체 2개", lineHeight: 15)
-                cell.contentView.addSubview(mypageList)
-                mypageList.snp.makeConstraints { make in
-                    make.left.equalToSuperview().inset(20)
-                    make.top.equalToSuperview()
-                }
-                
-                let moreButton = UIButton()
-                moreButton.setAttributedTitle(.attributeFont(font: .PRegular, size: 13, text: "진행 중인 상품", lineHeight: 13), for: .normal)
-                moreButton.setImage(UIImage(named: "down_arrow_ic"), for: .normal)
-                moreButton.setTitleColor(.nanuriGray4, for: .normal)
-                moreButton.semanticContentAttribute = .forceLeftToRight
-                cell.contentView.addSubview(moreButton)
-                moreButton.snp.makeConstraints { make in
-                    make.right.equalToSuperview().inset(16)
-                    make.top.equalToSuperview()
-                }
-                moreButton.addTarget(self, action: #selector(selectMoreButton), for: .touchUpInside)
-                
-                cell.contentView.snp.makeConstraints { make in
-                    make.left.right.equalToSuperview()
-                }
-                return cell
-            }
-        } else {
-            let identifier = "\(indexPath.row)"
-            
-            if let reuseCell = tableView.dequeueReusableCell(withIdentifier: identifier) {
-                return reuseCell
-            } else {
-                let cell = MainProductTableViewCell.init(style: .default, reuseIdentifier: identifier)
-                cell.selectionStyle = .none
-                
-                return cell
-            }
-        }
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.section == 1 {
-            if indexPath.row == 0 {
-                let productDetailViewController = ProductDetailViewController()
-                productDetailViewController.hidesBottomBarWhenPushed = true
-                self.navigationController?.pushViewController(productDetailViewController, animated: true)
-            }
-        }
-    }
-}
-
-
 
 //extension UIViewController {
 //
