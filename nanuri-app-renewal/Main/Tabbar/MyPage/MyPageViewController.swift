@@ -7,7 +7,41 @@
 
 import UIKit
 
-class MyPageViewController: UIViewController, UIScrollViewDelegate {
+class MyPageViewController: UIViewController {
+    
+    private var isTappedProductListButton: Bool = false
+    private let productListTableView = UITableView()
+    private let registeredProductsListButton: UIButton = {
+        let button = UIButton()
+        button.backgroundColor = .white
+        button.setAttributedTitle(.attributeFont(font: .PRegular, size: 13, text: "내가 등록한 상품", lineHeight: 15), for: .normal)
+        button.setTitleColor(.nanuriGreen, for: .normal)
+        return button
+    }()
+    private let clickedView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .nanuriGreen
+        return view
+    }()
+    private let participatedProductsListButton: UIButton = {
+        let button = UIButton()
+        button.backgroundColor = .white
+        button.setAttributedTitle(.attributeFont(font: .PRegular, size: 13, text: "내가 참여한 상품", lineHeight: 15), for: .normal)
+        button.setTitleColor(.nanuriGray5, for: .normal)
+        return button
+    }()
+    private let clickedView2: UIView = {
+        let view = UIView()
+        view.backgroundColor = .nanuriGray2
+        return view
+    }()
+    private let numberOfListLabel: UILabel = {
+        let label = UILabel()
+        label.attributedText = .attributeFont(font: .PBold, size: 13, text: label.text ?? "전체 0개", lineHeight: 15)
+        label.text = "전체 14개"
+        return label
+    }()
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,7 +54,6 @@ class MyPageViewController: UIViewController, UIScrollViewDelegate {
         let settingButton = UIBarButtonItem(image: UIImage(named: "setting_ic"), style: .plain, target: self, action: #selector(selectSettingButton))
         self.navigationItem.setRightBarButton(settingButton, animated: true)
         
-        let productListTableView = UITableView()
         productListTableView.delegate = self
         productListTableView.dataSource = self
         productListTableView.separatorInset = .zero
@@ -87,8 +120,6 @@ class MyPageViewController: UIViewController, UIScrollViewDelegate {
         }
     }
     
-    
-    
     // objc - Actions
     @objc func selectSettingButton() {
         print("settingButton Tapped")
@@ -104,12 +135,34 @@ class MyPageViewController: UIViewController, UIScrollViewDelegate {
         self.navigationController?.pushViewController(myProfileModifiedView, animated:true)
     }
     
-    @objc func registeredProductsListButtonTapped(_ sender: UIButton) {
-        print("registeredProductsListButtonTapped")
+    @objc func registeredProductsListButtonTapped() {
+        
+        if isTappedProductListButton { // true
+            isTappedProductListButton.toggle()
+            registeredProductsListButton.setTitleColor(.nanuriGreen, for: .normal)
+            clickedView.backgroundColor = .nanuriGreen
+            participatedProductsListButton.setTitleColor(.nanuriGray5, for: .normal)
+            clickedView2.backgroundColor = .nanuriGray2
+            DispatchQueue.main.async {
+                self.productListTableView.reloadData()
+            }
+            numberOfListLabel.text = "전체 14개"
+        }
     }
     
-    @objc func participatedProductsListButtonTapped(_ sender: UIButton) {
-        print("participatedProductsListButtonTapped")
+    @objc func participatedProductsListButtonTapped() {
+        
+        if isTappedProductListButton == false { // false
+            isTappedProductListButton.toggle()
+            registeredProductsListButton.setTitleColor(.nanuriGray5, for: .normal)
+            clickedView.backgroundColor = .nanuriGray2
+            participatedProductsListButton.setTitleColor(.nanuriGreen, for: .normal)
+            clickedView2.backgroundColor = .nanuriGreen
+            DispatchQueue.main.async {
+                self.productListTableView.reloadData()
+            }
+            numberOfListLabel.text = "전체 3개"
+        }
     }
     
     /*
@@ -125,7 +178,11 @@ class MyPageViewController: UIViewController, UIScrollViewDelegate {
 
 extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 14
+        if isTappedProductListButton {
+            return 3
+        } else {
+            return 14
+        }
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -145,10 +202,6 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
             $0.height.equalTo(45)
         }
 
-        let registeredProductsListButton = UIButton()
-        registeredProductsListButton.backgroundColor = .white
-        registeredProductsListButton.setAttributedTitle(.attributeFont(font: .PRegular, size: 13, text: "내가 등록한 상품", lineHeight: 15), for: .normal)
-        registeredProductsListButton.setTitleColor(.nanuriGreen, for: .normal)
         productView.addSubview(registeredProductsListButton)
         registeredProductsListButton.snp.makeConstraints {
             $0.top.equalToSuperview()
@@ -158,8 +211,6 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
         }
         registeredProductsListButton.addTarget(self, action: #selector(registeredProductsListButtonTapped), for: .touchUpInside)
 
-        let clickedView = UIView()
-        clickedView.backgroundColor = .nanuriGreen
         productView.addSubview(clickedView)
         clickedView.snp.makeConstraints {
             $0.top.equalTo(registeredProductsListButton.snp.bottom)
@@ -168,10 +219,6 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
             $0.height.equalTo(3)
         }
 
-        let participatedProductsListButton = UIButton()
-        participatedProductsListButton.backgroundColor = .white
-        participatedProductsListButton.setAttributedTitle(.attributeFont(font: .PRegular, size: 13, text: "내가 참여한 상품", lineHeight: 15), for: .normal)
-        participatedProductsListButton.setTitleColor(.nanuriGray5, for: .normal)
         productView.addSubview(participatedProductsListButton)
         participatedProductsListButton.snp.makeConstraints {
             $0.top.equalToSuperview()
@@ -181,8 +228,6 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
         }
         participatedProductsListButton.addTarget(self, action: #selector(participatedProductsListButtonTapped), for: .touchUpInside)
 
-        let clickedView2 = UIView()
-        clickedView2.backgroundColor = .nanuriGray2
         productView.addSubview(clickedView2)
         clickedView2.snp.makeConstraints {
             $0.top.equalTo(participatedProductsListButton.snp.bottom)
@@ -191,8 +236,6 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
             $0.height.equalTo(3)
         }
 
-        let numberOfListLabel = UILabel()
-        numberOfListLabel.attributedText = .attributeFont(font: .PBold, size: 13, text: "전체 14개", lineHeight: 15)
         header.addSubview(numberOfListLabel)
         numberOfListLabel.snp.makeConstraints {
             $0.top.equalTo(productView.snp.bottom).inset(-25)
