@@ -131,12 +131,20 @@ extension UIView {
 
 extension UITextField {
     func addPadding(width: CGFloat) {
-      let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: width, height: self.frame.height))
-      self.leftView = paddingView
-      self.leftViewMode = ViewMode.always
-      self.rightView = paddingView
-      self.rightViewMode = ViewMode.always
-  }
+        let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: width, height: self.frame.height))
+        self.leftView = paddingView
+        self.leftViewMode = ViewMode.always
+        self.rightView = paddingView
+        self.rightViewMode = ViewMode.always
+    }
+    
+    func toStyledTextField(_ textField: UITextField) {
+        textField.borderStyle = .line
+        textField.clipsToBounds = true
+        textField.layer.borderWidth = 1
+        textField.layer.borderColor = UIColor.nanuriGray2.cgColor
+        textField.layer.cornerRadius = 4
+    }
 }
 
 enum NanuriFontType {
