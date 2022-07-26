@@ -117,7 +117,7 @@ class LoginViewController: UIViewController {
         logoImageView.image = UIImage(named: "login_logo_ic")
         logoImageView.snp.makeConstraints {
             $0.centerX.equalToSuperview()
-            $0.top.equalTo(172)
+            $0.centerY.equalToSuperview().offset(-139)
             $0.width.equalTo(148)
             $0.height.equalTo(48)
         }
