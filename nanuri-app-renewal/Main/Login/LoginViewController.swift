@@ -174,10 +174,7 @@ extension LoginViewController: ASAuthorizationControllerDelegate, ASAuthorizatio
             print("User Name : \((fullName?.givenName ?? "") + (fullName?.familyName ?? ""))")
             print("token : \(String(describing: tokeStr))")
             
-            let registerViewController = RegisterViewController()
-            registerViewController.modalTransitionStyle = .crossDissolve
-            registerViewController.modalPresentationStyle = .overFullScreen
-            self.present(registerViewController, animated: true, completion: nil)
+            self.presentView(RegisterViewController())
             
         default:
             break
