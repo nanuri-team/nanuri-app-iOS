@@ -13,19 +13,76 @@ import KakaoSDKUser
 
 import Alamofire
 
+import AuthenticationServices
+
 class LoginViewController: UIViewController {
-//    var kakaoID: SnsId?
+    
+    let loginView: LoginView = {
+        let view = LoginView()
+        return view
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = .white
-        // Do any additional setup after loading the view.
-        
-        
-        snsloginSetUpView()
+        loginSetUpView()
     }
     
     @objc func selectKakaologin(_ sender: UIButton) {
+        // 카카오톡 설치 여부 확인
+        if (UserApi.isKakaoTalkLoginAvailable()) {
+            self.loginWithKakaoApp()
+        } else {
+            self.loginWithKakaoWeb()
+        }
+    }
+    
+    @objc func selectApplelogin(_ sender: UIButton) {
+        let request = ASAuthorizationAppleIDProvider().createRequest()
+        request.requestedScopes = [.email, .fullName]
+        let authorizationController = ASAuthorizationController(authorizationRequests: [request])
+        
+        authorizationController.delegate = self
+        authorizationController.presentationContextProvider = self
+        authorizationController.performRequests()
+    }
+    
+    private func loginSetUpView() {
+        self.view.backgroundColor = .white
+        
+        self.view.addSubview(loginView)
+        loginView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
+        
+        loginView.kakaoButton.addTarget(self, action: #selector(selectKakaologin), for: .touchUpInside)
+        loginView.appleButton.addTarget(self, action: #selector(selectApplelogin), for: .touchUpInside)
+    }
+    
+    private func presentView(_ viewController: UIViewController) {
+        let registerViewController = viewController
+        registerViewController.modalTransitionStyle = .crossDissolve
+        registerViewController.modalPresentationStyle = .overFullScreen
+        self.present(registerViewController, animated: true, completion: nil)
+    }
+}
+
+// MARK: Kakao Login
+extension LoginViewController {
+    func loginWithKakaoApp() {
+        UserApi.shared.loginWithKakaoTalk { (oauthToken, error) in
+            if let error = error {
+                print(error)
+            } else {
+                print("loginWithKakaoTalk() success.")
+                
+                //do something
+                _ = oauthToken
+                self.userInfo()
+            }
+        }
+    }
+    
+    func loginWithKakaoWeb() {
         UserApi.shared.loginWithKakaoAccount(prompts: [.Login]) { (oauthToken, error) in
             if let error = error {
                 print(error)
@@ -39,65 +96,50 @@ class LoginViewController: UIViewController {
         }
     }
     
-    
-    @objc func selectApplelogin(_ sender: UIButton) {
-        print("apple")
-    }
-    //####
-    func userInfo(){
-//        let strURL = "http://localhost:8080/api/auth/kakao/accounts/"
+    private func userInfo() {
         
         let strURL = "https://nanuri.app/api/auth/kakao/accounts/"
-        //shared 라는 건 singleton 객체라는 것
-        UserApi.shared.me { user, error in
-            if let error = error { /*error 가 !nil*/
+
+        UserApi.shared.me { (user, error) in
+            if let error = error {
                 print(error.localizedDescription)
-                return
-                
             } else {
-                
-                //내부적으로 쓰는 구분..?
-                if let kId =  user?.id {
-                    
+                if let kakaoId = user?.id {
                     guard let user = user,
                           let kakaoAccount = user.kakaoAccount,
                           let email = kakaoAccount.email
                     else { return }
-
-                    UserDefaults.standard.set(email, forKey: "userEmail")
                     
-                    let params: Parameters = ["kakao_id":kId]
+//                    UserDefaults.standard.set(email, forKey: "userEmail")
+                    
+                    let params: Parameters = ["kakao_id": kakaoId]
                     let alamo = AF.request(strURL, method: .post, parameters: params)
                     alamo.responseJSON { response in
                         switch response.result {
                         case .success(let value):
                             print("Success with key: \(value)")
                             
-                            if let token = value as? [String: String] {
-                                if let backToken = token["token"] {
-
-                                    UserDefaults.standard.set(backToken, forKey: "token")
-                                    if let tokenNum = UserDefaults.standard.string(forKey: "token") as? String {
-                                        print(tokenNum)
-                                    }
-
-                                }
-                            }
+//                            if let token = value as? [String: String] {
+//                                if let backToken = token["token"] {
+//
+//                                    UserDefaults.standard.set(backToken, forKey: "token")
+//                                    if let tokenNum = UserDefaults.standard.string(forKey: "token") as? String {
+//                                        print(tokenNum)
+//                                    }
+//                                }
+//                            }
+//
+//                            if let uuid = value as? [String: String] {
+//                                if let userUUID = uuid["uuid"] {
+//                                    UserDefaults.standard.set(userUUID, forKey: "uuid")
+//                                    if let userUuid = UserDefaults.standard.string(forKey: "uuid") as? String {
+//                                        print(userUuid)
+//                                    }
+//                                }
+//                            }
                             
-                            if let uuid = value as? [String: String] {
-                                if let userUUID = uuid["uuid"] {
-                                    UserDefaults.standard.set(userUUID, forKey: "uuid")
-                                    if let userUuid = UserDefaults.standard.string(forKey: "uuid") as? String {
-                                        print(userUuid)
-                                    }
-                                }
-                            }
+                            self.presentView(RegisterViewController())
                             
-                            let registerViewController = RegisterViewController()
-                            registerViewController.modalTransitionStyle = .crossDissolve
-                            registerViewController.modalPresentationStyle = .overFullScreen
-                            self.present(registerViewController, animated: true, completion: nil)
-
                         case .failure(let error):
                             if let error = error.errorDescription {
                                 print(error)
@@ -105,53 +147,45 @@ class LoginViewController: UIViewController {
                         }
                     }
                 }
-                
             }
         }
-    } // ####
-    
-    
-    func snsloginSetUpView(){
-        let logoImageView = UIImageView()
-        self.view.addSubview(logoImageView)
-        logoImageView.image = UIImage(named: "login_logo_ic")
-        logoImageView.snp.makeConstraints {
-            $0.centerX.equalToSuperview()
-            $0.centerY.equalToSuperview().offset(-139)
-            $0.width.equalTo(148)
-            $0.height.equalTo(48)
-        }
-        // Button
-        let kakaoButton = UIButton()
-        kakaoButton.setImage(UIImage(named: "snskakao_ic"), for: .normal)
-        self.view.addSubview(kakaoButton)
-        kakaoButton.snp.makeConstraints {
-            $0.centerX.equalToSuperview()
-            $0.top.equalTo(logoImageView.snp.bottom).offset(164)
-            $0.width.equalTo(311)
-            $0.height.equalTo(46)
-        }
-        kakaoButton.addTarget(self, action: #selector(self.selectKakaologin), for: .touchUpInside)
+    }
+}
+
+// MARK: Apple Login
+extension LoginViewController: ASAuthorizationControllerDelegate, ASAuthorizationControllerPresentationContextProviding {
+    // 로그인을 진행하는 화면
+    func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
+        return self.view.window!
+    }
         
-        let appleButton = UIButton()
-        appleButton.setImage(UIImage(named: "snsapple_ic"), for: .normal)
-        self.view.addSubview(appleButton)
-        appleButton.snp.makeConstraints {
-            $0.centerX.equalToSuperview()
-            $0.top.equalTo(kakaoButton.snp.bottom).offset(10)
-            $0.width.equalTo(311)
-            $0.height.equalTo(46)
+    // 로그인 성공
+    func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
+        switch authorization.credential {
+        case let appleIDCredential as ASAuthorizationAppleIDCredential:
+            let userIdentifier = appleIDCredential.user
+            let fullName = appleIDCredential.fullName
+            let email = appleIDCredential.email
+            let idToken = appleIDCredential.identityToken!
+            let tokeStr = String(data: idToken, encoding: .utf8)
+            
+            print("User ID : \(userIdentifier)")
+            print("User Email : \(email ?? "")")
+            print("User Name : \((fullName?.givenName ?? "") + (fullName?.familyName ?? ""))")
+            print("token : \(String(describing: tokeStr))")
+            
+            let registerViewController = RegisterViewController()
+            registerViewController.modalTransitionStyle = .crossDissolve
+            registerViewController.modalPresentationStyle = .overFullScreen
+            self.present(registerViewController, animated: true, completion: nil)
+            
+        default:
+            break
         }
-        appleButton.addTarget(self, action: #selector(selectApplelogin), for: .touchUpInside)
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    
+    // 로그인 실패
+    func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
+        print(error.localizedDescription)
     }
-    */
-
 }

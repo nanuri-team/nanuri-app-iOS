@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		103DA7C128A104FC004FEA14 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 103DA7C028A104FC004FEA14 /* LoginView.swift */; };
 		349EE88BFBCFEC4B071C4AD0 /* Pods_nanuri_app_renewal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 670A464DDF73C49130CF9703 /* Pods_nanuri_app_renewal.framework */; };
 		39308CC12806FFFB00C41F9F /* CommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39308CC02806FFFB00C41F9F /* CommentTableViewCell.swift */; };
 		39308CCF28073ACE00C41F9F /* NanumSquareRoundB.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 39308CC9280737A600C41F9F /* NanumSquareRoundB.ttf */; };
@@ -70,6 +71,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		103DA7BA28A0EA11004FEA14 /* nanuri-app-renewal.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "nanuri-app-renewal.entitlements"; sourceTree = "<group>"; };
+		103DA7C028A104FC004FEA14 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		39308CC02806FFFB00C41F9F /* CommentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentTableViewCell.swift; sourceTree = "<group>"; };
 		39308CC9280737A600C41F9F /* NanumSquareRoundB.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = NanumSquareRoundB.ttf; sourceTree = "<group>"; };
 		39308CCB280737A600C41F9F /* NanumSquareRoundEB.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = NanumSquareRoundEB.ttf; sourceTree = "<group>"; };
@@ -212,6 +215,7 @@
 		39AD77CD27FB0F4E0022EAC1 /* nanuri-app-renewal */ = {
 			isa = PBXGroup;
 			children = (
+				103DA7BA28A0EA11004FEA14 /* nanuri-app-renewal.entitlements */,
 				39AD77E227FB10100022EAC1 /* Main */,
 				39AD77E327FB10150022EAC1 /* Common */,
 				39AD77E727FB10430022EAC1 /* Delegate */,
@@ -280,6 +284,7 @@
 			isa = PBXGroup;
 			children = (
 				39AD77F127FB11AF0022EAC1 /* LoginViewController.swift */,
+				103DA7C028A104FC004FEA14 /* LoginView.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -595,6 +600,7 @@
 				39AD77F227FB11AF0022EAC1 /* LoginViewController.swift in Sources */,
 				39AD781427FDF28E0022EAC1 /* AllRegionProductTableViewController.swift in Sources */,
 				3954BB952813C9F300C8815E /* AddProductStepTwoViewController.swift in Sources */,
+				103DA7C128A104FC004FEA14 /* LoginView.swift in Sources */,
 				39AD77F027FB11990022EAC1 /* Extension.swift in Sources */,
 				394D4D7A28105C1400A4D669 /* AddProductStepOneViewController.swift in Sources */,
 			);
@@ -725,9 +731,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "nanuri-app-renewal/nanuri-app-renewal.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = P5A4NBG7AB;
+				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "nanuri-app-renewal/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "나누리";
@@ -759,9 +766,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "nanuri-app-renewal/nanuri-app-renewal.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = P5A4NBG7AB;
+				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "nanuri-app-renewal/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "나누리";
