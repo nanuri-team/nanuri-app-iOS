@@ -7,10 +7,21 @@
 
 import Foundation
 
-//struct SocialLogins: Decodable {
-//    var data: [SnsId]
-//
-//}
+struct SocialLogin: Codable {
+    let token: String
+    let type: String
+    let uuid: String
+}
+
+extension Decodable {
+    static func decode<T: Decodable>(dictionary: [String: String]) throws -> T {
+        let data = try JSONSerialization.data(withJSONObject: dictionary, options: [.fragmentsAllowed])
+        return try JSONDecoder().decode(T.self, from: data)
+    }
+}
+
+
+
 struct SNSPostResponse: Decodable {
     var data: SnsId
 }
