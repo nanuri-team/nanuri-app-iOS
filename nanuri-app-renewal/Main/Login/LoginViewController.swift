@@ -110,7 +110,8 @@ extension LoginViewController {
                           let email = kakaoAccount.email
                     else { return }
                     
-//                    UserDefaults.standard.set(email, forKey: "userEmail")
+                    // email 어디에 쓰나요??
+                    UserDefaults.standard.set(email, forKey: "userEmail")
                     
                     let params: Parameters = ["kakao_id": kakaoId]
                     let alamo = AF.request(strURL, method: .post, parameters: params)
@@ -119,24 +120,19 @@ extension LoginViewController {
                         case .success(let value):
                             print("Success with key: \(value)")
                             
-//                            if let token = value as? [String: String] {
-//                                if let backToken = token["token"] {
-//
-//                                    UserDefaults.standard.set(backToken, forKey: "token")
-//                                    if let tokenNum = UserDefaults.standard.string(forKey: "token") as? String {
-//                                        print(tokenNum)
-//                                    }
-//                                }
-//                            }
-//
-//                            if let uuid = value as? [String: String] {
-//                                if let userUUID = uuid["uuid"] {
-//                                    UserDefaults.standard.set(userUUID, forKey: "uuid")
-//                                    if let userUuid = UserDefaults.standard.string(forKey: "uuid") as? String {
-//                                        print(userUuid)
-//                                    }
-//                                }
-//                            }
+                            if let loginInfo = value as? [String: String] {
+                                do {
+                                    let object: SocialLogin = try SocialLogin.decode(dictionary: loginInfo)
+                                    print("object --> \(object)") // ✅
+                                    
+                                    let encoder = JSONEncoder()
+                                    if let encoded = try? encoder.encode(object) {
+                                        UserDefaults.standard.set(encoded, forKey: "loginInfo")
+                                    }
+                                } catch {
+                                    // error handler
+                                }
+                            }
                             
                             self.presentView(RegisterViewController())
                             
