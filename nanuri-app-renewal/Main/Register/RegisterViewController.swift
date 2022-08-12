@@ -7,265 +7,194 @@
 
 import UIKit
 import Alamofire
+import SafariServices
 
 class RegisterViewController: UIViewController {
-//    var user: UserInfo?
-    var userParams: [String : Any] = [:]
-    // 사용자정보
-    let nickNameTextField = UITextField()
     
-    // 사용자정보
-    var nickname = UITextField()
+    let registerView: RegisterView = {
+        let view = RegisterView()
+        return view
+    }()
+    
+    var termsCheck: Bool = false
+    var privacyCheck: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         setUpView()
-        
-       
+        registerView.nickNameTextField.delegate = self
+    }
+    
+    func test(isOn: Bool) {
+        switch isOn {
+        case true:
+            if termsCheck == true && privacyCheck == true {
+                registerView.registerButton.isUserInteractionEnabled = true
+                registerView.registerButton.backgroundColor = .nanuriGreen
+            }
+        case false:
+            registerView.registerButton.isUserInteractionEnabled = false
+            registerView.registerButton.backgroundColor = .nanuriGray3
+        }
     }
     
     @objc func selectTermsCheckButton(sender: UIButton) {
         if sender.isSelected {
             sender.isSelected = false
+            termsCheck = false
         } else {
             sender.isSelected = true
+            termsCheck = true
         }
     }
     
     @objc func selectPrivacyCheckButton(sender: UIButton) {
         if sender.isSelected {
             sender.isSelected = false
+            privacyCheck = false
         } else {
             sender.isSelected = true
+            privacyCheck = true
         }
     }
-    @objc func actSignUp(){
-       
-//        saveUserInfo()
+    
+    @objc func tappedPrivacyButton(sender: UIButton) {
+        guard let url = URL(string: "https://www.google.com") else { return }
+        let safari = SFSafariViewController(url: url)
+        present(safari, animated: true)
+    }
+    
+    @objc func tappedDismissButton() {
+        self.dismiss(animated: true, completion: nil)
         
-        guard let nickNameText = nickNameTextField.text else { return }
-        if nickNameText.isEmpty {
-            return
-        } else {
-            UserDefaults.standard.set(nickNameText, forKey: "nickName")
-            if UserDefaults.standard.string(forKey: "nickName") != nil {
+        // dismiss 하면서 저장된 UserDefaults 삭제
+        // DB에서도 삭제해야하는지?
+        for key in UserDefaults.standard.dictionaryRepresentation().keys {
+            UserDefaults.standard.removeObject(forKey: key.description)
+        }
+    }
+    
+    @objc func tappedSignUpButton(_ sender: UIButton) {
+        if registerView.nickNameTextField.text?.isEmpty != nil && (registerView.nickNameTextField.text?.count)! >= 2 {
+            if termsCheck == true && privacyCheck == true {
+                print("--> 데이터 넘깁니다!")
+                self.saveUserInfo()
+                print("--> 데이터 받았습니다!")
                 let tabbarViewController = TabBarController()
                 tabbarViewController.modalTransitionStyle = .crossDissolve
                 tabbarViewController.modalPresentationStyle = .overFullScreen
                 self.present(tabbarViewController, animated: true, completion: nil)
+            } else {
+                let alert = UIAlertController(title: "약관에 동의해주세요.", message: "약관 동의는 필수입니다.", preferredStyle: .alert)
+                let action = UIAlertAction(title: "확인", style: .default, handler: { _ in print("test")} )
+                alert.addAction(action)
+                present(alert, animated: true)
             }
-//            self.dismiss(animated: true, completion: nil)
+        } else {
+            let alert = UIAlertController(title: "닉네임을 입력해주세요.", message: "닉네임은 필수입니다.", preferredStyle: .alert)
+            let action = UIAlertAction(title: "확인", style: .default, handler: { _ in print("test")} )
+            alert.addAction(action)
+            present(alert, animated: true)
         }
-        
     }
-    
-    @objc func selectSignUpBtn(_ sender: Any) {
-        
-        saveUserInfo()
-    }
-    /*
-    func saveUserInfo() {
-            guard let userUUID = UserDefaults.standard.string(forKey: "uuid") else { return }
-            let strURL = "https://nanuri.app/api/v1/users/\(userUUID)"
-    //        let strURL = "http://localhost:8080/api/v1/users/"
-            guard let userToken = UserDefaults.standard.string(forKey: "token") else { return }
-            
-            guard let userEmail = UserDefaults.standard.string(forKey: "email") else { return }
-            
-            guard let registerNickname = nickNameTextField.text else { return }
-           print("nickname: \(registerNickname)")
-            let header: HTTPHeaders = [
-                "Content-Type" : "multipart/form-data",
-                "Content-Disposition": "form-data",
-                "Authorization": "Token \(userToken)"
-            ]
-            
-            AF.upload(multipartFormData: { multipartFormData in
-                multipartFormData.append(Data(registerNickname.utf8), withName: "nickname")
-            }, to: strURL, method: .patch, headers: header).responseJSON { response in
-                print("[response result] \(response)")
-                switch response.result {
-                case .success(_):
-                    print("success: \(response)")
-                case .failure(let error):
-                    print(error.localizedDescription)
+
+    private func saveUserInfo() {
+        if let tokenNum = UserDefaults.standard.object(forKey: "loginInfo") as? Data {
+            let decoder = JSONDecoder()
+            if let loadedToken = try? decoder.decode(SocialLogin.self, from: tokenNum) {
+                print(" 저장됐음! \(loadedToken.token), \(loadedToken.uuid)")
+                
+                let strURL = "https://nanuri.app/api/v1/users/\(loadedToken.uuid)/"
+                
+                guard let registerNickName = registerView.nickNameTextField.text else { return }
+                
+                let headers: HTTPHeaders = [
+                    "Content-Type": "multipart/form-data",
+                    "Authorization": "Token \(loadedToken.token)"
+                ]
+                let userParams: Parameters = ["nickname": registerNickName]
+                
+                AF.upload(multipartFormData: { multiFormData in
+                    for (key, value) in userParams {
+                        multiFormData.append(Data("\(value)".utf8), withName: key)
+                    }
+                }, to: strURL, method: .patch, headers: headers).responseString { response in
+                    switch response.result {
+                    case .success(let value):
+                        print("value -> \(value)")
+                    case .failure(let error):
+                        print("error -> \(error.localizedDescription)")
+                    }
                 }
             }
-            
-    //        let userParams:Parameters = ["nickname": registerNickname]
-            
-
-    //        print("@@@\(registerNickname)")
-    //        AF.upload(multipartFormData: { multiFormData in
-    //            for (key, value) in userParams {
-    //                multiFormData.append(Data("\(value)".utf8), withName: key)
-    //            }
-    //        }, to: strURL, headers: header).responseString { response in
-    //            switch response.result {
-    //            case .success(_):
-    //                print("success:\(response)")
-    //                guard let value = response.value else { return }
-    //                Networking.sharedObject.patchUserListRequest(url: strURL, params: userParams) { response in
-    //                    print(response)
-    //                    print("유저정보:\(userParams)")
-    //                }
-    //                let homeVC = HomeViewController()
-    //
-    //                homeVC.modalPresentationStyle = .fullScreen
-    //                self.present(homeVC, animated: true, completion: nil)
-    //
-    //            case .failure(let error):
-    //                print(error.localizedDescription)
-    //
-    //            }
-    //        }
-            
-            
         }
-    */
-    //@@@@@@@@
-    
-    func saveUserInfo() {
-        guard let userUUID = UserDefaults.standard.string(forKey: "uuid") else { return }
-        let strURL = "https://nanuri.app/api/v1/users/\(userUUID)"
-//        let strURL = "http://localhost:8080/api/v1/users/"
-        guard let userToken = UserDefaults.standard.string(forKey: "token") else { return }
-        
-        guard let userEmail = UserDefaults.standard.string(forKey: "email") else { return }
-        
-        guard let registerNickname = nickNameTextField.text else { return }
-       
-        let header: HTTPHeaders = [
-            "Content-Type" : "multipart/form-data",
-            "Authorization": "Token \(userToken)"
-        ]
-        let userParams:Parameters = ["nickname": registerNickname]
-        
-        AF.upload( multipartFormData: { multiFormData in
-            for (key, value) in userParams {
-                multiFormData.append(Data("\(value)".utf8), withName: key)
-            }
-        }, to: strURL,method:.patch , headers: header).responseString { response in
-            switch response.result {
-            case .success(_):
-                print("success:\(response)")
-                guard let value = response.value else { return }
-                print("value: \(value)")
-                let tabVC = TabBarController()
-                
-                tabVC.modalPresentationStyle = .fullScreen
-                self.present(tabVC, animated: true, completion: nil)
-
-            case .failure(let error):
-                print(error.localizedDescription)
-
-            }
-        }
-        
-        
     }
-     
-    //@@@@@@@@
     
     func setUpView() {
         self.view.backgroundColor = .white
         
-        let closeButton = UIButton()
-        closeButton.setImage(UIImage(named: "close_ic"), for: .normal)
-        self.view.addSubview(closeButton)
-        closeButton.snp.makeConstraints { make in
-            make.top.equalTo(self.view.safeAreaLayoutGuide).inset(12)
-            make.left.equalToSuperview().inset(16)
+        self.view.addSubview(registerView)
+        registerView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
         }
         
-        let welcomeTitleLabel = UILabel()
-        welcomeTitleLabel.attributedText = .attributeFont(font: .PBold, size: 28, text: "환영합니다!", lineHeight: 34)
-        self.view.addSubview(welcomeTitleLabel)
-        welcomeTitleLabel.snp.makeConstraints { make in
-            make.top.equalTo(closeButton.snp.bottom).inset(-66)
-            make.left.right.equalToSuperview().inset(24)
-        }
+        registerView.closeButton.addTarget(self, action: #selector(tappedDismissButton), for: .touchUpInside)
+
+        registerView.registerButton.addTarget(self, action: #selector(tappedSignUpButton), for: .touchUpInside)
+
+        registerView.termsCheckButton.addTarget(self, action: #selector(selectTermsCheckButton), for: .touchUpInside)
+
+        registerView.termsLinkButton.addTarget(self, action: #selector(tappedPrivacyButton), for: .touchUpInside)
+
+        registerView.privacyCheckButton.addTarget(self, action: #selector(selectPrivacyCheckButton), for: .touchUpInside)
+
+        registerView.privacyLinkButton.addTarget(self, action: #selector(tappedPrivacyButton), for: .touchUpInside)
         
-        let requiredLabel = UILabel()
-        requiredLabel.attributedText = .attributeFont(font: .PSemibold, size: 16, text: "*", lineHeight: 19)
-        requiredLabel.textColor = .nanuriRed
-        self.view.addSubview(requiredLabel)
-        requiredLabel.snp.makeConstraints { make in
-            make.top.equalTo(welcomeTitleLabel.snp.bottom).inset(-32)
-            make.left.equalToSuperview().inset(24)
-        }
-        
-        
-        let nickNameLabel = UILabel()
-        nickNameLabel.attributedText = .attributeFont(font: .PSemibold, size: 16, text: "닉네임을 설정해주세요.", lineHeight: 19)
-        self.view.addSubview(nickNameLabel)
-        nickNameLabel.snp.makeConstraints { make in
-            make.top.equalTo(welcomeTitleLabel.snp.bottom).inset(-32)
-            make.left.equalTo(requiredLabel.snp.right).inset(-4)
-        }
-        
-        
-        nickNameTextField.placeholder = "닉네임(영문, 한글 20자 이내)"
-        nickNameTextField.attributedText = .attributeFont(font: .PRegular, size: 15, text: "", lineHeight: 18)
-        nickNameTextField.borderStyle = .line
-        nickNameTextField.clipsToBounds = true
-        nickNameTextField.layer.borderWidth = 1
-        nickNameTextField.layer.borderColor = UIColor.nanuriGray2.cgColor
-        nickNameTextField.layer.cornerRadius = 4
-        nickNameTextField.addPadding(width: 16)
-        self.view.addSubview(nickNameTextField)
-        nickNameTextField.snp.makeConstraints { make in
-            make.top.equalTo(nickNameLabel.snp.bottom).inset(-10)
-            make.left.right.equalToSuperview().inset(24)
-            make.height.equalTo(44)
-        }
-        
-        let registerButton = MainButton(style: .main)
-        registerButton.setAttributedTitle(.attributeFont(font: .PBold, size: 15, text: "회원가입", lineHeight: 18), for: .normal)
-        registerButton.addTarget(self, action: #selector(selectSignUpBtn), for: .touchUpInside)
-        self.view.addSubview(registerButton)
-        registerButton.addTarget(self, action: #selector(actSignUp), for: .touchUpInside)
-        registerButton.snp.makeConstraints { make in
-            make.bottom.equalTo(self.view.safeAreaLayoutGuide).inset(32)
-            make.left.right.equalToSuperview().inset(16)
-        }
-        
-        let termsCheckButton = CheckboxButton()
-        self.view.addSubview(termsCheckButton)
-        termsCheckButton.snp.makeConstraints { make in
-            make.bottom.equalTo(registerButton.snp.top).inset(-32)
-            make.left.equalToSuperview().inset(32)
-        }
-        termsCheckButton.addTarget(self, action: #selector(selectTermsCheckButton), for: .touchUpInside)
-        
-        let termsLabel = UILabel()
-        termsLabel.attributedText = .attributeFont(font: .PRegular, size: 15, text: "이용약관 에 동의합니다. (필수)", lineHeight: 18)
-        self.view.addSubview(termsLabel)
-        termsLabel.snp.makeConstraints { make in
-            make.bottom.equalTo(registerButton.snp.top).inset(-32)
-            make.left.equalTo(termsCheckButton.snp.right).inset(-10)
-        }
-        
-        let privacyCheckButton = CheckboxButton()
-        privacyCheckButton.isSelected = false
-        self.view.addSubview(privacyCheckButton)
-        privacyCheckButton.snp.makeConstraints { make in
-            make.bottom.equalTo(termsCheckButton.snp.top).inset(-17)
-            make.left.equalToSuperview().inset(32)
-        }
-        privacyCheckButton.addTarget(self, action: #selector(selectPrivacyCheckButton), for: .touchUpInside)
-        
-        let privacyLabel = UILabel()
-        privacyLabel.attributedText = .attributeFont(font: .PRegular, size: 15, text: "개인정보처리방침 에 동의합니다. (필수)", lineHeight: 18)
-        self.view.addSubview(privacyLabel)
-        privacyLabel.snp.makeConstraints { make in
-            make.bottom.equalTo(termsLabel.snp.top).inset(-22)
-            make.left.equalTo(privacyCheckButton.snp.right).inset(-10)
-        }
-        
-        
+        // 화면 아무 곳이나 클릭시 키보드 사라지게 하는 코드
+        let tapGesture = UITapGestureRecognizer(target: view, action: #selector(view.endEditing))
+        self.view.addGestureRecognizer(tapGesture)
+    }
+}
+
+extension RegisterViewController: UITextFieldDelegate {
+    // 키보드의 Return 버튼을 클릭했을시 키보드가 사라지게
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        registerView.nickNameTextField.resignFirstResponder()
+        return true
     }
     
-
+    // 텍스트필드에 편집이 시작될때
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        if textField.isEditing && ((textField.text?.isEmpty) != nil) {
+            textField.layer.borderColor = UIColor.nanuriGreen.cgColor
+        }
+    }
+    
+    // 텍스트필드에 편집이 중지될떄
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        // 사용가능한 닉네임인지 아닌지 체크해서 알려주기
+        if textField.text?.isEmpty != nil {
+            // 사용가능하면 체크표시
+            if (textField.text?.count)! >= 2 {
+                registerView.checkButton.backgroundColor = .white
+                registerView.checkButton.setImage(UIImage(systemName: "checkmark"), for: .normal)
+                registerView.checkButton.tintColor = .nanuriGreen
+                registerView.checkLabel.attributedText = .attributeFont(font: .PMedium, size: 13, text: "사용 가능한 닉네임입니다.", lineHeight: 15)
+                registerView.checkLabel.textColor = .nanuriGreen
+                textField.layer.borderColor = UIColor.nanuriGray2.cgColor
+            } else if (textField.text?.count)! >= 1 && (textField.text?.count)! < 2 {
+                registerView.checkButton.backgroundColor = .white
+                registerView.checkButton.setImage(UIImage(systemName: "exclamationmark"), for: .normal)
+                registerView.checkButton.tintColor = .nanuriRed
+                registerView.checkLabel.attributedText = .attributeFont(font: .PMedium, size: 13, text: "이미 등록된 닉네임입니다.", lineHeight: 15)
+                registerView.checkLabel.textColor = .nanuriRed
+                textField.layer.borderColor = UIColor.nanuriRed.cgColor
+            } else {
+                textField.layer.borderColor = UIColor.nanuriGray2.cgColor
+                registerView.checkButton.setImage(nil, for: .normal)
+                registerView.checkLabel.textColor = .clear
+            }
+        }
+    }
 }
