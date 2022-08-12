@@ -67,9 +67,6 @@ extension Networking {
             "Authorization": "Token \(Singleton.shared.userToken)",
             "Content-Type" : "multipart/form-data"
         ]
-        AF.upload(multipartFormData: { <#MultipartFormData#> in
-            <#code#>
-        }, to: url, method: .patch, headers: header)
         AF.upload(multipartFormData: { multiFormData in
             for (key, value) in params {
                 multiFormData.append(Data("\(value)".utf8), withName: key)

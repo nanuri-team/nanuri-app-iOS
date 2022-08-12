@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		103DA7C128A104FC004FEA14 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 103DA7C028A104FC004FEA14 /* LoginView.swift */; };
+		103DA84A28A536E5004FEA14 /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 103DA84928A536E5004FEA14 /* RegisterView.swift */; };
 		349EE88BFBCFEC4B071C4AD0 /* Pods_nanuri_app_renewal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 670A464DDF73C49130CF9703 /* Pods_nanuri_app_renewal.framework */; };
 		39308CC12806FFFB00C41F9F /* CommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39308CC02806FFFB00C41F9F /* CommentTableViewCell.swift */; };
 		39308CCF28073ACE00C41F9F /* NanumSquareRoundB.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 39308CC9280737A600C41F9F /* NanumSquareRoundB.ttf */; };
@@ -73,6 +74,7 @@
 /* Begin PBXFileReference section */
 		103DA7BA28A0EA11004FEA14 /* nanuri-app-renewal.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "nanuri-app-renewal.entitlements"; sourceTree = "<group>"; };
 		103DA7C028A104FC004FEA14 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		103DA84928A536E5004FEA14 /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
 		39308CC02806FFFB00C41F9F /* CommentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentTableViewCell.swift; sourceTree = "<group>"; };
 		39308CC9280737A600C41F9F /* NanumSquareRoundB.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = NanumSquareRoundB.ttf; sourceTree = "<group>"; };
 		39308CCB280737A600C41F9F /* NanumSquareRoundEB.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = NanumSquareRoundEB.ttf; sourceTree = "<group>"; };
@@ -302,6 +304,7 @@
 			isa = PBXGroup;
 			children = (
 				39AD77F327FB11BA0022EAC1 /* RegisterViewController.swift */,
+				103DA84928A536E5004FEA14 /* RegisterView.swift */,
 			);
 			path = Register;
 			sourceTree = "<group>";
@@ -559,6 +562,7 @@
 				3954BBA92814363F00C8815E /* ChattingViewController.swift in Sources */,
 				394D4D7C28105C6D00A4D669 /* StepItemView.swift in Sources */,
 				39AD780C27FB327F0022EAC1 /* MainProductTableViewCell.swift in Sources */,
+				103DA84A28A536E5004FEA14 /* RegisterView.swift in Sources */,
 				39AD77FE27FB12030022EAC1 /* BookmarkViewController.swift in Sources */,
 				39AD781D27FF42500022EAC1 /* LevelView.swift in Sources */,
 				39AD780627FB22DD0022EAC1 /* DeliveryTagView.swift in Sources */,
