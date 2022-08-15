@@ -69,7 +69,8 @@ final class RegisterView: UIView {
     
     var termsLinkButton: UIButton = {
         let button = UIButton()
-        button.setAttributedTitle(.attributeFontStyle(font: .PRegular, size: 15, text: "이용약관", lineHeight: 18), for: .normal)
+        button.setAttributedTitle(.attributeFont(font: .PRegular, size: 15, text: "이용약관", lineHeight: 18), for: .normal)
+
         button.setTitleColor(.nanuriGray7, for: .normal)
         return button
     }()
@@ -95,7 +96,7 @@ final class RegisterView: UIView {
     
     let privacyLinkButton: UIButton = {
         let button = UIButton()
-        button.setAttributedTitle(.attributeFontStyle(font: .PRegular, size: 15, text: "개인정보처리방침", lineHeight: 18), for: .normal)
+        button.setAttributedTitle(.attributeFont(font: .PRegular, size: 15, text: "개인정보처리방침", lineHeight: 18), for: .normal)
         button.setTitleColor(.nanuriGray7, for: .normal)
         return button
     }()
@@ -223,17 +224,5 @@ final class RegisterView: UIView {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-}
-
-extension UIButton {
-    func setUnderline() {
-        guard let title = title(for: .normal) else { return }
-        let attributedString = NSMutableAttributedString(string: title)
-        attributedString.addAttribute(.underlineStyle,
-                                      value: NSUnderlineStyle.single.rawValue,
-                                      range: NSRange(location: 0, length: title.count)
-        )
-        setAttributedTitle(attributedString, for: .normal)
     }
 }
