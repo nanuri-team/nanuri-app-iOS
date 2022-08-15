@@ -199,6 +199,46 @@ extension NSAttributedString {
     }
 }
 
+extension NSAttributedString {
+    class func attributeFontStyle(font: NanuriFontType, size: CGFloat, text: String, lineHeight: CGFloat) -> NSAttributedString {
+        
+        let attrString = NSMutableAttributedString(string: text)
+        let paragraphStyle = NSMutableParagraphStyle()
+        
+        if #available(iOS 14.0, *) {
+            paragraphStyle.lineBreakStrategy = .hangulWordPriority
+        } else {
+            paragraphStyle.lineBreakStrategy = .pushOut
+        }
+        
+        var setFont = UIFont()
+        switch font {
+        case .NSRBold:
+            setFont = UIFont(name: "NanumSquareRoundB", size: size)!
+        case .NSRExtrabold:
+            setFont = UIFont(name: "NanumSquareRoundEB", size: size)!
+        case .PRegular:
+            setFont = UIFont(name: "Pretendard-Regular", size: size)!
+        case .PMedium:
+            setFont = UIFont(name: "Pretendard-Medium", size: size)!
+        case .PSemibold:
+            setFont = UIFont(name: "Pretendard-SemiBold", size: size)!
+        case .PBold:
+            setFont = UIFont(name: "Pretendard-Bold", size: size)!
+        }
+        
+        paragraphStyle.lineSpacing = lineHeight - setFont.lineHeight
+        
+        attrString.addAttributes([
+                    NSAttributedString.Key.paragraphStyle : paragraphStyle,
+                    .font : setFont,
+                    NSAttributedString.Key.underlineStyle : NSUnderlineStyle.single.rawValue,
+                ], range: NSMakeRange(0, attrString.length))
+        
+        return attrString
+    }
+}
+
 extension Int {
     func toCategoryName() -> String {
         switch self {

@@ -70,6 +70,7 @@ final class RegisterView: UIView {
     var termsLinkButton: UIButton = {
         let button = UIButton()
         button.setAttributedTitle(.attributeFont(font: .PRegular, size: 15, text: "이용약관", lineHeight: 18), for: .normal)
+
         button.setTitleColor(.nanuriGray7, for: .normal)
         return button
     }()
