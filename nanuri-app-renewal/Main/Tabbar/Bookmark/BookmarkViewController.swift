@@ -14,21 +14,21 @@ class BookmarkTableViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setupUI()
+        setupView()
     }
     
-    private func setupUI() {
+    private func setupView() {
         self.view.backgroundColor = .white
         self.title = "즐겨찾기"
         
         let searchButton = UIButton()
         searchButton.setImage(UIImage(named: "search_ic"), for: .normal)
-        searchButton.addTarget(self, action: #selector(actChangeSearchBar), for: .touchUpInside)
+        searchButton.addTarget(self, action: #selector(tappedSearchItem), for: .touchUpInside)
         let searchItem = UIBarButtonItem(customView: searchButton)
         
         let notificationButton = UIButton()
         notificationButton.setImage(UIImage(named: "notification_ic"), for: .normal)
-        notificationButton.addTarget(self, action: #selector(actChangeSearchBar), for: .touchUpInside)
+        notificationButton.addTarget(self, action: #selector(tappedNotificationItem), for: .touchUpInside)
         let notificationItem = UIBarButtonItem(customView: notificationButton)
         
         self.navigationItem.rightBarButtonItems = [notificationItem, searchItem]
@@ -44,11 +44,18 @@ class BookmarkTableViewController: UIViewController {
         }
     }
 
-    @objc func actChangeSearchBar() {
+    @objc func tappedSearchItem() {
         let searchVC = SearchViewController()
         searchVC.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(searchVC, animated: true)
         print("moved SearchBar")
+    }
+    
+    @objc func tappedNotificationItem() {
+        let NotificationVC = NotificationViewController()
+        NotificationVC.hidesBottomBarWhenPushed = true
+        self.navigationController?.pushViewController(NotificationVC, animated: true)
+        print("moved notification")
     }
 }
 
