@@ -10,10 +10,21 @@ import UIKit
 class NotificationViewController: UIViewController {
     
     let tableView = UITableView(frame: .zero, style: .plain)
+    let emptyNotiView: EmptyNotiView = {
+        let view = EmptyNotiView()
+        return view
+    }()
+    let data: [String] = ["test"]
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
+        
+        if data.count == 0 {
+            self.emptyNotiView.isHidden = false
+        } else {
+            self.emptyNotiView.isHidden = true
+        }
     }
     
     private func setupView() {
@@ -37,8 +48,11 @@ class NotificationViewController: UIViewController {
             make.edges.equalToSuperview()
         }
         
-        // 알림이 없을때와 있을때
-        
+        // 알림이 없을때
+        tableView.addSubview(emptyNotiView)
+        emptyNotiView.snp.makeConstraints { make in
+            make.center.equalToSuperview()
+        }
     }
     
     @objc func tappedBackButton() {
@@ -52,7 +66,7 @@ class NotificationViewController: UIViewController {
 
 extension NotificationViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return data.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
