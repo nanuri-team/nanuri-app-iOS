@@ -11,6 +11,7 @@
 		103DA84A28A536E5004FEA14 /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 103DA84928A536E5004FEA14 /* RegisterView.swift */; };
 		103DA85A28AA7E56004FEA14 /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 103DA85928AA7E56004FEA14 /* NotificationViewController.swift */; };
 		103DA85E28AA91BD004FEA14 /* NotificationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 103DA85D28AA91BD004FEA14 /* NotificationTableViewCell.swift */; };
+		103DA89528ABAF33004FEA14 /* EmptyNotiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 103DA89428ABAF33004FEA14 /* EmptyNotiView.swift */; };
 		349EE88BFBCFEC4B071C4AD0 /* Pods_nanuri_app_renewal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 670A464DDF73C49130CF9703 /* Pods_nanuri_app_renewal.framework */; };
 		39308CC12806FFFB00C41F9F /* CommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39308CC02806FFFB00C41F9F /* CommentTableViewCell.swift */; };
 		39308CCF28073ACE00C41F9F /* NanumSquareRoundB.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 39308CC9280737A600C41F9F /* NanumSquareRoundB.ttf */; };
@@ -79,6 +80,7 @@
 		103DA84928A536E5004FEA14 /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
 		103DA85928AA7E56004FEA14 /* NotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
 		103DA85D28AA91BD004FEA14 /* NotificationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationTableViewCell.swift; sourceTree = "<group>"; };
+		103DA89428ABAF33004FEA14 /* EmptyNotiView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyNotiView.swift; sourceTree = "<group>"; };
 		39308CC02806FFFB00C41F9F /* CommentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentTableViewCell.swift; sourceTree = "<group>"; };
 		39308CC9280737A600C41F9F /* NanumSquareRoundB.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = NanumSquareRoundB.ttf; sourceTree = "<group>"; };
 		39308CCB280737A600C41F9F /* NanumSquareRoundEB.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = NanumSquareRoundEB.ttf; sourceTree = "<group>"; };
@@ -161,6 +163,7 @@
 			isa = PBXGroup;
 			children = (
 				103DA85928AA7E56004FEA14 /* NotificationViewController.swift */,
+				103DA89428ABAF33004FEA14 /* EmptyNotiView.swift */,
 			);
 			path = Notification;
 			sourceTree = "<group>";
@@ -568,6 +571,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				39AD780227FB12180022EAC1 /* User.swift in Sources */,
+				103DA89528ABAF33004FEA14 /* EmptyNotiView.swift in Sources */,
 				875B688C2806098700D083C9 /* MyRegisterProductViewController.swift in Sources */,
 				3954BBA528142FE900C8815E /* MyChatMessageViewCell.swift in Sources */,
 				3954BBA028142FA000C8815E /* ChattingListTableViewController.swift in Sources */,
