@@ -46,6 +46,7 @@
 		39788AF82819CC6900ABD918 /* Chat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39788AF72819CC6900ABD918 /* Chat.swift */; };
 		397ACBA42805F5B500E83FA0 /* LocationPermissionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397ACBA32805F5B500E83FA0 /* LocationPermissionViewController.swift */; };
 		397ACBA62805F93D00E83FA0 /* CheckMyLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397ACBA52805F93D00E83FA0 /* CheckMyLocationViewController.swift */; };
+		398B709C28B526A20039DA3D /* CategoryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 398B709B28B526A20039DA3D /* CategoryButton.swift */; };
 		39AD77CF27FB0F4E0022EAC1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39AD77CE27FB0F4E0022EAC1 /* AppDelegate.swift */; };
 		39AD77D127FB0F4E0022EAC1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39AD77D027FB0F4E0022EAC1 /* SceneDelegate.swift */; };
 		39AD77D827FB0F500022EAC1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 39AD77D727FB0F500022EAC1 /* Assets.xcassets */; };
@@ -120,6 +121,7 @@
 		39788AF72819CC6900ABD918 /* Chat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chat.swift; sourceTree = "<group>"; };
 		397ACBA32805F5B500E83FA0 /* LocationPermissionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationPermissionViewController.swift; sourceTree = "<group>"; };
 		397ACBA52805F93D00E83FA0 /* CheckMyLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckMyLocationViewController.swift; sourceTree = "<group>"; };
+		398B709B28B526A20039DA3D /* CategoryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryButton.swift; sourceTree = "<group>"; };
 		39AD77CB27FB0F4E0022EAC1 /* nanuri-app-renewal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "nanuri-app-renewal.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		39AD77CE27FB0F4E0022EAC1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		39AD77D027FB0F4E0022EAC1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -295,6 +297,7 @@
 				394D4D7B28105C6D00A4D669 /* StepItemView.swift */,
 				3954BBAA2816FCED00C8815E /* Networking.swift */,
 				39788AF228188A3B00ABD918 /* Singleton.swift */,
+				398B709B28B526A20039DA3D /* CategoryButton.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -637,6 +640,7 @@
 				3954BBA7281433FC00C8815E /* YourChatMessageTableViewCell.swift in Sources */,
 				39788AF528188B5700ABD918 /* Posts.swift in Sources */,
 				87D17BA027FB5BF100E171A2 /* SearchViewController.swift in Sources */,
+				398B709C28B526A20039DA3D /* CategoryButton.swift in Sources */,
 				39AD780027FB120B0022EAC1 /* MyPageViewController.swift in Sources */,
 				39AD781927FF2EC20022EAC1 /* ProductDetailViewController.swift in Sources */,
 				39308CC12806FFFB00C41F9F /* CommentTableViewCell.swift in Sources */,
