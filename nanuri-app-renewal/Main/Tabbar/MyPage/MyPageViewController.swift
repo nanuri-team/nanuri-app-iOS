@@ -11,6 +11,25 @@ class MyPageViewController: UIViewController {
     
     private var isTappedProductListButton: Bool = false
     private let productListTableView = UITableView()
+    var profileNameLabel: UILabel = {
+        let label = UILabel()
+        label.attributedText = .attributeFont(font: .PBold, size: 18, text: "닉네임을 입력하세요", lineHeight: 20)
+        return label
+    }()
+    var profileImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "myprofile_photo_ic")
+        return imageView
+    }()
+    var levelView: UIView = {
+        let view = LevelView(.bean, isLevelName: true)
+        return view
+    }()
+    var locationTagView: UIView = {
+        let view = LocationTagView(location: "서울시 강남구")
+        return view
+    }()
+    
     private let registeredProductsListButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = .white
@@ -47,6 +66,17 @@ class MyPageViewController: UIViewController {
         super.viewDidLoad()
         
         setUpView()
+        networkSetup()
+    }
+    
+    func networkSetup() {
+        NetworkService.shared.getUserInfoRequest { userInfo in
+            DispatchQueue.main.async {
+                self.profileImageView.image = UIImage(named: userInfo.profile)
+                self.profileNameLabel.text = userInfo.nickName
+                self.locationTagView = LocationTagView(location: userInfo.address)
+            }
+        }
     }
     
     private func setUpView() {
@@ -75,8 +105,7 @@ class MyPageViewController: UIViewController {
             $0.edges.equalToSuperview()
         }
         
-        let profileImageView = UIImageView()
-        profileImageView.image = UIImage(named: "myprofile_photo_ic")
+        
         profileView.addSubview(profileImageView)
         profileImageView.snp.makeConstraints {
             $0.left.equalTo(16)
@@ -84,8 +113,7 @@ class MyPageViewController: UIViewController {
             $0.width.height.equalTo(56)
         }
 
-        let profileNameLabel = UILabel()
-        profileNameLabel.attributedText = .attributeFont(font: .PBold, size: 18, text: "프로자취러", lineHeight: 20)
+        
         profileView.addSubview(profileNameLabel)
         profileNameLabel.snp.makeConstraints {
             $0.top.equalTo(20)
@@ -93,14 +121,14 @@ class MyPageViewController: UIViewController {
         }
         // profileNameLabel 10글자 이상이면 나머지는 ... 로 표시되도록
 
-        let levelView = LevelView(.flower, isLevelName: true)
+        
         profileView.addSubview(levelView)
         levelView.snp.makeConstraints {
             $0.centerY.equalTo(profileNameLabel)
             $0.left.equalTo(profileNameLabel.snp.right).inset(-6)
         }
 
-        let locationTagView = LocationTagView(location: "서울시 강남구")
+        
         profileView.addSubview(locationTagView)
         locationTagView.snp.makeConstraints {
             $0.top.equalTo(profileNameLabel.snp.bottom).inset(-8)
@@ -166,16 +194,6 @@ class MyPageViewController: UIViewController {
             numberOfListLabel.text = "전체 3개"
         }
     }
-    
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destination.
-     // Pass the selected object to the new view controller
-     }
-     */
 }
 
 extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {

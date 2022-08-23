@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1005C40228B3728F00A8AA7B /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1005C40128B3728E00A8AA7B /* NetworkService.swift */; };
 		103DA7C128A104FC004FEA14 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 103DA7C028A104FC004FEA14 /* LoginView.swift */; };
 		103DA84A28A536E5004FEA14 /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 103DA84928A536E5004FEA14 /* RegisterView.swift */; };
 		103DA85A28AA7E56004FEA14 /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 103DA85928AA7E56004FEA14 /* NotificationViewController.swift */; };
@@ -76,6 +77,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1005C40128B3728E00A8AA7B /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		103DA7BA28A0EA11004FEA14 /* nanuri-app-renewal.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "nanuri-app-renewal.entitlements"; sourceTree = "<group>"; };
 		103DA7C028A104FC004FEA14 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		103DA84928A536E5004FEA14 /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
@@ -274,6 +276,7 @@
 				394D4D7B28105C6D00A4D669 /* StepItemView.swift */,
 				3954BBAA2816FCED00C8815E /* Networking.swift */,
 				39788AF228188A3B00ABD918 /* Singleton.swift */,
+				1005C40128B3728E00A8AA7B /* NetworkService.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -612,6 +615,7 @@
 				39788AF528188B5700ABD918 /* Posts.swift in Sources */,
 				87D17BA027FB5BF100E171A2 /* SearchViewController.swift in Sources */,
 				39AD780027FB120B0022EAC1 /* MyPageViewController.swift in Sources */,
+				1005C40228B3728F00A8AA7B /* NetworkService.swift in Sources */,
 				39AD781927FF2EC20022EAC1 /* ProductDetailViewController.swift in Sources */,
 				39308CC12806FFFB00C41F9F /* CommentTableViewCell.swift in Sources */,
 				39308CF82808923300C41F9F /* TextView.swift in Sources */,
