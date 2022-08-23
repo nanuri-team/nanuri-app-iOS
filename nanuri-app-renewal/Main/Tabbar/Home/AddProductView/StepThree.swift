@@ -21,8 +21,8 @@ extension AddProductViewController {
         
         categoryTableView.separatorInset = .zero
         categoryTableView.separatorColor = .nanuriGray2
-//        categoryTableView.delegate = self
-//        categoryTableView.dataSource = self
+        categoryTableView.delegate = self
+        categoryTableView.dataSource = self
         stepThreeView.addSubview(categoryTableView)
         categoryTableView.snp.makeConstraints { make in
             make.top.equalTo(separatorView.snp.bottom)
@@ -31,3 +31,5 @@ extension AddProductViewController {
         }
     }
 }
+
+
