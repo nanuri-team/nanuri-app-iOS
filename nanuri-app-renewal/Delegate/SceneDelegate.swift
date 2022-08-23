@@ -41,7 +41,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 //            let loginVC = LoginViewController()
 //            self.present(loginVC, animated: true)
             
-            window.rootViewController = LoginViewController()
+            window.rootViewController = TabBarController()
         } else {
             
             window.rootViewController = TabBarController()

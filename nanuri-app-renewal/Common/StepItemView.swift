@@ -9,6 +9,13 @@ import Foundation
 import UIKit
 
 class StepItemView: UIView {
+    
+    var isActive: Bool = false
+    
+    let iconView = UIView()
+    let stepTitleLabel = UILabel()
+    let iconImageView = UIImageView()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
     }
@@ -17,10 +24,21 @@ class StepItemView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    func setState(isActive: Bool, icon: UIImage) {
+        self.isActive = isActive
+        iconImageView.image = icon
+        
+        if isActive {
+            iconView.backgroundColor = .nanuriGreen
+            stepTitleLabel.textColor = .nanuriGreen
+        }
+    }
+    
     convenience init(icon: UIImage, stepTitle: String, isActive: Bool = false) {
         self.init(frame: .zero)
         
-        let iconView = UIView()
+        self.isActive = isActive
+        
         iconView.backgroundColor = .nanuriGray1
         iconView.layer.cornerRadius = 48 / 2
         self.addSubview(iconView)
@@ -29,16 +47,13 @@ class StepItemView: UIView {
             make.top.left.right.equalToSuperview()
         }
         
-        let iconImageView = UIImageView()
         iconImageView.tintColor = .red
-        iconImageView.image = icon
         iconView.addSubview(iconImageView)
         iconImageView.snp.makeConstraints { make in
             make.center.equalToSuperview()
             make.width.height.equalTo(24)
         }
         
-        let stepTitleLabel = UILabel()
         stepTitleLabel.attributedText = .attributeFont(font: .PRegular, size: 12, text: stepTitle, lineHeight: 14)
         stepTitleLabel.textColor = .nanuriGray3
         stepTitleLabel.numberOfLines = 2
@@ -55,9 +70,6 @@ class StepItemView: UIView {
             make.bottom.equalTo(stepTitleLabel.snp.bottom)
         }
         
-        if isActive {
-            iconView.backgroundColor = .nanuriGreen
-            stepTitleLabel.textColor = .nanuriGreen
-        }
+        setState(isActive: isActive, icon: icon)
     }
 }

@@ -45,7 +45,7 @@ class HomeViewController: UIViewController {
     }
     
     @objc func selectAddProductButton() {
-        let addProductStepOneViewController = AddProductStepOneViewController()
+        let addProductStepOneViewController = AddProductViewController()
         addProductStepOneViewController.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(addProductStepOneViewController, animated: true)
     }
