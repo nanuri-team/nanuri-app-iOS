@@ -10,7 +10,7 @@ import UIKit
 class SettingViewController: UIViewController {
     
     private let tableView = UITableView(frame: .zero, style: .grouped)
-    private let sortOfSection: [[String]] = [["푸시 알림 설정"],
+    private let sortOfSection: [[String]] = [["활동 알림 설정", "채팅 알림 설정", "마케팅 알림 설정"],
                                         ["공지사항", "도움말", "문의하기"],
                                         ["이용약관", "개인정보처리방침", "위치 기반 서비스 이용약관", "오픈소스 라이선스"],
                                         ["로그아웃", "회원탈퇴"]]
@@ -22,7 +22,7 @@ class SettingViewController: UIViewController {
     
     private func setUpView() {
         self.navigationItem.title = "설정"
-        self.navigationController?.navigationBar.shadowImage = nil
+        extendedLayoutIncludesOpaqueBars = true
         let backButton = UIBarButtonItem(image: UIImage(named: "back_ic"), style: .plain, target: self, action: #selector(selectBackButton))
         self.navigationItem.setLeftBarButton(backButton, animated: true)
         
@@ -37,6 +37,10 @@ class SettingViewController: UIViewController {
     
     @objc func selectBackButton() {
         self.navigationController?.popViewController(animated: true)
+    }
+    
+    @objc func switchTapped(_ sender: UISwitch) {
+        print(sender)
     }
 }
 
@@ -70,6 +74,7 @@ extension SettingViewController: UITableViewDataSource, UITableViewDelegate {
                 make.centerY.equalToSuperview()
                 make.right.equalTo(-16)
             }
+            pushSwitch.addTarget(self, action: #selector(switchTapped), for: .touchUpInside)
             cell.textLabel?.text = sortOfSection[indexPath.section][indexPath.row]
         } else if indexPath.section == 1 {
             cell.textLabel?.text = sortOfSection[indexPath.section][indexPath.row]
@@ -98,5 +103,31 @@ extension SettingViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 48
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        switch indexPath.section {
+        case 0:
+            print(indexPath.row)
+        case 1:
+            print(indexPath.row)
+        case 2:
+            print(indexPath.row)
+        case 3:
+            if indexPath.row == 0 {
+                for key in UserDefaults.standard.dictionaryRepresentation().keys {
+                    UserDefaults.standard.removeObject(forKey: key.description)
+                }
+                print("로그아웃되었습니다.")
+                
+            } else {
+                let signOutViewController = SignOutViewController()
+                signOutViewController.modalTransitionStyle = .crossDissolve
+                signOutViewController.modalPresentationStyle = .overFullScreen
+                self.present(signOutViewController, animated: true, completion: nil)
+            }
+        default:
+            break
+        }
     }
 }
