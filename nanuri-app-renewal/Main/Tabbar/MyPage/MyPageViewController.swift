@@ -19,6 +19,8 @@ class MyPageViewController: UIViewController {
     var profileImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "myprofile_photo_ic")
+        imageView.layer.cornerRadius = 56 / 2
+        imageView.clipsToBounds = true
         return imageView
     }()
     var levelView: UIView = {
@@ -60,6 +62,8 @@ class MyPageViewController: UIViewController {
         label.text = "전체 14개"
         return label
     }()
+    
+    var userInfo: UserInfo?
 
     
     override func viewDidLoad() {
@@ -69,10 +73,22 @@ class MyPageViewController: UIViewController {
         networkSetup()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        networkSetup()
+    }
+    
     func networkSetup() {
         NetworkService.shared.getUserInfoRequest { userInfo in
+            self.userInfo = userInfo
             DispatchQueue.main.async {
-                self.profileImageView.image = UIImage(named: userInfo.profile)
+                if userInfo.profile != "" {
+                    let profileURL = userInfo.profile
+                    guard let imageURL = URL(string: profileURL),
+                          let imageData = try? Data(contentsOf: imageURL)
+                    else { return }
+                    self.profileImageView.image = UIImage(data: imageData)
+                }
                 self.profileNameLabel.text = userInfo.nickName
                 self.locationTagView = LocationTagView(location: userInfo.address)
             }
@@ -139,7 +155,7 @@ class MyPageViewController: UIViewController {
         profileModifyButton.setAttributedTitle(.attributeFont(font: .PRegular, size: 13, text: "수정", lineHeight: 13), for: .normal)
         profileModifyButton.setTitleColor(.nanuriGray5, for: .normal)
         profileModifyButton.semanticContentAttribute = .forceLeftToRight
-        profileModifyButton.addTarget(self, action: #selector(clickModifyButton), for: .touchUpInside)
+        profileModifyButton.addTarget(self, action: #selector(clickModifyButtonTapped), for: .touchUpInside)
         profileView.addSubview(profileModifyButton)
         profileModifyButton.snp.makeConstraints {
             $0.top.equalTo(20)
@@ -159,9 +175,10 @@ class MyPageViewController: UIViewController {
         print("Continued..")
     }
     
-    @objc func clickModifyButton() {
+    @objc func clickModifyButtonTapped() {
         let myProfileModifiedView = MyProfileModifiedViewController()
         myProfileModifiedView.hidesBottomBarWhenPushed = true
+        myProfileModifiedView.userInfo = self.userInfo
         self.navigationController?.pushViewController(myProfileModifiedView, animated:true)
     }
     
