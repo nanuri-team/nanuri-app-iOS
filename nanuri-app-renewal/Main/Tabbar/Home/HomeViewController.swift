@@ -12,7 +12,6 @@ class HomeViewController: UIViewController {
 
     let headerScrollView = UIScrollView()
     let allRegionTableView = UITableView()
-    var eventProductCollectionView: UICollectionView!
     let pagerCount = UILabel()
     
     var sampleImageViewArray: [UIImageView] = []
@@ -66,7 +65,6 @@ class HomeViewController: UIViewController {
             }
             self.getDeadlineImminent(responsePost: response.results)
             self.allRegionTableView.reloadData()
-            self.eventProductCollectionView.reloadData()
         }
     }
 
@@ -307,7 +305,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
                 cell.productLocationLabel.attributedText = .attributeFont(font: .NSRBold, size: 12, text: post.writerAddress ?? "", lineHeight: 14)
                 cell.productPrice.attributedText = .attributeFont(font: .PBold, size: 16, text: "\(post.unitPrice.toPriceNumberFormmat())원", lineHeight: 19)
                 cell.productPrice.textAlignment = .right
-                cell.deliveryTagView.setDeliveryType(type: post.tradeType)
+                cell.deliveryTagView.setDeliveryType(type: post.tradeType ?? "")
                 
                 cell.dDayTagView.setDday(dDay: post.waitedUntil?.dDaycalculator() ?? "")
                 cell.totalRecruit.attributedText = .attributeFont(font: .NSRExtrabold, size: 12, text: "/\(post.maxParticipants)", lineHeight: 14)
@@ -358,7 +356,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         cell.productName.attributedText = .attributeFont(font: .PRegular, size: 14, text: post.title, lineHeight: 17)
         cell.productPrice.attributedText = .attributeFont(font: .PBold, size: 11, text: "\(post.unitPrice.toPriceNumberFormmat())원", lineHeight: 13)
         cell.productPrice.textAlignment = .right
-        cell.deliveryTagView.setDeliveryType(type: post.tradeType)
+        cell.deliveryTagView.setDeliveryType(type: post.tradeType ?? "")
         
         cell.dDayTagView.setDday(dDay: post.waitedUntil?.dDaycalculator() ?? "")
         cell.totalRecruit.attributedText = .attributeFont(font: .NSRExtrabold, size: 12, text: "/\(post.maxParticipants)", lineHeight: 14)
