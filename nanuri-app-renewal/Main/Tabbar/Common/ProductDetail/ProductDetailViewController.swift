@@ -282,7 +282,7 @@ class ProductDetailViewController: UIViewController {
         }
         
         let deliveryTagView = DeliveryTagView()
-        deliveryTagView.setDeliveryType(type: postInfo.tradeType)
+        deliveryTagView.setDeliveryType(type: postInfo.tradeType ?? "")
         productDetailScrollView.addSubview(deliveryTagView)
         deliveryTagView.snp.makeConstraints { make in
             make.top.equalTo(productImageView.snp.bottom).inset(-24)
