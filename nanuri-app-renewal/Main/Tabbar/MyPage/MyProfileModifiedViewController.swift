@@ -9,11 +9,44 @@ import UIKit
 
 class MyProfileModifiedViewController: UIViewController {
     
+    var userInfo: UserInfo?
+    
+    var profileImageData: Data?
+    
     let profileImageView = UIImageView()
+    let profileNameTextField: UITextField = {
+        let textField = UITextField()
+        textField.toStyledTextField(textField)
+        textField.addPadding(width: 16)
+        return textField
+    }()
+    let regionModifyTextField: UITextField = {
+        let textField = UITextField()
+        textField.toStyledTextField(textField)
+        textField.addPadding(width: 16)
+        return textField
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpView()
+    }
+    
+    private func networksetup() {
+        guard let nickName = profileNameTextField.text else { return }
+        guard let region = regionModifyTextField.text else { return }
+        guard let imageData = profileImageData else { return }
+        
+        let userParams: [String: String] = ["nickname": nickName, "address": region]
+        
+        NetworkService.shared.patchUserInfoRequest(parameters: userParams, imageData: imageData, filename: "profileImage.jpeg", mimeType: "image/jpeg") { userInfo in
+            print(userInfo)
+        }
+    }
+    
+    @objc func doneButtonTapped() {
+        networksetup()
+        self.navigationController?.popViewController(animated: true)
     }
     
     private func setUpView() {
@@ -22,14 +55,24 @@ class MyProfileModifiedViewController: UIViewController {
         extendedLayoutIncludesOpaqueBars = true
         let backButton = UIBarButtonItem(image: UIImage(named: "back_ic"), style: .plain, target: self, action: #selector(selectBackButton))
         self.navigationItem.setLeftBarButton(backButton, animated: true)
-        let doneButton = UIBarButtonItem(title: "완료", style: .done, target: self, action: #selector(selectBackButton))
+        let doneButton = UIBarButtonItem(title: "완료", style: .done, target: self, action: #selector(doneButtonTapped))
         doneButton.tintColor = .nanuriGreen
         self.navigationItem.setRightBarButton(doneButton, animated: true)
         
         
+        guard let userInfo = userInfo else { return }
+
         profileImageView.layer.cornerRadius = 96 / 2
         profileImageView.clipsToBounds = true
-        profileImageView.image = UIImage(named: "myprofile_photo_ic")
+        if userInfo.profile == "" {
+            profileImageView.image = UIImage(named: "myprofile_photo_ic")
+        } else {
+            let profileURL = userInfo.profile
+            guard let imageURL = URL(string: profileURL),
+                  let imageData = try? Data(contentsOf: imageURL)
+            else { return }
+            profileImageView.image = UIImage(data: imageData)
+        }
         self.view.addSubview(profileImageView)
         profileImageView.snp.makeConstraints {
             $0.top.equalTo(self.view.safeAreaLayoutGuide).inset(24)
@@ -55,10 +98,7 @@ class MyProfileModifiedViewController: UIViewController {
             $0.left.equalTo(16)
         }
         
-        let profileNameTextField = UITextField()
-        profileNameTextField.toStyledTextField(profileNameTextField)
-        profileNameTextField.addPadding(width: 16)
-        profileNameTextField.attributedText = .attributeFont(font: .PRegular, size: 15, text: "프로자취러", lineHeight: 18)
+        profileNameTextField.attributedText = .attributeFont(font: .PRegular, size: 15, text: userInfo.nickName, lineHeight: 18)
         self.view.addSubview(profileNameTextField)
         profileNameTextField.snp.makeConstraints {
             $0.top.equalTo(nicNameLabel.snp.bottom).inset(-10)
@@ -75,10 +115,7 @@ class MyProfileModifiedViewController: UIViewController {
             $0.left.equalTo(16)
         }
         
-        let regionModifyTextField = UITextField()
-        regionModifyTextField.toStyledTextField(regionModifyTextField)
-        regionModifyTextField.addPadding(width: 16)
-        regionModifyTextField.attributedText = .attributeFont(font: .PRegular, size: 15, text: "서울시 강남구 논현로", lineHeight: 18)
+        regionModifyTextField.attributedText = .attributeFont(font: .PRegular, size: 15, text: userInfo.address, lineHeight: 18)
         self.view.addSubview(regionModifyTextField)
         regionModifyTextField.snp.makeConstraints {
             $0.top.equalTo(regionModifyLabel.snp.bottom).inset(-10)
@@ -87,6 +124,7 @@ class MyProfileModifiedViewController: UIViewController {
             $0.height.equalTo(44)
         }
         
+        // 없앨 예정??
         let accountNumberLabel = UILabel()
         accountNumberLabel.attributedText = .attributeFont(font: .PSemibold, size: 16, text: "계좌번호", lineHeight: 19)
         self.view.addSubview(accountNumberLabel)
@@ -149,6 +187,7 @@ extension MyProfileModifiedViewController: UIImagePickerControllerDelegate, UINa
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let image = info[UIImagePickerController.InfoKey(rawValue: "UIImagePickerControllerEditedImage")] as? UIImage {
             profileImageView.image = image
+            self.profileImageData = image.jpegData(compressionQuality: 0.7)
         }
         
         picker.dismiss(animated: true, completion: nil)

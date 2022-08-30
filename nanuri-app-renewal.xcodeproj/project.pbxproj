@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1005C40228B3728F00A8AA7B /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1005C40128B3728E00A8AA7B /* NetworkService.swift */; };
+		1005C40428B5F77700A8AA7B /* SignOutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1005C40328B5F77700A8AA7B /* SignOutViewController.swift */; };
 		103DA7C128A104FC004FEA14 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 103DA7C028A104FC004FEA14 /* LoginView.swift */; };
 		103DA84A28A536E5004FEA14 /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 103DA84928A536E5004FEA14 /* RegisterView.swift */; };
 		103DA85A28AA7E56004FEA14 /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 103DA85928AA7E56004FEA14 /* NotificationViewController.swift */; };
@@ -76,14 +78,14 @@
 		39AD782628016DDF0022EAC1 /* CommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39AD782528016DDF0022EAC1 /* CommentViewController.swift */; };
 		870F9D142816AA310098DDD9 /* SnsUserInfoSingleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 870F9D132816AA310098DDD9 /* SnsUserInfoSingleton.swift */; };
 		870F9D162816AB680098DDD9 /* SnsLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 870F9D152816AB680098DDD9 /* SnsLogin.swift */; };
-		874DCAAA28133ECF009ECD76 /* SelectedUIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874DCAA928133ECF009ECD76 /* SelectedUIButton.swift */; };
-		875B688C2806098700D083C9 /* MyRegisterProductViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 875B688B2806098700D083C9 /* MyRegisterProductViewController.swift */; };
 		87D17BA027FB5BF100E171A2 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87D17B9F27FB5BF100E171A2 /* SearchViewController.swift */; };
 		87D17BA227FB5C0B00E171A2 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87D17BA127FB5C0B00E171A2 /* SettingViewController.swift */; };
 		87D6E1BF280B30DA001AA33C /* MyProfileModifiedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87D6E1BE280B30DA001AA33C /* MyProfileModifiedViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1005C40128B3728E00A8AA7B /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		1005C40328B5F77700A8AA7B /* SignOutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignOutViewController.swift; sourceTree = "<group>"; };
 		103DA7BA28A0EA11004FEA14 /* nanuri-app-renewal.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "nanuri-app-renewal.entitlements"; sourceTree = "<group>"; };
 		103DA7C028A104FC004FEA14 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		103DA84928A536E5004FEA14 /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
@@ -156,8 +158,6 @@
 		670A464DDF73C49130CF9703 /* Pods_nanuri_app_renewal.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_nanuri_app_renewal.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		870F9D132816AA310098DDD9 /* SnsUserInfoSingleton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnsUserInfoSingleton.swift; sourceTree = "<group>"; };
 		870F9D152816AB680098DDD9 /* SnsLogin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnsLogin.swift; sourceTree = "<group>"; };
-		874DCAA928133ECF009ECD76 /* SelectedUIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedUIButton.swift; sourceTree = "<group>"; };
-		875B688B2806098700D083C9 /* MyRegisterProductViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRegisterProductViewController.swift; sourceTree = "<group>"; };
 		87D17B9F27FB5BF100E171A2 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		87D17BA127FB5C0B00E171A2 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		87D6E1BE280B30DA001AA33C /* MyProfileModifiedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProfileModifiedViewController.swift; sourceTree = "<group>"; };
@@ -309,6 +309,7 @@
 				394D4D7B28105C6D00A4D669 /* StepItemView.swift */,
 				3954BBAA2816FCED00C8815E /* Networking.swift */,
 				39788AF228188A3B00ABD918 /* Singleton.swift */,
+				1005C40128B3728E00A8AA7B /* NetworkService.swift */,
 				398B709B28B526A20039DA3D /* CategoryButton.swift */,
 				3934E3C928B66601001AC568 /* BottomSheetViewController.swift */,
 			);
@@ -421,9 +422,7 @@
 			isa = PBXGroup;
 			children = (
 				39AD77FF27FB120B0022EAC1 /* MyPageViewController.swift */,
-				875B688B2806098700D083C9 /* MyRegisterProductViewController.swift */,
 				87D6E1BE280B30DA001AA33C /* MyProfileModifiedViewController.swift */,
-				874DCAA928133ECF009ECD76 /* SelectedUIButton.swift */,
 			);
 			path = MyPage;
 			sourceTree = "<group>";
@@ -473,6 +472,7 @@
 			isa = PBXGroup;
 			children = (
 				87D17BA127FB5C0B00E171A2 /* SettingViewController.swift */,
+				1005C40328B5F77700A8AA7B /* SignOutViewController.swift */,
 			);
 			path = Setting;
 			sourceTree = "<group>";
@@ -615,7 +615,6 @@
 			files = (
 				39AD780227FB12180022EAC1 /* User.swift in Sources */,
 				103DA89528ABAF33004FEA14 /* EmptyNotiView.swift in Sources */,
-				875B688C2806098700D083C9 /* MyRegisterProductViewController.swift in Sources */,
 				3954BBA528142FE900C8815E /* MyChatMessageViewCell.swift in Sources */,
 				3954BBA028142FA000C8815E /* ChattingListTableViewController.swift in Sources */,
 				39AD780427FB12280022EAC1 /* MainViewController.swift in Sources */,
@@ -646,7 +645,6 @@
 				39AD780E27FB32C50022EAC1 /* DDayTagView.swift in Sources */,
 				3934E3CD28B66C79001AC568 /* OptionView.swift in Sources */,
 				87D6E1BF280B30DA001AA33C /* MyProfileModifiedViewController.swift in Sources */,
-				874DCAAA28133ECF009ECD76 /* SelectedUIButton.swift in Sources */,
 				103DA85E28AA91BD004FEA14 /* NotificationTableViewCell.swift in Sources */,
 				39308CF02807518400C41F9F /* FilterButton.swift in Sources */,
 				39AD780827FB26DB0022EAC1 /* Constants.swift in Sources */,
@@ -656,8 +654,10 @@
 				3954BBA7281433FC00C8815E /* YourChatMessageTableViewCell.swift in Sources */,
 				39788AF528188B5700ABD918 /* Posts.swift in Sources */,
 				87D17BA027FB5BF100E171A2 /* SearchViewController.swift in Sources */,
+				1005C40428B5F77700A8AA7B /* SignOutViewController.swift in Sources */,
 				398B709C28B526A20039DA3D /* CategoryButton.swift in Sources */,
 				39AD780027FB120B0022EAC1 /* MyPageViewController.swift in Sources */,
+				1005C40228B3728F00A8AA7B /* NetworkService.swift in Sources */,
 				39AD781927FF2EC20022EAC1 /* ProductDetailViewController.swift in Sources */,
 				39308CC12806FFFB00C41F9F /* CommentTableViewCell.swift in Sources */,
 				39308CF82808923300C41F9F /* TextView.swift in Sources */,

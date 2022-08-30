@@ -11,6 +11,27 @@ class MyPageViewController: UIViewController {
     
     private var isTappedProductListButton: Bool = false
     private let productListTableView = UITableView()
+    var profileNameLabel: UILabel = {
+        let label = UILabel()
+        label.attributedText = .attributeFont(font: .PBold, size: 18, text: "닉네임을 입력하세요", lineHeight: 20)
+        return label
+    }()
+    var profileImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "myprofile_photo_ic")
+        imageView.layer.cornerRadius = 56 / 2
+        imageView.clipsToBounds = true
+        return imageView
+    }()
+    var levelView: UIView = {
+        let view = LevelView(.bean, isLevelName: true)
+        return view
+    }()
+    var locationTagView: UIView = {
+        let view = LocationTagView(location: "서울시 강남구")
+        return view
+    }()
+    
     private let registeredProductsListButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = .white
@@ -41,12 +62,37 @@ class MyPageViewController: UIViewController {
         label.text = "전체 14개"
         return label
     }()
+    
+    var userInfo: UserInfo?
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setUpView()
+        networkSetup()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        networkSetup()
+    }
+    
+    func networkSetup() {
+        NetworkService.shared.getUserInfoRequest { userInfo in
+            self.userInfo = userInfo
+            DispatchQueue.main.async {
+                if userInfo.profile != "" {
+                    let profileURL = userInfo.profile
+                    guard let imageURL = URL(string: profileURL),
+                          let imageData = try? Data(contentsOf: imageURL)
+                    else { return }
+                    self.profileImageView.image = UIImage(data: imageData)
+                }
+                self.profileNameLabel.text = userInfo.nickName
+                self.locationTagView = LocationTagView(location: userInfo.address)
+            }
+        }
     }
     
     private func setUpView() {
@@ -75,8 +121,7 @@ class MyPageViewController: UIViewController {
             $0.edges.equalToSuperview()
         }
         
-        let profileImageView = UIImageView()
-        profileImageView.image = UIImage(named: "myprofile_photo_ic")
+        
         profileView.addSubview(profileImageView)
         profileImageView.snp.makeConstraints {
             $0.left.equalTo(16)
@@ -84,8 +129,7 @@ class MyPageViewController: UIViewController {
             $0.width.height.equalTo(56)
         }
 
-        let profileNameLabel = UILabel()
-        profileNameLabel.attributedText = .attributeFont(font: .PBold, size: 18, text: "프로자취러", lineHeight: 20)
+        
         profileView.addSubview(profileNameLabel)
         profileNameLabel.snp.makeConstraints {
             $0.top.equalTo(20)
@@ -93,14 +137,14 @@ class MyPageViewController: UIViewController {
         }
         // profileNameLabel 10글자 이상이면 나머지는 ... 로 표시되도록
 
-        let levelView = LevelView(.flower, isLevelName: true)
+        
         profileView.addSubview(levelView)
         levelView.snp.makeConstraints {
             $0.centerY.equalTo(profileNameLabel)
             $0.left.equalTo(profileNameLabel.snp.right).inset(-6)
         }
 
-        let locationTagView = LocationTagView(location: "서울시 강남구")
+        
         profileView.addSubview(locationTagView)
         locationTagView.snp.makeConstraints {
             $0.top.equalTo(profileNameLabel.snp.bottom).inset(-8)
@@ -111,7 +155,7 @@ class MyPageViewController: UIViewController {
         profileModifyButton.setAttributedTitle(.attributeFont(font: .PRegular, size: 13, text: "수정", lineHeight: 13), for: .normal)
         profileModifyButton.setTitleColor(.nanuriGray5, for: .normal)
         profileModifyButton.semanticContentAttribute = .forceLeftToRight
-        profileModifyButton.addTarget(self, action: #selector(clickModifyButton), for: .touchUpInside)
+        profileModifyButton.addTarget(self, action: #selector(clickModifyButtonTapped), for: .touchUpInside)
         profileView.addSubview(profileModifyButton)
         profileModifyButton.snp.makeConstraints {
             $0.top.equalTo(20)
@@ -131,9 +175,10 @@ class MyPageViewController: UIViewController {
         print("Continued..")
     }
     
-    @objc func clickModifyButton() {
+    @objc func clickModifyButtonTapped() {
         let myProfileModifiedView = MyProfileModifiedViewController()
         myProfileModifiedView.hidesBottomBarWhenPushed = true
+        myProfileModifiedView.userInfo = self.userInfo
         self.navigationController?.pushViewController(myProfileModifiedView, animated:true)
     }
     
@@ -166,16 +211,6 @@ class MyPageViewController: UIViewController {
             numberOfListLabel.text = "전체 3개"
         }
     }
-    
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destination.
-     // Pass the selected object to the new view controller
-     }
-     */
 }
 
 extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
