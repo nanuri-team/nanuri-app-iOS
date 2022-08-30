@@ -80,5 +80,4 @@ extension NotificationViewController: UITableViewDelegate, UITableViewDataSource
 //            tableView.deleteRows(at: [indexPath], with: .fade)
         }
     }
-    
 }
