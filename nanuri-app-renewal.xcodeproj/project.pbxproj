@@ -30,6 +30,8 @@
 		39308CF2280880DB00C41F9F /* CheckboxButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39308CF1280880DB00C41F9F /* CheckboxButton.swift */; };
 		39308CF62808860900C41F9F /* AlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39308CF52808860900C41F9F /* AlertViewController.swift */; };
 		39308CF82808923300C41F9F /* TextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39308CF72808923300C41F9F /* TextView.swift */; };
+		3934E3CA28B66601001AC568 /* BottomSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3934E3C928B66601001AC568 /* BottomSheetViewController.swift */; };
+		3934E3CD28B66C79001AC568 /* OptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3934E3CC28B66C79001AC568 /* OptionView.swift */; };
 		394D4D7A28105C1400A4D669 /* AddProductStepOneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 394D4D7928105C1400A4D669 /* AddProductStepOneViewController.swift */; };
 		394D4D7C28105C6D00A4D669 /* StepItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 394D4D7B28105C6D00A4D669 /* StepItemView.swift */; };
 		3954BB952813C9F300C8815E /* AddProductStepTwoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3954BB942813C9F300C8815E /* AddProductStepTwoViewController.swift */; };
@@ -105,6 +107,8 @@
 		39308CF1280880DB00C41F9F /* CheckboxButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckboxButton.swift; sourceTree = "<group>"; };
 		39308CF52808860900C41F9F /* AlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewController.swift; sourceTree = "<group>"; };
 		39308CF72808923300C41F9F /* TextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextView.swift; sourceTree = "<group>"; };
+		3934E3C928B66601001AC568 /* BottomSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetViewController.swift; sourceTree = "<group>"; };
+		3934E3CC28B66C79001AC568 /* OptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionView.swift; sourceTree = "<group>"; };
 		394D4D7928105C1400A4D669 /* AddProductStepOneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProductStepOneViewController.swift; sourceTree = "<group>"; };
 		394D4D7B28105C6D00A4D669 /* StepItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepItemView.swift; sourceTree = "<group>"; };
 		3954BB942813C9F300C8815E /* AddProductStepTwoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProductStepTwoViewController.swift; sourceTree = "<group>"; };
@@ -206,6 +210,14 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
+		3934E3CB28B66C5D001AC568 /* BottomSheetView */ = {
+			isa = PBXGroup;
+			children = (
+				3934E3CC28B66C79001AC568 /* OptionView.swift */,
+			);
+			path = BottomSheetView;
+			sourceTree = "<group>";
+		};
 		394D4D7828105BE300A4D669 /* TestAddProduct */ = {
 			isa = PBXGroup;
 			children = (
@@ -298,6 +310,7 @@
 				3954BBAA2816FCED00C8815E /* Networking.swift */,
 				39788AF228188A3B00ABD918 /* Singleton.swift */,
 				398B709B28B526A20039DA3D /* CategoryButton.swift */,
+				3934E3C928B66601001AC568 /* BottomSheetViewController.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -430,6 +443,7 @@
 		39AD781727FF2EA00022EAC1 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				3934E3CB28B66C5D001AC568 /* BottomSheetView */,
 				103DA85828AA7E30004FEA14 /* Notification */,
 				397ACBA22805F59400E83FA0 /* SettingLocation */,
 				39AD781E280157170022EAC1 /* ProductDetail */,
@@ -630,6 +644,7 @@
 				39AD77FA27FB11EE0022EAC1 /* NeighbourhoodViewController.swift in Sources */,
 				3954BBAB2816FCED00C8815E /* Networking.swift in Sources */,
 				39AD780E27FB32C50022EAC1 /* DDayTagView.swift in Sources */,
+				3934E3CD28B66C79001AC568 /* OptionView.swift in Sources */,
 				87D6E1BF280B30DA001AA33C /* MyProfileModifiedViewController.swift in Sources */,
 				874DCAAA28133ECF009ECD76 /* SelectedUIButton.swift in Sources */,
 				103DA85E28AA91BD004FEA14 /* NotificationTableViewCell.swift in Sources */,
@@ -637,6 +652,7 @@
 				39AD780827FB26DB0022EAC1 /* Constants.swift in Sources */,
 				870F9D142816AA310098DDD9 /* SnsUserInfoSingleton.swift in Sources */,
 				39AD77F427FB11BA0022EAC1 /* RegisterViewController.swift in Sources */,
+				3934E3CA28B66601001AC568 /* BottomSheetViewController.swift in Sources */,
 				3954BBA7281433FC00C8815E /* YourChatMessageTableViewCell.swift in Sources */,
 				39788AF528188B5700ABD918 /* Posts.swift in Sources */,
 				87D17BA027FB5BF100E171A2 /* SearchViewController.swift in Sources */,

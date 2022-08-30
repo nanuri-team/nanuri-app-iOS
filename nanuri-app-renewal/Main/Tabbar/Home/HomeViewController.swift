@@ -25,8 +25,10 @@ class HomeViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "홈"
         self.navigationController?.navigationBar.isHidden = false
+        
+        let leftNavigationBar = UIBarButtonItem(image: UIImage(named: "nanuri_header_logo")?.withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: nil)
+        self.navigationItem.setLeftBarButton(leftNavigationBar, animated: false)
         
         setUpView()
         getPostsList()
