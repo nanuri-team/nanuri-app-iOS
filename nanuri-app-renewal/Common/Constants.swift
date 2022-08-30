@@ -6,6 +6,11 @@
 //
 
 import Foundation
+import UIKit
+
+let ratioHeight = UIScreen.main.bounds.height / 812
+let ratioWidth = UIScreen.main.bounds.width / 375
+let safeAreaHeight: CGFloat = 34
 
 enum APIInfo {
     static let hostURL = "https://nanuri.app/"

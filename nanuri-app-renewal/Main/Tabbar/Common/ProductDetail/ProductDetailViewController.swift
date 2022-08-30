@@ -36,8 +36,9 @@ class ProductDetailViewController: UIViewController {
     }
     
     @objc func selectOptionButton() {
-        print("Click")
-        presentOptionAlert()
+        let optionBottomSheetViewController = BottomSheetViewController(subView: OptionView())
+        optionBottomSheetViewController.modalPresentationStyle = .overFullScreen
+        self.present(optionBottomSheetViewController, animated: false, completion: nil)
     }
     
     @objc func selectCommentButton() {
@@ -58,20 +59,6 @@ class ProductDetailViewController: UIViewController {
         purchaseButton.isEnabled = false
         purchaseButton.setAttributedTitle(.attributeFont(font: .PBold, size: 15, text: "이미 참여한 공동 구매 입니다!", lineHeight: 18), for: .normal)
         
-    }
-    func presentOptionAlert() {
-        let optionAlert = UIAlertController(title: "상품을 수정하거나 삭제할 수 있습니다.", message: nil, preferredStyle: .actionSheet)
-        let editAction = UIAlertAction(title: "수정하기", style: .default, handler: nil)
-        let deleteAction = UIAlertAction(title: "삭제하기", style: .destructive) { _ in
-            self.presentAlertViewController()
-        }
-        let cancelAction = UIAlertAction(title: "취소", style: .cancel, handler: nil)
-        
-        optionAlert.addAction(editAction)
-        optionAlert.addAction(deleteAction)
-        optionAlert.addAction(cancelAction)
-        
-        self.present(optionAlert, animated: true, completion: nil)
     }
     
     func presentAlertViewController() {
@@ -295,7 +282,7 @@ class ProductDetailViewController: UIViewController {
         }
         
         let deliveryTagView = DeliveryTagView()
-        deliveryTagView.setDeliveryType(type: postInfo.tradeType)
+        deliveryTagView.setDeliveryType(type: postInfo.tradeType ?? "")
         productDetailScrollView.addSubview(deliveryTagView)
         deliveryTagView.snp.makeConstraints { make in
             make.top.equalTo(productImageView.snp.bottom).inset(-24)

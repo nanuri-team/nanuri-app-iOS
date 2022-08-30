@@ -68,7 +68,7 @@ class AllRegionProductTableViewController: UITableViewController {
             cell.productLocationLabel.attributedText = .attributeFont(font: .NSRBold, size: 12, text: post.writerAddress ?? "", lineHeight: 14)
             cell.productPrice.attributedText = .attributeFont(font: .PBold, size: 16, text: "\(post.unitPrice.toPriceNumberFormmat())원", lineHeight: 19)
             cell.productPrice.textAlignment = .right
-            cell.deliveryTagView.setDeliveryType(type: post.tradeType)
+            cell.deliveryTagView.setDeliveryType(type: post.tradeType ?? "")
             
             cell.dDayTagView.setDday(dDay: post.waitedUntil?.dDaycalculator() ?? "")
             cell.totalRecruit.attributedText = .attributeFont(font: .NSRExtrabold, size: 12, text: "/\(post.maxParticipants)", lineHeight: 14)

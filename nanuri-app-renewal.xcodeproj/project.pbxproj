@@ -16,6 +16,11 @@
 		103DA89528ABAF33004FEA14 /* EmptyNotiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 103DA89428ABAF33004FEA14 /* EmptyNotiView.swift */; };
 		103DA89728ABCD2F004FEA14 /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 103DA89628ABCD2F004FEA14 /* CategoryCell.swift */; };
 		349EE88BFBCFEC4B071C4AD0 /* Pods_nanuri_app_renewal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 670A464DDF73C49130CF9703 /* Pods_nanuri_app_renewal.framework */; };
+		390CF6AF28B50B4900980DC7 /* StepTwo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 390CF6AE28B50B4900980DC7 /* StepTwo.swift */; };
+		390CF6B128B50F6F00980DC7 /* StepThree.swift in Sources */ = {isa = PBXBuildFile; fileRef = 390CF6B028B50F6F00980DC7 /* StepThree.swift */; };
+		390CF6B328B5105D00980DC7 /* StepFour.swift in Sources */ = {isa = PBXBuildFile; fileRef = 390CF6B228B5105D00980DC7 /* StepFour.swift */; };
+		3923EDA428AE7B500009980F /* AddProductViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3923EDA328AE7B500009980F /* AddProductViewController.swift */; };
+		3923EDA728AE7EF60009980F /* StepOne.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3923EDA628AE7EF60009980F /* StepOne.swift */; };
 		39308CC12806FFFB00C41F9F /* CommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39308CC02806FFFB00C41F9F /* CommentTableViewCell.swift */; };
 		39308CCF28073ACE00C41F9F /* NanumSquareRoundB.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 39308CC9280737A600C41F9F /* NanumSquareRoundB.ttf */; };
 		39308CD328073AD200C41F9F /* NanumSquareRoundEB.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 39308CCB280737A600C41F9F /* NanumSquareRoundEB.ttf */; };
@@ -27,6 +32,8 @@
 		39308CF2280880DB00C41F9F /* CheckboxButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39308CF1280880DB00C41F9F /* CheckboxButton.swift */; };
 		39308CF62808860900C41F9F /* AlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39308CF52808860900C41F9F /* AlertViewController.swift */; };
 		39308CF82808923300C41F9F /* TextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39308CF72808923300C41F9F /* TextView.swift */; };
+		3934E3CA28B66601001AC568 /* BottomSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3934E3C928B66601001AC568 /* BottomSheetViewController.swift */; };
+		3934E3CD28B66C79001AC568 /* OptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3934E3CC28B66C79001AC568 /* OptionView.swift */; };
 		394D4D7A28105C1400A4D669 /* AddProductStepOneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 394D4D7928105C1400A4D669 /* AddProductStepOneViewController.swift */; };
 		394D4D7C28105C6D00A4D669 /* StepItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 394D4D7B28105C6D00A4D669 /* StepItemView.swift */; };
 		3954BB952813C9F300C8815E /* AddProductStepTwoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3954BB942813C9F300C8815E /* AddProductStepTwoViewController.swift */; };
@@ -43,6 +50,7 @@
 		39788AF82819CC6900ABD918 /* Chat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39788AF72819CC6900ABD918 /* Chat.swift */; };
 		397ACBA42805F5B500E83FA0 /* LocationPermissionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397ACBA32805F5B500E83FA0 /* LocationPermissionViewController.swift */; };
 		397ACBA62805F93D00E83FA0 /* CheckMyLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397ACBA52805F93D00E83FA0 /* CheckMyLocationViewController.swift */; };
+		398B709C28B526A20039DA3D /* CategoryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 398B709B28B526A20039DA3D /* CategoryButton.swift */; };
 		39AD77CF27FB0F4E0022EAC1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39AD77CE27FB0F4E0022EAC1 /* AppDelegate.swift */; };
 		39AD77D127FB0F4E0022EAC1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39AD77D027FB0F4E0022EAC1 /* SceneDelegate.swift */; };
 		39AD77D827FB0F500022EAC1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 39AD77D727FB0F500022EAC1 /* Assets.xcassets */; };
@@ -85,6 +93,11 @@
 		103DA85D28AA91BD004FEA14 /* NotificationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationTableViewCell.swift; sourceTree = "<group>"; };
 		103DA89428ABAF33004FEA14 /* EmptyNotiView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyNotiView.swift; sourceTree = "<group>"; };
 		103DA89628ABCD2F004FEA14 /* CategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
+		390CF6AE28B50B4900980DC7 /* StepTwo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepTwo.swift; sourceTree = "<group>"; };
+		390CF6B028B50F6F00980DC7 /* StepThree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepThree.swift; sourceTree = "<group>"; };
+		390CF6B228B5105D00980DC7 /* StepFour.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepFour.swift; sourceTree = "<group>"; };
+		3923EDA328AE7B500009980F /* AddProductViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProductViewController.swift; sourceTree = "<group>"; };
+		3923EDA628AE7EF60009980F /* StepOne.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepOne.swift; sourceTree = "<group>"; };
 		39308CC02806FFFB00C41F9F /* CommentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentTableViewCell.swift; sourceTree = "<group>"; };
 		39308CC9280737A600C41F9F /* NanumSquareRoundB.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = NanumSquareRoundB.ttf; sourceTree = "<group>"; };
 		39308CCB280737A600C41F9F /* NanumSquareRoundEB.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = NanumSquareRoundEB.ttf; sourceTree = "<group>"; };
@@ -96,6 +109,8 @@
 		39308CF1280880DB00C41F9F /* CheckboxButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckboxButton.swift; sourceTree = "<group>"; };
 		39308CF52808860900C41F9F /* AlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewController.swift; sourceTree = "<group>"; };
 		39308CF72808923300C41F9F /* TextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextView.swift; sourceTree = "<group>"; };
+		3934E3C928B66601001AC568 /* BottomSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetViewController.swift; sourceTree = "<group>"; };
+		3934E3CC28B66C79001AC568 /* OptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionView.swift; sourceTree = "<group>"; };
 		394D4D7928105C1400A4D669 /* AddProductStepOneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProductStepOneViewController.swift; sourceTree = "<group>"; };
 		394D4D7B28105C6D00A4D669 /* StepItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepItemView.swift; sourceTree = "<group>"; };
 		3954BB942813C9F300C8815E /* AddProductStepTwoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProductStepTwoViewController.swift; sourceTree = "<group>"; };
@@ -112,6 +127,7 @@
 		39788AF72819CC6900ABD918 /* Chat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chat.swift; sourceTree = "<group>"; };
 		397ACBA32805F5B500E83FA0 /* LocationPermissionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationPermissionViewController.swift; sourceTree = "<group>"; };
 		397ACBA52805F93D00E83FA0 /* CheckMyLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckMyLocationViewController.swift; sourceTree = "<group>"; };
+		398B709B28B526A20039DA3D /* CategoryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryButton.swift; sourceTree = "<group>"; };
 		39AD77CB27FB0F4E0022EAC1 /* nanuri-app-renewal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "nanuri-app-renewal.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		39AD77CE27FB0F4E0022EAC1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		39AD77D027FB0F4E0022EAC1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -170,6 +186,17 @@
 			path = Notification;
 			sourceTree = "<group>";
 		};
+		3923EDA528AE7B5C0009980F /* AddProductView */ = {
+			isa = PBXGroup;
+			children = (
+				3923EDA628AE7EF60009980F /* StepOne.swift */,
+				390CF6AE28B50B4900980DC7 /* StepTwo.swift */,
+				390CF6B028B50F6F00980DC7 /* StepThree.swift */,
+				390CF6B228B5105D00980DC7 /* StepFour.swift */,
+			);
+			path = AddProductView;
+			sourceTree = "<group>";
+		};
 		39308CC22807370B00C41F9F /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
@@ -183,7 +210,15 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
-		394D4D7828105BE300A4D669 /* AddProduct */ = {
+		3934E3CB28B66C5D001AC568 /* BottomSheetView */ = {
+			isa = PBXGroup;
+			children = (
+				3934E3CC28B66C79001AC568 /* OptionView.swift */,
+			);
+			path = BottomSheetView;
+			sourceTree = "<group>";
+		};
+		394D4D7828105BE300A4D669 /* TestAddProduct */ = {
 			isa = PBXGroup;
 			children = (
 				394D4D7928105C1400A4D669 /* AddProductStepOneViewController.swift */,
@@ -191,7 +226,7 @@
 				3954BB962813E61C00C8815E /* AddProductStepThreeViewController.swift */,
 				3954BB982813FCD100C8815E /* AddProductStepFourViewController.swift */,
 			);
-			path = AddProduct;
+			path = TestAddProduct;
 			sourceTree = "<group>";
 		};
 		3954BBA328142FB900C8815E /* Cells */ = {
@@ -275,6 +310,8 @@
 				3954BBAA2816FCED00C8815E /* Networking.swift */,
 				39788AF228188A3B00ABD918 /* Singleton.swift */,
 				1005C40128B3728E00A8AA7B /* NetworkService.swift */,
+				398B709B28B526A20039DA3D /* CategoryButton.swift */,
+				3934E3C928B66601001AC568 /* BottomSheetViewController.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -346,9 +383,11 @@
 		39AD77EA27FB10600022EAC1 /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				394D4D7828105BE300A4D669 /* AddProduct */,
+				394D4D7828105BE300A4D669 /* TestAddProduct */,
 				39AD77F727FB11E30022EAC1 /* HomeViewController.swift */,
 				39AD781327FDF28E0022EAC1 /* AllRegionProductTableViewController.swift */,
+				3923EDA328AE7B500009980F /* AddProductViewController.swift */,
+				3923EDA528AE7B5C0009980F /* AddProductView */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -403,6 +442,7 @@
 		39AD781727FF2EA00022EAC1 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				3934E3CB28B66C5D001AC568 /* BottomSheetView */,
 				103DA85828AA7E30004FEA14 /* Notification */,
 				397ACBA22805F59400E83FA0 /* SettingLocation */,
 				39AD781E280157170022EAC1 /* ProductDetail */,
@@ -582,9 +622,11 @@
 				3954BBA92814363F00C8815E /* ChattingViewController.swift in Sources */,
 				394D4D7C28105C6D00A4D669 /* StepItemView.swift in Sources */,
 				103DA89728ABCD2F004FEA14 /* CategoryCell.swift in Sources */,
+				3923EDA428AE7B500009980F /* AddProductViewController.swift in Sources */,
 				39AD780C27FB327F0022EAC1 /* MainProductTableViewCell.swift in Sources */,
 				103DA84A28A536E5004FEA14 /* RegisterView.swift in Sources */,
 				39AD77FE27FB12030022EAC1 /* BookmarkViewController.swift in Sources */,
+				3923EDA728AE7EF60009980F /* StepOne.swift in Sources */,
 				39AD781D27FF42500022EAC1 /* LevelView.swift in Sources */,
 				39AD780627FB22DD0022EAC1 /* DeliveryTagView.swift in Sources */,
 				39308CF2280880DB00C41F9F /* CheckboxButton.swift in Sources */,
@@ -594,22 +636,26 @@
 				397ACBA42805F5B500E83FA0 /* LocationPermissionViewController.swift in Sources */,
 				870F9D162816AB680098DDD9 /* SnsLogin.swift in Sources */,
 				39AD77F827FB11E30022EAC1 /* HomeViewController.swift in Sources */,
+				390CF6B128B50F6F00980DC7 /* StepThree.swift in Sources */,
 				39AD781B27FF3E9C0022EAC1 /* LocationTagView.swift in Sources */,
 				3954BB972813E61D00C8815E /* AddProductStepThreeViewController.swift in Sources */,
 				39AD781227FB47730022EAC1 /* VerticalProductCollectionViewCell.swift in Sources */,
 				39AD77FA27FB11EE0022EAC1 /* NeighbourhoodViewController.swift in Sources */,
 				3954BBAB2816FCED00C8815E /* Networking.swift in Sources */,
 				39AD780E27FB32C50022EAC1 /* DDayTagView.swift in Sources */,
+				3934E3CD28B66C79001AC568 /* OptionView.swift in Sources */,
 				87D6E1BF280B30DA001AA33C /* MyProfileModifiedViewController.swift in Sources */,
 				103DA85E28AA91BD004FEA14 /* NotificationTableViewCell.swift in Sources */,
 				39308CF02807518400C41F9F /* FilterButton.swift in Sources */,
 				39AD780827FB26DB0022EAC1 /* Constants.swift in Sources */,
 				870F9D142816AA310098DDD9 /* SnsUserInfoSingleton.swift in Sources */,
 				39AD77F427FB11BA0022EAC1 /* RegisterViewController.swift in Sources */,
+				3934E3CA28B66601001AC568 /* BottomSheetViewController.swift in Sources */,
 				3954BBA7281433FC00C8815E /* YourChatMessageTableViewCell.swift in Sources */,
 				39788AF528188B5700ABD918 /* Posts.swift in Sources */,
 				87D17BA027FB5BF100E171A2 /* SearchViewController.swift in Sources */,
 				1005C40428B5F77700A8AA7B /* SignOutViewController.swift in Sources */,
+				398B709C28B526A20039DA3D /* CategoryButton.swift in Sources */,
 				39AD780027FB120B0022EAC1 /* MyPageViewController.swift in Sources */,
 				1005C40228B3728F00A8AA7B /* NetworkService.swift in Sources */,
 				39AD781927FF2EC20022EAC1 /* ProductDetailViewController.swift in Sources */,
@@ -622,11 +668,13 @@
 				87D17BA227FB5C0B00E171A2 /* SettingViewController.swift in Sources */,
 				39788AF328188A3B00ABD918 /* Singleton.swift in Sources */,
 				103DA85A28AA7E56004FEA14 /* NotificationViewController.swift in Sources */,
+				390CF6B328B5105D00980DC7 /* StepFour.swift in Sources */,
 				39AD782628016DDF0022EAC1 /* CommentViewController.swift in Sources */,
 				39AD781627FF2A7A0022EAC1 /* MainButton.swift in Sources */,
 				3954BB992813FCD100C8815E /* AddProductStepFourViewController.swift in Sources */,
 				39AD77F227FB11AF0022EAC1 /* LoginViewController.swift in Sources */,
 				39AD781427FDF28E0022EAC1 /* AllRegionProductTableViewController.swift in Sources */,
+				390CF6AF28B50B4900980DC7 /* StepTwo.swift in Sources */,
 				3954BB952813C9F300C8815E /* AddProductStepTwoViewController.swift in Sources */,
 				103DA7C128A104FC004FEA14 /* LoginView.swift in Sources */,
 				39AD77F027FB11990022EAC1 /* Extension.swift in Sources */,
