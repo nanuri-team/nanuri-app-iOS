@@ -12,7 +12,7 @@ class HomeViewController: UIViewController {
 
     let headerScrollView = UIScrollView()
     let allRegionTableView = UITableView()
-    var eventProductCollectionView: UICollectionView!
+    let pagerCount = UILabel()
     
     var sampleImageViewArray: [UIImageView] = []
     var collectionCellWidth = 120
@@ -24,8 +24,10 @@ class HomeViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "홈"
         self.navigationController?.navigationBar.isHidden = false
+        
+        let leftNavigationBar = UIBarButtonItem(image: UIImage(named: "nanuri_header_logo")?.withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: nil)
+        self.navigationItem.setLeftBarButton(leftNavigationBar, animated: false)
         
         setUpView()
         getPostsList()
@@ -45,7 +47,7 @@ class HomeViewController: UIViewController {
     }
     
     @objc func selectAddProductButton() {
-        let addProductStepOneViewController = AddProductStepOneViewController()
+        let addProductStepOneViewController = AddProductViewController()
         addProductStepOneViewController.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(addProductStepOneViewController, animated: true)
     }
@@ -63,7 +65,6 @@ class HomeViewController: UIViewController {
             }
             self.getDeadlineImminent(responsePost: response.results)
             self.allRegionTableView.reloadData()
-            self.eventProductCollectionView.reloadData()
         }
     }
 
@@ -113,7 +114,6 @@ class HomeViewController: UIViewController {
             }
         }
     }
-    
 
     func setUpView() {
         self.view.backgroundColor = .white
@@ -125,6 +125,7 @@ class HomeViewController: UIViewController {
         headerScrollView.delegate = self
         headerScrollView.contentSize = CGSize(width: headerScrollView.frame.width, height: headerScrollView.frame.height)
         headerScrollView.isPagingEnabled = true
+        headerScrollView.showsHorizontalScrollIndicator = false
         headerView.addSubview(headerScrollView)
         headerScrollView.snp.makeConstraints { make in
             make.top.equalToSuperview()
@@ -133,41 +134,79 @@ class HomeViewController: UIViewController {
         }
         setUpEventScrollView()
         
-//        let pagerView = UIView()
-//        pagerView.backgroundColor = .black.withAlphaComponent(0.4)
-//        pagerView.layer.cornerRadius = 18 / 2
-//        headerView.addSubview(pagerView)
-//        pagerView.snp.makeConstraints { make in
-//            make.bottom.equalTo(headerScrollView.snp.bottom).inset(10)
-//            make.right.equalToSuperview().inset(10)
-//            make.width.equalTo(42)
-//            make.height.equalTo(18)
-//        }
-//
-        let eventTitleLabel = UILabel()
-        eventTitleLabel.attributedText = .attributeFont(font: .PBold, size: 17, text: "마감 임박 공구!", lineHeight: 20)
-        headerView.addSubview(eventTitleLabel)
-        eventTitleLabel.snp.makeConstraints { make in
+        let pagerView = UIView()
+        pagerView.backgroundColor = .black.withAlphaComponent(0.4)
+        pagerView.layer.cornerRadius = 18 / 2
+        headerView.addSubview(pagerView)
+        pagerView.snp.makeConstraints { make in
+            make.bottom.equalTo(headerScrollView.snp.bottom).inset(10)
+            make.right.equalToSuperview().inset(10)
+            make.width.equalTo(42)
+            make.height.equalTo(18)
+        }
+        
+        pagerCount.attributedText = .attributeFont(font: .PMedium, size: 10, text: "1  /  \(sampleImageViewArray.count)", lineHeight: 10)
+        pagerCount.textColor = .white
+        pagerView.addSubview(pagerCount)
+        pagerCount.snp.makeConstraints { make in
+            make.center.equalToSuperview()
+        }
+
+        let categoryTitleLabel = UILabel()
+        categoryTitleLabel.attributedText = .attributeFont(font: .PBold, size: 17, text: "카테고리", lineHeight: 20)
+        headerView.addSubview(categoryTitleLabel)
+        categoryTitleLabel.snp.makeConstraints { make in
             make.top.equalTo(headerScrollView.snp.bottom).inset(-32)
             make.right.left.equalToSuperview().inset(16)
         }
         
-        let layout = UICollectionViewFlowLayout()
-        eventProductCollectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        eventProductCollectionView.delegate = self
-        eventProductCollectionView.dataSource = self
-        eventProductCollectionView.showsHorizontalScrollIndicator = false
-        layout.scrollDirection = .horizontal
-        layout.minimumLineSpacing = 16
-        eventProductCollectionView.register(VerticalProductCollectionViewCell.self, forCellWithReuseIdentifier: VerticalProductCollectionViewCell.cellId)
-        headerView.addSubview(eventProductCollectionView)
-        eventProductCollectionView.snp.makeConstraints { make in
-            make.top.equalTo(eventTitleLabel.snp.bottom).inset(-10)
-            make.width.equalTo(ratioWidth)
-            make.height.equalTo(collectionCellHeight)
+        let categoryView = UIView()
+        headerView.addSubview(categoryView)
+        categoryView.snp.makeConstraints { make in
+            make.top.equalTo(categoryTitleLabel.snp.bottom).inset(-12)
+            make.left.right.equalToSuperview()
+            make.bottom.equalToSuperview()
         }
-
-
+        
+        let lifeCategoryButton = CategoryButton(image: UIImage(named: "category_life_ic"), title: "생활용품")
+        categoryView.addSubview(lifeCategoryButton)
+        lifeCategoryButton.snp.makeConstraints { make in
+            make.left.equalToSuperview().inset(16)
+        }
+        
+        let foodCategoryButton = CategoryButton(image: UIImage(named: "category_bath_ic"), title: "음식")
+        categoryView.addSubview(foodCategoryButton)
+        foodCategoryButton.snp.makeConstraints { make in
+            make.left.equalTo(lifeCategoryButton.snp.right).inset(-12)
+        }
+        
+        let kitchenCategoryButton = CategoryButton(image: UIImage(named: "category_kitchen_ic"), title: "주방")
+        categoryView.addSubview(kitchenCategoryButton)
+        kitchenCategoryButton.snp.makeConstraints { make in
+            make.left.equalTo(foodCategoryButton.snp.right).inset(-12)
+        }
+        
+        let bathCategoryButton = CategoryButton(image: UIImage(named: "category_bath_ic"), title: "욕실")
+        categoryView.addSubview(bathCategoryButton)
+        bathCategoryButton.snp.makeConstraints { make in
+            make.top.equalTo(lifeCategoryButton.snp.bottom).inset(-10)
+            make.left.equalToSuperview().inset(16)
+        }
+        
+        let noteCategoryButton = CategoryButton(image: UIImage(named: "category_note_ic"), title: "문구")
+        categoryView.addSubview(noteCategoryButton)
+        noteCategoryButton.snp.makeConstraints { make in
+            make.top.equalTo(foodCategoryButton.snp.bottom).inset(-10)
+            make.left.equalTo(bathCategoryButton.snp.right).inset(-12)
+        }
+        
+        let etcCategoryButton = CategoryButton(image: UIImage(named: "category_etc_ic"), title: "기타")
+        categoryView.addSubview(etcCategoryButton)
+        etcCategoryButton.snp.makeConstraints { make in
+            make.top.equalTo(kitchenCategoryButton.snp.bottom).inset(-10)
+            make.left.equalTo(noteCategoryButton.snp.right).inset(-12)
+        }
+        
         allRegionTableView.delegate = self
         allRegionTableView.dataSource = self
         allRegionTableView.separatorInset = .zero
@@ -266,7 +305,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
                 cell.productLocationLabel.attributedText = .attributeFont(font: .NSRBold, size: 12, text: post.writerAddress ?? "", lineHeight: 14)
                 cell.productPrice.attributedText = .attributeFont(font: .PBold, size: 16, text: "\(post.unitPrice.toPriceNumberFormmat())원", lineHeight: 19)
                 cell.productPrice.textAlignment = .right
-                cell.deliveryTagView.setDeliveryType(type: post.tradeType)
+                cell.deliveryTagView.setDeliveryType(type: post.tradeType ?? "")
                 
                 cell.dDayTagView.setDday(dDay: post.waitedUntil?.dDaycalculator() ?? "")
                 cell.totalRecruit.attributedText = .attributeFont(font: .NSRExtrabold, size: 12, text: "/\(post.maxParticipants)", lineHeight: 14)
@@ -317,7 +356,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         cell.productName.attributedText = .attributeFont(font: .PRegular, size: 14, text: post.title, lineHeight: 17)
         cell.productPrice.attributedText = .attributeFont(font: .PBold, size: 11, text: "\(post.unitPrice.toPriceNumberFormmat())원", lineHeight: 13)
         cell.productPrice.textAlignment = .right
-        cell.deliveryTagView.setDeliveryType(type: post.tradeType)
+        cell.deliveryTagView.setDeliveryType(type: post.tradeType ?? "")
         
         cell.dDayTagView.setDday(dDay: post.waitedUntil?.dDaycalculator() ?? "")
         cell.totalRecruit.attributedText = .attributeFont(font: .NSRExtrabold, size: 12, text: "/\(post.maxParticipants)", lineHeight: 14)
@@ -338,7 +377,9 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
 //MARK: - UIScrollViewDelegate
 
 extension HomeViewController: UIScrollViewDelegate {
-    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        //
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let value = scrollView.contentOffset.x / scrollView.frame.size.width
+        pagerCount.attributedText = .attributeFont(font: .PMedium, size: 10, text: "\(Int(round(value + 1)))  /  \(sampleImageViewArray.count)", lineHeight: 10)
+        pagerCount.textColor = .white
     }
 }

@@ -21,6 +21,7 @@ struct ResultInfo: Decodable {
     var participants: [String]
     var category: String?
     var favoredBy: [String]
+    var images: [String]
     var uuid: String
     var title: String
     var image: String?
@@ -31,7 +32,7 @@ struct ResultInfo: Decodable {
     var maxParticipants: Int
     var numParticipants: Int
     var productUrl: String
-    var tradeType: String
+    var tradeType: String?
     var orderStatus: String
     var isPublished: Bool
     var publishedAt: String?
@@ -48,6 +49,7 @@ struct ResultInfo: Decodable {
         case participants
         case category
         case favoredBy = "favored_by"
+        case images
         case uuid
         case title
         case image

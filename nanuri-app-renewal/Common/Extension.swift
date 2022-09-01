@@ -46,6 +46,11 @@ extension UIColor {
         return UIColor(red: 155.0 / 255.0, green: 179.0 / 255.0, blue: 226.0 / 255.0, alpha: 1)
     }
     
+    class var nanuriGray8: UIColor {
+        // rgba(217, 217, 217, 1)
+        return UIColor(red: 217.0 / 255.0, green: 217.0 / 255.0, blue: 217.0 / 255.0, alpha: 1)
+    }
+    
     class var nanuriGray7: UIColor {
         // rgba(80, 81, 85, 1)
         return UIColor(red: 80.0 / 255.0, green: 81.0 / 255.0, blue: 85.0 / 255.0, alpha: 1)
@@ -329,5 +334,45 @@ extension String {
 extension UIImageView {
     func imageUpload(url: String) {
         self.sd_setImage(with: URL(string: url), placeholderImage: UIImage(named: "placeholder.png"))
+    }
+}
+
+extension UIButton {
+    func alignTextBelow(spacing: CGFloat = 7.0) {
+        guard let image = self.imageView?.image else {
+            return
+        }
+
+        guard let titleLabel = self.titleLabel else {
+            return
+        }
+
+        guard let titleText = titleLabel.text else {
+            return
+        }
+
+        let titleSize = titleText.size(withAttributes: [
+            NSAttributedString.Key.font: titleLabel.font as Any
+        ])
+
+        titleEdgeInsets = UIEdgeInsets(top: spacing, left: -image.size.width, bottom: -image.size.height, right: 0)
+        imageEdgeInsets = UIEdgeInsets(top: -(titleSize.height + spacing), left: 0, bottom: 0, right: -titleSize.width)
+    }
+    
+    func imageWithText(image: UIImage?, text: String) {
+        let buttonImage = UIImageView()
+        buttonImage.image = image
+        self.addSubview(buttonImage)
+        buttonImage.snp.makeConstraints { make in
+            make.left.equalToSuperview()
+            make.width.height.equalTo(18)
+        }
+        
+        let buttonText = UILabel()
+        buttonText.attributedText = .attributeFont(font: .PMedium, size: 15, text: text, lineHeight: 18)
+        self.addSubview(buttonText)
+        buttonText.snp.makeConstraints { make in
+            make.left.equalTo(buttonImage.snp.right).inset(-16)
+        }
     }
 }

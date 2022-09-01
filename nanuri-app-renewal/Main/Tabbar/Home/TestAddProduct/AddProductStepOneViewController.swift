@@ -137,6 +137,8 @@ class AddProductStepOneViewController: UIViewController {
             make.height.equalTo(156)
             make.top.equalTo(self.view.safeAreaLayoutGuide)
         }
+        
+       
     }
 
     func setUpView() {
