@@ -37,11 +37,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 //        window.rootViewController = TabBarController()
         // 로그인 화면 전환 로직
         
-        if UserDefaults.standard.integer(forKey: "kakaoID") == 0 {
+        if UserDefaults.standard.object(forKey: "loginInfo") == nil {
 //            let loginVC = LoginViewController()
 //            self.present(loginVC, animated: true)
             
-            window.rootViewController = TabBarController()
+            window.rootViewController = LoginViewController()
         } else {
             
             window.rootViewController = TabBarController()
