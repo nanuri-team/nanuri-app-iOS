@@ -1,5 +1,5 @@
 //
-//  SignOutViewController.swift
+//  DeactivatedViewController.swift
 //  nanuri-app-renewal
 //
 //  Created by heyji on 2022/08/24.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SignOutViewController: UIViewController {
+class DeactivatedViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -16,6 +16,20 @@ class SignOutViewController: UIViewController {
     
     @objc func cancelButtonTapped() {
         self.dismiss(animated: true, completion: nil)
+    }
+    
+    @objc func deactivatedButtonTapped() {
+        self.dismiss(animated: true, completion: nil)
+        
+        let params: [String: Any] = ["is_active": false]
+        
+        NetworkService.shared.patchUserIsActiveRequest(parameters: params)
+        
+        for key in UserDefaults.standard.dictionaryRepresentation().keys {
+            UserDefaults.standard.removeObject(forKey: key.description)
+        }
+        let viewController = LoginViewController()
+        (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.setRootViewController(viewController)
     }
     
     private func setupView() {
@@ -83,7 +97,7 @@ class SignOutViewController: UIViewController {
         signOutButton.setTitleColor(.white, for: .normal)
         signOutButton.backgroundColor = .nanuriGreen
         signOutButton.layer.cornerRadius = 4
-        signOutButton.addTarget(self, action: #selector(cancelButtonTapped), for: .touchUpInside)
+        signOutButton.addTarget(self, action: #selector(deactivatedButtonTapped), for: .touchUpInside)
         
         var buttonStackView = UIStackView()
         buttonStackView = UIStackView(arrangedSubviews: [cancelButton, signOutButton])
@@ -99,5 +113,4 @@ class SignOutViewController: UIViewController {
             make.height.equalTo(48)
         }
     }
-    
 }

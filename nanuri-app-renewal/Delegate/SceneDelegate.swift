@@ -21,10 +21,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 _ = AuthController.handleOpenUrl(url: url)
             }
         }
-        
-      
     }
-    
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
@@ -34,22 +31,21 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         guard let windowScene = (scene as? UIWindowScene) else { return }
         let window = UIWindow(windowScene: windowScene)
-//        window.rootViewController = TabBarController()
-        // 로그인 화면 전환 로직
         
+        // 로그인 화면 전환 로직
         if UserDefaults.standard.object(forKey: "loginInfo") == nil {
-//            let loginVC = LoginViewController()
-//            self.present(loginVC, animated: true)
-            
             window.rootViewController = LoginViewController()
         } else {
-            
             window.rootViewController = TabBarController()
         }
         
         self.window = window
         window.makeKeyAndVisible()
-//        window.rootViewController = TabBarController()
+    }
+    
+    func setRootViewController(_ viewController: UIViewController) {
+        window?.rootViewController = viewController
+        window?.makeKeyAndVisible()
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

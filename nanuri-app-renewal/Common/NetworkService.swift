@@ -51,7 +51,7 @@ class NetworkService {
         }
     }
     
-    func patchUserInfoRequest(parameters: [String: String], imageData: Data? = nil, filename: String? = nil, mimeType: String? = nil, completionHandler: @escaping (UserInfo) -> Void) {
+    func patchUserInfoRequest(parameters: [String: Any], imageData: Data? = nil, filename: String? = nil, mimeType: String? = nil, completionHandler: @escaping (UserInfo) -> Void) {
         
         if let tokenNum = UserDefaults.standard.object(forKey: "loginInfo") as? Data {
             let decoder = JSONDecoder()
@@ -109,6 +109,50 @@ class NetworkService {
                         let userInfo = try JSONDecoder().decode(UserInfo.self, from: data)
                         completionHandler(userInfo)
                         
+                    } catch let error as NSError {
+                        print("Error occur: error calling PATCH - \(error)")
+                    }
+                }.resume()
+            }
+        }
+    }
+    
+    func patchUserIsActiveRequest(parameters: [String: Any]) {
+        if let tokenNum = UserDefaults.standard.object(forKey: "loginInfo") as? Data {
+            let decoder = JSONDecoder()
+            if let loadedToken = try? decoder.decode(SocialLogin.self, from: tokenNum) {
+                let configuration = URLSessionConfiguration.default
+                configuration.httpAdditionalHeaders = [
+                    "Authorization": "Token \(loadedToken.token)"
+                ]
+                
+                let url = baseURL + loadedToken.uuid
+                guard let urlComponents = URLComponents(string: url) else { return }
+                guard let requestURL = urlComponents.url else { return }
+                var request = URLRequest(url: requestURL)
+                
+                request.httpMethod = "PATCH"
+                request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+                request.addValue("application/json", forHTTPHeaderField: "Accept")
+                
+                // data
+                let jsonData = try! JSONSerialization.data(withJSONObject: parameters, options: .prettyPrinted)
+                request.httpBody = jsonData
+                
+                let defaultSession = URLSession(configuration: configuration)
+                
+                defaultSession.dataTask(with: request) { data, response, error in
+                    guard let httpResponse = response as? HTTPURLResponse,
+                          (200..<300).contains(httpResponse.statusCode)  else {
+                              print("Error: HTTP request failed \n --> response: \(response)")
+                              return
+                          }
+                    
+                    guard let data = data else { return }
+                    
+                    do {
+                        guard let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: Any] else { return }
+                        print("로그아웃 완료 \(json["is_active"])")
                     } catch let error as NSError {
                         print("Error occur: error calling PATCH - \(error)")
                     }

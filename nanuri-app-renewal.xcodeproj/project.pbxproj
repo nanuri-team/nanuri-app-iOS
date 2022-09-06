@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1005C40228B3728F00A8AA7B /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1005C40128B3728E00A8AA7B /* NetworkService.swift */; };
-		1005C40428B5F77700A8AA7B /* SignOutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1005C40328B5F77700A8AA7B /* SignOutViewController.swift */; };
+		1005C40428B5F77700A8AA7B /* DeactivatedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1005C40328B5F77700A8AA7B /* DeactivatedViewController.swift */; };
 		103DA7C128A104FC004FEA14 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 103DA7C028A104FC004FEA14 /* LoginView.swift */; };
 		103DA84A28A536E5004FEA14 /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 103DA84928A536E5004FEA14 /* RegisterView.swift */; };
 		103DA85A28AA7E56004FEA14 /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 103DA85928AA7E56004FEA14 /* NotificationViewController.swift */; };
@@ -85,7 +85,7 @@
 
 /* Begin PBXFileReference section */
 		1005C40128B3728E00A8AA7B /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
-		1005C40328B5F77700A8AA7B /* SignOutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignOutViewController.swift; sourceTree = "<group>"; };
+		1005C40328B5F77700A8AA7B /* DeactivatedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeactivatedViewController.swift; sourceTree = "<group>"; };
 		103DA7BA28A0EA11004FEA14 /* nanuri-app-renewal.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "nanuri-app-renewal.entitlements"; sourceTree = "<group>"; };
 		103DA7C028A104FC004FEA14 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		103DA84928A536E5004FEA14 /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
@@ -472,7 +472,7 @@
 			isa = PBXGroup;
 			children = (
 				87D17BA127FB5C0B00E171A2 /* SettingViewController.swift */,
-				1005C40328B5F77700A8AA7B /* SignOutViewController.swift */,
+				1005C40328B5F77700A8AA7B /* DeactivatedViewController.swift */,
 			);
 			path = Setting;
 			sourceTree = "<group>";
@@ -654,7 +654,7 @@
 				3954BBA7281433FC00C8815E /* YourChatMessageTableViewCell.swift in Sources */,
 				39788AF528188B5700ABD918 /* Posts.swift in Sources */,
 				87D17BA027FB5BF100E171A2 /* SearchViewController.swift in Sources */,
-				1005C40428B5F77700A8AA7B /* SignOutViewController.swift in Sources */,
+				1005C40428B5F77700A8AA7B /* DeactivatedViewController.swift in Sources */,
 				398B709C28B526A20039DA3D /* CategoryButton.swift in Sources */,
 				39AD780027FB120B0022EAC1 /* MyPageViewController.swift in Sources */,
 				1005C40228B3728F00A8AA7B /* NetworkService.swift in Sources */,
