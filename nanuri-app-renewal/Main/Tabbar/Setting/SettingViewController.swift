@@ -118,13 +118,15 @@ extension SettingViewController: UITableViewDataSource, UITableViewDelegate {
                 for key in UserDefaults.standard.dictionaryRepresentation().keys {
                     UserDefaults.standard.removeObject(forKey: key.description)
                 }
+                let viewController = LoginViewController()
+                (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.setRootViewController(viewController)
                 print("로그아웃되었습니다.")
                 
             } else {
-                let signOutViewController = SignOutViewController()
-                signOutViewController.modalTransitionStyle = .crossDissolve
-                signOutViewController.modalPresentationStyle = .overFullScreen
-                self.present(signOutViewController, animated: true, completion: nil)
+                let deactivatedViewController = DeactivatedViewController()
+                deactivatedViewController.modalTransitionStyle = .crossDissolve
+                deactivatedViewController.modalPresentationStyle = .overFullScreen
+                self.present(deactivatedViewController, animated: true, completion: nil)
             }
         default:
             break

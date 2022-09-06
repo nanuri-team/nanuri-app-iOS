@@ -31,14 +31,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UINavigationBar.appearance().isTranslucent = false
         UINavigationBar.appearance().barTintColor = .white
         
-//        KakaoSDK.initSDK(appKey: "ca58fb6fe4a03e54e743b7b25bf5ae4b")
-        
         // 13이전의 경우에는 SceneDelegate에서 해주었던 작업을 그대로 진행해주면 된다.
         window = UIWindow()
-        window?.rootViewController = TabBarController() // 초기 ViewController
+        if UserDefaults.standard.object(forKey: "loginInfo") == nil {
+            window?.rootViewController = LoginViewController()
+        } else {
+            window?.rootViewController = TabBarController()
+        }
         window?.makeKeyAndVisible()
         
         return true
+    }
+    
+    func setRootViewController(_ viewController: UIViewController) {
+        window?.rootViewController = viewController
+        window?.makeKeyAndVisible()
     }
 
     // MARK: UISceneSession Lifecycle

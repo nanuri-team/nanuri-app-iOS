@@ -35,7 +35,7 @@ class MyProfileModifiedViewController: UIViewController {
     private func networksetup() {
         guard let nickName = profileNameTextField.text else { return }
         guard let region = regionModifyTextField.text else { return }
-        guard let imageData = profileImageData else { return }
+        let imageData = profileImageData
         
         let userParams: [String: String] = ["nickname": nickName, "address": region]
         
@@ -45,6 +45,7 @@ class MyProfileModifiedViewController: UIViewController {
     }
     
     @objc func doneButtonTapped() {
+        print("aaa")
         networksetup()
         self.navigationController?.popViewController(animated: true)
     }
