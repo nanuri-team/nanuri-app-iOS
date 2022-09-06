@@ -81,10 +81,8 @@ class RegisterViewController: UIViewController {
                 print("--> 데이터 넘깁니다!")
                 self.saveUserInfo()
                 print("--> 데이터 받았습니다!")
-                let tabbarViewController = TabBarController()
-                tabbarViewController.modalTransitionStyle = .crossDissolve
-                tabbarViewController.modalPresentationStyle = .overFullScreen
-                self.present(tabbarViewController, animated: true, completion: nil)
+                let viewController = TabBarController()
+                (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.setRootViewController(viewController)
             } else {
                 let alert = UIAlertController(title: "약관에 동의해주세요.", message: "약관 동의는 필수입니다.", preferredStyle: .alert)
                 let action = UIAlertAction(title: "확인", style: .default, handler: { _ in print("test")} )

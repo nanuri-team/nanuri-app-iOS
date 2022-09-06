@@ -70,10 +70,8 @@ class LoginViewController: UIViewController {
                 }
             } else {
                 DispatchQueue.main.async {
-                    let tabbarViewController = TabBarController()
-                    tabbarViewController.modalTransitionStyle = .crossDissolve
-                    tabbarViewController.modalPresentationStyle = .overFullScreen
-                    self.present(tabbarViewController, animated: true, completion: nil)
+                    let viewController = TabBarController()
+                    (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.setRootViewController(viewController)
                 }
             }
         }
