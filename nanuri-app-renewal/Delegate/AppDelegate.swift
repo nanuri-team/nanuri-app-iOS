@@ -18,6 +18,7 @@ import KakaoSDKUser
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    let mainViewController = MainViewController()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -30,15 +31,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         IQKeyboardManager.shared.enable = true
         UINavigationBar.appearance().isTranslucent = false
         UINavigationBar.appearance().barTintColor = .white
-        
-        // 13이전의 경우에는 SceneDelegate에서 해주었던 작업을 그대로 진행해주면 된다.
-        window = UIWindow()
-        if UserDefaults.standard.object(forKey: "loginInfo") == nil {
-            window?.rootViewController = LoginViewController()
-        } else {
-            window?.rootViewController = TabBarController()
-        }
-        window?.makeKeyAndVisible()
         
         return true
     }

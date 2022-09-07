@@ -12,6 +12,7 @@ class SnsUserInfoSingleton{
     
     var user: String?
     var kakaoUserId:Int?
+    var token: String = ""
     
     private init(){ }
 }

@@ -8,6 +8,13 @@
 import UIKit
 
 extension AddProductViewController {
+    
+    /// 상품 등록 2페이지 유효성 검사
+    func stepThreeValidation() -> Bool {
+        postProductInfo["category"] = categorySelectIndex.toCategoryName()
+        return true
+    }
+    
     func setUpStepThreeView() {
         
         stepThreeView.backgroundColor = .white

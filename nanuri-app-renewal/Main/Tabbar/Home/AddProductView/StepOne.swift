@@ -9,6 +9,33 @@ import UIKit
 
 extension AddProductViewController {
     
+    /// 상품 등록 1페이지 유효성 검사
+    func stepOneValidation() -> Bool {
+        guard let productNameText = productNameTextField.text,
+              let productLinkText = productLinkTextField.text,
+              let productPriceText = productPriceTextField.text
+        else { return false }
+        
+        if productNameText.isEmpty ||
+            productLinkText.isEmpty ||
+            productPriceText.isEmpty {
+            return false
+        } else {
+            postProductInfo["title"] = productNameText
+            postProductInfo["product_url"] = productLinkText
+            
+            if let integerToProductPrice = Int(productPriceText) {
+                postProductInfo["unit_price"] = integerToProductPrice
+            } else {
+                postProductInfo["unit_price"] = 0
+            }
+            
+            postImageData = addImageView.image
+            
+            return true
+        }
+    }
+    
     /// 상품 등록 스텝 1
     func setUpStepOneView() {
         
@@ -138,7 +165,7 @@ extension AddProductViewController {
             make.left.equalToSuperview().inset(16)
             make.bottom.equalToSuperview().inset(100)
         }
-//        addImageButton.addTarget(self, action: #selector(selectAddImageButton), for: .touchUpInside)
+        addImageButton.addTarget(self, action: #selector(selectAddImageButton), for: .touchUpInside)
         
         addImageView.layer.backgroundColor = UIColor.nanuriGray2.cgColor
         addImageView.layer.cornerRadius = 4

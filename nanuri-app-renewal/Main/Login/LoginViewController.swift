@@ -24,6 +24,7 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         loginSetUpView()
     }
     
@@ -59,21 +60,28 @@ class LoginViewController: UIViewController {
     }
     
     private func presentView(_ viewController: UIViewController) {
+        print("presentView")
         // 닉네임이 nil이라면 회원가입 뷰로 아니라면 메인뷰로 이동
         NetworkService.shared.getUserInfoRequest { userInfo in
             if userInfo.nickName.isEmpty {
                 DispatchQueue.main.async {
                     let registerViewController = viewController
                     registerViewController.modalTransitionStyle = .crossDissolve
-                    registerViewController.modalPresentationStyle = .overFullScreen
+                    registerViewController.modalPresentationStyle = .fullScreen
                     self.present(registerViewController, animated: true, completion: nil)
                 }
             } else {
                 DispatchQueue.main.async {
-                    let tabbarViewController = TabBarController()
-                    tabbarViewController.modalTransitionStyle = .crossDissolve
-                    tabbarViewController.modalPresentationStyle = .overFullScreen
-                    self.present(tabbarViewController, animated: true, completion: nil)
+//                    let tabbarViewController = TabBarController()
+//                    tabbarViewController.modalTransitionStyle = .crossDissolve
+//                    tabbarViewController.modalPresentationStyle = .fullScreen
+//                    self.present(tabbarViewController, animated: true, completion: nil)
+                    self.dismiss(animated: true) {
+                        let appdelegate = UIApplication.shared.delegate as! AppDelegate
+                        guard let mainViewController = appdelegate.window?.rootViewController as? MainViewController else { return }
+                        mainViewController.getHomeViewController()
+                        
+                    }
                 }
             }
         }
