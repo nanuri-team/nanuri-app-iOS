@@ -55,3 +55,10 @@ struct UserInfo: Codable {
         updatedAt = (try? values.decode(String.self, forKey: .updatedAt)) ?? ""
     }
 }
+
+struct UserResult: Codable {
+    let count: Int
+    let next: Int?
+    let previous: Int?
+    let result: [UserInfo]?
+}
