@@ -61,7 +61,7 @@ class NetworkService {
                 ]
                 let session = URLSession(configuration: configuration)
                 
-                let url = APIInfo.hostURL + APIInfo.api + APIInfo.version + APIList.user
+                let url = baseURL
                 guard var urlComponents = URLComponents(string: url) else { return }
                 
                 let queryItems = parameters.map { (key: String, value: String) in
