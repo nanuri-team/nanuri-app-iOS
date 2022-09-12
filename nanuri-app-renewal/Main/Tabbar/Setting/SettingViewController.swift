@@ -6,18 +6,28 @@
 //
 
 import UIKit
+import SafariServices
 
-class SettingViewController: UIViewController {
+final class SettingViewController: UIViewController {
     
     private let tableView = UITableView(frame: .zero, style: .grouped)
     private let sortOfSection: [[String]] = [["활동 알림 설정", "채팅 알림 설정", "마케팅 알림 설정"],
                                         ["공지사항", "도움말", "문의하기"],
                                         ["이용약관", "개인정보처리방침", "위치 기반 서비스 이용약관", "오픈소스 라이선스"],
                                         ["로그아웃", "회원탈퇴"]]
-
+    private let descriptionOfFirstSection: [String] = ["댓글, 즐겨찾기, 모집 마감 등 공동구매 활동에 대한 알림입니다.", "채팅방 생성, 새로운 채팅 등 채팅에 대한 알림입니다.", "프로모션, 이벤트 등 광고성 소식에 대한 알림입니다."]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpView()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        // 테이블뷰에서 셀 선택 후 돌아왔을떄 선택된 셀 해제
+        if let selectedIndexPath = tableView.indexPathForSelectedRow {
+            tableView.deselectRow(at: selectedIndexPath, animated: animated)
+        }
     }
     
     private func setUpView() {
@@ -29,18 +39,28 @@ class SettingViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.separatorStyle = .none
+        tableView.register(CustomSettingTableViewCell.self, forCellReuseIdentifier: CustomSettingTableViewCell.cellId)
+        tableView.register(DefaultSettingTableViewCell.self, forCellReuseIdentifier: DefaultSettingTableViewCell.cellId)
         self.view.addSubview(tableView)
         tableView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
     }
     
-    @objc func selectBackButton() {
+    @objc private func selectBackButton() {
         self.navigationController?.popViewController(animated: true)
     }
     
-    @objc func switchTapped(_ sender: UISwitch) {
-        print(sender)
+    @objc private func activeSwitchTapped(_ sender: UISwitch) {
+        UserDefaults.standard.set(sender.isOn, forKey: NotiSetting.notiOfActive.rawValue)
+    }
+    
+    @objc private func chatSwitchTapped(_ sender: UISwitch) {
+        UserDefaults.standard.set(sender.isOn, forKey: NotiSetting.notiOfChat.rawValue)
+    }
+    
+    @objc private func eventSwitchTapped(_ sender: UISwitch) {
+        UserDefaults.standard.set(sender.isOn, forKey: NotiSetting.notiOfEvent.rawValue)
     }
 }
 
@@ -52,44 +72,58 @@ extension SettingViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 0 {
+        switch section {
+        case 0:
             return sortOfSection[0].count
-        } else if section == 1 {
+        case 1:
             return sortOfSection[1].count
-        } else if section == 2 {
+        case 2:
             return sortOfSection[2].count
+        case 3:
+            return sortOfSection[3].count
+        default:
+            return 0
         }
-        return sortOfSection[3].count
     }
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell.init(style: .default, reuseIdentifier: "cell")
-        cell.selectionStyle = .none
-        
-        if indexPath.section == 0 {
-            let pushSwitch = UISwitch()
-            cell.contentView.addSubview(pushSwitch)
-            pushSwitch.snp.makeConstraints { make in
-                make.centerY.equalToSuperview()
-                make.right.equalTo(-16)
+        switch indexPath.section {
+        case 0:
+            let cell = tableView.dequeueReusableCell(withIdentifier: CustomSettingTableViewCell.cellId, for: indexPath) as! CustomSettingTableViewCell
+            cell.configure(title: sortOfSection[indexPath.section][indexPath.row], description: descriptionOfFirstSection[indexPath.row])
+            switch indexPath.row {
+            case 0:
+                cell.pushSwitch.isOn = UserDefaults.standard.bool(forKey: NotiSetting.notiOfActive.rawValue)
+                cell.pushSwitch.addTarget(self, action: #selector(activeSwitchTapped), for: .touchUpInside)
+            case 1:
+                cell.pushSwitch.isOn = UserDefaults.standard.bool(forKey: NotiSetting.notiOfChat.rawValue)
+                cell.pushSwitch.addTarget(self, action: #selector(chatSwitchTapped), for: .touchUpInside)
+            case 2:
+                cell.pushSwitch.isOn = UserDefaults.standard.bool(forKey: NotiSetting.notiOfEvent.rawValue)
+                cell.pushSwitch.addTarget(self, action: #selector(eventSwitchTapped), for: .touchUpInside)
+            default:
+                break
             }
-            pushSwitch.addTarget(self, action: #selector(switchTapped), for: .touchUpInside)
-            cell.textLabel?.text = sortOfSection[indexPath.section][indexPath.row]
-        } else if indexPath.section == 1 {
-            cell.textLabel?.text = sortOfSection[indexPath.section][indexPath.row]
-        } else if indexPath.section == 2 {
-            cell.textLabel?.text = sortOfSection[indexPath.section][indexPath.row]
-        } else {
+            return cell
+        case 1, 2:
+            let cell = tableView.dequeueReusableCell(withIdentifier: DefaultSettingTableViewCell.cellId, for: indexPath) as! DefaultSettingTableViewCell
+            cell.configure(title: sortOfSection[indexPath.section][indexPath.row])
+            return cell
+        case 3:
+            let cell = tableView.dequeueReusableCell(withIdentifier: DefaultSettingTableViewCell.cellId, for: indexPath) as! DefaultSettingTableViewCell
             if indexPath.row == 0 {
-                cell.textLabel?.text = sortOfSection[indexPath.section][0]
+                cell.configure(title: sortOfSection[indexPath.section][indexPath.row])
             } else {
-                cell.textLabel?.text = sortOfSection[indexPath.section][1]
-                cell.textLabel?.textColor = .nanuriGray4
+                cell.configure(title: sortOfSection[indexPath.section][indexPath.row])
+                cell.titleLabel.textColor = .nanuriGray4
                 cell.backgroundColor = .clear
+                cell.selectionStyle = .none
             }
+            return cell
+        default:
+            return UITableViewCell()
         }
-        return cell
     }
     
     // Delegate
@@ -102,17 +136,24 @@ extension SettingViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.section == 0 {
+            return 67
+        }
         return 48
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.section {
         case 0:
-            print(indexPath.row)
+            break
         case 1:
-            print(indexPath.row)
+            guard let url = URL(string: "https://www.google.com") else { return }
+            let safari = SFSafariViewController(url: url)
+            present(safari, animated: true)
         case 2:
-            print(indexPath.row)
+            guard let url = URL(string: "https://www.google.com") else { return }
+            let safari = SFSafariViewController(url: url)
+            present(safari, animated: true)
         case 3:
             if indexPath.row == 0 {
                 for key in UserDefaults.standard.dictionaryRepresentation().keys {
@@ -131,5 +172,10 @@ extension SettingViewController: UITableViewDataSource, UITableViewDelegate {
         default:
             break
         }
+    }
+    
+    // 첫번째 섹션은 셀 선택이 되지 않도록 설정
+    func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
+        return indexPath.section != 0
     }
 }
