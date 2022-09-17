@@ -6,18 +6,14 @@
 //
 
 import UIKit
-import Alamofire
 import SafariServices
 
 class RegisterViewController: UIViewController {
     
-    let registerView: RegisterView = {
-        let view = RegisterView()
-        return view
-    }()
-    
+    let registerView: RegisterView = RegisterView()
     var termsCheck: Bool = false
     var privacyCheck: Bool = false
+    var nickNameCheck: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,10 +22,10 @@ class RegisterViewController: UIViewController {
         registerView.nickNameTextField.delegate = self
     }
     
-    func test(isOn: Bool) {
+    func registerButtonSwitch(isOn: Bool) {
         switch isOn {
         case true:
-            if termsCheck == true && privacyCheck == true {
+            if termsCheck == true && privacyCheck == true && nickNameCheck == true {
                 registerView.registerButton.isUserInteractionEnabled = true
                 registerView.registerButton.backgroundColor = .nanuriGreen
             }
@@ -43,9 +39,11 @@ class RegisterViewController: UIViewController {
         if sender.isSelected {
             sender.isSelected = false
             termsCheck = false
+            registerButtonSwitch(isOn: termsCheck)
         } else {
             sender.isSelected = true
             termsCheck = true
+            registerButtonSwitch(isOn: termsCheck)
         }
     }
     
@@ -53,9 +51,11 @@ class RegisterViewController: UIViewController {
         if sender.isSelected {
             sender.isSelected = false
             privacyCheck = false
+            registerButtonSwitch(isOn: privacyCheck)
         } else {
             sender.isSelected = true
             privacyCheck = true
+            registerButtonSwitch(isOn: privacyCheck)
         }
     }
     
@@ -76,57 +76,17 @@ class RegisterViewController: UIViewController {
     }
     
     @objc func tappedSignUpButton(_ sender: UIButton) {
-        if registerView.nickNameTextField.text?.isEmpty != nil && (registerView.nickNameTextField.text?.count)! >= 2 {
-            if termsCheck == true && privacyCheck == true {
-                print("--> 데이터 넘깁니다!")
-                self.saveUserInfo()
-                print("--> 데이터 받았습니다!")
-                let tabbarViewController = TabBarController()
-                tabbarViewController.modalTransitionStyle = .crossDissolve
-                tabbarViewController.modalPresentationStyle = .overFullScreen
-                self.present(tabbarViewController, animated: true, completion: nil)
-            } else {
-                let alert = UIAlertController(title: "약관에 동의해주세요.", message: "약관 동의는 필수입니다.", preferredStyle: .alert)
-                let action = UIAlertAction(title: "확인", style: .default, handler: { _ in print("test")} )
-                alert.addAction(action)
-                present(alert, animated: true)
-            }
-        } else {
-            let alert = UIAlertController(title: "닉네임을 입력해주세요.", message: "닉네임은 필수입니다.", preferredStyle: .alert)
-            let action = UIAlertAction(title: "확인", style: .default, handler: { _ in print("test")} )
-            alert.addAction(action)
-            present(alert, animated: true)
-        }
+        self.saveUserInfo()
     }
 
     private func saveUserInfo() {
-        if let tokenNum = UserDefaults.standard.object(forKey: "loginInfo") as? Data {
-            let decoder = JSONDecoder()
-            if let loadedToken = try? decoder.decode(SocialLogin.self, from: tokenNum) {
-                print(" 저장됐음! \(loadedToken.token), \(loadedToken.uuid)")
-                
-                let strURL = "https://nanuri.app/api/v1/users/\(loadedToken.uuid)/"
-                
-                guard let registerNickName = registerView.nickNameTextField.text else { return }
-                
-                let headers: HTTPHeaders = [
-                    "Content-Type": "multipart/form-data",
-                    "Authorization": "Token \(loadedToken.token)"
-                ]
-                let userParams: Parameters = ["nickname": registerNickName]
-                
-                AF.upload(multipartFormData: { multiFormData in
-                    for (key, value) in userParams {
-                        multiFormData.append(Data("\(value)".utf8), withName: key)
-                    }
-                }, to: strURL, method: .patch, headers: headers).responseString { response in
-                    switch response.result {
-                    case .success(let value):
-                        print("value -> \(value)")
-                    case .failure(let error):
-                        print("error -> \(error.localizedDescription)")
-                    }
-                }
+        guard let registerNickName = registerView.nickNameTextField.text else { return }
+        let params: [String: String] = ["nickname": registerNickName]
+        NetworkService.shared.patchUserInfoRequest(parameters: params) { userInfo in
+            DispatchQueue.main.async {
+                print("데이터 저장 -> \(userInfo)")
+                let viewController = TabBarController()
+                (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.setRootViewController(viewController)
             }
         }
     }
@@ -171,30 +131,53 @@ extension RegisterViewController: UITextFieldDelegate {
         }
     }
     
+    func textFieldDidChangeSelection(_ textField: UITextField) {
+        // 닉네임 중복 체크
+        let params: [String: String] = ["nickname": textField.text!]
+        NetworkService.shared.getUserNicNameResquest(parameters: params) { userResult in
+            DispatchQueue.main.async {
+                if (textField.text?.count)! > 0 {
+                    if userResult.count == 0 {
+                        self.registerView.checkButton.backgroundColor = .white
+                        self.registerView.checkButton.setImage(UIImage(systemName: "checkmark"), for: .normal)
+                        self.registerView.checkButton.tintColor = .nanuriGreen
+                        self.registerView.checkLabel.attributedText = .attributeFont(font: .PMedium, size: 13, text: "사용 가능한 닉네임입니다.", lineHeight: 15)
+                        self.registerView.checkLabel.textColor = .nanuriGreen
+                        textField.layer.borderColor = UIColor.nanuriGreen.cgColor
+                        self.nickNameCheck = true
+                        if self.termsCheck == true && self.privacyCheck == true {
+                            self.registerView.registerButton.isUserInteractionEnabled = true
+                            self.registerView.registerButton.backgroundColor = .nanuriGreen
+                        }
+                    } else {
+                        self.nickNameCheck = false
+                        self.registerView.checkButton.backgroundColor = .white
+                        self.registerView.checkButton.setImage(UIImage(systemName: "exclamationmark"), for: .normal)
+                        self.registerView.checkButton.tintColor = .nanuriRed
+                        self.registerView.checkLabel.attributedText = .attributeFont(font: .PMedium, size: 13, text: "이미 등록된 닉네임입니다.", lineHeight: 15)
+                        self.registerView.checkLabel.textColor = .nanuriRed
+                        textField.layer.borderColor = UIColor.nanuriRed.cgColor
+                        self.registerView.registerButton.isUserInteractionEnabled = false
+                        self.registerView.registerButton.backgroundColor = .nanuriGray3
+                    }
+                } else {
+                    self.nickNameCheck = false
+                    textField.layer.borderColor = UIColor.nanuriGreen.cgColor
+                    self.registerView.checkButton.setImage(nil, for: .normal)
+                    self.registerView.checkLabel.textColor = .clear
+                    self.registerView.registerButton.isUserInteractionEnabled = false
+                    self.registerView.registerButton.backgroundColor = .nanuriGray3
+                }
+            }
+        }
+    }
+    
     // 텍스트필드에 편집이 중지될떄
     func textFieldDidEndEditing(_ textField: UITextField) {
-        // 사용가능한 닉네임인지 아닌지 체크해서 알려주기
-        if textField.text?.isEmpty != nil {
-            // 사용가능하면 체크표시
-            if (textField.text?.count)! >= 2 {
-                registerView.checkButton.backgroundColor = .white
-                registerView.checkButton.setImage(UIImage(systemName: "checkmark"), for: .normal)
-                registerView.checkButton.tintColor = .nanuriGreen
-                registerView.checkLabel.attributedText = .attributeFont(font: .PMedium, size: 13, text: "사용 가능한 닉네임입니다.", lineHeight: 15)
-                registerView.checkLabel.textColor = .nanuriGreen
-                textField.layer.borderColor = UIColor.nanuriGray2.cgColor
-            } else if (textField.text?.count)! >= 1 && (textField.text?.count)! < 2 {
-                registerView.checkButton.backgroundColor = .white
-                registerView.checkButton.setImage(UIImage(systemName: "exclamationmark"), for: .normal)
-                registerView.checkButton.tintColor = .nanuriRed
-                registerView.checkLabel.attributedText = .attributeFont(font: .PMedium, size: 13, text: "이미 등록된 닉네임입니다.", lineHeight: 15)
-                registerView.checkLabel.textColor = .nanuriRed
-                textField.layer.borderColor = UIColor.nanuriRed.cgColor
-            } else {
-                textField.layer.borderColor = UIColor.nanuriGray2.cgColor
-                registerView.checkButton.setImage(nil, for: .normal)
-                registerView.checkLabel.textColor = .clear
-            }
+        if nickNameCheck == true {
+            textField.layer.borderColor = UIColor.nanuriGreen.cgColor
+        } else {
+            textField.layer.borderColor = UIColor.nanuriRed.cgColor
         }
     }
 }

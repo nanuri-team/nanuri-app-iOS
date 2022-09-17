@@ -72,16 +72,8 @@ class LoginViewController: UIViewController {
                 }
             } else {
                 DispatchQueue.main.async {
-//                    let tabbarViewController = TabBarController()
-//                    tabbarViewController.modalTransitionStyle = .crossDissolve
-//                    tabbarViewController.modalPresentationStyle = .fullScreen
-//                    self.present(tabbarViewController, animated: true, completion: nil)
-                    self.dismiss(animated: true) {
-                        let appdelegate = UIApplication.shared.delegate as! AppDelegate
-                        guard let mainViewController = appdelegate.window?.rootViewController as? MainViewController else { return }
-                        mainViewController.getHomeViewController()
-                        
-                    }
+                    let viewController = TabBarController()
+                    (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.setRootViewController(viewController)
                 }
             }
         }

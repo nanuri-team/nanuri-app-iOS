@@ -45,6 +45,7 @@ final class RegisterView: UIView {
     
     var checkButton: UIButton = {
         let button = UIButton()
+        button.isUserInteractionEnabled = false
         return button
     }()
     
@@ -59,6 +60,7 @@ final class RegisterView: UIView {
         button.backgroundColor = .nanuriGray3
         button.layer.cornerRadius = 4
         button.setTitleColor(.white, for: .normal)
+        button.isUserInteractionEnabled = false
         return button
     }()
     
@@ -69,7 +71,7 @@ final class RegisterView: UIView {
     
     var termsLinkButton: UIButton = {
         let button = UIButton()
-        button.setAttributedTitle(.attributeFont(font: .PRegular, size: 15, text: "이용약관", lineHeight: 18), for: .normal)
+        button.setAttributedTitle(.attributeFontStyle(font: .PRegular, size: 15, text: "이용약관", lineHeight: 18), for: .normal)
         button.setTitleColor(.nanuriGray7, for: .normal)
         return button
     }()
@@ -95,7 +97,7 @@ final class RegisterView: UIView {
     
     let privacyLinkButton: UIButton = {
         let button = UIButton()
-        button.setAttributedTitle(.attributeFont(font: .PRegular, size: 15, text: "개인정보처리방침", lineHeight: 18), for: .normal)
+        button.setAttributedTitle(.attributeFontStyle(font: .PRegular, size: 15, text: "개인정보처리방침", lineHeight: 18), for: .normal)
         button.setTitleColor(.nanuriGray7, for: .normal)
         return button
     }()
@@ -118,8 +120,6 @@ final class RegisterView: UIView {
         
         setUpView()
     }
-    
-    
     
     private func setUpView() {
         addSubview(closeButton)
