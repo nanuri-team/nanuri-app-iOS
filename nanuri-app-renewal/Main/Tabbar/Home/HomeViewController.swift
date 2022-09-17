@@ -25,12 +25,14 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.navigationBar.isHidden = false
+        getEnterUserInfo()
+        
+        print(Singleton.shared.userToken)
         
         let leftNavigationBar = UIBarButtonItem(image: UIImage(named: "nanuri_header_logo")?.withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: nil)
         self.navigationItem.setLeftBarButton(leftNavigationBar, animated: false)
         
         setUpView()
-        getPostsList()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -49,7 +51,17 @@ class HomeViewController: UIViewController {
     @objc func selectAddProductButton() {
         let addProductStepOneViewController = AddProductViewController()
         addProductStepOneViewController.hidesBottomBarWhenPushed = true
+        addProductStepOneViewController.modalPresentationStyle = .fullScreen
         self.navigationController?.pushViewController(addProductStepOneViewController, animated: true)
+    }
+    
+    func getEnterUserInfo() {
+        if let tokenNum = UserDefaults.standard.object(forKey: "loginInfo") as? Data {
+            let decoder = JSONDecoder()
+            if let loadedToken = try? decoder.decode(SocialLogin.self, from: tokenNum) {
+                Singleton.shared.userToken = loadedToken.token
+            }
+        }
     }
     
     func getPostsList() {
@@ -63,20 +75,7 @@ class HomeViewController: UIViewController {
             } else {
                 self.postsListArray = result
             }
-            self.getDeadlineImminent(responsePost: response.results)
             self.allRegionTableView.reloadData()
-        }
-    }
-
-    func getDeadlineImminent(responsePost: [ResultInfo]) {
-        deadlineImminentPostsArray = []
-        for i in 0..<responsePost.count {
-            // post.waitedUntil?.dDaycalculator() ?? ""
-            guard let integerWaitUnitl = Int(responsePost[i].waitedUntil?.dDaycalculator() ?? "0") else { return }
-            print(integerWaitUnitl)
-            if integerWaitUnitl <= 10 {
-                deadlineImminentPostsArray.append(responsePost[i])
-            }
         }
     }
     
@@ -324,52 +323,6 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
             self.navigationController?.pushViewController(productDetailViewController, animated: true)
             
         }
-    }
-}
-
-
-//MARK: - UICollectionViewDelegate, UICollectionViewDataSource
-
-extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return deadlineImminentPostsArray.count
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: collectionCellWidth, height: collectionCellHeight)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
-    }
-    
-
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: VerticalProductCollectionViewCell.cellId, for: indexPath) as? VerticalProductCollectionViewCell else {
-            return UICollectionViewCell()
-        }
-        
-        let post = deadlineImminentPostsArray[indexPath.row]
-        
-        cell.productImageView.imageUpload(url: post.image?.replaceImageUrl() ?? "")
-        cell.productName.attributedText = .attributeFont(font: .PRegular, size: 14, text: post.title, lineHeight: 17)
-        cell.productPrice.attributedText = .attributeFont(font: .PBold, size: 11, text: "\(post.unitPrice.toPriceNumberFormmat())원", lineHeight: 13)
-        cell.productPrice.textAlignment = .right
-        cell.deliveryTagView.setDeliveryType(type: post.tradeType ?? "")
-        
-        cell.dDayTagView.setDday(dDay: post.waitedUntil?.dDaycalculator() ?? "")
-        cell.totalRecruit.attributedText = .attributeFont(font: .NSRExtrabold, size: 12, text: "/\(post.maxParticipants)", lineHeight: 14)
-        cell.productParticipant.attributedText = .attributeFont(font: .NSRExtrabold, size: 12, text: "\(post.numParticipants)", lineHeight: 14)
-        
-        return cell
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let productDetailViewController = ProductDetailViewController()
-        productDetailViewController.hidesBottomBarWhenPushed = true
-        productDetailViewController.postInfo = postsListArray[indexPath.row]
-        self.navigationController?.pushViewController(productDetailViewController, animated: true)
     }
 }
 

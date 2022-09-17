@@ -31,16 +31,17 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         guard let windowScene = (scene as? UIWindowScene) else { return }
         let window = UIWindow(windowScene: windowScene)
-        
-        // 로그인 화면 전환 로직
-        if UserDefaults.standard.object(forKey: "loginInfo") == nil {
-            window.rootViewController = LoginViewController()
-        } else {
-            window.rootViewController = TabBarController()
-        }
-        
         self.window = window
+        let mainViewController = MainViewController()
+        window.rootViewController = mainViewController
         window.makeKeyAndVisible()
+
+        print(UserDefaults.standard.object(forKey: "loginInfo"))
+        if UserDefaults.standard.object(forKey: "loginInfo") == nil {
+            mainViewController.getLoginViewController()
+        } else {
+            mainViewController.getHomeViewController()
+        }
     }
     
     func setRootViewController(_ viewController: UIViewController) {

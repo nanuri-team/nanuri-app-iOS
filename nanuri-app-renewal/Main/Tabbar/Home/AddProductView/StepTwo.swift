@@ -8,6 +8,46 @@
 import UIKit
 
 extension AddProductViewController {
+    
+    /// 상품 등록 2페이지 유효성 검사
+    func stepTwoValidation() -> Bool {
+        guard let productLocationText = productLocationTextField.text,
+              let minimumRecruitmentText = minimumRecruitmentTextField.text,
+              let maximumRecruitmentText = maximumRecruitmentTextField.text,
+              let detailContentsText = detailContentsTextView.text,
+              let recruitmentPeriodText = recruitmentPeriodTextField.text
+        else { return false }
+        
+        if productLocationText.isEmpty ||
+            minimumRecruitmentText.isEmpty ||
+            maximumRecruitmentText.isEmpty ||
+            detailContentsText.isEmpty ||
+            recruitmentPeriodText.isEmpty {
+            return false
+        } else {
+            postProductInfo["writer_address"] = productLocationText
+            
+            if let integerToMinimumRecruitment = Int(minimumRecruitmentText) {
+                postProductInfo["min_participants"] = integerToMinimumRecruitment
+            } else {
+                postProductInfo["min_participants"] = 1
+            }
+            
+            if let integerToMaximumRecruitment = Int(maximumRecruitmentText) {
+                postProductInfo["max_participants"] = integerToMaximumRecruitment
+            } else {
+                postProductInfo["max_participants"] = 0
+            }
+            
+            postProductInfo["waited_until"] = DateFormatter().changeDateFormat(selectDate, format: .dahsed)
+            postProductInfo["waited_from"] = DateFormatter().changeDateFormat(Date(), format: .dahsed)
+            postProductInfo["description"] = detailContentsText
+            
+            
+            return true
+        }
+    }
+    
     func setUpStepTwoView() {
         
         stepTwoView.backgroundColor = .white
@@ -172,15 +212,15 @@ extension AddProductViewController {
         datePickerView.minimumDate = Date()
         datePickerView.maximumDate = Calendar.current.date(byAdding: .month, value: 3, to: Date())
         datePickerView.locale = Locale(identifier: "ko")
-//        datePickerView.addTarget(self, action: #selector(selectDatePickerView), for: .valueChanged)
+        datePickerView.addTarget(self, action: #selector(selectDatePickerView), for: .valueChanged)
         datePickerView.datePickerMode = .date
         recruitmentPeriodTextField.inputView = datePickerView
         
         let toolBar = UIToolbar(frame: CGRect(x: 0.0, y: 0.0, width: self.view.frame.width, height: 44.0))
         let flexible = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-//        let cancel = UIBarButtonItem(title: "Cancel", style: .plain, target: nil, action: #selector(tapCancel))
-//        let barButton = UIBarButtonItem(title: "Done", style: .plain, target: target, action: #selector(selectDayDoneButton))
-//        toolBar.setItems([cancel, flexible, barButton], animated: false)
+        let cancel = UIBarButtonItem(title: "Cancel", style: .plain, target: nil, action: #selector(tapCancel))
+        let barButton = UIBarButtonItem(title: "Done", style: .plain, target: target, action: #selector(selectDayDoneButton))
+        toolBar.setItems([cancel, flexible, barButton], animated: false)
         recruitmentPeriodTextField.inputAccessoryView = toolBar
         
         let periodInfoLabel = UILabel()

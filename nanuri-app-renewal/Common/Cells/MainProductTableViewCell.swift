@@ -81,11 +81,12 @@ class MainProductTableViewCell: UITableViewCell {
         }
         
         productName.attributedText = .attributeFont(font: .PRegular, size: 17, text: "로스팅 원두", lineHeight: 20)
+        productName.lineBreakMode = .byTruncatingTail
         cellView.addSubview(productName)
         productName.snp.makeConstraints { make in
             make.left.equalToSuperview().inset(14)
             make.top.equalTo(locationImageView.snp.bottom).inset(-4)
-            make.right.equalTo(productImage.snp.left).inset(10)
+            make.right.equalTo(productImage.snp.left).inset(-10)
         }
         
         productPrice.attributedText = .attributeFont(font: .PBold, size: 16, text: "3,500원", lineHeight: 19)

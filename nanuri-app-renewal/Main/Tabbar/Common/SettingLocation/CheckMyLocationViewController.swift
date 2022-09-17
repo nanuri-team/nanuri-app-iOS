@@ -57,11 +57,11 @@ class CheckMyLocationViewController: UIViewController {
             
             guard let placemark = placemarks?.first,
                   let administrativeArea = placemark.administrativeArea,
-                    let locality = placemark.locality
+                  let subLocality = placemark.subLocality
            else { return }
            
-            self.myLocationLabel.attributedText = .attributeFont(font: .NSRExtrabold, size: 24, text: "\"\(administrativeArea) \(locality)\"", lineHeight: 27.24)
-            Singleton.shared.testLocation = "\(administrativeArea) \(locality)"
+            self.myLocationLabel.attributedText = .attributeFont(font: .NSRExtrabold, size: 24, text: "\"\(administrativeArea) \(subLocality)\"", lineHeight: 27.24)
+            Singleton.shared.testLocation = "\(administrativeArea) \(subLocality)"
         }
     }
 
