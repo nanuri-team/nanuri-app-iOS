@@ -16,8 +16,7 @@ struct UserInfo: Codable {
     var nickName: String
     var isActive: Bool
     var isAdmin: Bool
-    var latitude: Int
-    var longitude: Int
+    var location: String
     var address: String
     var profile: String
     var authProvider: String
@@ -25,7 +24,7 @@ struct UserInfo: Codable {
     var updatedAt: String
     
     enum CodingKeys: String, CodingKey {
-        case posts, uuid, email, latitude, longitude, address, profile
+        case posts, uuid, email, location, address, profile
         case favoritePosts = "favorite_posts"
         case lastLogin = "last_login"
         case nickName = "nickname"
@@ -46,8 +45,7 @@ struct UserInfo: Codable {
         nickName = (try? values.decode(String.self, forKey: .nickName)) ?? ""
         isActive = (try? values.decode(Bool.self, forKey: .isActive)) ?? false
         isAdmin = (try? values.decode(Bool.self, forKey: .isAdmin)) ?? false
-        latitude = (try? values.decode(Int.self, forKey: .latitude)) ?? 0
-        longitude = (try? values.decode(Int.self, forKey: .longitude)) ?? 0
+        location = (try? values.decode(String.self, forKey: .location)) ?? ""
         address = (try? values.decode(String.self, forKey: .address)) ?? ""
         profile = (try? values.decode(String.self, forKey: .profile)) ?? ""
         authProvider = (try? values.decode(String.self, forKey: .authProvider)) ?? ""

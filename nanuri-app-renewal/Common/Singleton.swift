@@ -13,7 +13,6 @@ class Singleton {
     let tokenName: String = "Token"
     var userToken: String = ""
     var uuid: String = "c4efed4c79d3bdd3155cba4fecd29eeb14ef5bf1"
-    var isSettingLocation = false
     
     var testLocation: String = ""
     

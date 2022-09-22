@@ -14,6 +14,8 @@ class CheckMyLocationViewController: UIViewController {
     let myLocationLabel = UILabel()
     
     var edgeHeight = 34
+    var userLongitude: CGFloat = 0.0
+    var userLatitude: CGFloat = 0.0
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,13 +38,12 @@ class CheckMyLocationViewController: UIViewController {
     }
     
     @objc func selectCancelButton() {
-        Singleton.shared.testLocation = ""
         self.navigationController?.popViewController(animated: true)
     }
     
     @objc func selectOkButton() {
-        Singleton.shared.isSettingLocation = true
-        self.navigationController?.popToRootViewController(animated: true)
+        patchUserLocationInfo(longitude: userLongitude, latitude: userLatitude)
+//        self.navigationController?.popToRootViewController(animated: true)
     }
     
     func getCurrentAddress(location: CLLocation) {
@@ -61,7 +62,22 @@ class CheckMyLocationViewController: UIViewController {
            else { return }
            
             self.myLocationLabel.attributedText = .attributeFont(font: .NSRExtrabold, size: 24, text: "\"\(administrativeArea) \(subLocality)\"", lineHeight: 27.24)
-            Singleton.shared.testLocation = "\(administrativeArea) \(subLocality)"
+            
+            // 위도, 경도 가져오기
+            guard let location = placemark.location else { return }
+            self.userLongitude = location.coordinate.longitude
+            self.userLatitude = location.coordinate.latitude
+        }
+    }
+    
+    private func patchUserLocationInfo(longitude: CGFloat, latitude: CGFloat) {
+        let locationString = "POINT (\(longitude) \(latitude))"
+        print(locationString)
+        let params: [String: String] = ["location": locationString]
+
+        NetworkService.shared.patchUserInfoRequest(parameters: params) { userInfo in
+            print(userInfo)
+            
         }
     }
 
