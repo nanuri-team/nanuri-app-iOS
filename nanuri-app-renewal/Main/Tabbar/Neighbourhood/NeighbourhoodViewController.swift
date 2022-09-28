@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CoreLocation
 
 class NeighbourhoodViewController: UIViewController {
     
@@ -22,6 +23,7 @@ class NeighbourhoodViewController: UIViewController {
     var filterButtonArray: [FilterButton] = []
     var filterCount = 6 + 1
     var postsListArray: [ResultInfo] = []
+    var userInfo: UserInfo?
 
 
     override func viewDidLoad() {
@@ -51,16 +53,7 @@ class NeighbourhoodViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        if Singleton.shared.testLocation == "" {
-            noSettingWrapView.removeFromSuperview()
-            locationButton.setAttributedTitle(.attributeFont(font: .PBold, size: 15, text: "현 위치", lineHeight: 18), for: .normal)
-            setUpNoSettingView()
-        } else {
-            wrapView.removeFromSuperview()
-            locationButton.setAttributedTitle(.attributeFont(font: .PBold, size: 15, text: Singleton.shared.testLocation, lineHeight: 18), for: .normal)
-            setUpView()
-            getPostsList()
-        }
+        getUserInfo()
     }
     
     @objc func selectLocationButton() {
@@ -81,6 +74,51 @@ class NeighbourhoodViewController: UIViewController {
         }
         
         filterButtonArray[sender.tag].isSelected = true
+    }
+    
+    
+    
+    func CheckMyLocation() {
+        guard let userInfo = userInfo else {
+            return
+        }
+        
+        let location = splitLocation(location: userInfo.location)
+        let myLocation = CLLocation(latitude: location.latitude, longitude: location.longitude)
+        let geocoder = CLGeocoder()
+        let locale = Locale(identifier: "Ko-kr")
+        geocoder.reverseGeocodeLocation(myLocation, preferredLocale: locale) { (place, error) in
+            guard let placemark = place?.last,
+                  let locality = placemark.locality,
+                  let subLocality = placemark.subLocality
+           else { return }
+            
+            self.locationButton.setAttributedTitle(.attributeFont(font: .PBold, size: 15, text: "\(subLocality)", lineHeight: 18), for: .normal)
+        }
+    }
+    
+    func getUserInfo() {
+        NetworkService.shared.getUserInfoRequest { userInfo in
+            self.userInfo = userInfo
+            DispatchQueue.main.async {
+                self.CheckMyLocation()
+                self.settingView()
+            }
+        }
+    }
+    
+    func settingView() {
+        guard let userInfo = userInfo else { return }
+        
+        if userInfo.location == "" {
+            self.noSettingWrapView.removeFromSuperview()
+            self.locationButton.setAttributedTitle(.attributeFont(font: .PBold, size: 15, text: "현 위치", lineHeight: 18), for: .normal)
+            self.setUpNoSettingView()
+        } else {
+            self.wrapView.removeFromSuperview()
+            self.setUpView()
+            self.getPostsList()
+        }
     }
     
     func getPostsList() {
@@ -149,7 +187,7 @@ class NeighbourhoodViewController: UIViewController {
         headerView.frame = CGRect(x: 0, y: 0, width: Int(ratioWidth), height: headerViewHeight)
         
         let hotItemTitleLabel = UILabel()
-        hotItemTitleLabel.attributedText = .attributeFont(font: .PBold, size: 17, text: "내 주변 인기 상품", lineHeight: 20.4)
+        hotItemTitleLabel.attributedText = .attributeFont(font: .PBold, size: 17, text: "내 주변 최근 상품", lineHeight: 20.4)
         headerView.addSubview(hotItemTitleLabel)
         hotItemTitleLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().inset(24)

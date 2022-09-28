@@ -43,7 +43,9 @@ class CheckMyLocationViewController: UIViewController {
     
     @objc func selectOkButton() {
         patchUserLocationInfo(longitude: userLongitude, latitude: userLatitude)
-//        self.navigationController?.popToRootViewController(animated: true)
+        DispatchQueue.main.async {
+            self.navigationController?.popToRootViewController(animated: true)
+        }
     }
     
     func getCurrentAddress(location: CLLocation) {
@@ -71,14 +73,10 @@ class CheckMyLocationViewController: UIViewController {
     }
     
     private func patchUserLocationInfo(longitude: CGFloat, latitude: CGFloat) {
-        let locationString = "POINT (\(longitude) \(latitude))"
+        let locationString = "POINT (\(latitude) \(longitude))"
         print(locationString)
         let params: [String: String] = ["location": locationString]
-
-        NetworkService.shared.patchUserInfoRequest(parameters: params) { userInfo in
-            print(userInfo)
-            
-        }
+        NetworkService.shared.patchUserIsActiveRequest(parameters: params)
     }
 
     func setUpView() {

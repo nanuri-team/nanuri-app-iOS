@@ -41,20 +41,19 @@ class FilterButton: UIButton {
         }
         
         self.setAttributedTitle(.attributeFont(font: .NSRBold, size: 14, text: "#\(filterTitle)", lineHeight: 15.89), for: .normal)
-        self.layer.borderWidth = 1
-        self.layer.borderColor = UIColor.nanuriGreen.cgColor
+        self.backgroundColor = .nanuriGray2
         self.layer.cornerRadius = 13.5
         self.contentEdgeInsets = UIEdgeInsets(top: 6, left: 10, bottom: 6, right: 10)
-        self.setTitleColor(.nanuriGreen, for: .normal)
+        self.setTitleColor(.nanuriGray4, for: .normal)
     }
     
     override var isSelected: Bool {
         didSet {
             if isSelected {
-                self.layer.borderColor = UIColor.nanuriGreen.cgColor
-                self.setTitleColor(.nanuriGreen, for: .normal)
+                self.backgroundColor = .nanuriGreen
+                self.setTitleColor(.white, for: .normal)
             } else {
-                self.layer.borderColor = UIColor.nanuriGray4.cgColor
+                self.backgroundColor = .nanuriGray2
                 self.setTitleColor(.nanuriGray4, for: .normal)
             }
         }

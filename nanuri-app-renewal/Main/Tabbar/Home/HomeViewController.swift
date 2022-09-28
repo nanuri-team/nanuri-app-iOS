@@ -11,6 +11,7 @@ class HomeViewController: UIViewController {
     
 
     let headerScrollView = UIScrollView()
+    let categoryScrollView = UIScrollView()
     let allRegionTableView = UITableView()
     let pagerCount = UILabel()
     
@@ -20,6 +21,9 @@ class HomeViewController: UIViewController {
     let ratioWidth = UIScreen.main.bounds.width
     var postsListArray: [ResultInfo] = []
     var deadlineImminentPostsArray: [ResultInfo] = []
+    var categoryButtonArray: [UIButton] = []
+    let categoryIconArray: [String] = ["category_life_ic", "category_kitchen_ic", "category_food_ic", "category_bath_ic", "category_note_ic", "category_etc_ic"]
+    let cateogryTitleArray: [String] = ["생활용품", "음식", "주방", "욕실", "문구", "기타"]
 
 
     override func viewDidLoad() {
@@ -113,12 +117,61 @@ class HomeViewController: UIViewController {
             }
         }
     }
+    
+    func setUpCategoryScrollView() {
+        for i in 0..<cateogryTitleArray.count {
+            let categoryButton = UIButton()
+            
+            let categoryIconImageView = UIImageView()
+            categoryIconImageView.image = UIImage(named: categoryIconArray[i])
+            categoryButton.addSubview(categoryIconImageView)
+            categoryIconImageView.snp.makeConstraints { make in
+                make.width.height.equalTo(50)
+                make.centerX.equalToSuperview()
+            }
+            
+            let categoryTitleLabel = UILabel()
+            categoryTitleLabel.attributedText = .attributeFont(font: .PMedium, size: 12, text: cateogryTitleArray[i], lineHeight: 14)
+            categoryButton.addSubview(categoryTitleLabel)
+            categoryTitleLabel.snp.makeConstraints { make in
+                make.top.equalTo(categoryIconImageView.snp.bottom).inset(-6)
+                make.centerX.equalToSuperview()
+            }
+            
+            categoryButtonArray.append(categoryButton)
+        }
+        
+        for i in 0..<categoryButtonArray.count {
+            categoryScrollView.addSubview(categoryButtonArray[i])
+            
+            if i == 0 {
+                categoryButtonArray[i].snp.makeConstraints { make in
+                    make.top.bottom.equalToSuperview()
+                    make.left.equalToSuperview().inset(16)
+                    make.width.height.equalTo(70)
+                }
+            } else if i == categoryButtonArray.count - 1 {
+                categoryButtonArray[i].snp.makeConstraints { make in
+                    make.top.bottom.equalToSuperview()
+                    make.left.equalTo(categoryButtonArray[i-1].snp.right).inset(-16)
+                    make.right.equalToSuperview().inset(16)
+                    make.width.height.equalTo(70)
+                }
+            } else {
+                categoryButtonArray[i].snp.makeConstraints { make in
+                    make.top.bottom.equalToSuperview()
+                    make.left.equalTo(categoryButtonArray[i-1].snp.right).inset(-16)
+                    make.width.height.equalTo(70)
+                }
+            }
+        }
+    }
 
     func setUpView() {
         self.view.backgroundColor = .white
     
         let headerView = UIView()
-        let headerViewHeight = collectionCellHeight + 30 + 40 + 187 + 32
+        let headerViewHeight = collectionCellHeight + 40 + 187
         headerView.frame = CGRect(x: 0, y: 0, width: Int(ratioWidth), height: headerViewHeight)
         
         headerScrollView.delegate = self
@@ -159,52 +212,17 @@ class HomeViewController: UIViewController {
             make.right.left.equalToSuperview().inset(16)
         }
         
-        let categoryView = UIView()
-        headerView.addSubview(categoryView)
-        categoryView.snp.makeConstraints { make in
-            make.top.equalTo(categoryTitleLabel.snp.bottom).inset(-12)
+        categoryScrollView.frame = .init(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+        categoryScrollView.contentSize = .init(width: categoryScrollView.frame.width, height: categoryScrollView.frame.height)
+        categoryScrollView.showsHorizontalScrollIndicator = false
+        headerView.addSubview(categoryScrollView)
+        categoryScrollView.snp.makeConstraints { make in
+            make.top.equalTo(categoryTitleLabel.snp.bottom).inset(-24)
             make.left.right.equalToSuperview()
-            make.bottom.equalToSuperview()
+            make.height.equalTo(70)
         }
         
-        let lifeCategoryButton = CategoryButton(image: UIImage(named: "category_life_ic"), title: "생활용품")
-        categoryView.addSubview(lifeCategoryButton)
-        lifeCategoryButton.snp.makeConstraints { make in
-            make.left.equalToSuperview().inset(16)
-        }
-        
-        let foodCategoryButton = CategoryButton(image: UIImage(named: "category_bath_ic"), title: "음식")
-        categoryView.addSubview(foodCategoryButton)
-        foodCategoryButton.snp.makeConstraints { make in
-            make.left.equalTo(lifeCategoryButton.snp.right).inset(-12)
-        }
-        
-        let kitchenCategoryButton = CategoryButton(image: UIImage(named: "category_kitchen_ic"), title: "주방")
-        categoryView.addSubview(kitchenCategoryButton)
-        kitchenCategoryButton.snp.makeConstraints { make in
-            make.left.equalTo(foodCategoryButton.snp.right).inset(-12)
-        }
-        
-        let bathCategoryButton = CategoryButton(image: UIImage(named: "category_bath_ic"), title: "욕실")
-        categoryView.addSubview(bathCategoryButton)
-        bathCategoryButton.snp.makeConstraints { make in
-            make.top.equalTo(lifeCategoryButton.snp.bottom).inset(-10)
-            make.left.equalToSuperview().inset(16)
-        }
-        
-        let noteCategoryButton = CategoryButton(image: UIImage(named: "category_note_ic"), title: "문구")
-        categoryView.addSubview(noteCategoryButton)
-        noteCategoryButton.snp.makeConstraints { make in
-            make.top.equalTo(foodCategoryButton.snp.bottom).inset(-10)
-            make.left.equalTo(bathCategoryButton.snp.right).inset(-12)
-        }
-        
-        let etcCategoryButton = CategoryButton(image: UIImage(named: "category_etc_ic"), title: "기타")
-        categoryView.addSubview(etcCategoryButton)
-        etcCategoryButton.snp.makeConstraints { make in
-            make.top.equalTo(kitchenCategoryButton.snp.bottom).inset(-10)
-            make.left.equalTo(noteCategoryButton.snp.right).inset(-12)
-        }
+        setUpCategoryScrollView()
         
         allRegionTableView.delegate = self
         allRegionTableView.dataSource = self
