@@ -47,7 +47,7 @@ class ChattingListTableViewCell: UITableViewCell {
         cellView.snp.makeConstraints { make in
             make.top.bottom.equalToSuperview()
             make.left.right.equalToSuperview().inset(16)
-            make.height.equalTo(84)
+            make.height.equalTo(96)
         }
         
         productImageView.backgroundColor = .nanuriGray2
@@ -55,60 +55,59 @@ class ChattingListTableViewCell: UITableViewCell {
         productImageView.layer.cornerRadius = 12
         cellView.addSubview(productImageView)
         productImageView.snp.makeConstraints { make in
-            make.width.height.equalTo(64)
+            make.width.height.equalTo(60)
             make.left.equalToSuperview()
             make.centerY.equalToSuperview()
-        }
-        
-        productName.attributedText = .attributeFont(font: .PBold, size: 13, text: "레트로 노트북", lineHeight: 15)
-        cellView.addSubview(productName)
-        productName.snp.makeConstraints { make in
-            make.top.equalToSuperview().inset(10)
-            make.left.equalTo(productImageView.snp.right).inset(-11)
-            make.right.equalToSuperview().inset(11)
-        }
-        
-        let chatLabel = UILabel()
-        chatLabel.attributedText = .attributeFont(font: .PRegular, size: 12, text: "이거 언제 배송해주시나요?", lineHeight: 18)
-        chatLabel.textColor = .nanuriGray6
-        cellView.addSubview(chatLabel)
-        chatLabel.snp.makeConstraints { make in
-            make.top.equalTo(productName.snp.bottom).inset(-4)
-            make.left.equalTo(productImageView.snp.right).inset(-11)
-            make.right.equalToSuperview().inset(19)
         }
         
         deliveryTag.setDeliveryType(type: DeliveryType.parcel)
         cellView.addSubview(deliveryTag)
         deliveryTag.snp.makeConstraints { make in
+            make.top.equalToSuperview().inset(16)
             make.left.equalTo(productImageView.snp.right).inset(-11)
-            make.bottom.equalToSuperview().inset(10)
         }
         
-        chatPeopleLabel.attributedText = .attributeFont(font: .NSRExtrabold, size: 12, text: "2", lineHeight: 14)
-        chatPeopleLabel.textColor = .nanuriGray4
-        cellView.addSubview(chatPeopleLabel)
-        chatPeopleLabel.snp.makeConstraints { make in
-            make.right.equalToSuperview()
-            make.bottom.equalToSuperview().inset(11)
+        productName.attributedText = .attributeFont(font: .PBold, size: 15, text: "레트로 노트북", lineHeight: 15)
+        cellView.addSubview(productName)
+        productName.snp.makeConstraints { make in
+            make.top.equalToSuperview().inset(16)
+            make.left.equalTo(deliveryTag.snp.right).inset(-8)
+        }
+        
+        let chatLabel = UILabel()
+        chatLabel.attributedText = .attributeFont(font: .PRegular, size: 13, text: "이거 언제 배송해주시나요?", lineHeight: 18)
+        chatLabel.textColor = .nanuriGray7
+        cellView.addSubview(chatLabel)
+        chatLabel.snp.makeConstraints { make in
+            make.top.equalTo(deliveryTag.snp.bottom).inset(-4)
+            make.left.equalTo(productImageView.snp.right).inset(-11)
+            make.right.equalToSuperview().inset(19)
         }
         
         let participantImageView = UIImageView()
         participantImageView.image = UIImage(named: "people_ic")
         cellView.addSubview(participantImageView)
         participantImageView.snp.makeConstraints { make in
-            make.right.equalTo(chatPeopleLabel.snp.left).inset(-6)
-            make.bottom.equalToSuperview().inset(10)
+            make.left.equalTo(productImageView.snp.right).inset(-13)
+            make.bottom.equalToSuperview().inset(16)
             make.width.height.equalTo(16)
+        }
+        
+        chatPeopleLabel.attributedText = .attributeFont(font: .NSRExtrabold, size: 12, text: "2", lineHeight: 14)
+        chatPeopleLabel.textColor = .nanuriGray4
+        cellView.addSubview(chatPeopleLabel)
+        chatPeopleLabel.snp.makeConstraints { make in
+            make.left.equalTo(participantImageView.snp.right).inset(-2)
+            make.bottom.equalToSuperview().inset(17)
         }
         
         let locationImageView = UIImageView()
         locationImageView.image = UIImage(named: "place_ic")
         cellView.addSubview(locationImageView)
         locationImageView.snp.makeConstraints { make in
-            make.top.equalTo(chatLabel.snp.bottom).inset(-10)
+            make.left.equalTo(chatPeopleLabel.snp.right).inset(-8)
+            make.bottom.equalToSuperview().inset(16)
             make.height.width.equalTo(16)
-            make.bottom.equalToSuperview().inset(10)
         }
         
         productLocationLabel.attributedText = .attributeFont(font: .NSRBold, size: 12, text: "서울시 강남구", lineHeight: 14)
@@ -116,10 +115,17 @@ class ChattingListTableViewCell: UITableViewCell {
         cellView.addSubview(productLocationLabel)
         productLocationLabel.snp.makeConstraints { make in
             make.left.equalTo(locationImageView.snp.right).inset(-2)
-            make.right.equalTo(participantImageView.snp.left).inset(-10)
-            make.bottom.equalToSuperview().inset(11)
+            make.bottom.equalToSuperview().inset(17)
         }
         
+        let lastChatTimeLabel = UILabel()
+        lastChatTimeLabel.attributedText = .attributeFont(font: .PMedium, size: 12, text: "13:48", lineHeight: 14)
+        lastChatTimeLabel.textColor = .nanuriGray3
+        cellView.addSubview(lastChatTimeLabel)
+        lastChatTimeLabel.snp.makeConstraints { make in
+            make.top.equalToSuperview().inset(16)
+            make.right.equalToSuperview()
+        }
     }
 
 }

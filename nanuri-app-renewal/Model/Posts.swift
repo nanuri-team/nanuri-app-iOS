@@ -14,16 +14,16 @@ struct PostList: Decodable {
     var results: [ResultInfo]
 }
 
-struct ResultInfo: Decodable {
+struct ResultInfo: Codable {
     var writer: String
     var writerAddress: String?
     var writerNickname: String?
     var participants: [String]
-    var category: String?
     var favoredBy: [String]
     var images: [String]
     var uuid: String
     var title: String
+    var category: String?
     var image: String?
     var unitPrice: Int
     var quantity: Int
@@ -47,11 +47,11 @@ struct ResultInfo: Decodable {
         case writerAddress = "writer_address"
         case writerNickname = "writer_nickname"
         case participants
-        case category
         case favoredBy = "favored_by"
         case images
         case uuid
         case title
+        case category
         case image
         case unitPrice = "unit_price"
         case quantity
@@ -69,6 +69,36 @@ struct ResultInfo: Decodable {
         case waitedUntil = "waited_until"
         case createdAt = "created_at"
         case updatedAt = "updated_at"
+    }
+    
+    init(from decoder: Decoder) throws {
+        let value = try decoder.container(keyedBy: CodingKeys.self)
+        writer = (try? value.decode(String.self, forKey: .writer)) ?? ""
+        writerAddress = (try? value.decode(String.self, forKey: .writerAddress)) ?? ""
+        writerNickname = (try? value.decode(String.self, forKey: .writerNickname)) ?? ""
+        participants = (try? value.decode([String].self, forKey: .participants)) ?? []
+        favoredBy = (try? value.decode([String].self, forKey: .favoredBy)) ?? []
+        images = (try? value.decode([String].self, forKey: .images)) ?? []
+        uuid = (try? value.decode(String.self, forKey: .uuid)) ?? ""
+        title = (try? value.decode(String.self, forKey: .title)) ?? ""
+        category = (try? value.decode(String.self, forKey: .category)) ?? ""
+        image = (try? value.decode(String.self, forKey: .image)) ?? ""
+        unitPrice = (try? value.decode(Int.self, forKey: .unitPrice)) ?? 0
+        quantity = (try? value.decode(Int.self, forKey: .quantity)) ?? 0
+        description = (try? value.decode(String.self, forKey: .description)) ?? ""
+        minParticipants = (try? value.decode(Int.self, forKey: .minParticipants)) ?? 0
+        maxParticipants = (try? value.decode(Int.self, forKey: .maxParticipants)) ?? 0
+        numParticipants = (try? value.decode(Int.self, forKey: .numParticipants)) ?? 0
+        productUrl = (try? value.decode(String.self, forKey: .productUrl)) ?? ""
+        tradeType = (try? value.decode(String.self, forKey: .tradeType)) ?? ""
+        orderStatus = (try? value.decode(String.self, forKey: .orderStatus)) ?? ""
+        isPublished = (try? value.decode(Bool.self, forKey: .isPublished)) ?? false
+        publishedAt = (try? value.decode(String.self, forKey: .publishedAt)) ?? ""
+        viewCount = (try? value.decode(Int.self, forKey: .viewCount)) ?? 0
+        waitedFrom = (try? value.decode(String.self, forKey: .waitedFrom)) ?? ""
+        waitedUntil = (try? value.decode(String.self, forKey: .waitedUntil)) ?? ""
+        createdAt = (try? value.decode(String.self, forKey: .createdAt)) ?? ""
+        updatedAt = (try? value.decode(String.self, forKey: .updatedAt)) ?? ""
     }
 }
 

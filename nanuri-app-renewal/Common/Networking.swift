@@ -33,6 +33,14 @@ extension Networking {
         getPostsListRequest(url: url, completion: result)
     }
     
+    func getSinglePost(postUuid: String, result: @escaping (_ response: ResultInfo) -> ()) {
+        
+        let url = "\(APIInfo.hostURL)\(APIInfo.api)\(APIInfo.version)\(APIList.posts)\(postUuid)"
+        print("\(#file.split(separator: "/").last!)-\(#function)[\(#line)] \(url) 👉 ")
+        
+        getSinglePostRequest(url: url, completion: result)
+    }
+    
     func postPosts(image: UIImage, parameter: [String: Any], result: @escaping (_ response: ResultInfo) -> ()) {
         let url = "\(APIInfo.hostURL)\(APIInfo.api)\(APIInfo.version)\(APIList.posts)"
     
@@ -62,7 +70,24 @@ extension Networking {
         }
     }
     
-    private func postPostsRequest(image: Data, url: String, params: [String : Any], completion: @escaping (_ response: ResultInfo) -> ()) {
+    private func getSinglePostRequest(url: String, completion: @escaping (_ response: ResultInfo) -> ()) {
+        let header: HTTPHeaders = [
+            "Authorization": "\(Singleton.shared.userToken)"
+        ]
+        let parmas = ["":""]
+        let request = setGetRequest(url: url, params: parmas, headers: header)
+        request.responseDecodable(of: ResultInfo.self) { response in
+//            switch response.result {
+//            case .success(_):
+//                guard let response = response.value else { return }
+//                completion(response)
+//            case .failure(let error):
+//                print(error)
+//            }
+        }
+    }
+    
+    private func postPostsRequest(image: Data, url:  String, params: [String : Any], completion: @escaping (_ response: ResultInfo) -> ()) {
         let header: HTTPHeaders = [
             "Authorization": "Token \(Singleton.shared.userToken)",
             "Content-Type" : "multipart/form-data"
@@ -93,6 +118,7 @@ extension Networking {
     }
     
     func setGetRequest(url: String, params: Parameters?, headers: HTTPHeaders) -> DataRequest {
+        print(url)
         return sessionManager.request(url, method: .get, parameters: params, headers: headers)
     }
     

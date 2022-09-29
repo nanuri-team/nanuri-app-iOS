@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import CoreLocation
+
 
 class AddProductViewController: UIViewController {
     
@@ -67,13 +69,18 @@ class AddProductViewController: UIViewController {
     var bottomViewHeight = 64
     var currentStepState: StepState = .stepOne
     var edgeHeight = 34
-
+    var userInfo: UserInfo?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "상품 등록하기"
         setNavigationHeaderIcon()
         setUpView()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        getUserInfo()
     }
     
     @objc func selectCloseButton() {
@@ -154,6 +161,36 @@ class AddProductViewController: UIViewController {
         recruitmentPeriodTextField.resignFirstResponder()
     }
     
+    func getUserInfo() {
+        NetworkService.shared.getUserInfoRequest { userInfo in
+            self.userInfo = userInfo
+            DispatchQueue.main.async {
+                self.checkIsUserHaveLocation()
+            }
+        }
+    }
+    
+    func checkIsUserHaveLocation() {
+        guard let userInfo = userInfo else {
+            print("location값이 비어있습니다.")
+            self.navigationController?.popViewController(animated: true)
+            return
+        }
+        
+        let location = splitLocation(location: userInfo.location)
+        let myLocation = CLLocation(latitude: location.latitude, longitude: location.longitude)
+        let geocoder = CLGeocoder()
+        let locale = Locale(identifier: "Ko-kr")
+        geocoder.reverseGeocodeLocation(myLocation, preferredLocale: locale) { (place, error) in
+            guard let placemark = place?.last,
+                  let administrativeArea = placemark.administrativeArea,
+                  let subLocality = placemark.subLocality
+           else { return }
+            
+            self.productLocationTextField.attributedText = .attributeFont(font: .PMedium, size: 15, text: "\(administrativeArea) \(subLocality)", lineHeight: 18)
+        }
+    }
+    
     func postPosts() {
         Networking.sharedObject.postPosts(image: postImageData, parameter: postProductInfo) { response in
             print(response)
@@ -190,10 +227,6 @@ class AddProductViewController: UIViewController {
         setUpStepThreeView()
         setUpStepFourView()
         setUpBottomView()
-    }
-    
-    func changeStepState() {
-        
     }
     
     /// 스텝 헤더 뷰

@@ -48,6 +48,7 @@
 		3954BBA7281433FC00C8815E /* YourChatMessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3954BBA6281433FB00C8815E /* YourChatMessageTableViewCell.swift */; };
 		3954BBA92814363F00C8815E /* ChattingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3954BBA82814363F00C8815E /* ChattingViewController.swift */; };
 		3954BBAB2816FCED00C8815E /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3954BBAA2816FCED00C8815E /* Networking.swift */; };
+		395EC16C28E4B3C100F32840 /* GetUserLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 395EC16B28E4B3C100F32840 /* GetUserLocation.swift */; };
 		39788AF328188A3B00ABD918 /* Singleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39788AF228188A3B00ABD918 /* Singleton.swift */; };
 		39788AF528188B5700ABD918 /* Posts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39788AF428188B5700ABD918 /* Posts.swift */; };
 		39788AF82819CC6900ABD918 /* Chat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39788AF72819CC6900ABD918 /* Chat.swift */; };
@@ -128,6 +129,7 @@
 		3954BBA6281433FB00C8815E /* YourChatMessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YourChatMessageTableViewCell.swift; sourceTree = "<group>"; };
 		3954BBA82814363F00C8815E /* ChattingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChattingViewController.swift; sourceTree = "<group>"; };
 		3954BBAA2816FCED00C8815E /* Networking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networking.swift; sourceTree = "<group>"; };
+		395EC16B28E4B3C100F32840 /* GetUserLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetUserLocation.swift; sourceTree = "<group>"; };
 		39788AF228188A3B00ABD918 /* Singleton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Singleton.swift; sourceTree = "<group>"; };
 		39788AF428188B5700ABD918 /* Posts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Posts.swift; sourceTree = "<group>"; };
 		39788AF72819CC6900ABD918 /* Chat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chat.swift; sourceTree = "<group>"; };
@@ -318,6 +320,7 @@
 				1005C40128B3728E00A8AA7B /* NetworkService.swift */,
 				398B709B28B526A20039DA3D /* CategoryButton.swift */,
 				3934E3C928B66601001AC568 /* BottomSheetViewController.swift */,
+				395EC16B28E4B3C100F32840 /* GetUserLocation.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -672,6 +675,7 @@
 				39AD781927FF2EC20022EAC1 /* ProductDetailViewController.swift in Sources */,
 				39308CC12806FFFB00C41F9F /* CommentTableViewCell.swift in Sources */,
 				39308CF82808923300C41F9F /* TextView.swift in Sources */,
+				395EC16C28E4B3C100F32840 /* GetUserLocation.swift in Sources */,
 				100DBAE528CEA17F00B5D3BC /* NotificationSetting.swift in Sources */,
 				39AD78242801624B0022EAC1 /* ReCommentTableViewCell.swift in Sources */,
 				39308CF62808860900C41F9F /* AlertViewController.swift in Sources */,

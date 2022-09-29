@@ -6,7 +6,7 @@ target 'nanuri-app-renewal' do
   use_frameworks!
 
   # Pods for nanuri-app-renewal
-  pod 'Alamofire', '~> 5.5'
+  pod 'Alamofire'
   pod 'SnapKit', '~> 5.0.0'
   pod 'IQKeyboardManagerSwift', '6.3.0'
   pod 'KakaoSDK'
