@@ -64,13 +64,13 @@ class MyPageViewController: UIViewController {
     }()
     
     var userInfo: UserInfo?
+    var userPosts: [String] = []
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setUpView()
-        networkSetup()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -91,8 +91,20 @@ class MyPageViewController: UIViewController {
                 }
                 self.profileNameLabel.text = userInfo.nickName
                 self.locationTagView = LocationTagView(location: userInfo.address)
+                
+                self.getMyProductInfo()
             }
         }
+    }
+    
+    func getMyProductInfo() {
+        guard let userInfo = userInfo else { return }
+        userPosts = userInfo.posts
+        
+        Networking.sharedObject.getSinglePost(postUuid: userPosts[0]) { response in
+            print(response)
+        }
+        
     }
     
     private func setUpView() {

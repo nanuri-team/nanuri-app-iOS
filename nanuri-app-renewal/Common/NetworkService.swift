@@ -126,6 +126,8 @@ class NetworkService {
                     uploadData.append("\(value)\r\n".data(using: .utf8)!)
                 }
                 
+                print(boundaryPrefix)
+                
                 // image를 첨부하지 않아도 작동할 수 있도록 if let을 통해 images 여부 확인
                 if let imageData = imageData {
                     uploadData.append(boundaryPrefix.data(using: .utf8)!)

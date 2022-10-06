@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		1005C40228B3728F00A8AA7B /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1005C40128B3728E00A8AA7B /* NetworkService.swift */; };
 		1005C40428B5F77700A8AA7B /* DeactivatedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1005C40328B5F77700A8AA7B /* DeactivatedViewController.swift */; };
+		100DBAE128C9E4CE00B5D3BC /* CustomSettingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100DBAE028C9E4CE00B5D3BC /* CustomSettingTableViewCell.swift */; };
+		100DBAE328CA024D00B5D3BC /* defaultSettingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100DBAE228CA024D00B5D3BC /* defaultSettingTableViewCell.swift */; };
+		100DBAE528CEA17F00B5D3BC /* NotificationSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100DBAE428CEA17F00B5D3BC /* NotificationSetting.swift */; };
 		103DA7C128A104FC004FEA14 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 103DA7C028A104FC004FEA14 /* LoginView.swift */; };
 		103DA84A28A536E5004FEA14 /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 103DA84928A536E5004FEA14 /* RegisterView.swift */; };
 		103DA85A28AA7E56004FEA14 /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 103DA85928AA7E56004FEA14 /* NotificationViewController.swift */; };
@@ -45,6 +48,7 @@
 		3954BBA7281433FC00C8815E /* YourChatMessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3954BBA6281433FB00C8815E /* YourChatMessageTableViewCell.swift */; };
 		3954BBA92814363F00C8815E /* ChattingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3954BBA82814363F00C8815E /* ChattingViewController.swift */; };
 		3954BBAB2816FCED00C8815E /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3954BBAA2816FCED00C8815E /* Networking.swift */; };
+		395EC16C28E4B3C100F32840 /* GetUserLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 395EC16B28E4B3C100F32840 /* GetUserLocation.swift */; };
 		39788AF328188A3B00ABD918 /* Singleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39788AF228188A3B00ABD918 /* Singleton.swift */; };
 		39788AF528188B5700ABD918 /* Posts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39788AF428188B5700ABD918 /* Posts.swift */; };
 		39788AF82819CC6900ABD918 /* Chat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39788AF72819CC6900ABD918 /* Chat.swift */; };
@@ -86,6 +90,9 @@
 /* Begin PBXFileReference section */
 		1005C40128B3728E00A8AA7B /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		1005C40328B5F77700A8AA7B /* DeactivatedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeactivatedViewController.swift; sourceTree = "<group>"; };
+		100DBAE028C9E4CE00B5D3BC /* CustomSettingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSettingTableViewCell.swift; sourceTree = "<group>"; };
+		100DBAE228CA024D00B5D3BC /* defaultSettingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = defaultSettingTableViewCell.swift; sourceTree = "<group>"; };
+		100DBAE428CEA17F00B5D3BC /* NotificationSetting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationSetting.swift; sourceTree = "<group>"; };
 		103DA7BA28A0EA11004FEA14 /* nanuri-app-renewal.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "nanuri-app-renewal.entitlements"; sourceTree = "<group>"; };
 		103DA7C028A104FC004FEA14 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		103DA84928A536E5004FEA14 /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
@@ -122,6 +129,7 @@
 		3954BBA6281433FB00C8815E /* YourChatMessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YourChatMessageTableViewCell.swift; sourceTree = "<group>"; };
 		3954BBA82814363F00C8815E /* ChattingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChattingViewController.swift; sourceTree = "<group>"; };
 		3954BBAA2816FCED00C8815E /* Networking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networking.swift; sourceTree = "<group>"; };
+		395EC16B28E4B3C100F32840 /* GetUserLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetUserLocation.swift; sourceTree = "<group>"; };
 		39788AF228188A3B00ABD918 /* Singleton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Singleton.swift; sourceTree = "<group>"; };
 		39788AF428188B5700ABD918 /* Posts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Posts.swift; sourceTree = "<group>"; };
 		39788AF72819CC6900ABD918 /* Chat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chat.swift; sourceTree = "<group>"; };
@@ -312,6 +320,7 @@
 				1005C40128B3728E00A8AA7B /* NetworkService.swift */,
 				398B709B28B526A20039DA3D /* CategoryButton.swift */,
 				3934E3C928B66601001AC568 /* BottomSheetViewController.swift */,
+				395EC16B28E4B3C100F32840 /* GetUserLocation.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -472,7 +481,10 @@
 			isa = PBXGroup;
 			children = (
 				87D17BA127FB5C0B00E171A2 /* SettingViewController.swift */,
+				100DBAE028C9E4CE00B5D3BC /* CustomSettingTableViewCell.swift */,
+				100DBAE228CA024D00B5D3BC /* defaultSettingTableViewCell.swift */,
 				1005C40328B5F77700A8AA7B /* DeactivatedViewController.swift */,
+				100DBAE428CEA17F00B5D3BC /* NotificationSetting.swift */,
 			);
 			path = Setting;
 			sourceTree = "<group>";
@@ -641,11 +653,13 @@
 				3954BB972813E61D00C8815E /* AddProductStepThreeViewController.swift in Sources */,
 				39AD781227FB47730022EAC1 /* VerticalProductCollectionViewCell.swift in Sources */,
 				39AD77FA27FB11EE0022EAC1 /* NeighbourhoodViewController.swift in Sources */,
+				100DBAE128C9E4CE00B5D3BC /* CustomSettingTableViewCell.swift in Sources */,
 				3954BBAB2816FCED00C8815E /* Networking.swift in Sources */,
 				39AD780E27FB32C50022EAC1 /* DDayTagView.swift in Sources */,
 				3934E3CD28B66C79001AC568 /* OptionView.swift in Sources */,
 				87D6E1BF280B30DA001AA33C /* MyProfileModifiedViewController.swift in Sources */,
 				103DA85E28AA91BD004FEA14 /* NotificationTableViewCell.swift in Sources */,
+				100DBAE328CA024D00B5D3BC /* defaultSettingTableViewCell.swift in Sources */,
 				39308CF02807518400C41F9F /* FilterButton.swift in Sources */,
 				39AD780827FB26DB0022EAC1 /* Constants.swift in Sources */,
 				870F9D142816AA310098DDD9 /* SnsUserInfoSingleton.swift in Sources */,
@@ -661,6 +675,8 @@
 				39AD781927FF2EC20022EAC1 /* ProductDetailViewController.swift in Sources */,
 				39308CC12806FFFB00C41F9F /* CommentTableViewCell.swift in Sources */,
 				39308CF82808923300C41F9F /* TextView.swift in Sources */,
+				395EC16C28E4B3C100F32840 /* GetUserLocation.swift in Sources */,
+				100DBAE528CEA17F00B5D3BC /* NotificationSetting.swift in Sources */,
 				39AD78242801624B0022EAC1 /* ReCommentTableViewCell.swift in Sources */,
 				39308CF62808860900C41F9F /* AlertViewController.swift in Sources */,
 				39AD77F627FB11CE0022EAC1 /* TabBarController.swift in Sources */,
