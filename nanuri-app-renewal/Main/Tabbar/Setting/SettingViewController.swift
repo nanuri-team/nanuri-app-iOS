@@ -8,7 +8,9 @@
 import UIKit
 import SafariServices
 
-final class SettingViewController: UIViewController {
+class SettingViewController: UIViewController {
+    
+    
     
     private let tableView = UITableView(frame: .zero, style: .grouped)
     private let sortOfSection: [[String]] = [["활동 알림 설정", "채팅 알림 설정", "마케팅 알림 설정"],
@@ -64,7 +66,7 @@ final class SettingViewController: UIViewController {
     }
 }
 
-extension SettingViewController: UITableViewDataSource, UITableViewDelegate {
+extension SettingViewController: UITableViewDataSource, UITableViewDelegate, CustomAlertDelegate {
     
     // DataSource
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -164,14 +166,34 @@ extension SettingViewController: UITableViewDataSource, UITableViewDelegate {
                 print("로그아웃되었습니다.")
                 
             } else {
-                let deactivatedViewController = DeactivatedViewController()
-                deactivatedViewController.modalTransitionStyle = .crossDissolve
-                deactivatedViewController.modalPresentationStyle = .overFullScreen
-                self.present(deactivatedViewController, animated: true, completion: nil)
+                let viewController = CustomAlertViewController(firstTitle: "나누리 회원을", secondEmphTitle: "탈퇴", backSecondTitle: "하시겠습니까?", descriptionContent: "탈퇴 30일 후, 계정이 완전히 삭제됩니다.\n신중하게 선택해주세요.", grayColorButtonTitle: "취소", greenColorButtonTitle: "탈퇴하기", customAlertType: .doneAndCancel, alertHeight: 244)
+                viewController.delegate = self
+                viewController.modalTransitionStyle = .crossDissolve
+                viewController.modalPresentationStyle = .overFullScreen
+                self.present(viewController, animated: true)
             }
         default:
             break
         }
+    }
+    
+    func action() {
+        let params: [String: Any] = ["is_active": false]
+        NetworkService.shared.patchUserIsActiveRequest(parameters: params)
+        
+        for key in UserDefaults.standard.dictionaryRepresentation().keys {
+            UserDefaults.standard.removeObject(forKey: key.description)
+        }
+        
+        self.view.window?.rootViewController?.dismiss(animated: true, completion: {
+            let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as! SceneDelegate
+            guard let rootViewController = sceneDelegate.window?.rootViewController as? MainViewController else { return }
+            rootViewController.getLoginViewController()
+        })
+    }
+    
+    func exit() {
+        
     }
     
     // 첫번째 섹션은 셀 선택이 되지 않도록 설정

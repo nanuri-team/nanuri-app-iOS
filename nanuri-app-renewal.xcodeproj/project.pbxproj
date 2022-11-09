@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		1005C40228B3728F00A8AA7B /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1005C40128B3728E00A8AA7B /* NetworkService.swift */; };
-		1005C40428B5F77700A8AA7B /* DeactivatedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1005C40328B5F77700A8AA7B /* DeactivatedViewController.swift */; };
 		100DBAE128C9E4CE00B5D3BC /* CustomSettingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100DBAE028C9E4CE00B5D3BC /* CustomSettingTableViewCell.swift */; };
 		100DBAE328CA024D00B5D3BC /* defaultSettingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100DBAE228CA024D00B5D3BC /* defaultSettingTableViewCell.swift */; };
 		100DBAE528CEA17F00B5D3BC /* NotificationSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100DBAE428CEA17F00B5D3BC /* NotificationSetting.swift */; };
@@ -18,6 +17,7 @@
 		103DA85E28AA91BD004FEA14 /* NotificationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 103DA85D28AA91BD004FEA14 /* NotificationTableViewCell.swift */; };
 		103DA89528ABAF33004FEA14 /* EmptyNotiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 103DA89428ABAF33004FEA14 /* EmptyNotiView.swift */; };
 		103DA89728ABCD2F004FEA14 /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 103DA89628ABCD2F004FEA14 /* CategoryCell.swift */; };
+		107C95A1291BB48F00D336DC /* CustomAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 107C95A0291BB48F00D336DC /* CustomAlertViewController.swift */; };
 		349EE88BFBCFEC4B071C4AD0 /* Pods_nanuri_app_renewal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 670A464DDF73C49130CF9703 /* Pods_nanuri_app_renewal.framework */; };
 		390CF6AF28B50B4900980DC7 /* StepTwo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 390CF6AE28B50B4900980DC7 /* StepTwo.swift */; };
 		390CF6B128B50F6F00980DC7 /* StepThree.swift in Sources */ = {isa = PBXBuildFile; fileRef = 390CF6B028B50F6F00980DC7 /* StepThree.swift */; };
@@ -89,7 +89,6 @@
 
 /* Begin PBXFileReference section */
 		1005C40128B3728E00A8AA7B /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
-		1005C40328B5F77700A8AA7B /* DeactivatedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeactivatedViewController.swift; sourceTree = "<group>"; };
 		100DBAE028C9E4CE00B5D3BC /* CustomSettingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSettingTableViewCell.swift; sourceTree = "<group>"; };
 		100DBAE228CA024D00B5D3BC /* defaultSettingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = defaultSettingTableViewCell.swift; sourceTree = "<group>"; };
 		100DBAE428CEA17F00B5D3BC /* NotificationSetting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationSetting.swift; sourceTree = "<group>"; };
@@ -100,6 +99,7 @@
 		103DA85D28AA91BD004FEA14 /* NotificationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationTableViewCell.swift; sourceTree = "<group>"; };
 		103DA89428ABAF33004FEA14 /* EmptyNotiView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyNotiView.swift; sourceTree = "<group>"; };
 		103DA89628ABCD2F004FEA14 /* CategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
+		107C95A0291BB48F00D336DC /* CustomAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlertViewController.swift; sourceTree = "<group>"; };
 		390CF6AE28B50B4900980DC7 /* StepTwo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepTwo.swift; sourceTree = "<group>"; };
 		390CF6B028B50F6F00980DC7 /* StepThree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepThree.swift; sourceTree = "<group>"; };
 		390CF6B228B5105D00980DC7 /* StepFour.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepFour.swift; sourceTree = "<group>"; };
@@ -321,6 +321,7 @@
 				398B709B28B526A20039DA3D /* CategoryButton.swift */,
 				3934E3C928B66601001AC568 /* BottomSheetViewController.swift */,
 				395EC16B28E4B3C100F32840 /* GetUserLocation.swift */,
+				107C95A0291BB48F00D336DC /* CustomAlertViewController.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -483,7 +484,6 @@
 				87D17BA127FB5C0B00E171A2 /* SettingViewController.swift */,
 				100DBAE028C9E4CE00B5D3BC /* CustomSettingTableViewCell.swift */,
 				100DBAE228CA024D00B5D3BC /* defaultSettingTableViewCell.swift */,
-				1005C40328B5F77700A8AA7B /* DeactivatedViewController.swift */,
 				100DBAE428CEA17F00B5D3BC /* NotificationSetting.swift */,
 			);
 			path = Setting;
@@ -645,6 +645,7 @@
 				39788AF82819CC6900ABD918 /* Chat.swift in Sources */,
 				39AD77CF27FB0F4E0022EAC1 /* AppDelegate.swift in Sources */,
 				39AD77D127FB0F4E0022EAC1 /* SceneDelegate.swift in Sources */,
+				107C95A1291BB48F00D336DC /* CustomAlertViewController.swift in Sources */,
 				397ACBA42805F5B500E83FA0 /* LocationPermissionViewController.swift in Sources */,
 				870F9D162816AB680098DDD9 /* SnsLogin.swift in Sources */,
 				39AD77F827FB11E30022EAC1 /* HomeViewController.swift in Sources */,
@@ -668,7 +669,6 @@
 				3954BBA7281433FC00C8815E /* YourChatMessageTableViewCell.swift in Sources */,
 				39788AF528188B5700ABD918 /* Posts.swift in Sources */,
 				87D17BA027FB5BF100E171A2 /* SearchViewController.swift in Sources */,
-				1005C40428B5F77700A8AA7B /* DeactivatedViewController.swift in Sources */,
 				398B709C28B526A20039DA3D /* CategoryButton.swift in Sources */,
 				39AD780027FB120B0022EAC1 /* MyPageViewController.swift in Sources */,
 				1005C40228B3728F00A8AA7B /* NetworkService.swift in Sources */,

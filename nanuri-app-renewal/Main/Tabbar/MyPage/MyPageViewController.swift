@@ -35,7 +35,7 @@ class MyPageViewController: UIViewController {
     private let registeredProductsListButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = .white
-        button.setAttributedTitle(.attributeFont(font: .PRegular, size: 13, text: "내가 등록한 상품", lineHeight: 15), for: .normal)
+        button.setAttributedTitle(.attributeFont(font: .PBold, size: 13, text: "내가 등록한 상품", lineHeight: 15), for: .normal)
         button.setTitleColor(.nanuriGreen, for: .normal)
         return button
     }()
@@ -47,7 +47,7 @@ class MyPageViewController: UIViewController {
     private let participatedProductsListButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = .white
-        button.setAttributedTitle(.attributeFont(font: .PRegular, size: 13, text: "내가 참여한 상품", lineHeight: 15), for: .normal)
+        button.setAttributedTitle(.attributeFont(font: .PMedium, size: 13, text: "내가 참여한 상품", lineHeight: 15), for: .normal)
         button.setTitleColor(.nanuriGray5, for: .normal)
         return button
     }()
@@ -58,7 +58,7 @@ class MyPageViewController: UIViewController {
     }()
     private let numberOfListLabel: UILabel = {
         let label = UILabel()
-        label.attributedText = .attributeFont(font: .PBold, size: 13, text: label.text ?? "전체 0개", lineHeight: 15)
+        label.attributedText = .attributeFont(font: .PMedium, size: 13, text: label.text ?? "전체 0개", lineHeight: 15)
         label.text = "전체 14개"
         return label
     }()
