@@ -90,7 +90,7 @@ class MyPageViewController: UIViewController {
                     self.profileImageView.image = UIImage(data: imageData)
                 }
                 self.profileNameLabel.text = userInfo.nickName
-                self.locationTagView = LocationTagView(location: userInfo.address)
+                self.locationTagView = LocationTagView(location: userInfo.location)
                 
                 self.getMyProductInfo()
             }
@@ -199,8 +199,10 @@ class MyPageViewController: UIViewController {
         if isTappedProductListButton { // true
             isTappedProductListButton.toggle()
             registeredProductsListButton.setTitleColor(.nanuriGreen, for: .normal)
+            registeredProductsListButton.setAttributedTitle(.attributeFont(font: .PBold, size: 13, text: "내가 등록한 상품", lineHeight: 15), for: .normal)
             clickedView.backgroundColor = .nanuriGreen
             participatedProductsListButton.setTitleColor(.nanuriGray5, for: .normal)
+            participatedProductsListButton.setAttributedTitle(.attributeFont(font: .PMedium, size: 13, text: "내가 참여한 상품", lineHeight: 15), for: .normal)
             clickedView2.backgroundColor = .nanuriGray2
             DispatchQueue.main.async {
                 self.productListTableView.reloadData()
@@ -214,8 +216,10 @@ class MyPageViewController: UIViewController {
         if isTappedProductListButton == false { // false
             isTappedProductListButton.toggle()
             registeredProductsListButton.setTitleColor(.nanuriGray5, for: .normal)
+            registeredProductsListButton.setAttributedTitle(.attributeFont(font: .PMedium, size: 13, text: "내가 등록한 상품", lineHeight: 15), for: .normal)
             clickedView.backgroundColor = .nanuriGray2
             participatedProductsListButton.setTitleColor(.nanuriGreen, for: .normal)
+            participatedProductsListButton.setAttributedTitle(.attributeFont(font: .PBold, size: 13, text: "내가 참여한 상품", lineHeight: 15), for: .normal)
             clickedView2.backgroundColor = .nanuriGreen
             DispatchQueue.main.async {
                 self.productListTableView.reloadData()

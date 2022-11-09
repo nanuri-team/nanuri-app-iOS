@@ -116,7 +116,7 @@ class MyProfileModifiedViewController: UIViewController {
             $0.left.equalTo(16)
         }
         
-        regionModifyTextField.attributedText = .attributeFont(font: .PRegular, size: 15, text: userInfo.address, lineHeight: 18)
+        regionModifyTextField.attributedText = .attributeFont(font: .PRegular, size: 15, text: userInfo.location, lineHeight: 18)
         self.view.addSubview(regionModifyTextField)
         regionModifyTextField.snp.makeConstraints {
             $0.top.equalTo(regionModifyLabel.snp.bottom).inset(-10)
