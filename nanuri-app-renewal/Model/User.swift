@@ -8,31 +8,26 @@
 import Foundation
 
 struct UserInfo: Codable {
-    var posts: [String]
-    var favoritePosts: [String]
-    var lastLogin: String
     var uuid: String
     var email: String
     var nickName: String
     var isActive: Bool
     var isAdmin: Bool
-    var location: String
-    var address: String
+    var lastLogin: String
     var profile: String
     var authProvider: String
-    var createdAt: String
-    var updatedAt: String
+    var location: String
+    var posts: [String]
+    var favoritePosts: [String]
     
     enum CodingKeys: String, CodingKey {
-        case posts, uuid, email, location, address, profile
+        case posts, uuid, email, location, profile
         case favoritePosts = "favorite_posts"
         case lastLogin = "last_login"
         case nickName = "nickname"
         case isActive = "is_active"
         case isAdmin = "is_admin"
         case authProvider = "auth_provider"
-        case createdAt = "created_at"
-        case updatedAt = "updated_at"
     }
     
     init(from decoder: Decoder) throws {
@@ -46,11 +41,8 @@ struct UserInfo: Codable {
         isActive = (try? values.decode(Bool.self, forKey: .isActive)) ?? false
         isAdmin = (try? values.decode(Bool.self, forKey: .isAdmin)) ?? false
         location = (try? values.decode(String.self, forKey: .location)) ?? ""
-        address = (try? values.decode(String.self, forKey: .address)) ?? ""
         profile = (try? values.decode(String.self, forKey: .profile)) ?? ""
         authProvider = (try? values.decode(String.self, forKey: .authProvider)) ?? ""
-        createdAt = (try? values.decode(String.self, forKey: .createdAt)) ?? ""
-        updatedAt = (try? values.decode(String.self, forKey: .updatedAt)) ?? ""
     }
 }
 
