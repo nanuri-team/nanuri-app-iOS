@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CoreLocation
 
 class MyProfileModifiedViewController: UIViewController {
     
@@ -30,6 +31,7 @@ class MyProfileModifiedViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpView()
+        region()
     }
     
     private func networksetup() {
@@ -44,10 +46,34 @@ class MyProfileModifiedViewController: UIViewController {
         }
     }
     
+    private func region() {
+        guard let location = self.userInfo?.location.components(separatedBy: " ") else { return }
+        let longitude = Double(location[1].dropFirst())!
+        let latitude = Double(location[2].dropLast())!
+        
+        let findLocation: CLLocation = CLLocation(latitude: latitude, longitude: longitude)
+        let geoCoder: CLGeocoder = CLGeocoder()
+        let local: Locale = Locale(identifier: "Ko-kr") // Korea
+        geoCoder.reverseGeocodeLocation(findLocation, preferredLocale: local) { (place, error) in
+            if let address: [CLPlacemark] = place {
+                self.regionModifyTextField.text = address.last?.administrativeArea ?? ""
+                print(address)
+                print("시(도): \(address.last?.administrativeArea)")
+                print("구(군): \(address.last?.locality)")
+                print("동: \(address.last?.subLocality)")
+            }
+        }
+    }
+    
     @objc func doneButtonTapped() {
-        print("aaa")
         networksetup()
         self.navigationController?.popViewController(animated: true)
+    }
+    
+    @objc func regionTextTapped() {
+        let locationPermissionViewController = LocationPermissionViewController()
+        locationPermissionViewController.hidesBottomBarWhenPushed = true
+        self.navigationController?.pushViewController(locationPermissionViewController, animated: true)
     }
     
     private func setUpView() {
@@ -116,7 +142,7 @@ class MyProfileModifiedViewController: UIViewController {
             $0.left.equalTo(16)
         }
         
-        regionModifyTextField.attributedText = .attributeFont(font: .PRegular, size: 15, text: userInfo.address, lineHeight: 18)
+        regionModifyTextField.attributedText = .attributeFont(font: .PRegular, size: 15, text: "", lineHeight: 18)
         self.view.addSubview(regionModifyTextField)
         regionModifyTextField.snp.makeConstraints {
             $0.top.equalTo(regionModifyLabel.snp.bottom).inset(-10)
@@ -124,6 +150,8 @@ class MyProfileModifiedViewController: UIViewController {
             $0.right.equalTo(-16)
             $0.height.equalTo(44)
         }
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(regionTextTapped))
+        self.regionModifyTextField.addGestureRecognizer(gesture)
         
         // 없앨 예정??
         let accountNumberLabel = UILabel()
