@@ -7,78 +7,43 @@
 
 import UIKit
 
-class MyPageViewController: UIViewController {
+final class MyPageViewController: UIViewController {
     
-    private var isTappedProductListButton: Bool = false
     private let productListTableView = UITableView()
-    var profileNameLabel: UILabel = {
-        let label = UILabel()
-        label.attributedText = .attributeFont(font: .PBold, size: 18, text: "닉네임을 입력하세요", lineHeight: 20)
-        return label
-    }()
-    var profileImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: "myprofile_photo_ic")
-        imageView.layer.cornerRadius = 56 / 2
-        imageView.clipsToBounds = true
-        return imageView
-    }()
-    var levelView: UIView = {
-        let view = LevelView(.bean, isLevelName: true)
+    private let myPageHeaderView: MyPageHeaderView = {
+        let view = MyPageHeaderView()
         return view
     }()
-    var locationTagView: UIView = {
-        let view = LocationTagView(location: "서울시 강남구")
+    private let myPageSectionHeaderView: MyPageSectionHeaderView = {
+        let view = MyPageSectionHeaderView()
         return view
     }()
-    
-    private let registeredProductsListButton: UIButton = {
-        let button = UIButton()
-        button.backgroundColor = .white
-        button.setAttributedTitle(.attributeFont(font: .PRegular, size: 13, text: "내가 등록한 상품", lineHeight: 15), for: .normal)
-        button.setTitleColor(.nanuriGreen, for: .normal)
-        return button
+    private var isTappedProductListButton: Bool = false
+    let indicatorView: UIActivityIndicatorView = {
+        let indicator = UIActivityIndicatorView()
+        indicator.color = .nanuriGreen
+        indicator.style = .large
+        indicator.hidesWhenStopped = true
+        indicator.stopAnimating()
+        return indicator
     }()
-    private let clickedView: UIView = {
-        let view = UIView()
-        view.backgroundColor = .nanuriGreen
-        return view
-    }()
-    private let participatedProductsListButton: UIButton = {
-        let button = UIButton()
-        button.backgroundColor = .white
-        button.setAttributedTitle(.attributeFont(font: .PRegular, size: 13, text: "내가 참여한 상품", lineHeight: 15), for: .normal)
-        button.setTitleColor(.nanuriGray5, for: .normal)
-        return button
-    }()
-    private let clickedView2: UIView = {
-        let view = UIView()
-        view.backgroundColor = .nanuriGray2
-        return view
-    }()
-    private let numberOfListLabel: UILabel = {
-        let label = UILabel()
-        label.attributedText = .attributeFont(font: .PBold, size: 13, text: label.text ?? "전체 0개", lineHeight: 15)
-        label.text = "전체 14개"
-        return label
-    }()
-    
     var userInfo: UserInfo?
     var userPosts: [String] = []
-
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setUpView()
+        networkSetup()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        networkSetup()
+//        networkSetup()
     }
     
     func networkSetup() {
+        self.indicatorView.startAnimating()
         NetworkService.shared.getUserInfoRequest { userInfo in
             self.userInfo = userInfo
             DispatchQueue.main.async {
@@ -87,12 +52,16 @@ class MyPageViewController: UIViewController {
                     guard let imageURL = URL(string: profileURL),
                           let imageData = try? Data(contentsOf: imageURL)
                     else { return }
-                    self.profileImageView.image = UIImage(data: imageData)
+                    self.myPageHeaderView.profileImageView.image = UIImage(data: imageData)
                 }
-                self.profileNameLabel.text = userInfo.nickName
-                self.locationTagView = LocationTagView(location: userInfo.address)
+                self.myPageHeaderView.profileNameLabel.text = userInfo.nickName
+                userInfo.location.currentLocation(userInfo: userInfo) { location in
+                    self.myPageHeaderView.locationTagView.productLocationLabel.attributedText = .attributeFont(font: .NSRExtrabold, size: 12, text: location, lineHeight: 14)
+                }
                 
-                self.getMyProductInfo()
+                self.indicatorView.stopAnimating()
+                
+//                self.getMyProductInfo()
             }
         }
     }
@@ -126,101 +95,67 @@ class MyPageViewController: UIViewController {
         let headerView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: 95))
         productListTableView.tableHeaderView = headerView
         
-        let profileView = UIView()
-        headerView.addSubview(profileView)
-        profileView.backgroundColor = .white
-        profileView.snp.makeConstraints {
-            $0.edges.equalToSuperview()
+        headerView.addSubview(myPageHeaderView)
+        myPageHeaderView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
         }
         
+        myPageHeaderView.profileModifyButton.addTarget(self, action: #selector(clickModifyButtonTapped), for: .touchUpInside)
         
-        profileView.addSubview(profileImageView)
-        profileImageView.snp.makeConstraints {
-            $0.left.equalTo(16)
-            $0.centerY.equalToSuperview()
-            $0.width.height.equalTo(56)
+        self.view.addSubview(indicatorView)
+        indicatorView.snp.makeConstraints { make in
+            make.center.equalToSuperview()
         }
-
-        
-        profileView.addSubview(profileNameLabel)
-        profileNameLabel.snp.makeConstraints {
-            $0.top.equalTo(20)
-            $0.left.equalTo(profileImageView.snp.right).inset(-16)
-        }
-        // profileNameLabel 10글자 이상이면 나머지는 ... 로 표시되도록
-
-        
-        profileView.addSubview(levelView)
-        levelView.snp.makeConstraints {
-            $0.centerY.equalTo(profileNameLabel)
-            $0.left.equalTo(profileNameLabel.snp.right).inset(-6)
-        }
-
-        
-        profileView.addSubview(locationTagView)
-        locationTagView.snp.makeConstraints {
-            $0.top.equalTo(profileNameLabel.snp.bottom).inset(-8)
-            $0.left.equalTo(profileImageView.snp.right).inset(-16)
-        }
-
-        let profileModifyButton = UIButton()
-        profileModifyButton.setAttributedTitle(.attributeFont(font: .PRegular, size: 13, text: "수정", lineHeight: 13), for: .normal)
-        profileModifyButton.setTitleColor(.nanuriGray5, for: .normal)
-        profileModifyButton.semanticContentAttribute = .forceLeftToRight
-        profileModifyButton.addTarget(self, action: #selector(clickModifyButtonTapped), for: .touchUpInside)
-        profileView.addSubview(profileModifyButton)
-        profileModifyButton.snp.makeConstraints {
-            $0.top.equalTo(20)
-            $0.right.equalTo(-16)
-            $0.width.equalTo(23)
-        }
+        self.view.bringSubviewToFront(indicatorView)
     }
     
-    // objc - Actions
-    @objc func selectSettingButton() {
+    // MARK: objc - Actions
+    @objc func selectSettingButton(_ sender: UIButton) {
         let settingView = SettingViewController()
         settingView.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(settingView, animated: true)
     }
     
-    @objc func selectMoreButton() {
+    @objc func selectMoreButton(_ sender: UIButton) {
         print("Continued..")
     }
     
-    @objc func clickModifyButtonTapped() {
-        let myProfileModifiedView = MyProfileModifiedViewController()
+    @objc func clickModifyButtonTapped(_ sender: UIButton) {
+        guard let userInfo = userInfo else { return }
+        let myProfileModifiedView = MyProfileModifiedViewController(userInfo: userInfo)
         myProfileModifiedView.hidesBottomBarWhenPushed = true
-        myProfileModifiedView.userInfo = self.userInfo
         self.navigationController?.pushViewController(myProfileModifiedView, animated:true)
     }
     
-    @objc func registeredProductsListButtonTapped() {
-        
+    @objc func registeredProductsListButtonTapped(_ sender: UIButton) {
         if isTappedProductListButton { // true
             isTappedProductListButton.toggle()
-            registeredProductsListButton.setTitleColor(.nanuriGreen, for: .normal)
-            clickedView.backgroundColor = .nanuriGreen
-            participatedProductsListButton.setTitleColor(.nanuriGray5, for: .normal)
-            clickedView2.backgroundColor = .nanuriGray2
+            myPageSectionHeaderView.registeredProductsListButton.setTitleColor(.nanuriGreen, for: .normal)
+            myPageSectionHeaderView.registeredProductsListButton.setAttributedTitle(.attributeFont(font: .PBold, size: 13, text: "내가 등록한 상품", lineHeight: 15), for: .normal)
+            myPageSectionHeaderView.clickedView.backgroundColor = .nanuriGreen
+            myPageSectionHeaderView.participatedProductsListButton.setTitleColor(.nanuriGray5, for: .normal)
+            myPageSectionHeaderView.participatedProductsListButton.setAttributedTitle(.attributeFont(font: .PMedium, size: 13, text: "내가 참여한 상품", lineHeight: 15), for: .normal)
+            myPageSectionHeaderView.clickedView2.backgroundColor = .nanuriGray2
             DispatchQueue.main.async {
                 self.productListTableView.reloadData()
             }
-            numberOfListLabel.text = "전체 14개"
+            myPageSectionHeaderView.numberOfListLabel.text = "전체 14개"
         }
     }
     
-    @objc func participatedProductsListButtonTapped() {
-        
+    @objc func participatedProductsListButtonTapped(_ sender: UIButton) {
         if isTappedProductListButton == false { // false
             isTappedProductListButton.toggle()
-            registeredProductsListButton.setTitleColor(.nanuriGray5, for: .normal)
-            clickedView.backgroundColor = .nanuriGray2
-            participatedProductsListButton.setTitleColor(.nanuriGreen, for: .normal)
-            clickedView2.backgroundColor = .nanuriGreen
+            myPageSectionHeaderView.registeredProductsListButton.setTitleColor(.nanuriGray5, for: .normal)
+            myPageSectionHeaderView.registeredProductsListButton.setAttributedTitle(.attributeFont(font: .PMedium, size: 13, text: "내가 등록한 상품", lineHeight: 15), for: .normal)
+            myPageSectionHeaderView.clickedView.backgroundColor = .nanuriGray2
+            myPageSectionHeaderView.participatedProductsListButton.setTitleColor(.nanuriGreen, for: .normal)
+            myPageSectionHeaderView.participatedProductsListButton.setAttributedTitle(.attributeFont(font: .PBold, size: 13, text: "내가 참여한 상품", lineHeight: 15), for: .normal)
+            myPageSectionHeaderView.clickedView2.backgroundColor = .nanuriGreen
             DispatchQueue.main.async {
                 self.productListTableView.reloadData()
             }
-            numberOfListLabel.text = "전체 3개"
+            myPageSectionHeaderView.numberOfListLabel.text = "전체 3개"
         }
     }
 }
@@ -241,67 +176,15 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let header = UIView()
         header.backgroundColor = .white
-
-        let productView = UIView()
-        productView.backgroundColor = .nanuriGray2
-        header.addSubview(productView)
-        productView.snp.makeConstraints {
-            $0.top.equalToSuperview()
-            $0.left.right.equalToSuperview()
-            $0.height.equalTo(45)
+        
+        header.addSubview(myPageSectionHeaderView)
+        myPageSectionHeaderView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
         }
-
-        productView.addSubview(registeredProductsListButton)
-        registeredProductsListButton.snp.makeConstraints {
-            $0.top.equalToSuperview()
-            $0.left.equalToSuperview()
-            $0.width.equalTo(productView.snp.width).dividedBy(2)
-            $0.height.equalTo(42)
-        }
-        registeredProductsListButton.addTarget(self, action: #selector(registeredProductsListButtonTapped), for: .touchUpInside)
-
-        productView.addSubview(clickedView)
-        clickedView.snp.makeConstraints {
-            $0.top.equalTo(registeredProductsListButton.snp.bottom)
-            $0.left.equalToSuperview()
-            $0.width.equalTo(registeredProductsListButton.snp.width)
-            $0.height.equalTo(3)
-        }
-
-        productView.addSubview(participatedProductsListButton)
-        participatedProductsListButton.snp.makeConstraints {
-            $0.top.equalToSuperview()
-            $0.right.equalToSuperview()
-            $0.width.equalTo(productView.snp.width).dividedBy(2)
-            $0.height.equalTo(42)
-        }
-        participatedProductsListButton.addTarget(self, action: #selector(participatedProductsListButtonTapped), for: .touchUpInside)
-
-        productView.addSubview(clickedView2)
-        clickedView2.snp.makeConstraints {
-            $0.top.equalTo(participatedProductsListButton.snp.bottom)
-            $0.right.equalToSuperview()
-            $0.width.equalTo(participatedProductsListButton.snp.width)
-            $0.height.equalTo(3)
-        }
-
-        header.addSubview(numberOfListLabel)
-        numberOfListLabel.snp.makeConstraints {
-            $0.top.equalTo(productView.snp.bottom).inset(-25)
-            $0.left.equalTo(16)
-        }
-
-        let moreButton = UIButton()
-        moreButton.setAttributedTitle(.attributeFont(font: .PRegular, size: 13, text: "진행 중인 상품", lineHeight: 13), for: .normal)
-        moreButton.setImage(UIImage(named: "down_arrow_ic"), for: .normal)
-        moreButton.setTitleColor(.nanuriGray4, for: .normal)
-        moreButton.semanticContentAttribute = .forceLeftToRight
-        header.addSubview(moreButton)
-        moreButton.snp.makeConstraints {
-            $0.top.equalTo(productView.snp.bottom).inset(-25)
-            $0.right.equalTo(-16)
-        }
-        moreButton.addTarget(self, action: #selector(selectMoreButton), for: .touchUpInside)
+        
+        myPageSectionHeaderView.registeredProductsListButton.addTarget(self, action: #selector(registeredProductsListButtonTapped), for: .touchUpInside)
+        myPageSectionHeaderView.participatedProductsListButton.addTarget(self, action: #selector(participatedProductsListButtonTapped), for: .touchUpInside)
+        myPageSectionHeaderView.moreButton.addTarget(self, action: #selector(selectMoreButton), for: .touchUpInside)
 
         return header
     }
@@ -327,23 +210,3 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
         }
     }
 }
-
-//extension UIViewController {
-//
-//    // An array of children view controllers. This array does not include any presented view controllers.
-//    @available(iOS 13.0, *)
-//    open var children: [UIViewController] { get }
-//
-//    /*
-//      If the child controller has a different parent controller, it will first be removed from its current parent
-//      by calling removeFromParentViewController. If this method is overridden then the super implementation must
-//      be called.
-//    */
-//    @available(iOS 13.0, *)
-//    open func addChild(_ childController: MyRegisterProductViewController)
-//
-//...
-//
-//}
-
-

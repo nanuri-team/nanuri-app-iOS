@@ -36,7 +36,7 @@ final class RegisterView: UIView {
     
     let nickNameTextField: UITextField = {
         let textField = UITextField()
-        textField.placeholder = "닉네임(영문, 한글 20자 이내)"
+        textField.placeholder = "닉네임(영문, 한글 10자 이내)"
         textField.attributedText = .attributeFont(font: .PRegular, size: 15, text: "", lineHeight: 18)
         textField.toStyledTextField(textField)
         textField.addPadding(width: 16)

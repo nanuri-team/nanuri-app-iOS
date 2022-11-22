@@ -9,6 +9,12 @@ import Foundation
 import UIKit
 
 class LocationTagView: UIView {
+    var productLocationLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = .nanuriGray4
+        return label
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
     }
@@ -31,9 +37,7 @@ class LocationTagView: UIView {
             make.centerY.equalToSuperview()
         }
         
-        let productLocationLabel = UILabel()
         productLocationLabel.attributedText = .attributeFont(font: .NSRExtrabold, size: 12, text: location, lineHeight: 14)
-        productLocationLabel.textColor = .nanuriGray4
         self.addSubview(productLocationLabel)
         productLocationLabel.snp.makeConstraints { make in
             make.centerY.equalToSuperview()

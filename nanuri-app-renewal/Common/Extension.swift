@@ -9,6 +9,7 @@ import Foundation
 import UIKit
 
 import SDWebImage
+import CoreLocation
 
 extension UIColor {
     class var nanuriGreen: UIColor {
@@ -328,6 +329,21 @@ extension String {
         let date = DateFormatter().changeStringToDate(self, format: .dahsed)
         guard let dDay = Calendar.current.dateComponents([.day], from: Date(), to: date).day else { return "" }
         return "\(dDay + 1)"
+    }
+    
+    func currentLocation(userInfo: UserInfo, completion: @escaping (String) -> ()) {
+        let location = splitLocation(location: userInfo.location)
+        let myLocation = CLLocation(latitude: location.latitude, longitude: location.longitude)
+        let geocoder = CLGeocoder()
+        let locale = Locale(identifier: "Ko-kr")
+        geocoder.reverseGeocodeLocation(myLocation, preferredLocale: locale) { (place, error) in
+            guard let placemark = place?.last,
+                  let administrativeArea = placemark.administrativeArea,
+                  let subLocality = placemark.subLocality
+            else { return }
+            let currentLocation = "\(administrativeArea) \(subLocality)"
+            completion(currentLocation)
+        }
     }
 }
 
