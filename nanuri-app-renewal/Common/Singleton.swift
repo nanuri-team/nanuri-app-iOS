@@ -10,9 +10,9 @@ import Foundation
 class Singleton {
     static let shared = Singleton()
     
-    let tokenName: String = "Token"
+    var tokenType: String = "Token"
     var userToken: String = ""
-    var uuid: String = "c4efed4c79d3bdd3155cba4fecd29eeb14ef5bf1"
+    var uuid: String = ""
     
     var testLocation: String = ""
     

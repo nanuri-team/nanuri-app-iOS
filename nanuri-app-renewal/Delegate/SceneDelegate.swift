@@ -35,9 +35,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let mainViewController = MainViewController()
         window.rootViewController = mainViewController
         window.makeKeyAndVisible()
-
-        print(UserDefaults.standard.object(forKey: "loginInfo"))
-        if UserDefaults.standard.object(forKey: "loginInfo") == nil {
+        
+        if UserDefaults.standard.bool(forKey: "LoginState") == false {
             mainViewController.getLoginViewController()
         } else {
             mainViewController.getHomeViewController()

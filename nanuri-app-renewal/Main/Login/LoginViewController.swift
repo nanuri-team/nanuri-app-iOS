@@ -11,8 +11,6 @@ import KakaoSDKAuth
 import KakaoSDKCommon
 import KakaoSDKUser
 
-import Alamofire
-
 import AuthenticationServices
 
 class LoginViewController: UIViewController {
@@ -59,25 +57,25 @@ class LoginViewController: UIViewController {
         loginView.appleButton.addTarget(self, action: #selector(selectApplelogin), for: .touchUpInside)
     }
     
-    private func presentView(_ viewController: UIViewController) {
-        print("presentView")
-        // 닉네임이 nil이라면 회원가입 뷰로 아니라면 메인뷰로 이동
-        NetworkService.shared.getUserInfoRequest { userInfo in
-            if userInfo.nickName.isEmpty {
-                DispatchQueue.main.async {
-                    let registerViewController = viewController
-                    registerViewController.modalTransitionStyle = .crossDissolve
-                    registerViewController.modalPresentationStyle = .fullScreen
-                    self.present(registerViewController, animated: true, completion: nil)
-                }
-            } else {
-                DispatchQueue.main.async {
-                    let viewController = TabBarController()
-                    (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.setRootViewController(viewController)
-                }
-            }
-        }
-    }
+//    private func presentView(_ viewController: UIViewController) {
+//        print("presentView")
+//        // 닉네임이 nil이라면 회원가입 뷰로 아니라면 메인뷰로 이동
+//        NetworkService.shared.getUserInfoRequest { userInfo in
+//            if userInfo.nickName.isEmpty {
+//                DispatchQueue.main.async {
+//                    let registerViewController = viewController
+//                    registerViewController.modalTransitionStyle = .crossDissolve
+//                    registerViewController.modalPresentationStyle = .fullScreen
+//                    self.present(registerViewController, animated: true, completion: nil)
+//                }
+//            } else {
+//                DispatchQueue.main.async {
+//                    let viewController = TabBarController()
+//                    (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.setRootViewController(viewController)
+//                }
+//            }
+//        }
+//    }
 }
 
 // MARK: Kakao Login
@@ -111,9 +109,6 @@ extension LoginViewController {
     }
     
     private func userInfo() {
-        
-        let strURL = "https://nanuri.app/api/auth/kakao/accounts/"
-
         UserApi.shared.me { (user, error) in
             if let error = error {
                 print(error.localizedDescription)
@@ -124,38 +119,13 @@ extension LoginViewController {
                           let email = kakaoAccount.email
                     else { return }
                     
-                    // email 어디에 쓰나요??
-                    UserDefaults.standard.set(email, forKey: "userEmail")
+                    print(" id \(kakaoId)")
+                    let registerViewController = RegisterViewController(id: kakaoId)
+                    registerViewController.modalTransitionStyle = .crossDissolve
+                    registerViewController.modalPresentationStyle = .fullScreen
+                    self.present(registerViewController, animated: true, completion: nil)
                     
-                    let params: Parameters = ["kakao_id": kakaoId]
-                    let alamo = AF.request(strURL, method: .post, parameters: params)
-                    alamo.responseJSON { response in
-                        switch response.result {
-                        case .success(let value):
-                            print("Success with key: \(value)")
-                            
-                            if let loginInfo = value as? [String: String] {
-                                do {
-                                    let object: SocialLogin = try SocialLogin.decode(dictionary: loginInfo)
-                                    print("object --> \(object)") // ✅
-                                    
-                                    let encoder = JSONEncoder()
-                                    if let encoded = try? encoder.encode(object) {
-                                        UserDefaults.standard.set(encoded, forKey: "loginInfo")
-                                    }
-                                } catch {
-                                    // error handler
-                                }
-                            }
-                            
-                            self.presentView(RegisterViewController())
-                            
-                        case .failure(let error):
-                            if let error = error.errorDescription {
-                                print(error)
-                            }
-                        }
-                    }
+//                    self.presentView(RegisterViewController(id: "\(kakaoId)"))
                 }
             }
         }
@@ -184,7 +154,7 @@ extension LoginViewController: ASAuthorizationControllerDelegate, ASAuthorizatio
             print("User Name : \((fullName?.givenName ?? "") + (fullName?.familyName ?? ""))")
             print("token : \(String(describing: tokeStr))")
             
-            self.presentView(RegisterViewController())
+//            self.presentView(RegisterViewController(id: userIdentifier))
             
         default:
             break

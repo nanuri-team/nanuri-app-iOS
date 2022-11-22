@@ -7,6 +7,7 @@
 
 import UIKit
 import SafariServices
+import Alamofire
 
 class RegisterViewController: UIViewController {
     
@@ -14,10 +15,20 @@ class RegisterViewController: UIViewController {
     var termsCheck: Bool = false
     var privacyCheck: Bool = false
     var nickNameCheck: Bool = false
+    var loginId: Int64
+    
+    init(id: Int64) {
+        self.loginId = id
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         setUpView()
         registerView.nickNameTextField.delegate = self
     }
@@ -35,6 +46,57 @@ class RegisterViewController: UIViewController {
         }
     }
     
+    func networking(id: Int64) {
+        
+        NetworkService.shared.postSnsLogin(id: id) { object in
+            print("-->>> \(object)")
+            DispatchQueue.main.async {
+                self.saveUserInfo()                
+            }
+        }
+    }
+
+    private func saveUserInfo() {
+        guard let registerNickName = registerView.nickNameTextField.text else { return }
+        let params: [String: String] = ["nickname": registerNickName]
+        NetworkService.shared.patchUserInfoRequest(parameters: params) { userInfo in
+            DispatchQueue.main.async {
+                print("데이터 저장 -> \(userInfo)")
+                self.view.window?.rootViewController?.dismiss(animated: true, completion: {
+                    let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as! SceneDelegate
+                    guard let rootViewController = sceneDelegate.window?.rootViewController as? MainViewController else { return }
+                    rootViewController.getHomeViewController()
+                })
+            }
+        }
+    }
+    
+    func setUpView() {
+        self.view.backgroundColor = .white
+        
+        self.view.addSubview(registerView)
+        registerView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+        
+        registerView.closeButton.addTarget(self, action: #selector(tappedDismissButton), for: .touchUpInside)
+
+        registerView.registerButton.addTarget(self, action: #selector(tappedSignUpButton), for: .touchUpInside)
+
+        registerView.termsCheckButton.addTarget(self, action: #selector(selectTermsCheckButton), for: .touchUpInside)
+
+        registerView.termsLinkButton.addTarget(self, action: #selector(tappedPrivacyButton), for: .touchUpInside)
+
+        registerView.privacyCheckButton.addTarget(self, action: #selector(selectPrivacyCheckButton), for: .touchUpInside)
+
+        registerView.privacyLinkButton.addTarget(self, action: #selector(tappedPrivacyButton), for: .touchUpInside)
+        
+        // 화면 아무 곳이나 클릭시 키보드 사라지게 하는 코드
+        let tapGesture = UITapGestureRecognizer(target: view, action: #selector(view.endEditing))
+        self.view.addGestureRecognizer(tapGesture)
+    }
+    
+    // MARK: objc actions
     @objc func selectTermsCheckButton(sender: UIButton) {
         if sender.isSelected {
             sender.isSelected = false
@@ -67,53 +129,10 @@ class RegisterViewController: UIViewController {
     
     @objc func tappedDismissButton() {
         self.dismiss(animated: true, completion: nil)
-        
-        // dismiss 하면서 저장된 UserDefaults 삭제
-        // DB에서도 삭제해야하는지?
-        for key in UserDefaults.standard.dictionaryRepresentation().keys {
-            UserDefaults.standard.removeObject(forKey: key.description)
-        }
     }
     
     @objc func tappedSignUpButton(_ sender: UIButton) {
-        self.saveUserInfo()
-    }
-
-    private func saveUserInfo() {
-        guard let registerNickName = registerView.nickNameTextField.text else { return }
-        let params: [String: String] = ["nickname": registerNickName]
-        NetworkService.shared.patchUserInfoRequest(parameters: params) { userInfo in
-            DispatchQueue.main.async {
-                print("데이터 저장 -> \(userInfo)")
-                let viewController = TabBarController()
-                (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.setRootViewController(viewController)
-            }
-        }
-    }
-    
-    func setUpView() {
-        self.view.backgroundColor = .white
-        
-        self.view.addSubview(registerView)
-        registerView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
-        }
-        
-        registerView.closeButton.addTarget(self, action: #selector(tappedDismissButton), for: .touchUpInside)
-
-        registerView.registerButton.addTarget(self, action: #selector(tappedSignUpButton), for: .touchUpInside)
-
-        registerView.termsCheckButton.addTarget(self, action: #selector(selectTermsCheckButton), for: .touchUpInside)
-
-        registerView.termsLinkButton.addTarget(self, action: #selector(tappedPrivacyButton), for: .touchUpInside)
-
-        registerView.privacyCheckButton.addTarget(self, action: #selector(selectPrivacyCheckButton), for: .touchUpInside)
-
-        registerView.privacyLinkButton.addTarget(self, action: #selector(tappedPrivacyButton), for: .touchUpInside)
-        
-        // 화면 아무 곳이나 클릭시 키보드 사라지게 하는 코드
-        let tapGesture = UITapGestureRecognizer(target: view, action: #selector(view.endEditing))
-        self.view.addGestureRecognizer(tapGesture)
+        self.networking(id: loginId)
     }
 }
 
@@ -133,6 +152,7 @@ extension RegisterViewController: UITextFieldDelegate {
     
     func textFieldDidChangeSelection(_ textField: UITextField) {
         // 닉네임 중복 체크
+        self.registerView.registerButton.isUserInteractionEnabled = true
         let params: [String: String] = ["nickname": textField.text!]
         NetworkService.shared.getUserNicNameResquest(parameters: params) { userResult in
             DispatchQueue.main.async {
