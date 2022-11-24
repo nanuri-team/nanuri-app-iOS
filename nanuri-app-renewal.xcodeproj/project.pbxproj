@@ -48,6 +48,7 @@
 		3954BBA92814363F00C8815E /* ChattingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3954BBA82814363F00C8815E /* ChattingViewController.swift */; };
 		3954BBAB2816FCED00C8815E /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3954BBAA2816FCED00C8815E /* Networking.swift */; };
 		395EC16C28E4B3C100F32840 /* GetUserLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 395EC16B28E4B3C100F32840 /* GetUserLocation.swift */; };
+		396FB057292E792500C7389A /* SingleProductTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 396FB056292E792500C7389A /* SingleProductTableViewCell.swift */; };
 		39788AF328188A3B00ABD918 /* Singleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39788AF228188A3B00ABD918 /* Singleton.swift */; };
 		39788AF528188B5700ABD918 /* Posts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39788AF428188B5700ABD918 /* Posts.swift */; };
 		39788AF82819CC6900ABD918 /* Chat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39788AF72819CC6900ABD918 /* Chat.swift */; };
@@ -128,6 +129,15 @@
 		3954BBA82814363F00C8815E /* ChattingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChattingViewController.swift; sourceTree = "<group>"; };
 		3954BBAA2816FCED00C8815E /* Networking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networking.swift; sourceTree = "<group>"; };
 		395EC16B28E4B3C100F32840 /* GetUserLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetUserLocation.swift; sourceTree = "<group>"; };
+		396FB056292E792500C7389A /* SingleProductTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleProductTableViewCell.swift; sourceTree = "<group>"; };
+		396FB05B292E8E1400C7389A /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
+		396FB05D292E8E1C00C7389A /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		396FB05F292E8E2700C7389A /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		396FB061292E8E3B00C7389A /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		396FB063292E8E4900C7389A /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
+		396FB064292E8E5300C7389A /* libxml2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.tbd; path = usr/lib/libxml2.tbd; sourceTree = SDKROOT; };
+		396FB065292E8E5D00C7389A /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		396FB082292E942700C7389A /* Metal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Metal.framework; path = System/Library/Frameworks/Metal.framework; sourceTree = SDKROOT; };
 		39788AF228188A3B00ABD918 /* Singleton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Singleton.swift; sourceTree = "<group>"; };
 		39788AF428188B5700ABD918 /* Posts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Posts.swift; sourceTree = "<group>"; };
 		39788AF72819CC6900ABD918 /* Chat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chat.swift; sourceTree = "<group>"; };
@@ -430,6 +440,7 @@
 			isa = PBXGroup;
 			children = (
 				39AD780B27FB327F0022EAC1 /* MainProductTableViewCell.swift */,
+				396FB056292E792500C7389A /* SingleProductTableViewCell.swift */,
 				39AD781127FB47730022EAC1 /* VerticalProductCollectionViewCell.swift */,
 				39AD78232801624B0022EAC1 /* ReCommentTableViewCell.swift */,
 				39308CC02806FFFB00C41F9F /* CommentTableViewCell.swift */,
@@ -481,6 +492,14 @@
 		ABDE7EE03F8338F170FC8C7F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				396FB082292E942700C7389A /* Metal.framework */,
+				396FB065292E8E5D00C7389A /* libsqlite3.tbd */,
+				396FB064292E8E5300C7389A /* libxml2.tbd */,
+				396FB063292E8E4900C7389A /* libc++.tbd */,
+				396FB061292E8E3B00C7389A /* QuartzCore.framework */,
+				396FB05F292E8E2700C7389A /* CoreLocation.framework */,
+				396FB05D292E8E1C00C7389A /* SystemConfiguration.framework */,
+				396FB05B292E8E1400C7389A /* OpenGLES.framework */,
 				670A464DDF73C49130CF9703 /* Pods_nanuri_app_renewal.framework */,
 			);
 			name = Frameworks;
@@ -672,6 +691,7 @@
 				87D17BA227FB5C0B00E171A2 /* SettingViewController.swift in Sources */,
 				39788AF328188A3B00ABD918 /* Singleton.swift in Sources */,
 				107C95A7291BF36F00D336DC /* MyPageSectionHeaderView.swift in Sources */,
+				396FB057292E792500C7389A /* SingleProductTableViewCell.swift in Sources */,
 				103DA85A28AA7E56004FEA14 /* NotificationViewController.swift in Sources */,
 				107C95A9291BFD0900D336DC /* ProfileView.swift in Sources */,
 				390CF6B328B5105D00980DC7 /* StepFour.swift in Sources */,
@@ -811,10 +831,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_OBJC_ARC = NO;
 				CODE_SIGN_ENTITLEMENTS = "nanuri-app-renewal/nanuri-app-renewal.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = "";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "nanuri-app-renewal/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "나누리";
@@ -832,9 +857,11 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
+				NEW_SETTING = "";
 				PRODUCT_BUNDLE_IDENTIFIER = "nanuri.team.nanuri-app-renewal";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -846,10 +873,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_OBJC_ARC = NO;
 				CODE_SIGN_ENTITLEMENTS = "nanuri-app-renewal/nanuri-app-renewal.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = "";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "nanuri-app-renewal/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "나누리";
@@ -867,9 +899,11 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
+				NEW_SETTING = "";
 				PRODUCT_BUNDLE_IDENTIFIER = "nanuri.team.nanuri-app-renewal";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};

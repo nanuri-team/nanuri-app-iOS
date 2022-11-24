@@ -2,8 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>CFBundleIdentifier</key>
-	<string>nanuri.team.project.nanuri-app</string>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
@@ -15,6 +13,13 @@
 			</array>
 		</dict>
 	</array>
+	<key>INIntentsSupported</key>
+	<array>
+		<string>Intent</string>
+	</array>
+	<key>KAKAO_APP_KEY</key>
+	<string>edf252ba60feb4777feff52a3f943a06
+</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>NanumSquareRoundB.ttf</string>
