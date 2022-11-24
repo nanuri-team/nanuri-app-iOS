@@ -8,12 +8,19 @@
 import UIKit
 
 class HomeViewController: UIViewController {
-    
 
     let headerScrollView = UIScrollView()
     let categoryScrollView = UIScrollView()
     let allRegionTableView = UITableView()
     let pagerCount = UILabel()
+    let indicatorView: UIActivityIndicatorView = {
+        let indicator = UIActivityIndicatorView()
+        indicator.color = .nanuriGreen
+        indicator.style = .large
+        indicator.hidesWhenStopped = true
+        indicator.stopAnimating()
+        return indicator
+    }()
     
     var sampleImageViewArray: [UIImageView] = []
     var collectionCellWidth = 120
@@ -69,6 +76,7 @@ class HomeViewController: UIViewController {
     }
     
     func getPostsList() {
+        self.indicatorView.startAnimating()
         Networking.sharedObject.getPostsList { response in
             let result = response.results
             self.postsListArray = []
@@ -80,6 +88,7 @@ class HomeViewController: UIViewController {
                 self.postsListArray = result
             }
             self.allRegionTableView.reloadData()
+            self.indicatorView.stopAnimating()
         }
     }
     
@@ -228,7 +237,6 @@ class HomeViewController: UIViewController {
         allRegionTableView.dataSource = self
         allRegionTableView.separatorInset = .zero
         allRegionTableView.separatorStyle = .none
-        allRegionTableView.register(MainProductTableViewCell.self, forCellReuseIdentifier: MainProductTableViewCell.cellId)
         allRegionTableView.tableHeaderView = headerView
         self.view.addSubview(allRegionTableView)
         allRegionTableView.snp.makeConstraints { make in
@@ -314,20 +322,19 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
             if let reuseCell = tableView.dequeueReusableCell(withIdentifier: identifier) {
                 return reuseCell
             } else {
-                let cell = MainProductTableViewCell.init(style: .default, reuseIdentifier: identifier)
+                let cell = SingleProductTableViewCell(reuseIdentifier: identifier)
                 cell.selectionStyle = .none
                 
-                cell.productImage.imageUpload(url: post.image?.replaceImageUrl() ?? "")
-                cell.productName.attributedText = .attributeFont(font: .PRegular, size: 17, text: post.title, lineHeight: 20)
+                cell.productImageView.imageUpload(url: post.image?.replaceImageUrl() ?? "")
+                cell.productNameLabel.attributedText = .attributeFont(font: .PRegular, size: 17, text: post.title, lineHeight: 20)
                 cell.productLocationLabel.attributedText = .attributeFont(font: .NSRBold, size: 12, text: post.writerAddress ?? "", lineHeight: 14)
-                cell.productPrice.attributedText = .attributeFont(font: .PBold, size: 16, text: "\(post.unitPrice.toPriceNumberFormmat())원", lineHeight: 19)
-                cell.productPrice.textAlignment = .right
+                cell.productPriceLabel.attributedText = .attributeFont(font: .PBold, size: 16, text: "\(post.unitPrice.toPriceNumberFormmat())원", lineHeight: 19)
                 cell.deliveryTagView.setDeliveryType(type: post.tradeType ?? "")
-                
+
                 cell.dDayTagView.setDday(dDay: post.waitedUntil?.dDaycalculator() ?? "")
-                cell.totalRecruit.attributedText = .attributeFont(font: .NSRExtrabold, size: 12, text: "/\(post.maxParticipants)", lineHeight: 14)
-                cell.productParticipant.attributedText = .attributeFont(font: .NSRExtrabold, size: 12, text: "\(post.numParticipants)", lineHeight: 14)
-                
+                cell.totalRecruitLabel.attributedText = .attributeFont(font: .NSRExtrabold, size: 12, text: "/\(post.maxParticipants)", lineHeight: 14)
+                cell.productParticipantLabel.attributedText = .attributeFont(font: .NSRExtrabold, size: 12, text: "\(post.numParticipants)", lineHeight: 14)
+//
                 return cell
             }
         }

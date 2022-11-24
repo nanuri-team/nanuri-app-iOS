@@ -8,6 +8,7 @@
 import Foundation
 
 func splitLocation(location: String) -> (latitude: Double, longitude: Double) {
+    if location.isEmpty { return (0, 0) }
     let startIndex = location.index(location.startIndex, offsetBy: 17)
     let endIndex = location.index(before: location.endIndex)
     let splitLocation = location[startIndex ..< endIndex].components(separatedBy: " ")

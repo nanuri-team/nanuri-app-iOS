@@ -57,16 +57,17 @@ class CheckMyLocationViewController: UIViewController {
                 print("\(error)")
                 return
             }
-            
+           
             guard let placemark = placemarks?.first,
                   let administrativeArea = placemark.administrativeArea,
                   let subLocality = placemark.subLocality
-           else { return }
+            else { return }
            
             self.myLocationLabel.attributedText = .attributeFont(font: .NSRExtrabold, size: 24, text: "\"\(administrativeArea) \(subLocality)\"", lineHeight: 27.24)
             
             // 위도, 경도 가져오기
             guard let location = placemark.location else { return }
+
             self.userLongitude = location.coordinate.longitude
             self.userLatitude = location.coordinate.latitude
         }
@@ -80,6 +81,7 @@ class CheckMyLocationViewController: UIViewController {
     }
 
     func setUpView() {
+        
         let locationTitleLabel = UILabel()
         locationTitleLabel.attributedText = .attributeFont(font: .PRegular, size: 16, text: "여기가 현재\n회원님의 위치가 맞나요?", lineHeight: 24)
         locationTitleLabel.numberOfLines = 2
@@ -143,7 +145,6 @@ class CheckMyLocationViewController: UIViewController {
 extension CheckMyLocationViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let location = locations.first {
-            print(location)
             getCurrentAddress(location: location)
         }
     }

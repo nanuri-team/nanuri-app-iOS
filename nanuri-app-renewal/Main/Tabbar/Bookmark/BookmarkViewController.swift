@@ -65,9 +65,17 @@ extension BookmarkTableViewController: UITableViewDelegate, UITableViewDataSourc
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: MainProductTableViewCell.cellId, for: indexPath)
-        cell.selectionStyle = .none
-        return cell
+        let identifier = "\(indexPath.row)"
+        if let reuseCell = tableView.dequeueReusableCell(withIdentifier: identifier) {
+            return reuseCell
+        } else {
+            let cell = SingleProductTableViewCell(reuseIdentifier: identifier)
+            cell.selectionStyle = .none
+            
+            cell.dDayTagView.setDday(dDay: "10")
+            
+            return cell
+        }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

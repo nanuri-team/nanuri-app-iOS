@@ -12,14 +12,10 @@
 //  See the License for the specific language governing permissions and
 //  limitations under the License.
 
-#import <Foundation/Foundation.h>
+import Foundation
 
-//! Project version number for KakaoSDKLink.
-FOUNDATION_EXPORT double KakaoSDKLinkVersionNumber;
-
-//! Project version string for KakaoSDKLink.
-FOUNDATION_EXPORT const unsigned char KakaoSDKLinkVersionString[];
-
-// In this header, you should import all the public headers of your framework using statements like #import <KakaoSDKLink/PublicHeader.h>
-
-
+extension Date {
+    public func toSeconds() -> Int64 {
+        return Int64(self.timeIntervalSince1970)
+    }
+}
