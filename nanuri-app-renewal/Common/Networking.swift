@@ -72,7 +72,7 @@ extension Networking {
     
     private func getSinglePostRequest(url: String, completion: @escaping (_ response: ResultInfo) -> ()) {
         let header: HTTPHeaders = [
-            "Authorization": "\(Singleton.shared.userToken)"
+            "Authorization": "Token \(Singleton.shared.userToken)"
         ]
         let parmas = ["":""]
         let request = setGetRequest(url: url, params: parmas, headers: header)

@@ -81,7 +81,6 @@ class CheckMyLocationViewController: UIViewController {
     }
 
     func setUpView() {
-        
         let locationTitleLabel = UILabel()
         locationTitleLabel.attributedText = .attributeFont(font: .PRegular, size: 16, text: "여기가 현재\n회원님의 위치가 맞나요?", lineHeight: 24)
         locationTitleLabel.numberOfLines = 2

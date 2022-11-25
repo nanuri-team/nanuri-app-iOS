@@ -22,6 +22,8 @@
 		107C95A7291BF36F00D336DC /* MyPageSectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 107C95A6291BF36F00D336DC /* MyPageSectionHeaderView.swift */; };
 		107C95A9291BFD0900D336DC /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 107C95A8291BFD0900D336DC /* ProfileView.swift */; };
 		349EE88BFBCFEC4B071C4AD0 /* Pods_nanuri_app_renewal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 670A464DDF73C49130CF9703 /* Pods_nanuri_app_renewal.framework */; };
+		3907C0A429312F6F009EBFB8 /* StepOneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3907C0A329312F6F009EBFB8 /* StepOneView.swift */; };
+		3907C0A62931337D009EBFB8 /* StepTwoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3907C0A52931337D009EBFB8 /* StepTwoView.swift */; };
 		390CF6AF28B50B4900980DC7 /* StepTwo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 390CF6AE28B50B4900980DC7 /* StepTwo.swift */; };
 		390CF6B128B50F6F00980DC7 /* StepThree.swift in Sources */ = {isa = PBXBuildFile; fileRef = 390CF6B028B50F6F00980DC7 /* StepThree.swift */; };
 		390CF6B328B5105D00980DC7 /* StepFour.swift in Sources */ = {isa = PBXBuildFile; fileRef = 390CF6B228B5105D00980DC7 /* StepFour.swift */; };
@@ -38,6 +40,9 @@
 		39308CF2280880DB00C41F9F /* CheckboxButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39308CF1280880DB00C41F9F /* CheckboxButton.swift */; };
 		39308CF62808860900C41F9F /* AlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39308CF52808860900C41F9F /* AlertViewController.swift */; };
 		39308CF82808923300C41F9F /* TextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39308CF72808923300C41F9F /* TextView.swift */; };
+		39348A4B293123A3003A2BBA /* TestAddProductViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39348A4A293123A3003A2BBA /* TestAddProductViewController.swift */; };
+		39348A4D2931244C003A2BBA /* AddProductHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39348A4C2931244C003A2BBA /* AddProductHeaderView.swift */; };
+		39348A4F293126AC003A2BBA /* StepView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39348A4E293126AC003A2BBA /* StepView.swift */; };
 		3934E3CA28B66601001AC568 /* BottomSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3934E3C928B66601001AC568 /* BottomSheetViewController.swift */; };
 		3934E3CD28B66C79001AC568 /* OptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3934E3CC28B66C79001AC568 /* OptionView.swift */; };
 		394D4D7C28105C6D00A4D669 /* StepItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 394D4D7B28105C6D00A4D669 /* StepItemView.swift */; };
@@ -103,6 +108,8 @@
 		107C95A4291BEFDD00D336DC /* MyPageHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageHeaderView.swift; sourceTree = "<group>"; };
 		107C95A6291BF36F00D336DC /* MyPageSectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageSectionHeaderView.swift; sourceTree = "<group>"; };
 		107C95A8291BFD0900D336DC /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		3907C0A329312F6F009EBFB8 /* StepOneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepOneView.swift; sourceTree = "<group>"; };
+		3907C0A52931337D009EBFB8 /* StepTwoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepTwoView.swift; sourceTree = "<group>"; };
 		390CF6AE28B50B4900980DC7 /* StepTwo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepTwo.swift; sourceTree = "<group>"; };
 		390CF6B028B50F6F00980DC7 /* StepThree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepThree.swift; sourceTree = "<group>"; };
 		390CF6B228B5105D00980DC7 /* StepFour.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepFour.swift; sourceTree = "<group>"; };
@@ -119,6 +126,9 @@
 		39308CF1280880DB00C41F9F /* CheckboxButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckboxButton.swift; sourceTree = "<group>"; };
 		39308CF52808860900C41F9F /* AlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewController.swift; sourceTree = "<group>"; };
 		39308CF72808923300C41F9F /* TextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextView.swift; sourceTree = "<group>"; };
+		39348A4A293123A3003A2BBA /* TestAddProductViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestAddProductViewController.swift; sourceTree = "<group>"; };
+		39348A4C2931244C003A2BBA /* AddProductHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProductHeaderView.swift; sourceTree = "<group>"; };
+		39348A4E293126AC003A2BBA /* StepView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepView.swift; sourceTree = "<group>"; };
 		3934E3C928B66601001AC568 /* BottomSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetViewController.swift; sourceTree = "<group>"; };
 		3934E3CC28B66C79001AC568 /* OptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionView.swift; sourceTree = "<group>"; };
 		394D4D7B28105C6D00A4D669 /* StepItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepItemView.swift; sourceTree = "<group>"; };
@@ -209,6 +219,10 @@
 				390CF6AE28B50B4900980DC7 /* StepTwo.swift */,
 				390CF6B028B50F6F00980DC7 /* StepThree.swift */,
 				390CF6B228B5105D00980DC7 /* StepFour.swift */,
+				39348A4C2931244C003A2BBA /* AddProductHeaderView.swift */,
+				39348A4E293126AC003A2BBA /* StepView.swift */,
+				3907C0A329312F6F009EBFB8 /* StepOneView.swift */,
+				3907C0A52931337D009EBFB8 /* StepTwoView.swift */,
 			);
 			path = AddProductView;
 			sourceTree = "<group>";
@@ -393,6 +407,7 @@
 				39AD77F727FB11E30022EAC1 /* HomeViewController.swift */,
 				39AD781327FDF28E0022EAC1 /* AllRegionProductTableViewController.swift */,
 				3923EDA328AE7B500009980F /* AddProductViewController.swift */,
+				39348A4A293123A3003A2BBA /* TestAddProductViewController.swift */,
 				3923EDA528AE7B5C0009980F /* AddProductView */,
 			);
 			path = Home;
@@ -644,6 +659,7 @@
 				103DA89728ABCD2F004FEA14 /* CategoryCell.swift in Sources */,
 				3923EDA428AE7B500009980F /* AddProductViewController.swift in Sources */,
 				39AD780C27FB327F0022EAC1 /* MainProductTableViewCell.swift in Sources */,
+				39348A4D2931244C003A2BBA /* AddProductHeaderView.swift in Sources */,
 				103DA84A28A536E5004FEA14 /* RegisterView.swift in Sources */,
 				39AD77FE27FB12030022EAC1 /* BookmarkViewController.swift in Sources */,
 				3923EDA728AE7EF60009980F /* StepOne.swift in Sources */,
@@ -665,6 +681,7 @@
 				3954BBAB2816FCED00C8815E /* Networking.swift in Sources */,
 				39AD780E27FB32C50022EAC1 /* DDayTagView.swift in Sources */,
 				3934E3CD28B66C79001AC568 /* OptionView.swift in Sources */,
+				3907C0A429312F6F009EBFB8 /* StepOneView.swift in Sources */,
 				87D6E1BF280B30DA001AA33C /* MyProfileModifiedViewController.swift in Sources */,
 				103DA85E28AA91BD004FEA14 /* NotificationTableViewCell.swift in Sources */,
 				100DBAE328CA024D00B5D3BC /* defaultSettingTableViewCell.swift in Sources */,
@@ -687,6 +704,7 @@
 				39AD78242801624B0022EAC1 /* ReCommentTableViewCell.swift in Sources */,
 				39308CF62808860900C41F9F /* AlertViewController.swift in Sources */,
 				39AD77F627FB11CE0022EAC1 /* TabBarController.swift in Sources */,
+				39348A4B293123A3003A2BBA /* TestAddProductViewController.swift in Sources */,
 				397ACBA62805F93D00E83FA0 /* CheckMyLocationViewController.swift in Sources */,
 				87D17BA227FB5C0B00E171A2 /* SettingViewController.swift in Sources */,
 				39788AF328188A3B00ABD918 /* Singleton.swift in Sources */,
@@ -696,9 +714,11 @@
 				107C95A9291BFD0900D336DC /* ProfileView.swift in Sources */,
 				390CF6B328B5105D00980DC7 /* StepFour.swift in Sources */,
 				39AD782628016DDF0022EAC1 /* CommentViewController.swift in Sources */,
+				3907C0A62931337D009EBFB8 /* StepTwoView.swift in Sources */,
 				39AD781627FF2A7A0022EAC1 /* MainButton.swift in Sources */,
 				39AD77F227FB11AF0022EAC1 /* LoginViewController.swift in Sources */,
 				39AD781427FDF28E0022EAC1 /* AllRegionProductTableViewController.swift in Sources */,
+				39348A4F293126AC003A2BBA /* StepView.swift in Sources */,
 				107C95A5291BEFDD00D336DC /* MyPageHeaderView.swift in Sources */,
 				390CF6AF28B50B4900980DC7 /* StepTwo.swift in Sources */,
 				103DA7C128A104FC004FEA14 /* LoginView.swift in Sources */,
