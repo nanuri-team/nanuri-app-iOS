@@ -409,8 +409,13 @@ class ProductDetailViewController: UIViewController {
         }
         
         let contents = UITextView()
-        contents.attributedText = .attributeFont(font: .PRegular, size: 15, text: postInfo.description, lineHeight: 22)
+        contents.typingAttributes = [
+                   .font : UIFont(name: "Pretendard-Regular", size: 15)!,
+                   .kern : -0.3,
+                   .foregroundColor: UIColor.black,
+               ]
         productDetailScrollView.addSubview(contents)
+        contents.text = postInfo.description
         contents.isEditable = false
         contents.isScrollEnabled = false
 //        contents.contentInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
@@ -420,7 +425,9 @@ class ProductDetailViewController: UIViewController {
         contents.snp.makeConstraints { make in
             make.top.equalTo(locationTagView.snp.bottom).inset(-24)
             make.left.right.equalTo(self.view).inset(16)
-            make.bottom.equalToSuperview().inset(contensViewHeight)
+            make.height.equalTo(contents.contentSize.height)
+            make.bottom.equalToSuperview()
+//            make.bottom.equalToSuperview().inset(contensViewHeight)
         }
         
     }

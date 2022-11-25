@@ -69,7 +69,7 @@ class SingleProductTableViewCell: UITableViewCell {
         productNameLabel.attributedText = .attributeFont(font: .PMedium, size: 16, text: "슬로우코프 비건 향균 칫솔", lineHeight: 20)
         cellView.addSubview(productNameLabel)
         productNameLabel.snp.makeConstraints { make in
-            make.top.equalTo(locationImageView.snp.bottom).inset(-5)
+            make.top.equalTo(locationImageView.snp.bottom).inset(-6)
             make.left.equalTo(locationImageView.snp.left)
             make.right.equalToSuperview().inset(16)
         }

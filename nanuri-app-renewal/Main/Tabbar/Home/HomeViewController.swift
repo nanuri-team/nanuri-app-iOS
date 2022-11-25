@@ -35,6 +35,10 @@ class HomeViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // 테스트를 위해서 토큰 정보 저장하기
+        Singleton.shared.userToken = "b727e0136ece46979b729863f1d09f4a4a6e03ea"
+        
         self.navigationController?.navigationBar.isHidden = false
         getEnterUserInfo()
         
@@ -60,7 +64,7 @@ class HomeViewController: UIViewController {
     }
     
     @objc func selectAddProductButton() {
-        let addProductStepOneViewController = AddProductViewController()
+        let addProductStepOneViewController = TestAddProductViewController()
         addProductStepOneViewController.hidesBottomBarWhenPushed = true
         addProductStepOneViewController.modalPresentationStyle = .fullScreen
         self.navigationController?.pushViewController(addProductStepOneViewController, animated: true)
