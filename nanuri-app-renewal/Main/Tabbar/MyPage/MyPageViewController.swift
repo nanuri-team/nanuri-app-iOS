@@ -18,6 +18,7 @@ final class MyPageViewController: UIViewController {
         let view = MyPageSectionHeaderView()
         return view
     }()
+    private let emptyNotiView: EmptyNotiView = EmptyNotiView()
     private var isTappedProductListButton: Bool = false
     let indicatorView: UIActivityIndicatorView = {
         let indicator = UIActivityIndicatorView()
@@ -28,7 +29,7 @@ final class MyPageViewController: UIViewController {
         return indicator
     }()
     var userInfo: UserInfo?
-    var userPosts: [String] = []
+    var userPostList: [ResultInfo] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,20 +61,25 @@ final class MyPageViewController: UIViewController {
                 }
                 
                 self.indicatorView.stopAnimating()
-                
-//                self.getMyProductInfo()
             }
+            self.getMyProductInfo(userInfo: userInfo)
         }
     }
     
-    func getMyProductInfo() {
-        guard let userInfo = userInfo else { return }
-        userPosts = userInfo.posts
-        
-        Networking.sharedObject.getSinglePost(postUuid: userPosts[0]) { response in
-            print(response)
+    func getMyProductInfo(userInfo: UserInfo) {
+        for post in userInfo.posts {
+            Networking.sharedObject.getSinglePost(postUuid: post) { response in
+                self.userPostList.append(response)
+                DispatchQueue.main.async {
+                    if self.userPostList.count == 0 {
+                        self.emptyNotiView.isHidden = false
+                    } else {
+                        self.emptyNotiView.isHidden = true
+                    }
+                    self.productListTableView.reloadData()
+                }
+            }
         }
-        
     }
     
     private func setUpView() {
@@ -107,6 +113,16 @@ final class MyPageViewController: UIViewController {
             make.center.equalToSuperview()
         }
         self.view.bringSubviewToFront(indicatorView)
+        
+        // 상품이 없을때
+        productListTableView.addSubview(emptyNotiView)
+        emptyNotiView.snp.makeConstraints { make in
+            make.centerY.equalToSuperview().offset(150)
+            make.centerX.equalToSuperview()
+        }
+        emptyNotiView.emptyLabel.text = "상품이 없습니다"
+        emptyNotiView.emptyDescriptionLabel.text = "공동 구매에 참여하거나 \n상품을 등록해보세요."
+//        emptyNotiView.emptyImageView.image = UIImage(systemName: "")
     }
     
     // MARK: objc - Actions
@@ -139,7 +155,7 @@ final class MyPageViewController: UIViewController {
             DispatchQueue.main.async {
                 self.productListTableView.reloadData()
             }
-            myPageSectionHeaderView.numberOfListLabel.text = "전체 14개"
+            myPageSectionHeaderView.numberOfListLabel.text = "전체 \(self.userPostList.count)개"
         }
     }
     
@@ -155,7 +171,7 @@ final class MyPageViewController: UIViewController {
             DispatchQueue.main.async {
                 self.productListTableView.reloadData()
             }
-            myPageSectionHeaderView.numberOfListLabel.text = "전체 3개"
+            myPageSectionHeaderView.numberOfListLabel.text = "전체 0개"
         }
     }
 }
@@ -163,9 +179,9 @@ final class MyPageViewController: UIViewController {
 extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if isTappedProductListButton {
-            return 3
+            return 0
         } else {
-            return 14
+            return self.userPostList.count
         }
     }
     
@@ -195,8 +211,23 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
         if let reuseCell = tableView.dequeueReusableCell(withIdentifier: identifier) {
             return reuseCell
         } else {
+            
+            let post = userPostList[indexPath.row]
+            let identifier = "\(indexPath.row) \(post.uuid)"
+            
             let cell = MainProductTableViewCell.init(style: .default, reuseIdentifier: identifier)
             cell.selectionStyle = .none
+            
+            cell.productImage.imageUpload(url: post.image?.replaceImageUrl() ?? "")
+            cell.productName.attributedText = .attributeFont(font: .PRegular, size: 17, text: post.title, lineHeight: 20)
+            cell.productLocationLabel.attributedText = .attributeFont(font: .NSRBold, size: 12, text: post.writerAddress ?? "", lineHeight: 14)
+            cell.productPrice.attributedText = .attributeFont(font: .PBold, size: 16, text: "\(post.unitPrice.toPriceNumberFormmat())원", lineHeight: 19)
+            cell.productPrice.textAlignment = .right
+            cell.deliveryTagView.setDeliveryType(type: post.tradeType ?? "")
+            
+            cell.dDayTagView.setDday(dDay: post.waitedUntil?.dDaycalculator() ?? "")
+            cell.totalRecruit.attributedText = .attributeFont(font: .NSRExtrabold, size: 12, text: "/\(post.maxParticipants)", lineHeight: 14)
+            cell.productParticipant.attributedText = .attributeFont(font: .NSRExtrabold, size: 12, text: "\(post.numParticipants)", lineHeight: 14)
             
             return cell
         }
