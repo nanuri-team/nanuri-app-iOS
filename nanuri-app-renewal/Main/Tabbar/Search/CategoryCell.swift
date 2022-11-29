@@ -13,22 +13,22 @@ class CategoryCell: UICollectionViewCell {
     
     override var isSelected: Bool {
         didSet {
-            self.cellview.layer.borderColor = isSelected ? UIColor.nanuriGreen.cgColor : UIColor.nanuriGray4.cgColor
-            self.categoryName.textColor = isSelected ? .nanuriGreen : .nanuriGray4
+            self.cellview.backgroundColor = isSelected ? .nanuriGreen : .nanuriGray2.withAlphaComponent(0.5)
+            self.categoryName.textColor = isSelected ? .white : .nanuriGray4
         }
     }
     
     let cellview: UIView = {
         let view = UIView()
-        view.layer.borderWidth = 1
-        view.layer.borderColor = UIColor.nanuriGray4.cgColor
         view.layer.cornerRadius = 14
+        view.backgroundColor = .nanuriGray2.withAlphaComponent(0.5)
         return view
     }()
     
     let categoryName: UILabel = {
         let label = UILabel()
         label.textColor = .nanuriGray4
+        label.attributedText = .attributeFont(font: .PRegular, size: 14, text: "", lineHeight: 16)
         return label
     }()
     
