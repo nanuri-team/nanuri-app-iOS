@@ -19,6 +19,7 @@ struct UserInfo: Codable {
     var location: String
     var posts: [String]
     var favoritePosts: [String]
+    var participatedPosts: [String]
     
     enum CodingKeys: String, CodingKey {
         case posts, uuid, email, location, profile
@@ -28,12 +29,14 @@ struct UserInfo: Codable {
         case isActive = "is_active"
         case isAdmin = "is_admin"
         case authProvider = "auth_provider"
+        case participatedPosts = "posts_participated"
     }
     
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         posts = (try? values.decode([String].self, forKey: .posts)) ?? []
         favoritePosts = (try? values.decode([String].self, forKey: .favoritePosts)) ?? []
+        participatedPosts = (try? values.decode([String].self, forKey: .participatedPosts)) ?? []
         lastLogin = (try? values.decode(String.self, forKey: .lastLogin)) ?? ""
         uuid = (try? values.decode(String.self, forKey: .uuid)) ?? ""
         email = (try? values.decode(String.self, forKey: .email)) ?? ""
