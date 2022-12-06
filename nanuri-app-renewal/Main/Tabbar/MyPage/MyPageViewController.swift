@@ -30,6 +30,7 @@ final class MyPageViewController: UIViewController {
     }()
     var userInfo: UserInfo?
     var userPostList: [ResultInfo] = []
+    var userParticipatedPostsList: [ResultInfo] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -72,6 +73,22 @@ final class MyPageViewController: UIViewController {
                 self.userPostList.append(response)
                 DispatchQueue.main.async {
                     if self.userPostList.count == 0 {
+                        self.emptyNotiView.isHidden = false
+                    } else {
+                        self.emptyNotiView.isHidden = true
+                    }
+                    self.productListTableView.reloadData()
+                }
+            }
+        }
+    }
+    
+    func getParticipatedProductInfo(userInfo: UserInfo) {
+        for post in userInfo.participatedPosts {
+            Networking.sharedObject.getSinglePost(postUuid: post) { response in
+                self.userParticipatedPostsList.append(response)
+                DispatchQueue.main.async {
+                    if self.userParticipatedPostsList.count == 0 {
                         self.emptyNotiView.isHidden = false
                     } else {
                         self.emptyNotiView.isHidden = true
@@ -179,7 +196,7 @@ final class MyPageViewController: UIViewController {
 extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if isTappedProductListButton {
-            return 0
+            return self.userParticipatedPostsList.count
         } else {
             return self.userPostList.count
         }
@@ -206,10 +223,26 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let identifier = "\(indexPath.row)"
         
-        if let reuseCell = tableView.dequeueReusableCell(withIdentifier: identifier) {
-            return reuseCell
+        if isTappedProductListButton {
+            let post = userParticipatedPostsList[indexPath.row]
+            let identifier = "\(indexPath.row) \(post.uuid)"
+            
+            let cell = MainProductTableViewCell.init(style: .default, reuseIdentifier: identifier)
+            cell.selectionStyle = .none
+            
+            cell.productImage.imageUpload(url: post.image?.replaceImageUrl() ?? "")
+            cell.productName.attributedText = .attributeFont(font: .PRegular, size: 17, text: post.title, lineHeight: 20)
+            cell.productLocationLabel.attributedText = .attributeFont(font: .NSRBold, size: 12, text: post.writerAddress ?? "", lineHeight: 14)
+            cell.productPrice.attributedText = .attributeFont(font: .PBold, size: 16, text: "\(post.unitPrice.toPriceNumberFormmat())원", lineHeight: 19)
+            cell.productPrice.textAlignment = .right
+            cell.deliveryTagView.setDeliveryType(type: post.tradeType ?? "")
+            
+            cell.dDayTagView.setDday(dDay: post.waitedUntil?.dDaycalculator() ?? "")
+            cell.totalRecruit.attributedText = .attributeFont(font: .NSRExtrabold, size: 12, text: "/\(post.maxParticipants)", lineHeight: 14)
+            cell.productParticipant.attributedText = .attributeFont(font: .NSRExtrabold, size: 12, text: "\(post.numParticipants)", lineHeight: 14)
+            
+            return cell
         } else {
             
             let post = userPostList[indexPath.row]
