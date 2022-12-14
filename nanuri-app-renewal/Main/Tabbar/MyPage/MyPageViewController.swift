@@ -195,7 +195,7 @@ extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
         if let reuseCell = tableView.dequeueReusableCell(withIdentifier: identifier) {
             return reuseCell
         } else {
-            let cell = MainProductTableViewCell.init(style: .default, reuseIdentifier: identifier)
+            let cell = SingleProductTableViewCell(reuseIdentifier: identifier)
             cell.selectionStyle = .none
             
             return cell

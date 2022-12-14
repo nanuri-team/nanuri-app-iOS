@@ -111,6 +111,11 @@ extension UIColor {
         // rgba(54, 55, 59, 1)
         return UIColor(red: 54.0 / 255.0, green: 55.0 / 255.0, blue: 59.0 / 255.0, alpha: 1)
     }
+    
+    class var nanuriRedLight: UIColor {
+        // rgba(255, 115, 108, 1)
+        return UIColor(red: 255.0 / 255.0, green: 115.0 / 255.0, blue: 108.0 / 255.0, alpha: 1)
+    }
 }
 
 extension UIView {
@@ -195,6 +200,7 @@ extension NSAttributedString {
         }
         
         paragraphStyle.lineSpacing = lineHeight - setFont.lineHeight
+        paragraphStyle.lineBreakMode = .byTruncatingTail
         
         attrString.addAttributes([
                     NSAttributedString.Key.paragraphStyle : paragraphStyle,
@@ -234,6 +240,8 @@ extension NSAttributedString {
         }
         
         paragraphStyle.lineSpacing = lineHeight - setFont.lineHeight
+        paragraphStyle.lineBreakMode = .byTruncatingTail
+
         
         attrString.addAttributes([
                     NSAttributedString.Key.paragraphStyle : paragraphStyle,

@@ -1,67 +1,27 @@
 //
-//  AddProductStepTwoViewController.swift
+//  StepTwoView.swift
 //  nanuri-app-renewal
 //
-//  Created by minimani on 2022/04/23.
+//  Created by minimani on 2022/11/26.
 //
 
 import UIKit
 
-class AddProductStepTwoViewController: UIViewController {
-
-    let stepView = UIView()
+class StepTwoView: UIView {
     
-    let productLocationTextField = UITextField()
-    let minimumRecruitmentTextField = UITextField()
-    let maximumRecruitmentTextField = UITextField()
     let detailContentsTextView = TextView()
     let recruitmentPeriodTextField = UITextField()
-
     
-    var bottomViewHeight = 64
-    var edgeHeight = 34
-    var postProductInfo: [String: Any] = [:]
     var selectDate = Date()
-    var postImageData: UIImage!
-
-
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        self.title = "상품 등록하기"
-        extendedLayoutIncludesOpaqueBars = true
-        print(postProductInfo)
-        
-        let backButton = UIBarButtonItem(image: UIImage(named: "back_ic"), style: .plain, target: self, action: #selector(selectBackButton))
-        self.navigationItem.setLeftBarButton(backButton, animated: true)
-        
-        self.view.backgroundColor = .white
-        setUpStepView()
+    init() {
+        super.init(frame: .zero)
+        self.backgroundColor = .white
         setUpView()
-        setUpBottomView()
-        
     }
     
-    @objc func selectBackButton() {
-        self.navigationController?.popViewController(animated: true)
-    }
-    
-    @objc func selectNextButton() {
-        
-        guard validation() else {
-            print("return")
-            return
-        }
-        
-        let addProductStepThreeViewController = AddProductStepThreeViewController()
-        addProductStepThreeViewController.postProductInfo = postProductInfo
-        addProductStepThreeViewController.postImageData = postImageData
-        addProductStepThreeViewController.hidesBottomBarWhenPushed = true
-        self.navigationController?.pushViewController(addProductStepThreeViewController, animated: true)
-    }
-    
-    @objc func tapCancel() {
-        self.resignFirstResponder()
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     @objc func selectDatePickerView(_ sender: UIDatePicker) {
@@ -69,119 +29,21 @@ class AddProductStepTwoViewController: UIViewController {
         selectDate = sender.date
     }
     
+    @objc func tapCancel() {
+        self.resignFirstResponder()
+    }
+    
     @objc func selectDayDoneButton() {
 //        recruitmentPeriodTextField.text = DateFormatter().changeDateFormat(datePickerView.date, format: .attachName)
         recruitmentPeriodTextField.resignFirstResponder()
     }
     
-    func validation() -> Bool {
-        guard let productLocationText = productLocationTextField.text,
-              let minimumRecruitmentText = minimumRecruitmentTextField.text,
-              let maximumRecruitmentText = maximumRecruitmentTextField.text,
-              let detailContentsText = detailContentsTextView.text,
-              let recruitmentPeriodText = recruitmentPeriodTextField.text
-        else { return false }
-        
-        if productLocationText.isEmpty ||
-            minimumRecruitmentText.isEmpty ||
-            maximumRecruitmentText.isEmpty ||
-            detailContentsText.isEmpty ||
-            recruitmentPeriodText.isEmpty {
-            return false
-        } else {
-            postProductInfo["writer_address"] = productLocationText
-            
-            if let integerToMinimumRecruitment = Int(minimumRecruitmentText) {
-                postProductInfo["min_participants"] = integerToMinimumRecruitment
-            } else {
-                postProductInfo["min_participants"] = 1
-            }
-            
-            if let integerToMaximumRecruitment = Int(maximumRecruitmentText) {
-                postProductInfo["max_participants"] = integerToMaximumRecruitment
-            } else {
-                postProductInfo["max_participants"] = 0
-            }
-            
-            postProductInfo["waited_until"] = DateFormatter().changeDateFormat(selectDate, format: .dahsed)
-            postProductInfo["waited_from"] = DateFormatter().changeDateFormat(Date(), format: .dahsed)
-            postProductInfo["description"] = detailContentsText
-            
-            
-            return true
-        }
-    }
-    
-    
-   
-    func setUpStepView() {
-        stepView.backgroundColor = .white
-        self.view.addSubview(stepView)
-        
-        let stepGroupView = UIView()
-        stepView.addSubview(stepGroupView)
-        
-        
-        let stepOne = StepItemView(icon: UIImage(named: "step_one_w_ic")!, stepTitle: "상품 정보 입력", isActive: true)
-        stepGroupView.addSubview(stepOne)
-        stepOne.snp.makeConstraints { make in
-            make.left.equalToSuperview()
-            make.centerY.equalToSuperview()
-        }
-        
-        let stepTwo = StepItemView(icon: UIImage(named: "step_two_w_ic")!, stepTitle: "공구 내용 작성", isActive: true)
-        stepGroupView.addSubview(stepTwo)
-        stepTwo.snp.makeConstraints { make in
-            make.centerY.equalToSuperview()
-            make.left.equalTo(stepOne.snp.right).inset(-27)
-        }
-        
-        let stepThree = StepItemView(icon: UIImage(named: "step_three_ic")!, stepTitle: "카테고리 선택")
-        stepGroupView.addSubview(stepThree)
-        stepThree.snp.makeConstraints { make in
-            make.centerY.equalToSuperview()
-            make.left.equalTo(stepTwo.snp.right).inset(-27)
-        }
-        
-        let stepFour = StepItemView(icon: UIImage(named: "step_four_ic")!, stepTitle: "나눔 방법 선택")
-        stepGroupView.addSubview(stepFour)
-        stepFour.snp.makeConstraints { make in
-            make.centerY.equalToSuperview()
-            make.left.equalTo(stepThree.snp.right).inset(-27)
-        }
-        
-        stepGroupView.snp.makeConstraints { make in
-            make.top.equalTo(stepOne.snp.top)
-            make.left.equalTo(stepOne.snp.left)
-            make.right.equalTo(stepFour.snp.right)
-            make.bottom.equalTo(stepOne.snp.bottom)
-            make.center.equalToSuperview()
-        }
-        
-        stepView.snp.makeConstraints { make in
-            make.left.right.equalToSuperview()
-            make.height.equalTo(156)
-            make.top.equalTo(self.view.safeAreaLayoutGuide)
-        }
-    }
-
-    func setUpView() {
-  
-        let separatorView = UIView()
-        self.view.addSubview(separatorView)
-        separatorView.backgroundColor = .nanuriGray1
-        separatorView.snp.makeConstraints { make in
-            make.top.equalTo(stepView.snp.bottom)
-            make.left.right.equalToSuperview()
-            make.height.equalTo(16)
-        }
-        
+    private func setUpView() {
         let contentsScrollView = UIScrollView()
-        let excludeScrollViewHeight = 260
-        let scrollViewHeight = self.view.frame.height - CGFloat(excludeScrollViewHeight) - CGFloat(edgeHeight)
-        contentsScrollView.frame = CGRect(x: 0, y: CGFloat(excludeScrollViewHeight), width: self.view.frame.width, height: scrollViewHeight)
-        contentsScrollView.contentSize = CGSize(width: contentsScrollView.frame.width, height: contentsScrollView.frame.height)
-        self.view.addSubview(contentsScrollView)
+        self.addSubview(contentsScrollView)
+        contentsScrollView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
         
         let productLocation = UILabel()
         productLocation.attributedText = .attributeFont(font: .PSemibold, size: 16, text: "판매자 지역", lineHeight: 19)
@@ -191,6 +53,7 @@ class AddProductStepTwoViewController: UIViewController {
             make.left.right.equalToSuperview().inset(16)
         }
         
+        let productLocationTextField = UITextField()
         productLocationTextField.attributedText = .attributeFont(font: .PRegular, size: 15, text: Singleton.shared.testLocation, lineHeight: 18)
         productLocationTextField.textColor = .nanuriGray4
         productLocationTextField.borderStyle = .line
@@ -205,7 +68,7 @@ class AddProductStepTwoViewController: UIViewController {
         productLocationTextField.snp.makeConstraints { make in
             make.top.equalTo(productLocation.snp.bottom).inset(-10)
             make.height.equalTo(44)
-            make.left.right.equalTo(self.view).inset(16)
+            make.left.right.equalTo(self).inset(16)
         }
         
         let recruitmentLabel = UILabel()
@@ -216,6 +79,7 @@ class AddProductStepTwoViewController: UIViewController {
             make.left.right.equalToSuperview().inset(16)
         }
         
+        let minimumRecruitmentTextField = UITextField()
         minimumRecruitmentTextField.attributedText = .attributeFont(font: .PRegular, size: 15, text: "", lineHeight: 18)
         minimumRecruitmentTextField.attributedPlaceholder = .attributeFont(font: .PRegular, size: 15, text: "최소 인원", lineHeight: 18)
         minimumRecruitmentTextField.keyboardType = .numberPad
@@ -261,6 +125,7 @@ class AddProductStepTwoViewController: UIViewController {
             make.left.equalTo(minimumRecruitmentTextField.snp.right).inset(-4)
         }
         
+        let maximumRecruitmentTextField = UITextField()
         maximumRecruitmentTextField.attributedText = .attributeFont(font: .PRegular, size: 15, text: "", lineHeight: 18)
         maximumRecruitmentTextField.attributedPlaceholder = .attributeFont(font: .PRegular, size: 15, text: "최대 인원", lineHeight: 18)
         maximumRecruitmentTextField.keyboardType = .numberPad
@@ -316,7 +181,7 @@ class AddProductStepTwoViewController: UIViewController {
         recruitmentPeriodTextField.snp.makeConstraints { make in
             make.top.equalTo(recruitmentPeriodLabel.snp.bottom).inset(-10)
             make.height.equalTo(44)
-            make.left.right.equalTo(self.view).inset(16)
+            make.left.right.equalTo(self).inset(16)
         }
         
         let datePickerView = UIDatePicker()
@@ -333,7 +198,7 @@ class AddProductStepTwoViewController: UIViewController {
         datePickerView.datePickerMode = .date
         recruitmentPeriodTextField.inputView = datePickerView
         
-        let toolBar = UIToolbar(frame: CGRect(x: 0.0, y: 0.0, width: self.view.frame.width, height: 44.0))
+        let toolBar = UIToolbar(frame: CGRect(x: 0.0, y: 0.0, width: self.frame.width, height: 44.0))
         let flexible = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
         let cancel = UIBarButtonItem(title: "Cancel", style: .plain, target: nil, action: #selector(tapCancel))
         let barButton = UIBarButtonItem(title: "Done", style: .plain, target: target, action: #selector(selectDayDoneButton))
@@ -368,43 +233,18 @@ class AddProductStepTwoViewController: UIViewController {
         detailContentsTextView.snp.makeConstraints { make in
             make.top.equalTo(detailContentsLabel.snp.bottom).inset(-10)
             make.height.equalTo(196)
-            make.left.right.equalTo(self.view).inset(16)
-            make.bottom.equalToSuperview().inset(100)
-        }
-    }
-    
-    func setUpBottomView() {
-        let bottomView = UIView()
-        bottomView.backgroundColor = .white
-        self.view.addSubview(bottomView)
-        self.view.bringSubviewToFront(bottomView)
-        bottomView.snp.makeConstraints { make in
-            make.bottom.equalTo(self.view.safeAreaLayoutGuide)
-            make.right.left.equalToSuperview()
-            make.height.equalTo(bottomViewHeight)
+            make.left.right.equalTo(self).inset(16)
+            make.bottom.equalToSuperview()
         }
         
-        let topLineView = UIView()
-        topLineView.backgroundColor = .nanuriGray2
-        bottomView.addSubview(topLineView)
-        topLineView.snp.makeConstraints { make in
-            make.left.right.equalToSuperview()
-            make.height.equalTo(1)
-            make.top.equalToSuperview()
+        self.snp.makeConstraints { make in
+            make.top.equalTo(contentsScrollView.snp.top)
+            make.bottom.equalTo(contentsScrollView.snp.bottom)
         }
-        
-        let nextButton = MainButton(style: .main)
-        nextButton.setAttributedTitle(.attributeFont(font: .PBold, size: 15, text: "다음", lineHeight: 18), for: .normal)
-        bottomView.addSubview(nextButton)
-        nextButton.snp.makeConstraints { make in
-            make.left.right.top.bottom.equalToSuperview().inset(8)
-        }
-        nextButton.addTarget(self, action: #selector(selectNextButton), for: .touchUpInside)
     }
-
 }
 
-extension AddProductStepTwoViewController: UITextViewDelegate {
+extension StepTwoView: UITextViewDelegate {
     func textViewDidBeginEditing(_ textView: UITextView) {
         detailContentsTextView.hidePlaceholder()
     }

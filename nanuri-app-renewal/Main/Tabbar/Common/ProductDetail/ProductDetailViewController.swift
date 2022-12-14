@@ -232,7 +232,7 @@ class ProductDetailViewController: UIViewController {
         productDetailScrollView.addSubview(productImageView)
         productImageView.snp.makeConstraints { make in
             make.top.equalToSuperview()
-            make.left.right.equalToSuperview()
+            make.left.right.equalTo(self.view)
             make.width.height.equalTo(375)
         }
         
@@ -243,7 +243,7 @@ class ProductDetailViewController: UIViewController {
         productImageView.addSubview(productImage)
         productImage.snp.makeConstraints { make in
             make.top.equalToSuperview()
-            make.left.right.equalToSuperview()
+            make.left.right.equalTo(self.view)
             make.width.height.equalToSuperview()
         }
         
@@ -278,7 +278,7 @@ class ProductDetailViewController: UIViewController {
         productDetailScrollView.addSubview(dDayTagView)
         dDayTagView.snp.makeConstraints { make in
             make.top.equalTo(productImageView.snp.bottom).inset(-24)
-            make.right.equalToSuperview().inset(16)
+            make.right.equalTo(self.view).inset(16)
         }
         
         let deliveryTagView = DeliveryTagView()
@@ -294,7 +294,7 @@ class ProductDetailViewController: UIViewController {
         productDetailScrollView.addSubview(productName)
         productName.snp.makeConstraints { make in
             make.top.equalTo(categoryLabel.snp.bottom).inset(-8)
-            make.left.right.equalToSuperview().inset(16)
+            make.left.right.equalTo(self.view).inset(16)
         }
         
         let purchaseDate = UILabel()
@@ -313,7 +313,7 @@ class ProductDetailViewController: UIViewController {
         productDetailScrollView.addSubview(productPrice)
         productPrice.snp.makeConstraints { make in
             make.top.equalTo(productName.snp.bottom)
-            make.right.equalToSuperview().inset(16)
+            make.right.equalTo(self.view).inset(16)
         }
         
         let participantImageView = UIImageView()
@@ -352,7 +352,7 @@ class ProductDetailViewController: UIViewController {
         productDetailScrollView.addSubview(participantProgress)
         participantProgress.snp.makeConstraints { make in
             make.top.equalTo(participantImageView.snp.bottom).inset(-4)
-            make.left.right.equalToSuperview().inset(16)
+            make.left.right.equalTo(self.view).inset(16)
             make.height.equalTo(8)
         }
         
@@ -362,7 +362,7 @@ class ProductDetailViewController: UIViewController {
         productDetailScrollView.addSubview(progress)
         progress.snp.makeConstraints { make in
             make.top.equalTo(productPrice.snp.bottom).inset(-16)
-            make.right.equalToSuperview().inset(16)
+            make.right.equalTo(self.view).inset(16)
             make.bottom.equalTo(participantProgress.snp.top).inset(-4)
         }
         
@@ -371,7 +371,7 @@ class ProductDetailViewController: UIViewController {
         productDetailScrollView.addSubview(separateView)
         separateView.snp.makeConstraints { make in
             make.top.equalTo(participantProgress.snp.bottom).inset(-16)
-            make.left.right.equalToSuperview()
+            make.left.right.equalTo(self.view)
             make.height.equalTo(1)
         }
         
@@ -409,8 +409,13 @@ class ProductDetailViewController: UIViewController {
         }
         
         let contents = UITextView()
-        contents.attributedText = .attributeFont(font: .PRegular, size: 15, text: postInfo.description, lineHeight: 22)
+        contents.typingAttributes = [
+                   .font : UIFont(name: "Pretendard-Regular", size: 15)!,
+                   .kern : -0.3,
+                   .foregroundColor: UIColor.black,
+               ]
         productDetailScrollView.addSubview(contents)
+        contents.text = postInfo.description
         contents.isEditable = false
         contents.isScrollEnabled = false
 //        contents.contentInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
@@ -419,8 +424,10 @@ class ProductDetailViewController: UIViewController {
         
         contents.snp.makeConstraints { make in
             make.top.equalTo(locationTagView.snp.bottom).inset(-24)
-            make.left.right.equalToSuperview().inset(16)
-            make.bottom.equalToSuperview().inset(contensViewHeight)
+            make.left.right.equalTo(self.view).inset(16)
+            make.height.equalTo(contents.contentSize.height)
+            make.bottom.equalToSuperview()
+//            make.bottom.equalToSuperview().inset(contensViewHeight)
         }
         
     }

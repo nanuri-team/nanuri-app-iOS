@@ -1,38 +1,22 @@
 PODS:
   - Alamofire (5.5.0)
   - IQKeyboardManagerSwift (6.3.0)
-  - KakaoSDK (2.8.4):
-    - KakaoSDKAuth (= 2.8.4)
-    - KakaoSDKCommon (= 2.8.4)
-    - KakaoSDKLink (= 2.8.4)
-    - KakaoSDKNavi (= 2.8.4)
-    - KakaoSDKStory (= 2.8.4)
-    - KakaoSDKTalk (= 2.8.4)
-    - KakaoSDKTemplate (= 2.8.4)
-    - KakaoSDKUser (= 2.8.4)
-  - KakaoSDKAuth (2.8.4):
-    - KakaoSDKCommon (= 2.8.4)
-  - KakaoSDKCommon (2.8.4):
-    - KakaoSDKCommon/Common (= 2.8.4)
-    - KakaoSDKCommon/Network (= 2.8.4)
-  - KakaoSDKCommon/Common (2.8.4)
-  - KakaoSDKCommon/Network (2.8.4):
+  - KakaoSDKAuth (2.11.3):
+    - KakaoSDKCommon (= 2.11.3)
+  - KakaoSDKCommon (2.11.3):
+    - KakaoSDKCommon/Common (= 2.11.3)
+    - KakaoSDKCommon/Network (= 2.11.3)
+  - KakaoSDKCommon/Common (2.11.3)
+  - KakaoSDKCommon/Network (2.11.3):
     - Alamofire (~> 5.1)
-    - KakaoSDKCommon/Common (= 2.8.4)
-  - KakaoSDKLink (2.8.4):
-    - KakaoSDKCommon (= 2.8.4)
-    - KakaoSDKTemplate (= 2.8.4)
-  - KakaoSDKNavi (2.8.4):
-    - KakaoSDKCommon/Common (= 2.8.4)
-  - KakaoSDKStory (2.8.4):
-    - KakaoSDKUser (= 2.8.4)
-  - KakaoSDKTalk (2.8.4):
-    - KakaoSDKTemplate (= 2.8.4)
-    - KakaoSDKUser (= 2.8.4)
-  - KakaoSDKTemplate (2.8.4):
-    - KakaoSDKCommon/Common (= 2.8.4)
-  - KakaoSDKUser (2.8.4):
-    - KakaoSDKAuth (= 2.8.4)
+    - KakaoSDKCommon/Common (= 2.11.3)
+  - KakaoSDKTalk (2.11.3):
+    - KakaoSDKTemplate (= 2.11.3)
+    - KakaoSDKUser (= 2.11.3)
+  - KakaoSDKTemplate (2.11.3):
+    - KakaoSDKCommon/Common (= 2.11.3)
+  - KakaoSDKUser (2.11.3):
+    - KakaoSDKAuth (= 2.11.3)
   - SDWebImage (5.12.5):
     - SDWebImage/Core (= 5.12.5)
   - SDWebImage/Core (5.12.5)
@@ -42,7 +26,10 @@ PODS:
 DEPENDENCIES:
   - Alamofire
   - IQKeyboardManagerSwift (= 6.3.0)
-  - KakaoSDK
+  - KakaoSDKAuth (= 2.11.3)
+  - KakaoSDKCommon (= 2.11.3)
+  - KakaoSDKTalk (= 2.11.3)
+  - KakaoSDKUser (= 2.11.3)
   - SDWebImage
   - SnapKit (~> 5.0.0)
   - Starscream
@@ -51,12 +38,8 @@ SPEC REPOS:
   trunk:
     - Alamofire
     - IQKeyboardManagerSwift
-    - KakaoSDK
     - KakaoSDKAuth
     - KakaoSDKCommon
-    - KakaoSDKLink
-    - KakaoSDKNavi
-    - KakaoSDKStory
     - KakaoSDKTalk
     - KakaoSDKTemplate
     - KakaoSDKUser
@@ -67,19 +50,15 @@ SPEC REPOS:
 SPEC CHECKSUMS:
   Alamofire: 1c4fb5369c3fe93d2857c780d8bbe09f06f97e7c
   IQKeyboardManagerSwift: a8228c257614af98743b4cd8584637025f36358f
-  KakaoSDK: f80dbd5e4e8db058c9f1cd48356329f11fd6e281
-  KakaoSDKAuth: b9b693995f98b1821ccd22b39d383e1dede5ca45
-  KakaoSDKCommon: 33c9902ee9ce13e9d1cac3549896406229836ff5
-  KakaoSDKLink: 588e425cb30df37b3404662170f2d0bdda7af7ae
-  KakaoSDKNavi: 46060633e4a41682bb8ed086372526412fcffda2
-  KakaoSDKStory: b1d287251c6c35dcf7b04e94e3107b6cc7236495
-  KakaoSDKTalk: ac4d2ec8b7323a50f98d74e6358fc8a296107566
-  KakaoSDKTemplate: 23ff3023d189f0962d28e34627a19c0eb8c1c7a6
-  KakaoSDKUser: d878977e0ba6b365cfeac3b6319cdf4231713bea
+  KakaoSDKAuth: a64dde90516e18fdfc35b83bbad2677c3675c329
+  KakaoSDKCommon: b4235203f67a5b6ee2df75eaf9bbc863c6d92e09
+  KakaoSDKTalk: f20736b6016c25b136cfc62b1949dc15686a2751
+  KakaoSDKTemplate: 295e57cf2826bc2cbdaf2c37e1ee62e69ea58d74
+  KakaoSDKUser: 9a42e9b74855ce876b071c841418aa6726534010
   SDWebImage: 0905f1b7760fc8ac4198cae0036600d67478751e
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
   Starscream: 5178aed56b316f13fa3bc55694e583d35dd414d9
 
-PODFILE CHECKSUM: 89693287922474f670fd0ccdc57ff8b9be55a4a0
+PODFILE CHECKSUM: ba4aae9db1c28c063e749388e1fb634e74684ec1
 
-COCOAPODS: 1.11.2
+COCOAPODS: 1.11.3
