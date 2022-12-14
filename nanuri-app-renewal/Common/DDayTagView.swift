@@ -22,8 +22,14 @@ class DDayTagView: UIView {
         self.addSubview(typeLabel)
         
         typeLabel.attributedText = .attributeFont(font: .NSRExtrabold, size: 11, text: "D-\(dDay)", lineHeight: 11)
-        typeLabel.textColor = .nanuriDarkGreen
-        self.backgroundColor = .nanuriLightGreen.withAlphaComponent(0.2)
+        let convertDday = Int(dDay) ?? 0
+        if convertDday <= 5 {
+            typeLabel.textColor = .white
+            self.backgroundColor = .nanuriRedLight
+        } else {
+            typeLabel.textColor = .nanuriGray4
+            self.backgroundColor = .nanuriGray2
+        }
         
         // view
        self.layer.cornerRadius = 4

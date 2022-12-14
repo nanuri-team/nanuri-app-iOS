@@ -22,6 +22,8 @@
 		107C95A7291BF36F00D336DC /* MyPageSectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 107C95A6291BF36F00D336DC /* MyPageSectionHeaderView.swift */; };
 		107C95A9291BFD0900D336DC /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 107C95A8291BFD0900D336DC /* ProfileView.swift */; };
 		349EE88BFBCFEC4B071C4AD0 /* Pods_nanuri_app_renewal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 670A464DDF73C49130CF9703 /* Pods_nanuri_app_renewal.framework */; };
+		3907C0A429312F6F009EBFB8 /* StepOneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3907C0A329312F6F009EBFB8 /* StepOneView.swift */; };
+		3907C0A62931337D009EBFB8 /* StepTwoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3907C0A52931337D009EBFB8 /* StepTwoView.swift */; };
 		390CF6AF28B50B4900980DC7 /* StepTwo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 390CF6AE28B50B4900980DC7 /* StepTwo.swift */; };
 		390CF6B128B50F6F00980DC7 /* StepThree.swift in Sources */ = {isa = PBXBuildFile; fileRef = 390CF6B028B50F6F00980DC7 /* StepThree.swift */; };
 		390CF6B328B5105D00980DC7 /* StepFour.swift in Sources */ = {isa = PBXBuildFile; fileRef = 390CF6B228B5105D00980DC7 /* StepFour.swift */; };
@@ -38,13 +40,12 @@
 		39308CF2280880DB00C41F9F /* CheckboxButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39308CF1280880DB00C41F9F /* CheckboxButton.swift */; };
 		39308CF62808860900C41F9F /* AlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39308CF52808860900C41F9F /* AlertViewController.swift */; };
 		39308CF82808923300C41F9F /* TextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39308CF72808923300C41F9F /* TextView.swift */; };
+		39348A4B293123A3003A2BBA /* TestAddProductViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39348A4A293123A3003A2BBA /* TestAddProductViewController.swift */; };
+		39348A4D2931244C003A2BBA /* AddProductHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39348A4C2931244C003A2BBA /* AddProductHeaderView.swift */; };
+		39348A4F293126AC003A2BBA /* StepView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39348A4E293126AC003A2BBA /* StepView.swift */; };
 		3934E3CA28B66601001AC568 /* BottomSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3934E3C928B66601001AC568 /* BottomSheetViewController.swift */; };
 		3934E3CD28B66C79001AC568 /* OptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3934E3CC28B66C79001AC568 /* OptionView.swift */; };
-		394D4D7A28105C1400A4D669 /* AddProductStepOneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 394D4D7928105C1400A4D669 /* AddProductStepOneViewController.swift */; };
 		394D4D7C28105C6D00A4D669 /* StepItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 394D4D7B28105C6D00A4D669 /* StepItemView.swift */; };
-		3954BB952813C9F300C8815E /* AddProductStepTwoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3954BB942813C9F300C8815E /* AddProductStepTwoViewController.swift */; };
-		3954BB972813E61D00C8815E /* AddProductStepThreeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3954BB962813E61C00C8815E /* AddProductStepThreeViewController.swift */; };
-		3954BB992813FCD100C8815E /* AddProductStepFourViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3954BB982813FCD100C8815E /* AddProductStepFourViewController.swift */; };
 		3954BB9C281425E800C8815E /* ChattingListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3954BB9B281425E800C8815E /* ChattingListTableViewCell.swift */; };
 		3954BBA028142FA000C8815E /* ChattingListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3954BB9F28142FA000C8815E /* ChattingListTableViewController.swift */; };
 		3954BBA528142FE900C8815E /* MyChatMessageViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3954BBA428142FE900C8815E /* MyChatMessageViewCell.swift */; };
@@ -52,6 +53,7 @@
 		3954BBA92814363F00C8815E /* ChattingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3954BBA82814363F00C8815E /* ChattingViewController.swift */; };
 		3954BBAB2816FCED00C8815E /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3954BBAA2816FCED00C8815E /* Networking.swift */; };
 		395EC16C28E4B3C100F32840 /* GetUserLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 395EC16B28E4B3C100F32840 /* GetUserLocation.swift */; };
+		396FB057292E792500C7389A /* SingleProductTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 396FB056292E792500C7389A /* SingleProductTableViewCell.swift */; };
 		39788AF328188A3B00ABD918 /* Singleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39788AF228188A3B00ABD918 /* Singleton.swift */; };
 		39788AF528188B5700ABD918 /* Posts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39788AF428188B5700ABD918 /* Posts.swift */; };
 		39788AF82819CC6900ABD918 /* Chat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39788AF72819CC6900ABD918 /* Chat.swift */; };
@@ -106,6 +108,8 @@
 		107C95A4291BEFDD00D336DC /* MyPageHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageHeaderView.swift; sourceTree = "<group>"; };
 		107C95A6291BF36F00D336DC /* MyPageSectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageSectionHeaderView.swift; sourceTree = "<group>"; };
 		107C95A8291BFD0900D336DC /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		3907C0A329312F6F009EBFB8 /* StepOneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepOneView.swift; sourceTree = "<group>"; };
+		3907C0A52931337D009EBFB8 /* StepTwoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepTwoView.swift; sourceTree = "<group>"; };
 		390CF6AE28B50B4900980DC7 /* StepTwo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepTwo.swift; sourceTree = "<group>"; };
 		390CF6B028B50F6F00980DC7 /* StepThree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepThree.swift; sourceTree = "<group>"; };
 		390CF6B228B5105D00980DC7 /* StepFour.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepFour.swift; sourceTree = "<group>"; };
@@ -122,13 +126,12 @@
 		39308CF1280880DB00C41F9F /* CheckboxButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckboxButton.swift; sourceTree = "<group>"; };
 		39308CF52808860900C41F9F /* AlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewController.swift; sourceTree = "<group>"; };
 		39308CF72808923300C41F9F /* TextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextView.swift; sourceTree = "<group>"; };
+		39348A4A293123A3003A2BBA /* TestAddProductViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestAddProductViewController.swift; sourceTree = "<group>"; };
+		39348A4C2931244C003A2BBA /* AddProductHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProductHeaderView.swift; sourceTree = "<group>"; };
+		39348A4E293126AC003A2BBA /* StepView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepView.swift; sourceTree = "<group>"; };
 		3934E3C928B66601001AC568 /* BottomSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetViewController.swift; sourceTree = "<group>"; };
 		3934E3CC28B66C79001AC568 /* OptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionView.swift; sourceTree = "<group>"; };
-		394D4D7928105C1400A4D669 /* AddProductStepOneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProductStepOneViewController.swift; sourceTree = "<group>"; };
 		394D4D7B28105C6D00A4D669 /* StepItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepItemView.swift; sourceTree = "<group>"; };
-		3954BB942813C9F300C8815E /* AddProductStepTwoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProductStepTwoViewController.swift; sourceTree = "<group>"; };
-		3954BB962813E61C00C8815E /* AddProductStepThreeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProductStepThreeViewController.swift; sourceTree = "<group>"; };
-		3954BB982813FCD100C8815E /* AddProductStepFourViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProductStepFourViewController.swift; sourceTree = "<group>"; };
 		3954BB9B281425E800C8815E /* ChattingListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChattingListTableViewCell.swift; sourceTree = "<group>"; };
 		3954BB9F28142FA000C8815E /* ChattingListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChattingListTableViewController.swift; sourceTree = "<group>"; };
 		3954BBA428142FE900C8815E /* MyChatMessageViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyChatMessageViewCell.swift; sourceTree = "<group>"; };
@@ -136,6 +139,15 @@
 		3954BBA82814363F00C8815E /* ChattingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChattingViewController.swift; sourceTree = "<group>"; };
 		3954BBAA2816FCED00C8815E /* Networking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networking.swift; sourceTree = "<group>"; };
 		395EC16B28E4B3C100F32840 /* GetUserLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetUserLocation.swift; sourceTree = "<group>"; };
+		396FB056292E792500C7389A /* SingleProductTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleProductTableViewCell.swift; sourceTree = "<group>"; };
+		396FB05B292E8E1400C7389A /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
+		396FB05D292E8E1C00C7389A /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		396FB05F292E8E2700C7389A /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		396FB061292E8E3B00C7389A /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		396FB063292E8E4900C7389A /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
+		396FB064292E8E5300C7389A /* libxml2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.tbd; path = usr/lib/libxml2.tbd; sourceTree = SDKROOT; };
+		396FB065292E8E5D00C7389A /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		396FB082292E942700C7389A /* Metal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Metal.framework; path = System/Library/Frameworks/Metal.framework; sourceTree = SDKROOT; };
 		39788AF228188A3B00ABD918 /* Singleton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Singleton.swift; sourceTree = "<group>"; };
 		39788AF428188B5700ABD918 /* Posts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Posts.swift; sourceTree = "<group>"; };
 		39788AF72819CC6900ABD918 /* Chat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chat.swift; sourceTree = "<group>"; };
@@ -207,6 +219,10 @@
 				390CF6AE28B50B4900980DC7 /* StepTwo.swift */,
 				390CF6B028B50F6F00980DC7 /* StepThree.swift */,
 				390CF6B228B5105D00980DC7 /* StepFour.swift */,
+				39348A4C2931244C003A2BBA /* AddProductHeaderView.swift */,
+				39348A4E293126AC003A2BBA /* StepView.swift */,
+				3907C0A329312F6F009EBFB8 /* StepOneView.swift */,
+				3907C0A52931337D009EBFB8 /* StepTwoView.swift */,
 			);
 			path = AddProductView;
 			sourceTree = "<group>";
@@ -230,17 +246,6 @@
 				3934E3CC28B66C79001AC568 /* OptionView.swift */,
 			);
 			path = BottomSheetView;
-			sourceTree = "<group>";
-		};
-		394D4D7828105BE300A4D669 /* TestAddProduct */ = {
-			isa = PBXGroup;
-			children = (
-				394D4D7928105C1400A4D669 /* AddProductStepOneViewController.swift */,
-				3954BB942813C9F300C8815E /* AddProductStepTwoViewController.swift */,
-				3954BB962813E61C00C8815E /* AddProductStepThreeViewController.swift */,
-				3954BB982813FCD100C8815E /* AddProductStepFourViewController.swift */,
-			);
-			path = TestAddProduct;
 			sourceTree = "<group>";
 		};
 		3954BBA328142FB900C8815E /* Cells */ = {
@@ -399,10 +404,10 @@
 		39AD77EA27FB10600022EAC1 /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				394D4D7828105BE300A4D669 /* TestAddProduct */,
 				39AD77F727FB11E30022EAC1 /* HomeViewController.swift */,
 				39AD781327FDF28E0022EAC1 /* AllRegionProductTableViewController.swift */,
 				3923EDA328AE7B500009980F /* AddProductViewController.swift */,
+				39348A4A293123A3003A2BBA /* TestAddProductViewController.swift */,
 				3923EDA528AE7B5C0009980F /* AddProductView */,
 			);
 			path = Home;
@@ -450,6 +455,7 @@
 			isa = PBXGroup;
 			children = (
 				39AD780B27FB327F0022EAC1 /* MainProductTableViewCell.swift */,
+				396FB056292E792500C7389A /* SingleProductTableViewCell.swift */,
 				39AD781127FB47730022EAC1 /* VerticalProductCollectionViewCell.swift */,
 				39AD78232801624B0022EAC1 /* ReCommentTableViewCell.swift */,
 				39308CC02806FFFB00C41F9F /* CommentTableViewCell.swift */,
@@ -501,6 +507,14 @@
 		ABDE7EE03F8338F170FC8C7F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				396FB082292E942700C7389A /* Metal.framework */,
+				396FB065292E8E5D00C7389A /* libsqlite3.tbd */,
+				396FB064292E8E5300C7389A /* libxml2.tbd */,
+				396FB063292E8E4900C7389A /* libc++.tbd */,
+				396FB061292E8E3B00C7389A /* QuartzCore.framework */,
+				396FB05F292E8E2700C7389A /* CoreLocation.framework */,
+				396FB05D292E8E1C00C7389A /* SystemConfiguration.framework */,
+				396FB05B292E8E1400C7389A /* OpenGLES.framework */,
 				670A464DDF73C49130CF9703 /* Pods_nanuri_app_renewal.framework */,
 			);
 			name = Frameworks;
@@ -645,6 +659,7 @@
 				103DA89728ABCD2F004FEA14 /* CategoryCell.swift in Sources */,
 				3923EDA428AE7B500009980F /* AddProductViewController.swift in Sources */,
 				39AD780C27FB327F0022EAC1 /* MainProductTableViewCell.swift in Sources */,
+				39348A4D2931244C003A2BBA /* AddProductHeaderView.swift in Sources */,
 				103DA84A28A536E5004FEA14 /* RegisterView.swift in Sources */,
 				39AD77FE27FB12030022EAC1 /* BookmarkViewController.swift in Sources */,
 				3923EDA728AE7EF60009980F /* StepOne.swift in Sources */,
@@ -660,13 +675,13 @@
 				39AD77F827FB11E30022EAC1 /* HomeViewController.swift in Sources */,
 				390CF6B128B50F6F00980DC7 /* StepThree.swift in Sources */,
 				39AD781B27FF3E9C0022EAC1 /* LocationTagView.swift in Sources */,
-				3954BB972813E61D00C8815E /* AddProductStepThreeViewController.swift in Sources */,
 				39AD781227FB47730022EAC1 /* VerticalProductCollectionViewCell.swift in Sources */,
 				39AD77FA27FB11EE0022EAC1 /* NeighbourhoodViewController.swift in Sources */,
 				100DBAE128C9E4CE00B5D3BC /* CustomSettingTableViewCell.swift in Sources */,
 				3954BBAB2816FCED00C8815E /* Networking.swift in Sources */,
 				39AD780E27FB32C50022EAC1 /* DDayTagView.swift in Sources */,
 				3934E3CD28B66C79001AC568 /* OptionView.swift in Sources */,
+				3907C0A429312F6F009EBFB8 /* StepOneView.swift in Sources */,
 				87D6E1BF280B30DA001AA33C /* MyProfileModifiedViewController.swift in Sources */,
 				103DA85E28AA91BD004FEA14 /* NotificationTableViewCell.swift in Sources */,
 				100DBAE328CA024D00B5D3BC /* defaultSettingTableViewCell.swift in Sources */,
@@ -689,24 +704,25 @@
 				39AD78242801624B0022EAC1 /* ReCommentTableViewCell.swift in Sources */,
 				39308CF62808860900C41F9F /* AlertViewController.swift in Sources */,
 				39AD77F627FB11CE0022EAC1 /* TabBarController.swift in Sources */,
+				39348A4B293123A3003A2BBA /* TestAddProductViewController.swift in Sources */,
 				397ACBA62805F93D00E83FA0 /* CheckMyLocationViewController.swift in Sources */,
 				87D17BA227FB5C0B00E171A2 /* SettingViewController.swift in Sources */,
 				39788AF328188A3B00ABD918 /* Singleton.swift in Sources */,
 				107C95A7291BF36F00D336DC /* MyPageSectionHeaderView.swift in Sources */,
+				396FB057292E792500C7389A /* SingleProductTableViewCell.swift in Sources */,
 				103DA85A28AA7E56004FEA14 /* NotificationViewController.swift in Sources */,
 				107C95A9291BFD0900D336DC /* ProfileView.swift in Sources */,
 				390CF6B328B5105D00980DC7 /* StepFour.swift in Sources */,
 				39AD782628016DDF0022EAC1 /* CommentViewController.swift in Sources */,
+				3907C0A62931337D009EBFB8 /* StepTwoView.swift in Sources */,
 				39AD781627FF2A7A0022EAC1 /* MainButton.swift in Sources */,
-				3954BB992813FCD100C8815E /* AddProductStepFourViewController.swift in Sources */,
 				39AD77F227FB11AF0022EAC1 /* LoginViewController.swift in Sources */,
 				39AD781427FDF28E0022EAC1 /* AllRegionProductTableViewController.swift in Sources */,
+				39348A4F293126AC003A2BBA /* StepView.swift in Sources */,
 				107C95A5291BEFDD00D336DC /* MyPageHeaderView.swift in Sources */,
 				390CF6AF28B50B4900980DC7 /* StepTwo.swift in Sources */,
-				3954BB952813C9F300C8815E /* AddProductStepTwoViewController.swift in Sources */,
 				103DA7C128A104FC004FEA14 /* LoginView.swift in Sources */,
 				39AD77F027FB11990022EAC1 /* Extension.swift in Sources */,
-				394D4D7A28105C1400A4D669 /* AddProductStepOneViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -835,10 +851,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_OBJC_ARC = NO;
 				CODE_SIGN_ENTITLEMENTS = "nanuri-app-renewal/nanuri-app-renewal.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = "";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "nanuri-app-renewal/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "나누리";
@@ -856,9 +877,11 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
+				NEW_SETTING = "";
 				PRODUCT_BUNDLE_IDENTIFIER = "nanuri.team.nanuri-app-renewal";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -870,10 +893,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_OBJC_ARC = NO;
 				CODE_SIGN_ENTITLEMENTS = "nanuri-app-renewal/nanuri-app-renewal.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = "";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "nanuri-app-renewal/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "나누리";
@@ -891,9 +919,11 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
+				NEW_SETTING = "";
 				PRODUCT_BUNDLE_IDENTIFIER = "nanuri.team.nanuri-app-renewal";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};

@@ -60,19 +60,18 @@ class AllRegionProductTableViewController: UITableViewController {
         if let reuseCell = tableView.dequeueReusableCell(withIdentifier: identifier) {
             return reuseCell
         } else {
-            let cell = MainProductTableViewCell.init(style: .default, reuseIdentifier: identifier)
+            let cell = SingleProductTableViewCell(reuseIdentifier: identifier)
             cell.selectionStyle = .none
             
-            cell.productImage.imageUpload(url: post.image?.replaceImageUrl() ?? "")
-            cell.productName.attributedText = .attributeFont(font: .PRegular, size: 17, text: post.title, lineHeight: 20)
+            cell.productImageView.imageUpload(url: post.image?.replaceImageUrl() ?? "")
+            cell.productNameLabel.attributedText = .attributeFont(font: .PRegular, size: 17, text: post.title, lineHeight: 20)
             cell.productLocationLabel.attributedText = .attributeFont(font: .NSRBold, size: 12, text: post.writerAddress ?? "", lineHeight: 14)
-            cell.productPrice.attributedText = .attributeFont(font: .PBold, size: 16, text: "\(post.unitPrice.toPriceNumberFormmat())원", lineHeight: 19)
-            cell.productPrice.textAlignment = .right
+            cell.productPriceLabel.attributedText = .attributeFont(font: .PBold, size: 16, text: "\(post.unitPrice.toPriceNumberFormmat())원", lineHeight: 19)
             cell.deliveryTagView.setDeliveryType(type: post.tradeType ?? "")
             
             cell.dDayTagView.setDday(dDay: post.waitedUntil?.dDaycalculator() ?? "")
-            cell.totalRecruit.attributedText = .attributeFont(font: .NSRExtrabold, size: 12, text: "/\(post.maxParticipants)", lineHeight: 14)
-            cell.productParticipant.attributedText = .attributeFont(font: .NSRExtrabold, size: 12, text: "\(post.numParticipants)", lineHeight: 14)
+            cell.totalRecruitLabel.attributedText = .attributeFont(font: .NSRExtrabold, size: 12, text: "/\(post.maxParticipants)", lineHeight: 14)
+            cell.productParticipantLabel.attributedText = .attributeFont(font: .NSRExtrabold, size: 12, text: "\(post.numParticipants)", lineHeight: 14)
             
             return cell
         }
