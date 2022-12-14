@@ -40,7 +40,7 @@ class MyPageSectionHeaderView: UIView {
     var numberOfListLabel: UILabel = {
         let label = UILabel()
         label.attributedText = .attributeFont(font: .PMedium, size: 13, text: label.text ?? "전체 0개", lineHeight: 15)
-        label.text = "전체 14개"
+        label.text = "전체 0개"
         return label
     }()
     var moreButton: UIButton = {
