@@ -231,5 +231,36 @@ class NetworkService {
             }
         }.resume()
     }
+    
+    func getProductListRequest(at category: String? = nil, completion: @escaping (PostList) -> Void) {
+        let configuration = URLSessionConfiguration.default
+        configuration.httpAdditionalHeaders = [
+            "Authorization": "Token \(Singleton.shared.userToken)"
+        ]
+        let session = URLSession(configuration: configuration)
+        let url = "https://nanuri.app/api/v1/posts/" + (category ?? "")
+        guard let urlComponents = URLComponents(string: url) else { return }
+        guard let requestURL = urlComponents.url else { return }
+        var request = URLRequest(url: requestURL)
+        request.httpMethod = "GET"
+        
+        let task = session.dataTask(with: requestURL) { data, response, error in
+            guard let httpResponse = response as? HTTPURLResponse,
+                  (200..<300).contains(httpResponse.statusCode) else {
+                print("--> response: \(response)")
+                return
+            }
+            guard let data = data else { return }
+            
+            do {
+                let decoder = JSONDecoder()
+                let productList = try decoder.decode(PostList.self, from: data)
+                completion(productList)
+            } catch let error as NSError {
+                print("error: \(error)")
+            }
+        }
+        task.resume()
+    }
 }
 

@@ -20,7 +20,7 @@ class SearchViewController: UIViewController {
     
     let tableView = UITableView()
     
-    let data: [String] = ["test"]
+    var resultOfProductList: [ResultInfo] = []
     
     private let numberOfListLabel: UILabel = {
         let label = UILabel()
@@ -42,12 +42,7 @@ class SearchViewController: UIViewController {
         super.viewDidLoad()
         
         setupView()
-        
-        if data.count == 0 {
-            self.emptyNotiView.isHidden = false
-        } else {
-            self.emptyNotiView.isHidden = true
-        }
+        getProduct()
     }
     
     @objc func selectBackButton() {
@@ -120,9 +115,10 @@ class SearchViewController: UIViewController {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CategoryCell", for: indexPath) as? CategoryCell else { return nil }
             cell.configure(text: self.categorylist[indexPath.item])
             if indexPath.item == 0 {
+                collectionView.selectItem(at: indexPath, animated: false, scrollPosition: .init())
                 cell.isSelected = true
-                cell.cellview.layer.borderColor = UIColor.nanuriGreen.cgColor
-                cell.categoryName.textColor = .nanuriGreen
+                cell.cellview.backgroundColor = .nanuriGreen
+                cell.categoryName.textColor = .white
             }
             return cell
         })
@@ -187,7 +183,7 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return data.count
+        return resultOfProductList.count
     }
 
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -224,15 +220,31 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
         if let reuseCell = tableView.dequeueReusableCell(withIdentifier: identifier) {
             return reuseCell
         } else {
+            let post = resultOfProductList[indexPath.row]
+            let identifier = "\(indexPath.row) \(post.uuid)"
+            
             let cell = MainProductTableViewCell.init(style: .default, reuseIdentifier: identifier)
-            numberOfListLabel.text = "전체 \(self.data.count)개"
+            
             cell.selectionStyle = .none
+            
+            cell.productImage.imageUpload(url: post.image?.replaceImageUrl() ?? "")
+            cell.productName.attributedText = .attributeFont(font: .PRegular, size: 17, text: post.title, lineHeight: 20)
+            cell.productLocationLabel.attributedText = .attributeFont(font: .NSRBold, size: 12, text: post.writerAddress ?? "", lineHeight: 14)
+            cell.productPrice.attributedText = .attributeFont(font: .PBold, size: 16, text: "\(post.unitPrice.toPriceNumberFormmat())원", lineHeight: 19)
+            cell.productPrice.textAlignment = .right
+            cell.deliveryTagView.setDeliveryType(type: post.tradeType ?? "")
+            
+            cell.dDayTagView.setDday(dDay: post.waitedUntil?.dDaycalculator() ?? "")
+            cell.totalRecruit.attributedText = .attributeFont(font: .NSRExtrabold, size: 12, text: "/\(post.maxParticipants)", lineHeight: 14)
+            cell.productParticipant.attributedText = .attributeFont(font: .NSRExtrabold, size: 12, text: "\(post.numParticipants)", lineHeight: 14)
+            
             return cell
         }
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let productDetailViewController = ProductDetailViewController()
+        productDetailViewController.postInfo = resultOfProductList[indexPath.row]
         productDetailViewController.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(productDetailViewController, animated: true)
     }
@@ -242,7 +254,52 @@ extension SearchViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CategoryCell", for: indexPath) as? CategoryCell else { return }
         print("--> \(categorylist[indexPath.item])")
-        tableView.reloadData()
+        switch indexPath.item {
+        case 0:
+            getProduct()
+        case 1:
+            let category = "?category=HOUSEHOLD"
+            getProduct(category: category)
+        case 2:
+            let category = "?category=FOOD"
+            getProduct(category: category)
+        case 3:
+            let category = "?category=KITCHEN"
+            getProduct(category: category)
+        case 4:
+            let category = "?category=BATHROOM"
+            getProduct(category: category)
+        case 5:
+            let category = "?category=STATIONARY"
+            getProduct(category: category)
+        case 6:
+            let category = "?category=ETC"
+            getProduct(category: category)
+        default:
+            ()
+        }
+    }
+    
+    func getProduct(category: String? = nil) {
+        NetworkService.shared.getProductListRequest(at: category) { productList in
+            print("전체 \(productList.results.count)개")
+            self.resultOfProductList = []
+            for product in productList.results {
+                self.resultOfProductList.append(product)
+            }
+            
+            DispatchQueue.main.async {
+                if self.resultOfProductList.count == 0 {
+                    self.emptyNotiView.isHidden = false
+                } else {
+                    self.emptyNotiView.isHidden = true
+                }
+                
+                self.numberOfListLabel.text = "전체 \(self.resultOfProductList.count)개"
+                
+                self.tableView.reloadData()
+            }
+        }
     }
 }
 
